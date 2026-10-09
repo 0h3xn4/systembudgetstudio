@@ -1,0 +1,28 @@
+schema_version: 1
+kind: unit
+name: Coarse sun sensors
+subsystem: AOCS
+mass_kg: 0.2
+bus: main_28v
+maturity: class_a
+modes:
+  - name: safe
+    avg_power_w: 0.4
+    peak_power_w: 0.5
+    duty_cycle_ratio: 1.0
+  - name: nominal
+    avg_power_w: 0.4
+    peak_power_w: 0.5
+    duty_cycle_ratio: 1.0
+  - name: imaging
+    avg_power_w: 0.4
+    peak_power_w: 0.5
+    duty_cycle_ratio: 1.0
+  - name: downlink
+    avg_power_w: 0.4
+    peak_power_w: 0.5
+    duty_cycle_ratio: 1.0
+  - name: survival
+    avg_power_w: 0.4
+    peak_power_w: 0.5
+    duty_cycle_ratio: 1.0

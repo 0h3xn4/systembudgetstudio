@@ -1,0 +1,11 @@
+schema_version: 1
+kind: spacecraft_mode
+name: Safe
+description: Detumbled, minimum loads.
+assignments:
+  adcs: safe
+  camera: off
+  eps: safe
+  gnss: off
+  obc: safe
+  radio: safe

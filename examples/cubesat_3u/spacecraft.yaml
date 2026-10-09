@@ -1,0 +1,6 @@
+schema_version: 1
+kind: spacecraft
+name: CubeSat 3U
+buses:
+  - name: main
+    nominal_voltage_v: 5.0

@@ -1,0 +1,88 @@
+{
+  "$defs": {
+    "MaturityClass": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "default": "",
+          "title": "Description",
+          "type": "string"
+        },
+        "margin_ratio": {
+          "$ref": "#/$defs/Sourced"
+        }
+      },
+      "required": [
+        "margin_ratio"
+      ],
+      "title": "MaturityClass",
+      "type": "object"
+    },
+    "Sourced": {
+      "additionalProperties": false,
+      "description": "A number from a standard, policy or data sheet. `source: TBD` or a null value marks a\nplaceholder that must be replaced before results are trusted (spec constraint 15).",
+      "properties": {
+        "note": {
+          "default": "",
+          "title": "Note",
+          "type": "string"
+        },
+        "source": {
+          "minLength": 1,
+          "title": "Source",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "value",
+        "source"
+      ],
+      "title": "Sourced",
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "classes": {
+      "additionalProperties": {
+        "$ref": "#/$defs/MaturityClass"
+      },
+      "title": "Classes",
+      "type": "object"
+    },
+    "kind": {
+      "const": "margin_policy",
+      "default": "margin_policy",
+      "title": "Kind",
+      "type": "string"
+    },
+    "schema_version": {
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "system_margin_ratio": {
+      "$ref": "#/$defs/Sourced"
+    }
+  },
+  "required": [
+    "classes",
+    "kind",
+    "schema_version",
+    "system_margin_ratio"
+  ],
+  "title": "System Budget Studio margin_policy",
+  "type": "object"
+}

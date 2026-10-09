@@ -1,0 +1,32 @@
+schema_version: 1
+kind: unit
+name: Stress unit 070
+subsystem: PL-DATA
+mass_kg: 0.33
+bus: main
+maturity: class_b
+modes:
+  - name: off
+    avg_power_w: 0.0
+    peak_power_w: 0.0
+    duty_cycle_ratio: 1.0
+  - name: safe
+    avg_power_w: 0.5
+    peak_power_w: 0.75
+    duty_cycle_ratio: 1.0
+  - name: nominal
+    avg_power_w: 0.55
+    peak_power_w: 0.825
+    duty_cycle_ratio: 1.0
+  - name: imaging
+    avg_power_w: 0.6
+    peak_power_w: 0.9
+    duty_cycle_ratio: 0.5
+  - name: downlink
+    avg_power_w: 0.65
+    peak_power_w: 0.975
+    duty_cycle_ratio: 1.0
+  - name: charging
+    avg_power_w: 0.7
+    peak_power_w: 1.05
+    duty_cycle_ratio: 1.0

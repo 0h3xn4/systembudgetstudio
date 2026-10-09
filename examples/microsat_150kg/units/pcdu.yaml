@@ -1,0 +1,28 @@
+schema_version: 1
+kind: unit
+name: Power conditioning unit
+subsystem: EPS
+mass_kg: 4.5
+bus: main_28v
+maturity: class_a
+modes:
+  - name: safe
+    avg_power_w: 6.0
+    peak_power_w: 8.0
+    duty_cycle_ratio: 1.0
+  - name: nominal
+    avg_power_w: 9.0
+    peak_power_w: 12.0
+    duty_cycle_ratio: 1.0
+  - name: imaging
+    avg_power_w: 9.0
+    peak_power_w: 12.0
+    duty_cycle_ratio: 1.0
+  - name: downlink
+    avg_power_w: 9.0
+    peak_power_w: 12.0
+    duty_cycle_ratio: 1.0
+  - name: survival
+    avg_power_w: 5.0
+    peak_power_w: 6.0
+    duty_cycle_ratio: 1.0

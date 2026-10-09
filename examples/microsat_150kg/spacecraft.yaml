@@ -1,0 +1,8 @@
+schema_version: 1
+kind: spacecraft
+name: Microsat 150
+buses:
+  - name: main_28v
+    nominal_voltage_v: 28.0
+  - name: payload_12v
+    nominal_voltage_v: 12.0

@@ -1,0 +1,5 @@
+schema_version: 1
+kind: project
+name: Example 3U CubeSat
+revision: '1'
+description: Synthetic example data; not a real spacecraft.

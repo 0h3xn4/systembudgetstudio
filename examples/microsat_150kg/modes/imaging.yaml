@@ -1,0 +1,18 @@
+schema_version: 1
+kind: spacecraft_mode
+name: Imaging
+description: Payload imaging over a target.
+assignments:
+  camera: imaging
+  gnss: imaging
+  heaters: imaging
+  magnetorquers: off
+  obc_a: imaging
+  obc_b: off
+  pcdu: imaging
+  pdu_data: imaging
+  reaction_wheels: imaging
+  sband_trx: imaging
+  star_tracker: imaging
+  sun_sensors: imaging
+  xband_tx: off
