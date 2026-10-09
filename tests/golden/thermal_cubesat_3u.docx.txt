@@ -233,7 +233,7 @@ Problems and open items
 ## table
 Severity | Code | Location | Message
 warning | CONFIG_EMPTY_TABLE | config/attenuation_table.yaml:3 | The table has no entries.
-warning | CONFIG_EMPTY_TABLE | config/ebn0_table.yaml:3 | The table has no entries.
+warning | CONFIG_PLACEHOLDER | config/ebn0_table.yaml:7 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
 warning | CONFIG_PLACEHOLDER | config/margin_policy.yaml:6 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
 warning | CONFIG_PLACEHOLDER | config/margin_policy.yaml:10 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
 warning | CONFIG_PLACEHOLDER | config/margin_policy.yaml:15 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
@@ -348,6 +348,14 @@ warning | CONFIG_PLACEHOLDER | config/thermal_model.yaml:174 | This number is a 
 warning | CONFIG_PLACEHOLDER | config/thermal_model.yaml:178 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
 warning | CONFIG_PLACEHOLDER | config/thermal_model.yaml:183 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
 warning | CONFIG_PLACEHOLDER | config/thermal_model.yaml:187 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | links/uhf_down.yaml:9 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | links/uhf_down.yaml:13 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | links/uhf_down.yaml:18 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | links/uhf_down.yaml:24 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | links/uhf_down.yaml:36 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | links/uhf_down.yaml:40 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | links/uhf_down.yaml:44 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | links/uhf_down.yaml:48 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
 warning | THERMAL_NO_LIMITS | units/adcs.yaml | Unit 'adcs' has no operating temperature limits; it is not checked.
 warning | THERMAL_NO_LIMITS | units/camera.yaml | Unit 'camera' has no operating temperature limits; it is not checked.
 warning | THERMAL_NO_LIMITS | units/eps.yaml | Unit 'eps' has no operating temperature limits; it is not checked.

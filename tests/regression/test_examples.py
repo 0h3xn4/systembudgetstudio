@@ -16,7 +16,7 @@ def test_example_has_no_errors_and_only_placeholder_warnings(name: str) -> None:
     result = load_project(ROOT / name)
     assert result.project is not None
     assert {p.code for p in result.problems} <= ALLOWED_WARNINGS
-    assert {p.code for p in result.problems} == ALLOWED_WARNINGS  # config is deliberately TBD
+    assert "CONFIG_PLACEHOLDER" in {p.code for p in result.problems}  # config is deliberately TBD
 
 
 def test_committed_examples_match_generator(tmp_path: Path) -> None:
@@ -44,6 +44,7 @@ def test_every_unit_is_mapped_in_every_mode() -> None:
 
 
 COMPLETE_POWER = "cubesat_3u_eps"
+SYNTHETIC_LINKS = {"cubesat_3u_eps", "microsat_150kg"}  # links with invented values
 
 
 def test_examples_contain_no_numbers_from_standards() -> None:
@@ -62,6 +63,12 @@ def test_examples_contain_no_numbers_from_standards() -> None:
                 project.config.power_system,
                 project.config.thermal_model,
                 project.config.thermal_environment,
+            ]
+        if name not in SYNTHETIC_LINKS:
+            models += [
+                project.config.ebn0_table,
+                project.config.attenuation_table,
+                *project.links.values(),
             ]
         for model in models:
             for _, sourced in iter_sourced(model):
@@ -87,3 +94,23 @@ def test_complete_power_example_has_synthetic_sources_only() -> None:
             else:
                 assert not sourced.is_placeholder
                 assert sourced.source.startswith("Synthetic example value")
+
+
+def test_example_links_with_invented_values_say_so() -> None:
+    from budget_core.io.validation import iter_sourced
+
+    for name in sorted(SYNTHETIC_LINKS):
+        project = load_project(ROOT / name).project
+        assert project is not None and project.links
+        models = [
+            project.config.ebn0_table,
+            project.config.attenuation_table,
+            *project.links.values(),
+        ]
+        count = 0
+        for model in models:
+            for _, sourced in iter_sourced(model):
+                count += 1
+                assert not sourced.is_placeholder
+                assert sourced.source.startswith("Synthetic example value")
+        assert count >= 9

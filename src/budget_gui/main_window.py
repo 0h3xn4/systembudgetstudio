@@ -20,6 +20,7 @@ from budget_core import APP_NAME, __version__
 from budget_core.problems import sort_problems
 from budget_core.reports.run import REPORT_KINDS
 from budget_gui.editor import EditorTabs
+from budget_gui.link_view import LinkPassesView
 from budget_gui.scenario_view import ScenarioView
 from budget_gui.session import ProjectSession
 from budget_gui.timeline_view import PowerTimelineView
@@ -42,16 +43,21 @@ class MainWindow(QMainWindow):
         self.power_view = PowerView()
         self.mass_view = PowerView()
         self.thermal_view = PowerView()
+        self.link_view = PowerView()
         self.editors = EditorTabs()
         self.editors.add_fixed(self.power_view, "Power budget")
         self.editors.add_fixed(self.mass_view, "Mass budget")
         self.editors.add_fixed(self.thermal_view, "Thermal budget")
+        self.editors.add_fixed(self.link_view, "Link budget")
         self.scenario_view = ScenarioView()
         self.editors.add_fixed(self.scenario_view, "Scenario")
         self.editors.register_modifiable(self.scenario_view.editor)
         self.timeline_view = PowerTimelineView()
         self.timeline_view.run_provider = self.scenario_view.reusable_run
         self.editors.add_fixed(self.timeline_view, "Power timeline")
+        self.link_passes_view = LinkPassesView()
+        self.link_passes_view.run_provider = self.scenario_view.reusable_run
+        self.editors.add_fixed(self.link_passes_view, "Link passes")
         self.setCentralWidget(self.editors)
         self._worker: ExportWorker | None = None
 
@@ -71,6 +77,7 @@ class MainWindow(QMainWindow):
         self.tree.unit_requested.connect(lambda unit_id: self.open_unit_editor(unit_id))
         self.problems_panel.jump_requested.connect(lambda rel, line: self.open_file(rel, line))
         self.timeline_view.computed.connect(lambda _result: self._update_problems())
+        self.link_passes_view.computed.connect(lambda _result: self._update_problems())
         self.timeline_view.jump_requested.connect(self.jump_to_input)
 
     # ---- actions -----------------------------------------------------------------------------
@@ -199,9 +206,11 @@ class MainWindow(QMainWindow):
         self.power_view.set_document(session.document)
         self.mass_view.set_document(session.mass_document)
         self.thermal_view.set_document(session.thermal_document)
+        self.link_view.set_document(session.link_document)
         self.scenario_view.set_project(project)
         load_problems = session.load_result.problems if session.load_result else []
         self.timeline_view.set_project(project, load_problems)
+        self.link_passes_view.set_project(project, load_problems)
         self._update_problems()
         self.editors.reload_clean_files()
         name = project.meta.name if project else (session.path.name if session.path else "")
@@ -255,6 +264,7 @@ class MainWindow(QMainWindow):
             self._worker.wait(10000)
         self.scenario_view.wait_for_worker()
         self.timeline_view.wait_for_worker()
+        self.link_passes_view.wait_for_worker()
         if self.editors.has_unsaved_changes():
             answer = QMessageBox.question(
                 self,

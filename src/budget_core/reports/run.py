@@ -7,6 +7,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+from budget_core.link.evaluate import LinkSeriesResult, StaticLinkResult
 from budget_core.mass.static_mass import StaticMassResult
 from budget_core.model import Project
 from budget_core.power.static_budget import StaticPowerResult
@@ -21,6 +22,15 @@ from budget_core.reports.export import (
     thermal_case_csv,
     thermal_mode_csv,
 )
+from budget_core.reports.link_export import (
+    link_json,
+    passes_csv,
+    static_csv,
+)
+from budget_core.reports.link_export import (
+    series_csv as link_series_csv,
+)
+from budget_core.reports.link_report import build_link_report
 from budget_core.reports.mass_report import build_mass_report
 from budget_core.reports.power_report import build_power_report
 from budget_core.reports.thermal_report import build_thermal_report
@@ -80,6 +90,27 @@ def thermal_output(
     csvs = tuple((f"thermal_static_{m.mode_id}.csv", thermal_mode_csv(m)) for m in thermal.modes)
     csvs += tuple((f"thermal_case_{c.case}.csv", thermal_case_csv(c)) for c in thermal.cases)
     return BudgetOutput("thermal_static", document, thermal, provenance, csvs)
+
+
+def link_output(
+    project: Project,
+    static: StaticLinkResult,
+    provenance: Provenance,
+    load_problems: Sequence[Problem] = (),
+    passes: LinkSeriesResult | None = None,
+    *,
+    plots: bool = True,
+) -> BudgetOutput:
+    """Static link table, plus the pass series when a scenario was run."""
+    document = build_link_report(project, static, provenance, load_problems, passes, plots=plots)
+    prefix = "link_static" if passes is None else f"link_passes_{passes.run.scenario_id}"
+    csvs: list[tuple[str, str]] = [(f"{prefix}_table.csv", static_csv(static))]
+    if passes is not None:
+        csvs.append((f"{prefix}_summary.csv", passes_csv(passes)))
+        csvs += [(f"{prefix}_{s.link_id}.csv", link_series_csv(passes, s)) for s in passes.series]
+    return BudgetOutput(
+        prefix, document, static, provenance, tuple(csvs), link_json(static, passes, provenance)
+    )
 
 
 def timeline_output(

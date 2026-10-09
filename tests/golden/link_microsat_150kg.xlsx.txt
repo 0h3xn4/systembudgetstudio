@@ -1,0 +1,173 @@
+## sheet Summary rows=28 cols=14
+1: 'Link budget: Example 150 kg microsatellite' |  |  |  |  |  |  |  |  |  |  |  |  | 
+3: 'Link budget at the static points' |  |  |  |  |  |  |  |  |  |  |  |  | 
+4: 'Link' | 'Direction' | 'Point' | 'Elevation (deg)' | 'Range (km)' | 'EIRP (dBW)' | 'G/T (dB/K)' | 'Path loss (dB)' | 'Atmospheric (dB)' | 'Other losses (dB)' | 'C/N0 (dBHz)' | 'Required Eb/N0 (dB)' | 'Highest closing rate (kbit/s)' | 'Rate at required margin (kbit/s)'
+5: 'sband_down' | 'downlink' | '5 deg elevation' | 5 | 2200 | 9.489700043360187 | 10 | 166.1446904547716 | 0.2 | 2.5 | 79.24417676180624 | 4 | 8192 | 16765.54501979162
+6: 'sband_down' | 'downlink' | 'zenith' | 90 | 550 | 9.489700043360187 | 10 | 154.1034906282124 | 0.2 | 2.5 | 91.2853765883655 | 4 | 8192 | 268248.7203166666
+7: 'xband_down' | 'downlink' | '10 deg elevation' | 10 | 1600 | 9.5 | 20 | 174.8064599226762 | 2.833333333333333 | 2.5 | 77.9593739172081 | 4 | 10000 | 12472.03703286073
+8: 'xband_down' | 'downlink' | 'zenith' | 90 | 550 | 19.5 | 20 | 165.5313140594426 | 0.9 | 2.5 | 99.16785311377507 | 4 | 50000 | 1647347.842219025
+9: 'Other losses = pointing, polarisation and implementation. A link closes at a rate when its margin is at least the required margin of the link. n/a: an input is a placeholder or missing. Highest closing rate empty (n/a with a result): no listed rate closes.' |  |  |  |  |  |  |  |  |  |  |  |  | 
+11: 'Margin by data rate' |  |  |  |  |  |  |  |  |  |  |  |  | 
+12: 'Link' | 'Point' | 'Data rate (kbit/s)' | 'Eb/N0 (dB)' | 'Margin (dB)' | 'Required margin (dB)' | 'Closes' |  |  |  |  |  |  | 
+13: 'sband_down' | '5 deg elevation' | 32 | 34.19267697860718 | 30.19267697860718 | 3 | 'yes' |  |  |  |  |  |  | 
+14: 'sband_down' | '5 deg elevation' | 128 | 28.17207706532756 | 24.17207706532756 | 3 | 'yes' |  |  |  |  |  |  | 
+15: 'sband_down' | '5 deg elevation' | 512 | 22.15147715204794 | 18.15147715204794 | 3 | 'yes' |  |  |  |  |  |  | 
+16: 'sband_down' | '5 deg elevation' | 2048 | 16.13087723876831 | 12.13087723876831 | 3 | 'yes' |  |  |  |  |  |  | 
+17: 'sband_down' | '5 deg elevation' | 8192 | 10.1102773254887 | 6.110277325488696 | 3 | 'yes' |  |  |  |  |  |  | 
+18: 'sband_down' | 'zenith' | 32 | 46.23387680516643 | 42.23387680516643 | 3 | 'yes' |  |  |  |  |  |  | 
+19: 'sband_down' | 'zenith' | 128 | 40.21327689188681 | 36.21327689188681 | 3 | 'yes' |  |  |  |  |  |  | 
+20: 'sband_down' | 'zenith' | 512 | 34.19267697860719 | 30.19267697860719 | 3 | 'yes' |  |  |  |  |  |  | 
+21: 'sband_down' | 'zenith' | 2048 | 28.17207706532756 | 24.17207706532756 | 3 | 'yes' |  |  |  |  |  |  | 
+22: 'sband_down' | 'zenith' | 8192 | 22.15147715204795 | 18.15147715204795 | 3 | 'yes' |  |  |  |  |  |  | 
+23: 'xband_down' | '10 deg elevation' | 1000 | 17.9593739172081 | 13.9593739172081 | 3 | 'yes' |  |  |  |  |  |  | 
+24: 'xband_down' | '10 deg elevation' | 10000 | 7.959373917208097 | 3.959373917208097 | 3 | 'yes' |  |  |  |  |  |  | 
+25: 'xband_down' | '10 deg elevation' | 50000 | 0.9696738738479098 | -3.03032612615209 | 3 | 'no' |  |  |  |  |  |  | 
+26: 'xband_down' | 'zenith' | 1000 | 39.16785311377507 | 35.16785311377507 | 3 | 'yes' |  |  |  |  |  |  | 
+27: 'xband_down' | 'zenith' | 10000 | 29.16785311377507 | 25.16785311377507 | 3 | 'yes' |  |  |  |  |  |  | 
+28: 'xband_down' | 'zenith' | 50000 | 22.17815307041488 | 18.17815307041488 | 3 | 'yes' |  |  |  |  |  |  | 
+## sheet Assumptions rows=37 cols=5
+1: 'Configuration numbers used' |  |  |  | 
+2: 'Name' | 'Value' | 'Unit' | 'Source' | 'Status'
+3: 'Transmit power' | 5 | 'W' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+4: 'Line loss' | 0.5 | 'dB' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+5: 'Antenna gain, transmitter' | 3 | 'dBi' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+6: 'G/T' | 10 | 'dB/K' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+7: 'Required margin' | 3 | 'dB' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+8: 'Pointing loss' | 1 | 'dB' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+9: 'Polarisation loss' | 0.5 | 'dB' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+10: 'Implementation loss' | 1 | 'dB' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+11: 'Required Eb/N0, QPSK rate 1/2' | 4 | 'dB' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+12: 'Attenuation gas_s' | 0.2 | 'dB' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+13: 'Transmit power' | 10 | 'W' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+14: 'Line loss' | 0.5 | 'dB' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+15: 'Antenna pattern, transmitter' | 'n/a' | 'dBi' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+16: 'G/T' | 20 | 'dB/K' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+17: 'Required margin' | 3 | 'dB' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+18: 'Pointing loss' | 1 | 'dB' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+19: 'Polarisation loss' | 0.5 | 'dB' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+20: 'Implementation loss' | 1 | 'dB' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+21: 'Attenuation rain_x at 5 deg' | 3 | 'dB' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+22: 'Attenuation rain_x at 20 deg' | 1 | 'dB' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+23: 'Attenuation rain_x at 90 deg' | 0.4 | 'dB' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+24: 'Attenuation gas_x' | 0.5 | 'dB' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+26: 'Equations' |  |  |  | 
+27: 'ID' | 'Name' | 'Formula' | 'Source' | 
+28: 'LNK-EIRP' | 'Effective isotropic radiated power' | 'EIRP = P_tx - L_line + G_tx  (dBW)' | 'SOURCE_MISSING' | 
+29: 'LNK-FSPL' | 'Free-space path loss' | 'L_fs = 20 log10(4 pi d f / c)  (dB)' | 'SOURCE_MISSING' | 
+30: 'LNK-GT' | 'Receiver figure of merit' | 'G/T = G_rx - L_feed - 10 log10(T_sys)  (dB/K), or given directly' | 'SOURCE_MISSING' | 
+31: 'LNK-CN0' | 'Carrier to noise density' | 'C/N0 = EIRP - L_fs - L_atm - L_point - L_pol - L_impl + G/T - 10 log10(k)  (dBHz)' | 'SOURCE_MISSING' | 
+32: 'LNK-EBN0' | 'Energy per bit to noise density' | 'Eb/N0 = C/N0 - 10 log10(R_b)  (dB)' | 'SOURCE_MISSING' | 
+33: 'LNK-MARGIN' | 'Link margin' | 'margin = Eb/N0 - Eb/N0_required  (dB); the link closes when margin >= required margin' | 'SOURCE_MISSING' | 
+34: 'LNK-ATT' | 'Atmospheric attenuation' | 'L_atm = sum of the named table entries, linear interpolation by elevation' | 'SOURCE_MISSING' | 
+35: 'LNK-NADIR' | 'Angle from nadir at the spacecraft' | 'sin(eta) = R cos(el) / r,  r^2 = R^2 + d^2 + 2 R d sin(el)' | 'SOURCE_MISSING' | 
+36: 'LNK-VOLUME' | 'Data volume' | 'V = sum over samples of R_selected * (time of the step inside the pass); R_selected is the highest listed rate with margin >= required margin while the link is active' | 'SOURCE_MISSING' | 
+37: 'SOURCE_MISSING: the formula is a project convention or textbook definition whose reference text is not available to the tool yet (see docs/DECISIONS.md).' |  |  |  | 
+## sheet Problems rows=97 cols=4
+1: 'Problems and open items' |  |  | 
+2: 'Severity' | 'Code' | 'Location' | 'Message'
+3: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:6' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+4: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:10' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+5: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:15' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+6: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:19' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+7: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:24' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+8: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:28' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+9: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:32' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+10: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:36' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+11: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/mass_limits.yaml:7' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+12: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_config.yaml:4' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+13: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_config.yaml:9' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+14: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_config.yaml:13' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+15: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:4' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+16: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:45' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+17: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:49' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+18: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:53' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+19: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:57' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+20: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:61' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+21: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:65' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+22: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:69' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+23: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:73' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+24: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:77' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+25: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:82' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+26: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:86' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+27: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:92' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+28: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:96' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+29: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:100' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+30: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:104' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+31: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:109' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+32: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:113' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+33: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:117' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+34: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:129' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+35: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_environment.yaml:4' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+36: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_environment.yaml:8' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+37: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_environment.yaml:17' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+38: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_environment.yaml:21' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+39: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_environment.yaml:25' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+40: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_environment.yaml:33' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+41: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_environment.yaml:37' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+42: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_environment.yaml:41' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+43: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:24' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+44: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:30' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+45: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:36' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+46: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:42' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+47: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:48' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+48: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:54' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+49: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:60' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+50: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:68' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+51: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:72' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+52: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:78' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+53: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:82' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+54: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:87' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+55: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:91' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+56: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:98' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+57: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:102' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+58: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:108' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+59: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:112' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+60: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:117' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+61: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:121' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+62: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:128' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+63: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:132' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+64: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:138' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+65: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:142' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+66: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:147' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+67: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:151' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+68: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:158' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+69: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:162' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+70: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:168' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+71: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:172' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+72: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:177' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+73: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:181' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+74: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:188' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+75: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:192' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+76: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:198' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+77: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:202' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+78: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:207' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+79: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:211' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+80: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:218' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+81: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:222' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+82: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:228' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+83: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:232' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+84: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:237' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+85: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:241' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+86: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:248' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+87: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:252' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+88: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:258' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+89: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:262' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+90: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:267' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+91: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:271' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+92: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:278' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+93: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:282' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+94: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:288' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+95: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:292' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+96: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:297' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+97: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:301' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+## sheet Provenance rows=10 cols=2
+1: 'Provenance' | 
+2: 'Item' | 'Value'
+3: 'Tool' | 'System Budget Studio 0.1.0'
+4: 'Python' | '3.x'
+5: 'Libraries' | 'pinned for-golden-tests'
+6: 'Project' | 'Example 150 kg microsatellite'
+7: 'Project revision' | '1'
+8: 'Scenario' | 'static (no scenario)'
+9: 'Generated (UTC)' | '2026-01-02T03:04:05Z'
+10: 'User' | 'Golden User'

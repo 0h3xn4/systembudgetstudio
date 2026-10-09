@@ -1,0 +1,922 @@
+pages=8
+## page 1
+System Budget Studio 0.1.0 | Example 150 kg microsatellite rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 1
+Link budget: Example 150 kg microsatellite
+Summary
+Link budget at the static points
+Link
+Direction
+Point
+Elevatio
+n (deg)
+Rang
+e
+(km)
+EIRP
+(dBW
+)
+G/T (
+dB/K)
+Path loss
+(dB)
+Atmosphe
+ric (dB)
+Other
+losses
+(dB)
+C/N0
+(dBHz
+)
+Required
+Eb/N0 (dB)
+Highest closing rate
+(kbit/s)
+Rate at required
+margin (kbit/s)
+sband_dow
+n
+downlink
+5 deg elevation
+ 5.0
+ 2200.
+ 0
+ 9.49
+ 10.00
+ 166.14
+ 0.20
+ 2.50
+ 79.24
+ 4.00
+ 8192.000
+ 16765.545
+sband_dow
+n
+downlink
+zenith
+ 90.0
+ 550.0
+ 9.49
+ 10.00
+ 154.10
+ 0.20
+ 2.50
+ 91.29
+ 4.00
+ 8192.000
+ 268248.720
+xband_dow
+n
+downlink
+10 deg elevation
+ 10.0
+ 1600.
+ 0
+ 9.50
+ 20.00
+ 174.81
+ 2.83
+ 2.50
+ 77.96
+ 4.00
+ 10000.000
+ 12472.037
+xband_dow
+n
+downlink
+zenith
+ 90.0
+ 550.0
+ 19.50
+ 20.00
+ 165.53
+ 0.90
+ 2.50
+ 99.17
+ 4.00
+ 50000.000
+ 1647347.842
+Other losses = pointing, polarisation and implementation. A link closes at a rate when its margin is at least the required margin of the link. n/a: an input is a placeholder or missing. Highest closing rate empty (n/a
+with a result): no listed rate closes.
+Margin by data rate
+Link
+Point
+Data rate (kbit/s)
+Eb/N0 (dB)
+Margin (dB)
+Required margin (dB)
+Closes
+sband_down
+5 deg elevation
+ 32.000
+ 34.19
+ 30.19
+ 3.00
+yes
+sband_down
+5 deg elevation
+ 128.000
+ 28.17
+ 24.17
+ 3.00
+yes
+sband_down
+5 deg elevation
+ 512.000
+ 22.15
+ 18.15
+ 3.00
+yes
+sband_down
+5 deg elevation
+ 2048.000
+ 16.13
+ 12.13
+ 3.00
+yes
+sband_down
+5 deg elevation
+ 8192.000
+ 10.11
+ 6.11
+ 3.00
+yes
+sband_down
+zenith
+ 32.000
+ 46.23
+ 42.23
+ 3.00
+yes
+sband_down
+zenith
+ 128.000
+ 40.21
+ 36.21
+ 3.00
+yes
+sband_down
+zenith
+ 512.000
+ 34.19
+ 30.19
+ 3.00
+yes
+sband_down
+zenith
+ 2048.000
+ 28.17
+ 24.17
+ 3.00
+yes
+sband_down
+zenith
+ 8192.000
+ 22.15
+ 18.15
+ 3.00
+yes
+xband_down
+10 deg elevation
+ 1000.000
+ 17.96
+ 13.96
+ 3.00
+yes
+xband_down
+10 deg elevation
+ 10000.000
+ 7.96
+ 3.96
+ 3.00
+yes
+xband_down
+10 deg elevation
+ 50000.000
+ 0.97
+ -3.03
+ 3.00
+no
+xband_down
+zenith
+ 1000.000
+ 39.17
+ 35.17
+ 3.00
+yes
+xband_down
+zenith
+ 10000.000
+ 29.17
+ 25.17
+ 3.00
+yes
+xband_down
+zenith
+ 50000.000
+ 22.18
+ 18.18
+ 3.00
+yes
+## page 2
+System Budget Studio 0.1.0 | Example 150 kg microsatellite rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 2
+Assumptions
+Configuration numbers used
+Name
+Value
+Unit
+Source
+Status
+Transmit power
+ 5.0000
+W
+Synthetic example value; not from a data sheet or a standard.
+sourced
+Line loss
+ 0.5000
+dB
+Synthetic example value; not from a data sheet or a standard.
+sourced
+Antenna gain, transmitter
+ 3.0000
+dBi
+Synthetic example value; not from a data sheet or a standard.
+sourced
+G/T
+ 10.0000
+dB/K
+Synthetic example value; not from a data sheet or a standard.
+sourced
+Required margin
+ 3.0000
+dB
+Synthetic example value; not from a data sheet or a standard.
+sourced
+Pointing loss
+ 1.0000
+dB
+Synthetic example value; not from a data sheet or a standard.
+sourced
+Polarisation loss
+ 0.5000
+dB
+Synthetic example value; not from a data sheet or a standard.
+sourced
+Implementation loss
+ 1.0000
+dB
+Synthetic example value; not from a data sheet or a standard.
+sourced
+Required Eb/N0, QPSK rate 1/2
+ 4.0000
+dB
+Synthetic example value; not from a data sheet or a standard.
+sourced
+Attenuation gas_s
+ 0.2000
+dB
+Synthetic example value; not from a data sheet or a standard.
+sourced
+Transmit power
+ 10.0000
+W
+Synthetic example value; not from a data sheet or a standard.
+sourced
+Line loss
+ 0.5000
+dB
+Synthetic example value; not from a data sheet or a standard.
+sourced
+Antenna pattern, transmitter
+ n/a
+dBi
+Synthetic example value; not from a data sheet or a standard.
+sourced
+G/T
+ 20.0000
+dB/K
+Synthetic example value; not from a data sheet or a standard.
+sourced
+Required margin
+ 3.0000
+dB
+Synthetic example value; not from a data sheet or a standard.
+sourced
+Pointing loss
+ 1.0000
+dB
+Synthetic example value; not from a data sheet or a standard.
+sourced
+Polarisation loss
+ 0.5000
+dB
+Synthetic example value; not from a data sheet or a standard.
+sourced
+Implementation loss
+ 1.0000
+dB
+Synthetic example value; not from a data sheet or a standard.
+sourced
+Attenuation rain_x at 5 deg
+ 3.0000
+dB
+Synthetic example value; not from a data sheet or a standard.
+sourced
+Attenuation rain_x at 20 deg
+ 1.0000
+dB
+Synthetic example value; not from a data sheet or a standard.
+sourced
+Attenuation rain_x at 90 deg
+ 0.4000
+dB
+Synthetic example value; not from a data sheet or a standard.
+sourced
+Attenuation gas_x
+ 0.5000
+dB
+Synthetic example value; not from a data sheet or a standard.
+sourced
+Equations
+ID
+Name
+Formula
+Source
+LNK-EIRP
+Effective isotropic radiated power
+EIRP = P_tx - L_line + G_tx (dBW)
+SOURCE_MISSING
+LNK-FSPL
+Free-space path loss
+L_fs = 20 log10(4 pi d f / c) (dB)
+SOURCE_MISSING
+LNK-GT
+Receiver figure of merit
+G/T = G_rx - L_feed - 10 log10(T_sys) (dB/K), or given directly
+SOURCE_MISSING
+LNK-CN0
+Carrier to noise density
+C/N0 = EIRP - L_fs - L_atm - L_point - L_pol - L_impl + G/T - 10 log10(k) (dBHz)
+SOURCE_MISSING
+LNK-EBN0
+Energy per bit to noise density
+Eb/N0 = C/N0 - 10 log10(R_b) (dB)
+SOURCE_MISSING
+LNK-MARGIN
+Link margin
+margin = Eb/N0 - Eb/N0_required (dB); the link closes when margin >= required margin
+SOURCE_MISSING
+LNK-ATT
+Atmospheric attenuation
+L_atm = sum of the named table entries, linear interpolation by elevation
+SOURCE_MISSING
+## page 3
+System Budget Studio 0.1.0 | Example 150 kg microsatellite rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 3
+ID
+Name
+Formula
+Source
+LNK-NADIR
+Angle from nadir at the spacecraft
+sin(eta) = R cos(el) / r, r^2 = R^2 + d^2 + 2 R d sin(el)
+SOURCE_MISSING
+LNK-VOLUME
+Data volume
+V = sum over samples of R_selected * (time of the step inside the pass); R_selected is the
+highest listed rate with margin >= required margin while the link is active
+SOURCE_MISSING
+SOURCE_MISSING: the formula is a project convention or textbook definition whose reference text is not available to the tool yet (see docs/DECISIONS.md).
+Problems
+Problems and open items
+Severity
+Code
+Location
+Message
+warning
+CONFIG_PLACEHOLDER
+config/margin_policy.yaml:6
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/margin_policy.yaml:10
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/margin_policy.yaml:15
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/margin_policy.yaml:19
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/margin_policy.yaml:24
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/margin_policy.yaml:28
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/margin_policy.yaml:32
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/margin_policy.yaml:36
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/mass_limits.yaml:7
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_config.yaml:4
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_config.yaml:9
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_config.yaml:13
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:4
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:45
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:49
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+## page 4
+System Budget Studio 0.1.0 | Example 150 kg microsatellite rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 4
+Severity
+Code
+Location
+Message
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:53
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:57
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:61
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:65
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:69
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:73
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:77
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:82
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:86
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:92
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:96
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:100
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:104
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:109
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:113
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:117
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:129
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_environment.yaml:4
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_environment.yaml:8
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_environment.yaml:17
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+## page 5
+System Budget Studio 0.1.0 | Example 150 kg microsatellite rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 5
+Severity
+Code
+Location
+Message
+warning
+CONFIG_PLACEHOLDER
+config/thermal_environment.yaml:21
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_environment.yaml:25
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_environment.yaml:33
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_environment.yaml:37
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_environment.yaml:41
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:24
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:30
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:36
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:42
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:48
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:54
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:60
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:68
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:72
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:78
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:82
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:87
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:91
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:98
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:102
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+## page 6
+System Budget Studio 0.1.0 | Example 150 kg microsatellite rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 6
+Severity
+Code
+Location
+Message
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:108
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:112
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:117
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:121
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:128
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:132
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:138
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:142
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:147
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:151
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:158
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:162
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:168
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:172
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:177
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:181
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:188
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:192
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:198
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:202
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+## page 7
+System Budget Studio 0.1.0 | Example 150 kg microsatellite rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 7
+Severity
+Code
+Location
+Message
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:207
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:211
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:218
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:222
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:228
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:232
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:237
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:241
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:248
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:252
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:258
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:262
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:267
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:271
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:278
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:282
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:288
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:292
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:297
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:301
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+## page 8
+System Budget Studio 0.1.0 | Example 150 kg microsatellite rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 8
+Provenance
+Provenance
+Item
+Value
+Tool
+System Budget Studio 0.1.0
+Python
+3.x
+Libraries
+pinned for-golden-tests
+Project
+Example 150 kg microsatellite
+Project revision
+1
+Scenario
+static (no scenario)
+Generated (UTC)
+2026-01-02T03:04:05Z
+User
+Golden User

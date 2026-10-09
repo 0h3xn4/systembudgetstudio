@@ -1044,10 +1044,6 @@ CONFIG_EMPTY_TABLE
 config/attenuation_table.yaml:3
 The table has no entries.
 warning
-CONFIG_EMPTY_TABLE
-config/ebn0_table.yaml:3
-The table has no entries.
-warning
 CONFIG_PLACEHOLDER
 config/margin_policy.yaml:9
 This number is a placeholder (no value or source 'TBD'); results that use it are not

@@ -12,6 +12,7 @@ from pathlib import Path
 from budget_core import APP_NAME, __version__
 from budget_core.examples import export_examples
 from budget_core.io.project_loader import load_project
+from budget_core.link.evaluate import link_pass_series, link_static_budget
 from budget_core.mass.static_mass import static_mass_budget
 from budget_core.power.static_budget import static_power_budget
 from budget_core.power.time_domain import time_domain_budget, violation_problems
@@ -20,6 +21,7 @@ from budget_core.provenance import make_provenance
 from budget_core.reports.run import (
     REPORT_KINDS,
     BudgetOutput,
+    link_output,
     mass_output,
     power_output,
     thermal_output,
@@ -59,7 +61,7 @@ def build_parser() -> argparse.ArgumentParser:
     run.add_argument("project", type=Path, help="Project folder (contains project.yaml).")
     run.add_argument(
         "--budget",
-        choices=("power", "mass", "thermal", "all"),
+        choices=("power", "mass", "thermal", "link", "all"),
         default="all",
         help="Budget to compute (default: all).",
     )
@@ -131,6 +133,26 @@ def build_parser() -> argparse.ArgumentParser:
     pt.add_argument("--date", type=_iso_datetime, help="Generation time, ISO 8601.")
     pt.add_argument("--strict", action="store_true", help="Treat warnings as failures.")
 
+    lp = sub.add_parser(
+        "link-passes",
+        help="Compute the link margin, selected data rate and data volume over every pass.",
+    )
+    lp.add_argument("project", type=Path, help="Project folder (contains project.yaml).")
+    lp.add_argument(
+        "--scenario", help="Scenario id (file name in scenarios/); optional if only one."
+    )
+    lp.add_argument(
+        "--report",
+        action="append",
+        choices=REPORTS + ("all",),
+        help="Output kind; repeat for several (default: all).",
+    )
+    lp.add_argument("--out", type=Path, help="Output folder (default: <project>/results).")
+    lp.add_argument("--no-plots", action="store_true", help="Leave the plots out of the reports.")
+    lp.add_argument("--user", help="User name for the provenance block.")
+    lp.add_argument("--date", type=_iso_datetime, help="Generation time, ISO 8601.")
+    lp.add_argument("--strict", action="store_true", help="Treat warnings as failures.")
+
     sub.add_parser(
         "self-test", help="Check that this installation can compute and render a budget."
     )
@@ -199,6 +221,14 @@ def _run(args: argparse.Namespace) -> int:
         outputs.append(thermal_output(project, thermal, provenance, loaded.problems))
         problems += thermal.problems
 
+    if args.budget in ("link", "all"):
+        if project.links:
+            link = link_static_budget(project)
+            outputs.append(link_output(project, link, provenance, loaded.problems))
+            problems += link.problems
+        elif args.budget == "link":
+            print("The project has no links (links/*.yaml); no link budget was computed.")
+
     wanted = set(args.report or ["all"])
     if "all" in wanted:
         wanted = set(REPORTS)
@@ -251,6 +281,60 @@ def _scenario(args: argparse.Namespace) -> int:
     for path in written:
         print(f"Wrote {path}")
     return 0
+
+
+def _link_passes(args: argparse.Namespace) -> int:
+    loaded = load_project(args.project)
+    errors = _count(loaded.problems, Severity.ERROR)
+    if loaded.project is None or errors:
+        for problem in loaded.problems:
+            print(problem.format())
+        print(f"{_plural(errors, 'error')}; nothing was written.")
+        return 1
+    project = loaded.project
+    if not project.links:
+        print("The project has no links (links/*.yaml); nothing to compute.")
+        return 1
+    scenario_id = args.scenario
+    if scenario_id is None and len(project.scenarios) == 1:
+        scenario_id = next(iter(project.scenarios))
+    try:
+        run = run_scenario(project, scenario_id or "")
+    except ScenarioRunError as exc:
+        print(exc.problem.format())
+        return 1
+    static = link_static_budget(project)
+    passes = link_pass_series(project, run)
+    provenance = make_provenance(
+        project, scenario=run.scenario_id, user=args.user, generated_at=args.date
+    )
+    output = link_output(
+        project, static, provenance, loaded.problems, passes, plots=not args.no_plots
+    )
+    wanted = set(args.report or ["all"])
+    if "all" in wanted:
+        wanted = set(REPORTS)
+    written = write_outputs([output], args.out or (args.project / "results"), wanted)
+    for path in written:
+        print(f"Wrote {path}")
+    for s in passes.series:
+        if s.volume_bits is None:
+            print(f"{s.link_id}: n/a (inputs missing, see the problems below).")
+        else:
+            print(
+                f"{s.link_id}: {len(s.passes)} pass(es) over {s.site}, "
+                f"{s.volume_bits / 8e6:.2f} MByte in the scenario "
+                f"({(s.volume_per_day_bits or 0.0) / 8e6:.2f} MByte per day)."
+            )
+    problems = sort_problems([*static.problems, *passes.problems])
+    warnings = _count(problems, Severity.WARNING)
+    for problem in problems:
+        if problem.severity is Severity.WARNING and problem.code != "RESULT_INCOMPLETE":
+            print(problem.format())
+    if output.document.banner:
+        print(output.document.banner)
+    print(f"0 errors, {_plural(warnings, 'warning')}.")
+    return 1 if args.strict and warnings else 0
 
 
 def _power_timeline(args: argparse.Namespace) -> int:
@@ -319,6 +403,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         return _validate(args)
     if args.command == "scenario":
         return _scenario(args)
+    if args.command == "link-passes":
+        return _link_passes(args)
     if args.command == "power-timeline":
         return _power_timeline(args)
     if args.command == "self-test":

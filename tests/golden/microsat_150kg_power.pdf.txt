@@ -1737,14 +1737,6 @@ Code
 Location
 Message
 warning
-CONFIG_EMPTY_TABLE
-config/attenuation_table.yaml:3
-The table has no entries.
-warning
-CONFIG_EMPTY_TABLE
-config/ebn0_table.yaml:3
-The table has no entries.
-warning
 RESULT_INCOMPLETE
 config/margin_policy.yaml
 The margin of maturity class 'class_a' is a placeholder.
@@ -1847,6 +1839,11 @@ CONFIG_PLACEHOLDER
 config/power_system.yaml:49
 This number is a placeholder (no value or source 'TBD'); results that use it are not
 trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:53
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
 ## page 10
 System Budget Studio 0.1.0 | Example 150 kg microsatellite rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
 Page 10
@@ -1854,11 +1851,6 @@ Severity
 Code
 Location
 Message
-warning
-CONFIG_PLACEHOLDER
-config/power_system.yaml:53
-This number is a placeholder (no value or source 'TBD'); results that use it are not
-trustworthy.
 warning
 CONFIG_PLACEHOLDER
 config/power_system.yaml:57
@@ -1954,6 +1946,11 @@ CONFIG_PLACEHOLDER
 config/thermal_environment.yaml:17
 This number is a placeholder (no value or source 'TBD'); results that use it are not
 trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_environment.yaml:21
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
 ## page 11
 System Budget Studio 0.1.0 | Example 150 kg microsatellite rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
 Page 11
@@ -1961,11 +1958,6 @@ Severity
 Code
 Location
 Message
-warning
-CONFIG_PLACEHOLDER
-config/thermal_environment.yaml:21
-This number is a placeholder (no value or source 'TBD'); results that use it are not
-trustworthy.
 warning
 CONFIG_PLACEHOLDER
 config/thermal_environment.yaml:25
@@ -2061,6 +2053,11 @@ CONFIG_PLACEHOLDER
 config/thermal_model.yaml:102
 This number is a placeholder (no value or source 'TBD'); results that use it are not
 trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:108
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
 ## page 12
 System Budget Studio 0.1.0 | Example 150 kg microsatellite rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
 Page 12
@@ -2068,11 +2065,6 @@ Severity
 Code
 Location
 Message
-warning
-CONFIG_PLACEHOLDER
-config/thermal_model.yaml:108
-This number is a placeholder (no value or source 'TBD'); results that use it are not
-trustworthy.
 warning
 CONFIG_PLACEHOLDER
 config/thermal_model.yaml:112
@@ -2168,6 +2160,11 @@ CONFIG_PLACEHOLDER
 config/thermal_model.yaml:202
 This number is a placeholder (no value or source 'TBD'); results that use it are not
 trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/thermal_model.yaml:207
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
 ## page 13
 System Budget Studio 0.1.0 | Example 150 kg microsatellite rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
 Page 13
@@ -2175,11 +2172,6 @@ Severity
 Code
 Location
 Message
-warning
-CONFIG_PLACEHOLDER
-config/thermal_model.yaml:207
-This number is a placeholder (no value or source 'TBD'); results that use it are not
-trustworthy.
 warning
 CONFIG_PLACEHOLDER
 config/thermal_model.yaml:211

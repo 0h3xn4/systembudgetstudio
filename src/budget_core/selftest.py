@@ -2,8 +2,8 @@
 
 Builds an example project in memory, parses a unit string with pint, propagates one orbit,
 computes the static power and mass budgets and the time-domain power budget, and renders XLSX,
-PDF and DOCX (with a plot) using the bundled fonts, and the thermal budget. Used to verify the
-PyInstaller bundle.
+PDF and DOCX (with a plot) using the bundled fonts, the thermal budget and a link budget. Used to
+verify the PyInstaller bundle.
 """
 
 from __future__ import annotations
@@ -57,6 +57,7 @@ def run_selftest() -> list[str]:
             failures.append("DOCX output is not a ZIP file")
         failures += _time_domain_check()
         failures += _thermal_check()
+        failures += _link_check()
     except Exception as exc:  # report the kind of failure, never file content
         failures.append(f"{type(exc).__name__} during the self-test")
     return failures
@@ -76,6 +77,23 @@ def _thermal_check() -> list[str]:
     document = build_thermal_report(project, result, make_provenance(project, user="self-test"))
     if not render_docx(document).startswith(b"PK"):
         failures.append("thermal DOCX output is not a ZIP file")
+    return failures
+
+
+def _link_check() -> list[str]:
+    """The static link table of the microsatellite example (two links) and its report."""
+    from budget_core.link.evaluate import link_static_budget
+    from budget_core.reports.docx import render_docx
+    from budget_core.reports.link_report import build_link_report
+
+    project = EXAMPLES["microsat_150kg"]()
+    result = link_static_budget(project)
+    failures: list[str] = []
+    if len(result.rows) < 2 or any(r.cn0_dbhz is None or not r.rates for r in result.rows):
+        failures.append("the link budget gave no margins")
+    document = build_link_report(project, result, make_provenance(project, user="self-test"))
+    if not render_docx(document).startswith(b"PK"):
+        failures.append("link DOCX output is not a ZIP file")
     return failures
 
 

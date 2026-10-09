@@ -50,8 +50,10 @@ def _hms_full(seconds: float) -> str:
 
 
 def _number(value: float) -> str:
-    if value != 0 and (abs(value) >= 10000 or abs(value) < 0.01):
+    if value != 0 and (abs(value) >= 1e6 or abs(value) < 0.01):
         return f"{value:.3g}"
+    if abs(value) >= 1000:
+        return f"{value:.0f}"
     return f"{value:.3f}".rstrip("0").rstrip(".") or "0"
 
 
@@ -281,9 +283,12 @@ class PlotWidget(QWidget):
         title_y = rect.top() - 5
         painter.drawText(QPointF(rect.left(), title_y), panel.y_label)
         x = rect.left() + metrics.horizontalAdvance(panel.y_label) + 24
-        for label, legend_colour in [(s.label, s.color) for s in panel.series] + [
-            (h.label, h.color) for h in panel.hlines
-        ]:
+        entries: dict[str, str] = {}  # one legend entry per label (a series may be split by pass)
+        for s in panel.series:
+            entries.setdefault(s.label, s.color)
+        for h in panel.hlines:
+            entries.setdefault(h.label, h.color)
+        for label, legend_colour in entries.items():
             painter.setPen(QPen(QColor(legend_colour), 3))
             painter.drawLine(QPointF(x, title_y - 4), QPointF(x + 16, title_y - 4))
             painter.setPen(QColor(MUTED))

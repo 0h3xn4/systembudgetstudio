@@ -18,6 +18,7 @@ config/power_config.yaml       kind: power_config        distribution_loss_ratio
 config/power_system.yaml       kind: power_system        design_life_yr, solar_array{faces[], ...}, battery{...}, attitude{...}, limits{peak_power_w}   (optional)
 config/thermal_model.yaml      kind: thermal_model       nodes{id: {name}}, conductances[{first_node, second_node, conductance_wk}], surfaces[...]   (optional)
 config/thermal_environment.yaml kind: thermal_environment space_temperature_k, temperature_margin_k, cases{name: {...}}   (optional)
+links/<id>.yaml         kind: link               name, direction, peer?, frequency_hz, transmitter{}, receiver{}, modulation, coding, data_rates_bps[], required_margin_db, ..._loss_db, attenuation[], active_modes[], max_elevation_deg?, static_points[]
 config/ebn0_table.yaml         kind: ebn0_table          entries[{modulation, coding, required_ebn0_db}]
 config/attenuation_table.yaml  kind: attenuation_table   entries[{name, attenuation_kind, freq_hz, elevation_deg, loss_db}]
 ```
@@ -115,6 +116,43 @@ cases:
 
 - Results per case: node temperatures, heat absorbed, radiated and conducted, and a check of every unit against its limits (`ok`, `margin`, `exceeded`, `no limits`).
 
+## Links (decisions D-077 to D-083)
+
+```yaml
+schema_version: 1
+kind: link
+name: S-band telemetry downlink
+direction: downlink              # or uplink
+peer: gs_north                   # ground station id; omit for static points only
+frequency_hz: 2.2 GHz
+transmitter:
+  power_w: {value: ..., source: ...}        # RF output power
+  line_loss_db: {value: ..., source: ...}   # between amplifier and antenna
+  antenna:                                  # exactly one of gain_dbi, pattern, pattern_file
+    gain_dbi: {value: ..., source: ...}
+  polarisation: RHCP
+receiver:                        # G/T given ...
+  g_over_t_dbk: {value: ..., source: ...}
+  # ... or: antenna, system_noise_temperature_k, feed_loss_db
+modulation: QPSK                 # with coding: an entry of config/ebn0_table.yaml
+coding: rate 1/2
+data_rates_bps: [32000, 128000, 512000]
+required_margin_db: {value: ..., source: ...}
+pointing_loss_db: {value: ..., source: ...}
+polarisation_loss_db: {value: ..., source: ...}
+implementation_loss_db: {value: ..., source: ...}
+attenuation: [gas_s]             # names in config/attenuation_table.yaml
+active_modes: [downlink]         # spacecraft modes in which the link is used (empty: always)
+max_elevation_deg: 85            # tracking limit (optional)
+static_points:                   # chosen elevation and range for the static table
+  - {name: 5 deg elevation, elevation_deg: 5, range_m: 2200000}
+```
+
+- Antenna: `gain_dbi` (constant); `pattern: {source, angles_deg, gains_dbi}` (spacecraft: angle from nadir, linear interpolation, ends held); `pattern_file: patterns/x.csv` with `pattern_source` (CSV columns `angle_deg,gain_dbi`). A ground antenna must have a constant gain.
+- Receiver: `g_over_t_dbk` (dB/K), or `antenna` + `system_noise_temperature_k` + `feed_loss_db`.
+- Required Eb/N0 comes from `config/ebn0_table.yaml` (entry with the same modulation and coding); attenuation entries are chosen by name from `config/attenuation_table.yaml`.
+- Results: the static table at every static point (EIRP, G/T, losses, C/N0, Eb/N0 and margin at every listed rate, highest rate that closes), and with a scenario the margin, selected rate and data volume over every pass.
+
 ## Unit schema 2
 
 `heat_dissipation_ratio` (per power mode), `thermal_node` and `temperature_limits` were added, all optional. Version 1 files migrate in memory unchanged (`FILE_MIGRATED`).
@@ -137,7 +175,7 @@ JSON Schemas for all kinds: `budget export-schemas <dir>` (also committed in `sr
 
 Errors: `FILE_NOT_FOUND`, `FILE_INVALID`, `YAML_SYNTAX`, `KIND_MISMATCH`, `SCHEMA_VERSION_MISSING`, `SCHEMA_TOO_NEW`, `SCHEMA_MIGRATION_MISSING`, `SCHEMA_MIGRATION_FAILED`, `FIELD_MISSING`, `FIELD_UNKNOWN`, `FIELD_INVALID`, `UNIT_INVALID`, `DUPLICATE_NAME`, `SOURCE_MISSING`, `REF_UNKNOWN_BUS`, `REF_UNKNOWN_MATURITY`, `REF_UNKNOWN_UNIT`, `REF_UNKNOWN_UNIT_MODE`, `UNIT_NOT_MAPPED`.
 Errors (config values): `CONFIG_VALUE_INVALID`, `REF_UNKNOWN_PHASE`, `PHASE_MASS_MISSING`.
-Thermal (errors at load): `THERMAL_NODE_UNKNOWN`, `REF_UNKNOWN_CASE`. Environment: `REF_UNKNOWN_ORBIT`, `REF_UNKNOWN_SITE`, `REF_UNKNOWN_MODE`, `DUPLICATE_ID`, `IMPORT_DIR_MISSING`, `ORBIT_INVALID` (errors at load); `SCENARIO_UNKNOWN`, `ENV_INPUT_INVALID`, `ENV_PROPAGATION_FAILED` (errors when running a scenario).
+Thermal (errors at load): `THERMAL_NODE_UNKNOWN`, `REF_UNKNOWN_CASE`. Link (errors at load): `REF_UNKNOWN_STATION`, `REF_UNKNOWN_ATTENUATION`, `REF_UNKNOWN_MODULATION`, `LINK_ANTENNA_PATTERN_GROUND`, `LINK_PATTERN_FILE_MISSING`; `LINK_INPUT_INVALID` (error when running: unreadable pattern file); warnings `LINK_ATTENUATION_FREQUENCY`, `LINK_SITE_NOT_IN_SCENARIO`; info `LINK_NO_STATIC_POINTS`. Environment: `REF_UNKNOWN_ORBIT`, `REF_UNKNOWN_SITE`, `REF_UNKNOWN_MODE`, `DUPLICATE_ID`, `IMPORT_DIR_MISSING`, `ORBIT_INVALID` (errors at load); `SCENARIO_UNKNOWN`, `ENV_INPUT_INVALID`, `ENV_PROPAGATION_FAILED` (errors when running a scenario).
 Result findings (errors): `MASS_LIMIT_EXCEEDED`; thermal: `THERMAL_LIMIT_EXCEEDED`, `THERMAL_MARGIN_INSUFFICIENT`, `THERMAL_SOLVE_FAILED`; time-domain power: `BATTERY_DOD_EXCEEDED`, `BATTERY_DEPLETED`, `ORBIT_BALANCE_NEGATIVE`, `PEAK_POWER_EXCEEDED`. Warnings: `MASS_PROPS_MISSING`, `MASS_FRAME_UNDEFINED`, `RESULT_INCOMPLETE` (a result needs a placeholder number, shown as n/a), `CONFIG_MISSING`, `CONFIG_PLACEHOLDER`, `CONFIG_EMPTY_TABLE`, `THERMAL_NO_LIMITS`. Info: `FILE_MIGRATED`, `MASS_INERTIA_POINT_MASS`.
 
 ## Schema versions

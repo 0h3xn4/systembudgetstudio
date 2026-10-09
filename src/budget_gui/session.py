@@ -7,13 +7,20 @@ from pathlib import Path
 from PySide6.QtCore import QObject, Signal
 
 from budget_core.io.project_loader import LoadResult, load_project
+from budget_core.link.evaluate import StaticLinkResult, link_static_budget
 from budget_core.mass.static_mass import StaticMassResult, static_mass_budget
 from budget_core.model import Project
 from budget_core.power.static_budget import StaticPowerResult, static_power_budget
 from budget_core.problems import Problem, Severity, sort_problems
 from budget_core.provenance import Provenance, make_provenance
 from budget_core.reports.document import ReportDocument
-from budget_core.reports.run import BudgetOutput, mass_output, power_output, thermal_output
+from budget_core.reports.run import (
+    BudgetOutput,
+    link_output,
+    mass_output,
+    power_output,
+    thermal_output,
+)
 from budget_core.thermal.static_thermal import StaticThermalResult, static_thermal_budget
 
 
@@ -29,10 +36,12 @@ class ProjectSession(QObject):
         self.power: StaticPowerResult | None = None
         self.mass: StaticMassResult | None = None
         self.thermal: StaticThermalResult | None = None
+        self.link: StaticLinkResult | None = None
         self.provenance: Provenance | None = None
         self.document: ReportDocument | None = None  # power budget report
         self.mass_document: ReportDocument | None = None
         self.thermal_document: ReportDocument | None = None
+        self.link_document: ReportDocument | None = None
         self.outputs: list[BudgetOutput] = []
         self.problems: list[Problem] = []
 
@@ -41,8 +50,9 @@ class ProjectSession(QObject):
         return self.load_result.project if self.load_result else None
 
     def _clear(self) -> None:
-        self.power = self.mass = self.thermal = self.provenance = None
+        self.power = self.mass = self.thermal = self.link = self.provenance = None
         self.document = self.mass_document = self.thermal_document = None
+        self.link_document = None
         self.outputs = []
 
     def open(self, path: Path) -> None:
@@ -69,12 +79,18 @@ class ProjectSession(QObject):
                 self.outputs = [power_out, mass_out, thermal_out]
                 self.document, self.mass_document = power_out.document, mass_out.document
                 self.thermal_document = thermal_out.document
+                if project.links:
+                    self.link = link_static_budget(project)
+                    link_out = link_output(project, self.link, self.provenance, load_problems)
+                    self.outputs.append(link_out)
+                    self.link_document = link_out.document
                 self.problems = sort_problems(
                     [
                         *self.problems,
                         *self.power.problems,
                         *self.mass.problems,
                         *self.thermal.problems,
+                        *(self.link.problems if self.link else ()),
                     ]
                 )
         except Exception as exc:  # never show a traceback; say what happened in plain words

@@ -205,11 +205,11 @@
 51: 'TH-SB' | 'Stefan-Boltzmann constant' | 'sigma = 5.670374419e-8 W m^-2 K^-4' | 'CODATA 2018 / SI 2019 (exact from h, k, c)' | 
 52: 'TH-LIMIT' | 'Unit temperature limit check' | 'exceeded when T < T_min or T > T_max; margin check when T - T_min or T_max - T < temperature_margin_k' | 'SOURCE_MISSING' | 
 53: 'SOURCE_MISSING: the formula is a project convention or textbook definition whose reference text is not available to the tool yet (see docs/DECISIONS.md).' |  |  |  | 
-## sheet Problems rows=124 cols=4
+## sheet Problems rows=132 cols=4
 1: 'Problems and open items' |  |  | 
 2: 'Severity' | 'Code' | 'Location' | 'Message'
 3: 'warning' | 'CONFIG_EMPTY_TABLE' | 'config/attenuation_table.yaml:3' | 'The table has no entries.'
-4: 'warning' | 'CONFIG_EMPTY_TABLE' | 'config/ebn0_table.yaml:3' | 'The table has no entries.'
+4: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/ebn0_table.yaml:7' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
 5: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:6' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
 6: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:10' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
 7: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:15' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
@@ -324,12 +324,20 @@
 116: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:178' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
 117: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:183' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
 118: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:187' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
-119: 'warning' | 'THERMAL_NO_LIMITS' | 'units/adcs.yaml' | "Unit 'adcs' has no operating temperature limits; it is not checked."
-120: 'warning' | 'THERMAL_NO_LIMITS' | 'units/camera.yaml' | "Unit 'camera' has no operating temperature limits; it is not checked."
-121: 'warning' | 'THERMAL_NO_LIMITS' | 'units/eps.yaml' | "Unit 'eps' has no operating temperature limits; it is not checked."
-122: 'warning' | 'THERMAL_NO_LIMITS' | 'units/gnss.yaml' | "Unit 'gnss' has no operating temperature limits; it is not checked."
-123: 'warning' | 'THERMAL_NO_LIMITS' | 'units/obc.yaml' | "Unit 'obc' has no operating temperature limits; it is not checked."
-124: 'warning' | 'THERMAL_NO_LIMITS' | 'units/radio.yaml' | "Unit 'radio' has no operating temperature limits; it is not checked."
+119: 'warning' | 'CONFIG_PLACEHOLDER' | 'links/uhf_down.yaml:9' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+120: 'warning' | 'CONFIG_PLACEHOLDER' | 'links/uhf_down.yaml:13' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+121: 'warning' | 'CONFIG_PLACEHOLDER' | 'links/uhf_down.yaml:18' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+122: 'warning' | 'CONFIG_PLACEHOLDER' | 'links/uhf_down.yaml:24' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+123: 'warning' | 'CONFIG_PLACEHOLDER' | 'links/uhf_down.yaml:36' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+124: 'warning' | 'CONFIG_PLACEHOLDER' | 'links/uhf_down.yaml:40' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+125: 'warning' | 'CONFIG_PLACEHOLDER' | 'links/uhf_down.yaml:44' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+126: 'warning' | 'CONFIG_PLACEHOLDER' | 'links/uhf_down.yaml:48' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+127: 'warning' | 'THERMAL_NO_LIMITS' | 'units/adcs.yaml' | "Unit 'adcs' has no operating temperature limits; it is not checked."
+128: 'warning' | 'THERMAL_NO_LIMITS' | 'units/camera.yaml' | "Unit 'camera' has no operating temperature limits; it is not checked."
+129: 'warning' | 'THERMAL_NO_LIMITS' | 'units/eps.yaml' | "Unit 'eps' has no operating temperature limits; it is not checked."
+130: 'warning' | 'THERMAL_NO_LIMITS' | 'units/gnss.yaml' | "Unit 'gnss' has no operating temperature limits; it is not checked."
+131: 'warning' | 'THERMAL_NO_LIMITS' | 'units/obc.yaml' | "Unit 'obc' has no operating temperature limits; it is not checked."
+132: 'warning' | 'THERMAL_NO_LIMITS' | 'units/radio.yaml' | "Unit 'radio' has no operating temperature limits; it is not checked."
 ## sheet Provenance rows=10 cols=2
 1: 'Provenance' | 
 2: 'Item' | 'Value'

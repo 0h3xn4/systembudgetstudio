@@ -206,3 +206,19 @@ def test_thermal_budget_path_is_strictly_offline(tmp_path) -> None:  # type: ign
         assert code == 1  # the example has a margin finding: not a failure of the guard
     """)
     assert r.returncode == 0, r.stderr
+
+
+def test_link_budget_paths_are_strictly_offline(tmp_path) -> None:  # type: ignore[no-untyped-def]
+    r = _run(f"""
+        import pathlib
+        from budget_cli.main import main
+        from budget_core.examples import export_examples
+        export_examples(pathlib.Path({str(tmp_path)!r}))
+        project = {str(tmp_path / "microsat_150kg")!r}
+        out = {str(tmp_path / "out")!r}
+        assert main(["run", project, "--budget", "link", "--report", "xlsx", "--report", "docx",
+                     "--report", "json", "--report", "csv", "--out", out]) == 0
+        assert main(["link-passes", project, "--report", "xlsx", "--report", "docx",
+                     "--report", "json", "--report", "csv", "--out", out]) == 0
+    """)
+    assert r.returncode == 0, r.stderr

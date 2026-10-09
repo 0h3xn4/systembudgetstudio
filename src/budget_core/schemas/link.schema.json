@@ -1,0 +1,376 @@
+{
+  "$defs": {
+    "Antenna": {
+      "additionalProperties": false,
+      "description": "Constant gain, a pattern table, or a pattern file (CSV with angle_deg and gain_dbi).\n\nOn the spacecraft the angle is measured from nadir (the boresight points at the Earth's\ncentre, DEVIATIONS DV-L2); a ground antenna tracks and has a constant gain.",
+      "properties": {
+        "gain_dbi": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Sourced"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "pattern": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AntennaPattern"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "pattern_file": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Pattern File"
+        },
+        "pattern_source": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Pattern Source"
+        }
+      },
+      "title": "Antenna",
+      "type": "object"
+    },
+    "AntennaPattern": {
+      "additionalProperties": false,
+      "description": "Gain by angle from the boresight, linearly interpolated (`source: TBD` is a placeholder).",
+      "properties": {
+        "angles_deg": {
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "title": "Angles Deg",
+          "type": "array"
+        },
+        "gains_dbi": {
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "title": "Gains Dbi",
+          "type": "array"
+        },
+        "note": {
+          "default": "",
+          "title": "Note",
+          "type": "string"
+        },
+        "source": {
+          "minLength": 1,
+          "title": "Source",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source",
+        "angles_deg",
+        "gains_dbi"
+      ],
+      "title": "AntennaPattern",
+      "type": "object"
+    },
+    "Receiver": {
+      "additionalProperties": false,
+      "description": "Either a given G/T, or an antenna with the system noise temperature and feed loss.",
+      "properties": {
+        "antenna": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Antenna"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "feed_loss_db": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Sourced"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "g_over_t_dbk": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Sourced"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "polarisation": {
+          "default": "",
+          "title": "Polarisation",
+          "type": "string"
+        },
+        "system_noise_temperature_k": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Sourced"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "title": "Receiver",
+      "type": "object"
+    },
+    "Sourced": {
+      "additionalProperties": false,
+      "description": "A number from a standard, policy or data sheet. `source: TBD` or a null value marks a\nplaceholder that must be replaced before results are trusted (spec constraint 15).",
+      "properties": {
+        "note": {
+          "default": "",
+          "title": "Note",
+          "type": "string"
+        },
+        "source": {
+          "minLength": 1,
+          "title": "Source",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "value",
+        "source"
+      ],
+      "title": "Sourced",
+      "type": "object"
+    },
+    "StaticPoint": {
+      "additionalProperties": false,
+      "description": "A chosen elevation and range at which the static link table is evaluated.",
+      "properties": {
+        "elevation_deg": {
+          "maximum": 90,
+          "minimum": 0,
+          "title": "Elevation Deg",
+          "type": "number"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "range_m": {
+          "exclusiveMinimum": 0,
+          "title": "Range M",
+          "type": "number"
+        }
+      },
+      "required": [
+        "name",
+        "elevation_deg",
+        "range_m"
+      ],
+      "title": "StaticPoint",
+      "type": "object"
+    },
+    "Transmitter": {
+      "additionalProperties": false,
+      "properties": {
+        "antenna": {
+          "$ref": "#/$defs/Antenna"
+        },
+        "line_loss_db": {
+          "$ref": "#/$defs/Sourced"
+        },
+        "polarisation": {
+          "default": "",
+          "title": "Polarisation",
+          "type": "string"
+        },
+        "power_w": {
+          "$ref": "#/$defs/Sourced"
+        }
+      },
+      "required": [
+        "power_w",
+        "line_loss_db",
+        "antenna"
+      ],
+      "title": "Transmitter",
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "active_modes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Active Modes",
+      "type": "array"
+    },
+    "attenuation": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Attenuation",
+      "type": "array"
+    },
+    "coding": {
+      "minLength": 1,
+      "title": "Coding",
+      "type": "string"
+    },
+    "data_rates_bps": {
+      "items": {
+        "type": "number"
+      },
+      "minItems": 1,
+      "title": "Data Rates Bps",
+      "type": "array"
+    },
+    "direction": {
+      "enum": [
+        "downlink",
+        "uplink"
+      ],
+      "title": "Direction",
+      "type": "string"
+    },
+    "frequency_hz": {
+      "exclusiveMinimum": 0,
+      "title": "Frequency Hz",
+      "type": "number"
+    },
+    "implementation_loss_db": {
+      "$ref": "#/$defs/Sourced"
+    },
+    "kind": {
+      "const": "link",
+      "default": "link",
+      "title": "Kind",
+      "type": "string"
+    },
+    "max_elevation_deg": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0,
+          "maximum": 90,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Max Elevation Deg"
+    },
+    "modulation": {
+      "minLength": 1,
+      "title": "Modulation",
+      "type": "string"
+    },
+    "name": {
+      "minLength": 1,
+      "title": "Name",
+      "type": "string"
+    },
+    "peer": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Peer"
+    },
+    "pointing_loss_db": {
+      "$ref": "#/$defs/Sourced"
+    },
+    "polarisation_loss_db": {
+      "$ref": "#/$defs/Sourced"
+    },
+    "receiver": {
+      "$ref": "#/$defs/Receiver"
+    },
+    "required_margin_db": {
+      "$ref": "#/$defs/Sourced"
+    },
+    "schema_version": {
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "static_points": {
+      "items": {
+        "$ref": "#/$defs/StaticPoint"
+      },
+      "title": "Static Points",
+      "type": "array"
+    },
+    "transmitter": {
+      "$ref": "#/$defs/Transmitter"
+    }
+  },
+  "required": [
+    "coding",
+    "data_rates_bps",
+    "direction",
+    "frequency_hz",
+    "implementation_loss_db",
+    "kind",
+    "modulation",
+    "name",
+    "pointing_loss_db",
+    "polarisation_loss_db",
+    "receiver",
+    "required_margin_db",
+    "schema_version",
+    "transmitter"
+  ],
+  "title": "System Budget Studio link",
+  "type": "object"
+}

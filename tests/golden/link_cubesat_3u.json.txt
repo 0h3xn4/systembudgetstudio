@@ -1,0 +1,226 @@
+{
+  "assumptions": [
+    {
+      "file": "links/uhf_down.yaml",
+      "name": "Transmit power",
+      "path": "transmitter.power_w",
+      "placeholder": true,
+      "source": "TBD",
+      "unit": "W",
+      "value": null
+    },
+    {
+      "file": "links/uhf_down.yaml",
+      "name": "Line loss",
+      "path": "transmitter.line_loss_db",
+      "placeholder": true,
+      "source": "TBD",
+      "unit": "dB",
+      "value": null
+    },
+    {
+      "file": "links/uhf_down.yaml",
+      "name": "Antenna gain, transmitter",
+      "path": "transmitter.antenna.gain_dbi",
+      "placeholder": true,
+      "source": "TBD",
+      "unit": "dBi",
+      "value": null
+    },
+    {
+      "file": "links/uhf_down.yaml",
+      "name": "G/T",
+      "path": "receiver.g_over_t_dbk",
+      "placeholder": true,
+      "source": "TBD",
+      "unit": "dB/K",
+      "value": null
+    },
+    {
+      "file": "links/uhf_down.yaml",
+      "name": "Required margin",
+      "path": "required_margin_db",
+      "placeholder": true,
+      "source": "TBD",
+      "unit": "dB",
+      "value": null
+    },
+    {
+      "file": "links/uhf_down.yaml",
+      "name": "Pointing loss",
+      "path": "pointing_loss_db",
+      "placeholder": true,
+      "source": "TBD",
+      "unit": "dB",
+      "value": null
+    },
+    {
+      "file": "links/uhf_down.yaml",
+      "name": "Polarisation loss",
+      "path": "polarisation_loss_db",
+      "placeholder": true,
+      "source": "TBD",
+      "unit": "dB",
+      "value": null
+    },
+    {
+      "file": "links/uhf_down.yaml",
+      "name": "Implementation loss",
+      "path": "implementation_loss_db",
+      "placeholder": true,
+      "source": "TBD",
+      "unit": "dB",
+      "value": null
+    },
+    {
+      "file": "config/ebn0_table.yaml",
+      "name": "Required Eb/N0, BPSK none",
+      "path": "entries[0].required_ebn0_db",
+      "placeholder": true,
+      "source": "TBD",
+      "unit": "dB",
+      "value": null
+    }
+  ],
+  "problems": [
+    {
+      "code": "RESULT_INCOMPLETE",
+      "file": "links/uhf_down.yaml",
+      "hint": "Replace the placeholder with a sourced value; results that need it show n/a.",
+      "line": null,
+      "message": "The transmit power is a placeholder.",
+      "path": "transmitter.power_w",
+      "severity": "warning"
+    },
+    {
+      "code": "RESULT_INCOMPLETE",
+      "file": "links/uhf_down.yaml",
+      "hint": "Replace the placeholder with a sourced value; results that need it show n/a.",
+      "line": null,
+      "message": "The line loss is a placeholder.",
+      "path": "transmitter.line_loss_db",
+      "severity": "warning"
+    },
+    {
+      "code": "RESULT_INCOMPLETE",
+      "file": "links/uhf_down.yaml",
+      "hint": "Replace the placeholder with a sourced value; results that need it show n/a.",
+      "line": null,
+      "message": "The transmitter antenna gain is a placeholder.",
+      "path": "transmitter.antenna.gain_dbi",
+      "severity": "warning"
+    },
+    {
+      "code": "RESULT_INCOMPLETE",
+      "file": "links/uhf_down.yaml",
+      "hint": "Replace the placeholder with a sourced value; results that need it show n/a.",
+      "line": null,
+      "message": "The receiver G/T is a placeholder.",
+      "path": "receiver.g_over_t_dbk",
+      "severity": "warning"
+    },
+    {
+      "code": "RESULT_INCOMPLETE",
+      "file": "links/uhf_down.yaml",
+      "hint": "Replace the placeholder with a sourced value; results that need it show n/a.",
+      "line": null,
+      "message": "The required margin is a placeholder.",
+      "path": "required_margin_db",
+      "severity": "warning"
+    },
+    {
+      "code": "RESULT_INCOMPLETE",
+      "file": "links/uhf_down.yaml",
+      "hint": "Replace the placeholder with a sourced value; results that need it show n/a.",
+      "line": null,
+      "message": "The pointing loss is a placeholder.",
+      "path": "pointing_loss_db",
+      "severity": "warning"
+    },
+    {
+      "code": "RESULT_INCOMPLETE",
+      "file": "links/uhf_down.yaml",
+      "hint": "Replace the placeholder with a sourced value; results that need it show n/a.",
+      "line": null,
+      "message": "The polarisation loss is a placeholder.",
+      "path": "polarisation_loss_db",
+      "severity": "warning"
+    },
+    {
+      "code": "RESULT_INCOMPLETE",
+      "file": "links/uhf_down.yaml",
+      "hint": "Replace the placeholder with a sourced value; results that need it show n/a.",
+      "line": null,
+      "message": "The implementation loss is a placeholder.",
+      "path": "implementation_loss_db",
+      "severity": "warning"
+    },
+    {
+      "code": "RESULT_INCOMPLETE",
+      "file": "config/ebn0_table.yaml",
+      "hint": "Replace the placeholder with a sourced value; results that need it show n/a.",
+      "line": null,
+      "message": "The required Eb/N0 is a placeholder.",
+      "path": "entries[0].required_ebn0_db",
+      "severity": "warning"
+    }
+  ],
+  "provenance": {
+    "generated": "2026-01-02T03:04:05Z",
+    "libraries": [
+      [
+        "pinned",
+        "for-golden-tests"
+      ]
+    ],
+    "project_name": "Example 3U CubeSat",
+    "project_revision": "1",
+    "python_version": "3.x",
+    "scenario": "static (no scenario)",
+    "tool": "System Budget Studio",
+    "tool_version": "0.1.0",
+    "user": "Golden User"
+  },
+  "static": [
+    {
+      "atmospheric_loss_db": null,
+      "cn0_dbhz": null,
+      "direction": "downlink",
+      "eirp_dbw": null,
+      "elevation_deg": 5.0,
+      "frequency_hz": 435000000.0,
+      "g_over_t_dbk": null,
+      "link_id": "uhf_down",
+      "link_name": "UHF telemetry downlink",
+      "max_rate_bps": null,
+      "max_rate_continuous_bps": null,
+      "other_losses_db": null,
+      "path_loss_db": null,
+      "point": "5 deg elevation",
+      "range_m": 2200000.0,
+      "rates": [],
+      "required_ebn0_db": null,
+      "required_margin_db": null
+    },
+    {
+      "atmospheric_loss_db": null,
+      "cn0_dbhz": null,
+      "direction": "downlink",
+      "eirp_dbw": null,
+      "elevation_deg": 90.0,
+      "frequency_hz": 435000000.0,
+      "g_over_t_dbk": null,
+      "link_id": "uhf_down",
+      "link_name": "UHF telemetry downlink",
+      "max_rate_bps": null,
+      "max_rate_continuous_bps": null,
+      "other_losses_db": null,
+      "path_loss_db": null,
+      "point": "zenith",
+      "range_m": 550000.0,
+      "rates": [],
+      "required_ebn0_db": null,
+      "required_margin_db": null
+    }
+  ]
+}

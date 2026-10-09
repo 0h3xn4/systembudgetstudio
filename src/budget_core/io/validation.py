@@ -6,7 +6,7 @@ from collections.abc import Callable, Iterator
 from typing import Any
 
 from budget_core.io.yamlio import LineMap, Path, format_path
-from budget_core.model import BudgetModel, Project, Sourced
+from budget_core.model import Antenna, BudgetModel, Link, Project, Sourced
 from budget_core.problems import Problem, Severity
 
 
@@ -132,6 +132,7 @@ def validate_references(project: Project, lines: dict[str, LineMap]) -> list[Pro
     out.extend(_environment_references(project, lines))
     out.extend(_power_system_references(project, lines))
     out.extend(_thermal_references(project, lines))
+    out.extend(_link_references(project, lines))
     out.extend(_value_ranges(project, lines))
 
     for kind in (
@@ -187,6 +188,51 @@ def validate_references(project: Project, lines: dict[str, LineMap]) -> list[Pro
                     "Add entries from a cited source, or import them from a file.",
                 )
             )
+    for lid, link in project.links.items():
+        file = f"links/{lid}.yaml"
+        for path, sourced in iter_sourced(link):
+            if sourced.is_placeholder:
+                out.append(
+                    _p(
+                        warn,
+                        "CONFIG_PLACEHOLDER",
+                        "This number is a placeholder (no value or source 'TBD'); results "
+                        "that use it are not trustworthy.",
+                        file,
+                        path,
+                        lines,
+                        "Replace it with a value from the data sheet or requirement and cite "
+                        "the source.",
+                    )
+                )
+        for side, antenna in _antennas(link):
+            if antenna.pattern is not None and antenna.pattern.is_placeholder:
+                out.append(
+                    _p(
+                        warn,
+                        "CONFIG_PLACEHOLDER",
+                        "The antenna pattern is a placeholder (source 'TBD').",
+                        file,
+                        (side, "antenna", "pattern", "source"),
+                        lines,
+                        "Replace it with data-sheet values and cite the source.",
+                    )
+                )
+            if (
+                antenna.pattern_source is not None
+                and antenna.pattern_source.strip().upper() == "TBD"
+            ):
+                out.append(
+                    _p(
+                        warn,
+                        "CONFIG_PLACEHOLDER",
+                        "The antenna pattern file is a placeholder (source 'TBD').",
+                        file,
+                        (side, "antenna", "pattern_source"),
+                        lines,
+                        "Cite the source of the pattern file.",
+                    )
+                )
     return out
 
 
@@ -435,6 +481,7 @@ def _value_ranges(project: Project, lines: dict[str, LineMap]) -> list[Problem]:
                 lo_open=True,
             )
     out.extend(_thermal_ranges(project, check))
+    out.extend(_link_ranges(project, check))
     return out
 
 
@@ -510,6 +557,133 @@ def _thermal_ranges(project: Project, check: Callable[..., None]) -> list[Proble
                         1.0,
                     )
     return []
+
+
+def _antennas(link: Link) -> list[tuple[str, Antenna]]:
+    out: list[tuple[str, Antenna]] = [("transmitter", link.transmitter.antenna)]
+    if link.receiver.antenna is not None:
+        out.append(("receiver", link.receiver.antenna))
+    return out
+
+
+def _link_ranges(project: Project, check: Callable[..., None]) -> list[Problem]:
+    big = 1e12
+    for lid, link in project.links.items():
+        f = f"links/{lid}.yaml"
+        tx, rx = link.transmitter, link.receiver
+        check(f, ("transmitter", "power_w"), tx.power_w, "The transmit power", 0.0, big, True)
+        check(f, ("transmitter", "line_loss_db"), tx.line_loss_db, "The line loss", 0.0, 100.0)
+        for field, what in (
+            ("required_margin_db", "The required margin"),
+            ("pointing_loss_db", "The pointing loss"),
+            ("polarisation_loss_db", "The polarisation loss"),
+            ("implementation_loss_db", "The implementation loss"),
+        ):
+            check(f, (field,), getattr(link, field), what, 0.0, 100.0)
+        if rx.system_noise_temperature_k is not None:
+            check(
+                f,
+                ("receiver", "system_noise_temperature_k"),
+                rx.system_noise_temperature_k,
+                "The system noise temperature",
+                0.0,
+                1e6,
+                True,
+            )
+        if rx.feed_loss_db is not None:
+            check(f, ("receiver", "feed_loss_db"), rx.feed_loss_db, "The feed loss", 0.0, 100.0)
+    return []
+
+
+def _link_references(project: Project, lines: dict[str, LineMap]) -> list[Problem]:
+    out: list[Problem] = []
+    err = Severity.ERROR
+    ebn0, table = project.config.ebn0_table, project.config.attenuation_table
+    for lid, link in project.links.items():
+        file = f"links/{lid}.yaml"
+        if link.peer is not None and link.peer not in project.ground_stations:
+            out.append(
+                _p(
+                    err,
+                    "REF_UNKNOWN_STATION",
+                    "The peer is not a ground station in ground_stations/.",
+                    file,
+                    ("peer",),
+                    lines,
+                    "Defined stations: " + ", ".join(sorted(project.ground_stations)) + ".",
+                )
+            )
+        for i, mode in enumerate(link.active_modes):
+            if mode not in project.modes:
+                out.append(
+                    _p(
+                        err,
+                        "REF_UNKNOWN_MODE",
+                        f"'{mode}' is not a spacecraft mode in modes/.",
+                        file,
+                        ("active_modes", i),
+                        lines,
+                        "Defined modes: " + ", ".join(sorted(project.modes)) + ".",
+                    )
+                )
+        if table is not None and table.entries:
+            names = {e.name for e in table.entries}
+            for i, name in enumerate(link.attenuation):
+                if name not in names:
+                    out.append(
+                        _p(
+                            err,
+                            "REF_UNKNOWN_ATTENUATION",
+                            "The attenuation is not defined in config/attenuation_table.yaml.",
+                            file,
+                            ("attenuation", i),
+                            lines,
+                            "Defined entries: " + ", ".join(sorted(names)) + ".",
+                        )
+                    )
+        listed = ebn0 is not None and any(
+            e.modulation == link.modulation and e.coding == link.coding for e in ebn0.entries
+        )
+        if ebn0 is not None and ebn0.entries and not listed:
+            out.append(
+                _p(
+                    err,
+                    "REF_UNKNOWN_MODULATION",
+                    "No Eb/N0 entry has this modulation and coding in config/ebn0_table.yaml.",
+                    file,
+                    ("modulation",),
+                    lines,
+                    "Add the entry with its source, or correct the names.",
+                )
+            )
+        ground = "receiver" if link.direction == "downlink" else "transmitter"
+        antenna = link.receiver.antenna if ground == "receiver" else link.transmitter.antenna
+        if antenna is not None and antenna.gain_dbi is None:
+            out.append(
+                _p(
+                    err,
+                    "LINK_ANTENNA_PATTERN_GROUND",
+                    "A ground antenna has a constant gain; patterns are for the spacecraft end.",
+                    file,
+                    (ground, "antenna"),
+                    lines,
+                    "Use gain_dbi (the ground antenna tracks the spacecraft).",
+                )
+            )
+        for side, ant in _antennas(link):
+            if ant.pattern_file is not None and not (project.root / ant.pattern_file).is_file():
+                out.append(
+                    _p(
+                        err,
+                        "LINK_PATTERN_FILE_MISSING",
+                        "The antenna pattern file does not exist.",
+                        file,
+                        (side, "antenna", "pattern_file"),
+                        lines,
+                        "The path is relative to the project folder.",
+                    )
+                )
+    return out
 
 
 def _thermal_references(project: Project, lines: dict[str, LineMap]) -> list[Problem]:
