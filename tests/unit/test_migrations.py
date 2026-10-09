@@ -20,8 +20,8 @@ def test_default_registry_matches_model_versions() -> None:
 
 
 def test_current_version_passes_through() -> None:
-    data = {"schema_version": 1, "kind": "unit"}
-    out, problem = DEFAULT_REGISTRY.migrate("unit", data)
+    data = {"schema_version": 1, "kind": "orbit"}
+    out, problem = DEFAULT_REGISTRY.migrate("orbit", data)
     assert out == data and problem is None
 
 
@@ -53,7 +53,11 @@ def test_chain_of_migrations_applies_in_order() -> None:
 def test_loader_migrates_old_file_in_memory(tmp_path: Any) -> None:
     write_valid_project(tmp_path)
     edit(tmp_path, "units/obc.yaml", "mass_kg:", "weight_kg:")
-    reg = MigrationRegistry({**CURRENT_VERSIONS, "unit": 2}, {("unit", 1): _rename})
+    edit(tmp_path, "units/obc.yaml", "schema_version: 2", "schema_version: 1")
+    reg = MigrationRegistry(
+        {**CURRENT_VERSIONS, "unit": 3},
+        {("unit", 1): _rename, ("unit", 2): lambda d: {**d, "schema_version": 3}},
+    )
     result = load_project(tmp_path, registry=reg)
     codes = [p.code for p in result.problems]
     assert "FILE_MIGRATED" in codes

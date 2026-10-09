@@ -83,8 +83,8 @@ def test_not_utf8(root: Path) -> None:
 
 
 def test_schema_version_missing_and_too_new(root: Path) -> None:
-    edit(root, "units/obc.yaml", "schema_version: 1\n", "")
-    edit(root, "units/radio.yaml", "schema_version: 1", "schema_version: 7")
+    edit(root, "units/obc.yaml", "schema_version: 2\n", "")
+    edit(root, "units/radio.yaml", "schema_version: 2", "schema_version: 7")
     problems = load_project(root).problems
     assert only(problems, "SCHEMA_VERSION_MISSING").file == "units/obc.yaml"
     assert only(problems, "SCHEMA_TOO_NEW").file == "units/radio.yaml"

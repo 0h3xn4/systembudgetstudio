@@ -11,6 +11,7 @@ from typing import Any
 from budget_core.mass.static_mass import PhaseMass
 from budget_core.power.static_budget import ModePowerResult
 from budget_core.provenance import Provenance
+from budget_core.thermal.static_thermal import CaseThermal, ModeHeat
 
 CSV_COLUMNS = (
     "unit_id",
@@ -97,3 +98,48 @@ def mass_csv(phase: PhaseMass) -> str:
 
 def _cell(value: Any) -> str:
     return repr(value) if isinstance(value, float) else str(value)
+
+
+THERMAL_CSV_COLUMNS = (
+    "unit_id",
+    "unit_name",
+    "subsystem",
+    "node",
+    "power_mode",
+    "effective_power_w",
+    "heat_dissipation_ratio",
+    "dissipation_w",
+    "peak_dissipation_w",
+)
+
+
+def thermal_mode_csv(mode: ModeHeat) -> str:
+    """One mode's dissipation by unit. Unavailable values are empty cells."""
+    buffer = io.StringIO()
+    writer = csv.writer(buffer, lineterminator="\n")
+    writer.writerow(THERMAL_CSV_COLUMNS)
+    for row in mode.rows:
+        values = asdict(row)
+        writer.writerow(
+            ["" if values[c] is None else _cell(values[c]) for c in THERMAL_CSV_COLUMNS]
+        )
+    return buffer.getvalue()
+
+
+def thermal_case_csv(case: CaseThermal) -> str:
+    """One case's node temperatures; empty when the case could not be computed."""
+    columns = (
+        "node",
+        "temperature_k",
+        "dissipation_w",
+        "absorbed_w",
+        "radiated_w",
+        "conducted_out_w",
+    )
+    buffer = io.StringIO()
+    writer = csv.writer(buffer, lineterminator="\n")
+    writer.writerow(columns)
+    for node in case.nodes:
+        values = asdict(node)
+        writer.writerow([_cell(values[c]) for c in columns])
+    return buffer.getvalue()

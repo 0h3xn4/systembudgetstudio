@@ -20,7 +20,14 @@ from budget_core.model.environment import (
     ScenarioSegment,
     Target,
 )
-from budget_core.model.equipment import Bus, PowerMode, Spacecraft, SpacecraftMode, Unit
+from budget_core.model.equipment import (
+    Bus,
+    PowerMode,
+    Spacecraft,
+    SpacecraftMode,
+    TemperatureLimits,
+    Unit,
+)
 from budget_core.model.mass import (
     Expendable,
     Inertia,
@@ -38,6 +45,15 @@ from budget_core.model.power_system import (
     SolarArray,
 )
 from budget_core.model.project import Project, ProjectConfig, ProjectMeta
+from budget_core.model.thermal import (
+    Conductance,
+    Exposure,
+    Surface,
+    ThermalCase,
+    ThermalEnvironment,
+    ThermalModel,
+    ThermalNode,
+)
 from budget_core.model.versions import CURRENT_VERSIONS
 
 __all__ = [
@@ -49,6 +65,8 @@ __all__ = [
     "Battery",
     "BudgetModel",
     "Bus",
+    "Conductance",
+    "Exposure",
     "Ebn0Entry",
     "Elements",
     "GroundSite",
@@ -75,6 +93,12 @@ __all__ = [
     "ProjectMeta",
     "SolarArray",
     "Sourced",
+    "Surface",
+    "TemperatureLimits",
+    "ThermalCase",
+    "ThermalEnvironment",
+    "ThermalModel",
+    "ThermalNode",
     "Spacecraft",
     "SpacecraftMode",
     "Unit",

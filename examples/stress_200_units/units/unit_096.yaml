@@ -1,4 +1,4 @@
-schema_version: 1
+schema_version: 2
 kind: unit
 name: Stress unit 096
 subsystem: DH
@@ -10,26 +10,32 @@ modes:
     avg_power_w: 0.0
     peak_power_w: 0.0
     duty_cycle_ratio: 1.0
+    heat_dissipation_ratio: 1.0
   - name: safe
     avg_power_w: 2.035
     peak_power_w: 3.053
     duty_cycle_ratio: 0.5
+    heat_dissipation_ratio: 1.0
   - name: nominal
     avg_power_w: 2.22
     peak_power_w: 3.33
     duty_cycle_ratio: 1.0
+    heat_dissipation_ratio: 1.0
   - name: imaging
     avg_power_w: 2.405
     peak_power_w: 3.607
     duty_cycle_ratio: 1.0
+    heat_dissipation_ratio: 1.0
   - name: downlink
     avg_power_w: 2.59
     peak_power_w: 3.885
     duty_cycle_ratio: 0.5
+    heat_dissipation_ratio: 1.0
   - name: charging
     avg_power_w: 1.85
     peak_power_w: 2.775
     duty_cycle_ratio: 1.0
+    heat_dissipation_ratio: 1.0
 mass_properties:
   position_m:
     - 0.1

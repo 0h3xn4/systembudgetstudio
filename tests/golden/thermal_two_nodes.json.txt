@@ -1,0 +1,391 @@
+{
+  "assumptions": [
+    {
+      "file": "config/thermal_environment.yaml",
+      "name": "Space temperature",
+      "path": "space_temperature_k",
+      "placeholder": false,
+      "source": "test fixture",
+      "unit": "K",
+      "value": 4.0
+    },
+    {
+      "file": "config/thermal_environment.yaml",
+      "name": "Temperature margin",
+      "path": "temperature_margin_k",
+      "placeholder": false,
+      "source": "test fixture",
+      "unit": "K",
+      "value": 5.0
+    },
+    {
+      "file": "config/thermal_model.yaml",
+      "name": "Conductance A - B",
+      "path": "conductances[0].conductance_wk",
+      "placeholder": false,
+      "source": "test fixture",
+      "unit": "W/K",
+      "value": 2.0
+    },
+    {
+      "file": "config/thermal_environment.yaml",
+      "name": "Solar flux, case cold",
+      "path": "cases.cold.solar_flux_wm2",
+      "placeholder": false,
+      "source": "test fixture",
+      "unit": "W/m2",
+      "value": 0.0
+    },
+    {
+      "file": "config/thermal_environment.yaml",
+      "name": "Albedo, case cold",
+      "path": "cases.cold.albedo_ratio",
+      "placeholder": false,
+      "source": "test fixture",
+      "unit": "ratio",
+      "value": 0.0
+    },
+    {
+      "file": "config/thermal_environment.yaml",
+      "name": "Earth infrared, case cold",
+      "path": "cases.cold.earth_ir_wm2",
+      "placeholder": false,
+      "source": "test fixture",
+      "unit": "W/m2",
+      "value": 0.0
+    },
+    {
+      "file": "config/thermal_model.yaml",
+      "name": "Emissivity, radiator",
+      "path": "surfaces[0].emissivity_ratio",
+      "placeholder": false,
+      "source": "test fixture",
+      "unit": "ratio",
+      "value": 0.8
+    },
+    {
+      "file": "config/thermal_model.yaml",
+      "name": "Absorptivity, radiator",
+      "path": "surfaces[0].absorptivity_ratio",
+      "placeholder": false,
+      "source": "test fixture",
+      "unit": "ratio",
+      "value": 0.3
+    },
+    {
+      "file": "config/thermal_model.yaml",
+      "name": "Solar view, radiator, case cold",
+      "path": "surfaces[0].exposure.cold.solar_view_ratio",
+      "placeholder": false,
+      "source": "test fixture",
+      "unit": "ratio",
+      "value": 0.0
+    },
+    {
+      "file": "config/thermal_model.yaml",
+      "name": "Earth view, radiator, case cold",
+      "path": "surfaces[0].exposure.cold.earth_view_ratio",
+      "placeholder": false,
+      "source": "test fixture",
+      "unit": "ratio",
+      "value": 0.0
+    },
+    {
+      "file": "config/thermal_environment.yaml",
+      "name": "Solar flux, case hot",
+      "path": "cases.hot.solar_flux_wm2",
+      "placeholder": false,
+      "source": "test fixture",
+      "unit": "W/m2",
+      "value": 1000.0
+    },
+    {
+      "file": "config/thermal_environment.yaml",
+      "name": "Albedo, case hot",
+      "path": "cases.hot.albedo_ratio",
+      "placeholder": false,
+      "source": "test fixture",
+      "unit": "ratio",
+      "value": 0.3
+    },
+    {
+      "file": "config/thermal_environment.yaml",
+      "name": "Earth infrared, case hot",
+      "path": "cases.hot.earth_ir_wm2",
+      "placeholder": false,
+      "source": "test fixture",
+      "unit": "W/m2",
+      "value": 200.0
+    },
+    {
+      "file": "config/thermal_model.yaml",
+      "name": "Solar view, radiator, case hot",
+      "path": "surfaces[0].exposure.hot.solar_view_ratio",
+      "placeholder": false,
+      "source": "test fixture",
+      "unit": "ratio",
+      "value": 0.5
+    },
+    {
+      "file": "config/thermal_model.yaml",
+      "name": "Earth view, radiator, case hot",
+      "path": "surfaces[0].exposure.hot.earth_view_ratio",
+      "placeholder": false,
+      "source": "test fixture",
+      "unit": "ratio",
+      "value": 0.5
+    }
+  ],
+  "cases": [
+    {
+      "balance_residual_w": 0.0,
+      "case": "cold",
+      "checks": [
+        {
+          "lower_headroom_k": null,
+          "lower_limit_k": null,
+          "node": "A",
+          "required_margin_k": 5.0,
+          "status": "no limits",
+          "temperature_k": null,
+          "unit_id": "u1",
+          "upper_headroom_k": null,
+          "upper_limit_k": null
+        },
+        {
+          "lower_headroom_k": null,
+          "lower_limit_k": null,
+          "node": "B",
+          "required_margin_k": 5.0,
+          "status": "no limits",
+          "temperature_k": null,
+          "unit_id": "u2",
+          "upper_headroom_k": null,
+          "upper_limit_k": null
+        }
+      ],
+      "complete": true,
+      "description": "",
+      "limit_set": "operating",
+      "mode_id": "cold",
+      "nodes": [
+        {
+          "absorbed_w": 0.0,
+          "conducted_out_w": 0.0,
+          "dissipation_w": 0.0,
+          "node": "A",
+          "radiated_w": 0.0,
+          "temperature_k": 4.0
+        },
+        {
+          "absorbed_w": 0.0,
+          "conducted_out_w": 0.0,
+          "dissipation_w": 0.0,
+          "node": "B",
+          "radiated_w": 0.0,
+          "temperature_k": 4.0
+        }
+      ]
+    },
+    {
+      "balance_residual_w": 0.0,
+      "case": "hot",
+      "checks": [
+        {
+          "lower_headroom_k": null,
+          "lower_limit_k": null,
+          "node": "A",
+          "required_margin_k": 5.0,
+          "status": "no limits",
+          "temperature_k": null,
+          "unit_id": "u1",
+          "upper_headroom_k": null,
+          "upper_limit_k": null
+        },
+        {
+          "lower_headroom_k": null,
+          "lower_limit_k": null,
+          "node": "B",
+          "required_margin_k": 5.0,
+          "status": "no limits",
+          "temperature_k": null,
+          "unit_id": "u2",
+          "upper_headroom_k": null,
+          "upper_limit_k": null
+        }
+      ],
+      "complete": true,
+      "description": "",
+      "limit_set": "operating",
+      "mode_id": "hot",
+      "nodes": [
+        {
+          "absorbed_w": 275.0,
+          "conducted_out_w": -6.0,
+          "dissipation_w": 10.0,
+          "node": "A",
+          "radiated_w": 291.0000000000001,
+          "temperature_k": 283.007419021177
+        },
+        {
+          "absorbed_w": 0.0,
+          "conducted_out_w": 6.0,
+          "dissipation_w": 6.0,
+          "node": "B",
+          "radiated_w": 0.0,
+          "temperature_k": 286.007419021177
+        }
+      ]
+    }
+  ],
+  "modes": [
+    {
+      "mode_id": "cold",
+      "mode_name": "Cold",
+      "nodes": [
+        {
+          "dissipation_w": 0.0,
+          "name": "A",
+          "peak_dissipation_w": 0.0
+        },
+        {
+          "dissipation_w": 0.0,
+          "name": "B",
+          "peak_dissipation_w": 0.0
+        }
+      ],
+      "peak_total_w": 0.0,
+      "rows": [
+        {
+          "dissipation_w": 0.0,
+          "effective_power_w": 0.0,
+          "heat_dissipation_ratio": 1.0,
+          "node": "A",
+          "peak_dissipation_w": 0.0,
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "A",
+          "unit_id": "u1",
+          "unit_name": "U1"
+        },
+        {
+          "dissipation_w": 0.0,
+          "effective_power_w": 0.0,
+          "heat_dissipation_ratio": 1.0,
+          "node": "B",
+          "peak_dissipation_w": 0.0,
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "B",
+          "unit_id": "u2",
+          "unit_name": "U2"
+        }
+      ],
+      "subsystems": [
+        {
+          "dissipation_w": 0.0,
+          "name": "A",
+          "peak_dissipation_w": 0.0
+        },
+        {
+          "dissipation_w": 0.0,
+          "name": "B",
+          "peak_dissipation_w": 0.0
+        }
+      ],
+      "total_w": 0.0
+    },
+    {
+      "mode_id": "hot",
+      "mode_name": "Hot",
+      "nodes": [
+        {
+          "dissipation_w": 10.0,
+          "name": "A",
+          "peak_dissipation_w": 15.0
+        },
+        {
+          "dissipation_w": 6.0,
+          "name": "B",
+          "peak_dissipation_w": 18.0
+        }
+      ],
+      "peak_total_w": 33.0,
+      "rows": [
+        {
+          "dissipation_w": 10.0,
+          "effective_power_w": 10.0,
+          "heat_dissipation_ratio": 1.0,
+          "node": "A",
+          "peak_dissipation_w": 15.0,
+          "peak_power_w": 15.0,
+          "power_mode": "on",
+          "subsystem": "A",
+          "unit_id": "u1",
+          "unit_name": "U1"
+        },
+        {
+          "dissipation_w": 6.0,
+          "effective_power_w": 10.0,
+          "heat_dissipation_ratio": 0.6,
+          "node": "B",
+          "peak_dissipation_w": 18.0,
+          "peak_power_w": 30.0,
+          "power_mode": "on",
+          "subsystem": "B",
+          "unit_id": "u2",
+          "unit_name": "U2"
+        }
+      ],
+      "subsystems": [
+        {
+          "dissipation_w": 10.0,
+          "name": "A",
+          "peak_dissipation_w": 15.0
+        },
+        {
+          "dissipation_w": 6.0,
+          "name": "B",
+          "peak_dissipation_w": 18.0
+        }
+      ],
+      "total_w": 16.0
+    }
+  ],
+  "problems": [
+    {
+      "code": "THERMAL_NO_LIMITS",
+      "file": "units/u1.yaml",
+      "hint": "Add temperature_limits from the unit's data sheet.",
+      "line": null,
+      "message": "Unit 'u1' has no operating temperature limits; it is not checked.",
+      "path": "temperature_limits",
+      "severity": "warning"
+    },
+    {
+      "code": "THERMAL_NO_LIMITS",
+      "file": "units/u2.yaml",
+      "hint": "Add temperature_limits from the unit's data sheet.",
+      "line": null,
+      "message": "Unit 'u2' has no operating temperature limits; it is not checked.",
+      "path": "temperature_limits",
+      "severity": "warning"
+    }
+  ],
+  "provenance": {
+    "generated": "2026-01-02T03:04:05Z",
+    "libraries": [
+      [
+        "pinned",
+        "for-golden-tests"
+      ]
+    ],
+    "project_name": "Thermal test",
+    "project_revision": "r1",
+    "python_version": "3.x",
+    "scenario": "static (no scenario)",
+    "tool": "System Budget Studio",
+    "tool_version": "0.1.0",
+    "user": "Golden User"
+  }
+}

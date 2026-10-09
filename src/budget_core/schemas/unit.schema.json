@@ -89,6 +89,20 @@
           "title": "Duty Cycle Ratio",
           "type": "number"
         },
+        "heat_dissipation_ratio": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Heat Dissipation Ratio"
+        },
         "max_duration_s": {
           "anyOf": [
             {
@@ -132,6 +146,66 @@
         "peak_power_w"
       ],
       "title": "PowerMode",
+      "type": "object"
+    },
+    "TemperatureLimits": {
+      "additionalProperties": false,
+      "description": "Operating and survival limits of a unit; a limit that is not given is not checked.",
+      "properties": {
+        "operating_max_k": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Operating Max K"
+        },
+        "operating_min_k": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Operating Min K"
+        },
+        "survival_max_k": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Survival Max K"
+        },
+        "survival_min_k": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Survival Min K"
+        }
+      },
+      "title": "TemperatureLimits",
       "type": "object"
     }
   },
@@ -211,7 +285,7 @@
       "title": "Phases"
     },
     "schema_version": {
-      "default": 1,
+      "default": 2,
       "title": "Schema Version",
       "type": "integer"
     },
@@ -219,6 +293,29 @@
       "minLength": 1,
       "title": "Subsystem",
       "type": "string"
+    },
+    "temperature_limits": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/TemperatureLimits"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "thermal_node": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Thermal Node"
     }
   },
   "required": [

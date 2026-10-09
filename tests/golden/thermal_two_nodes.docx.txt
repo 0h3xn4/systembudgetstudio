@@ -1,0 +1,113 @@
+pictures=0
+Thermal budget (static): Thermal test
+Summary
+Heat dissipation by spacecraft mode
+## table
+Mode | Average (W) | Peak (W)
+Cold | 0.000 | 0.000
+Hot | 16.000 | 33.000
+Average = sum of unit power x duty cycle x heat dissipation ratio. Peak uses the unit peak powers. n/a: a unit has no heat dissipation ratio for its power mode.
+Case: cold
+Node temperatures, case cold
+## table
+Node | Temperature (K) | Temperature (C) | Dissipated (W) | Absorbed from environment (W) | Radiated to space (W) | Conducted to other nodes (W)
+A | 4.00 | -269.15 | 0.000 | 0.000 | 0.000 | 0.000
+B | 4.00 | -269.15 | 0.000 | 0.000 | 0.000 | 0.000
+Mode cold; limit set: operating. Largest node imbalance after solving: below 0.000001 W.
+Unit temperature limits, case cold (operating)
+## table
+Unit | Node | Temperature (K) | Lower limit (K) | Upper limit (K) | Headroom to lower (K) | Headroom to upper (K) | Status
+u1 | A | n/a | n/a | n/a | n/a | n/a | no limits
+u2 | B | n/a | n/a | n/a | n/a | n/a | no limits
+Status: ok; margin = within the limits but closer than the required temperature margin; exceeded; no limits = the unit has no limits for this set (not checked).
+Case: hot
+Node temperatures, case hot
+## table
+Node | Temperature (K) | Temperature (C) | Dissipated (W) | Absorbed from environment (W) | Radiated to space (W) | Conducted to other nodes (W)
+A | 283.01 | 9.86 | 10.000 | 275.000 | 291.000 | -6.000
+B | 286.01 | 12.86 | 6.000 | 0.000 | 0.000 | 6.000
+Mode hot; limit set: operating. Largest node imbalance after solving: below 0.000001 W.
+Unit temperature limits, case hot (operating)
+## table
+Unit | Node | Temperature (K) | Lower limit (K) | Upper limit (K) | Headroom to lower (K) | Headroom to upper (K) | Status
+u1 | A | n/a | n/a | n/a | n/a | n/a | no limits
+u2 | B | n/a | n/a | n/a | n/a | n/a | no limits
+Status: ok; margin = within the limits but closer than the required temperature margin; exceeded; no limits = the unit has no limits for this set (not checked).
+Mode: Cold
+Units in mode Cold
+## table
+Unit | Name | Subsystem | Node | Power mode | Effective power (W) | Dissipation ratio | Dissipation (W) | Peak dissipation (W)
+u1 | U1 | A | A | off | 0.000 | 1.00 | 0.000 | 0.000
+u2 | U2 | B | B | off | 0.000 | 1.00 | 0.000 | 0.000
+By subsystem
+## table
+Subsystem | Dissipation (W) | Peak dissipation (W)
+A | 0.000 | 0.000
+B | 0.000 | 0.000
+By thermal node
+## table
+Node | Dissipation (W) | Peak dissipation (W)
+A | 0.000 | 0.000
+B | 0.000 | 0.000
+Mode: Hot
+Units in mode Hot
+## table
+Unit | Name | Subsystem | Node | Power mode | Effective power (W) | Dissipation ratio | Dissipation (W) | Peak dissipation (W)
+u1 | U1 | A | A | on | 10.000 | 1.00 | 10.000 | 15.000
+u2 | U2 | B | B | on | 10.000 | 0.60 | 6.000 | 18.000
+By subsystem
+## table
+Subsystem | Dissipation (W) | Peak dissipation (W)
+A | 10.000 | 15.000
+B | 6.000 | 18.000
+By thermal node
+## table
+Node | Dissipation (W) | Peak dissipation (W)
+A | 10.000 | 15.000
+B | 6.000 | 18.000
+Assumptions
+Configuration numbers used
+## table
+Name | Value | Unit | Source | Status
+Space temperature | 4.0000 | K | test fixture | sourced
+Temperature margin | 5.0000 | K | test fixture | sourced
+Conductance A - B | 2.0000 | W/K | test fixture | sourced
+Solar flux, case cold | 0.0000 | W/m2 | test fixture | sourced
+Albedo, case cold | 0.0000 | ratio | test fixture | sourced
+Earth infrared, case cold | 0.0000 | W/m2 | test fixture | sourced
+Emissivity, radiator | 0.8000 | ratio | test fixture | sourced
+Absorptivity, radiator | 0.3000 | ratio | test fixture | sourced
+Solar view, radiator, case cold | 0.0000 | ratio | test fixture | sourced
+Earth view, radiator, case cold | 0.0000 | ratio | test fixture | sourced
+Solar flux, case hot | 1000.0000 | W/m2 | test fixture | sourced
+Albedo, case hot | 0.3000 | ratio | test fixture | sourced
+Earth infrared, case hot | 200.0000 | W/m2 | test fixture | sourced
+Solar view, radiator, case hot | 0.5000 | ratio | test fixture | sourced
+Earth view, radiator, case hot | 0.5000 | ratio | test fixture | sourced
+Equations
+## table
+ID | Name | Formula | Source
+TH-DISS | Heat dissipated by a unit | Q = P_avg * duty_cycle_ratio * heat_dissipation_ratio (peak: P_peak * ratio) | SOURCE_MISSING
+TH-ABS | Heat absorbed by a surface | Q = A * (alpha * f_sun * S + alpha * f_earth * a * S + eps * f_earth * E_IR) | SOURCE_MISSING
+TH-BAL | Steady-state node heat balance | sum_j G_ij (T_j - T_i) + sum_surfaces eps sigma A (T_space^4 - T_i^4) + Q_i = 0 | SOURCE_MISSING
+TH-SB | Stefan-Boltzmann constant | sigma = 5.670374419e-8 W m^-2 K^-4 | CODATA 2018 / SI 2019 (exact from h, k, c)
+TH-LIMIT | Unit temperature limit check | exceeded when T < T_min or T > T_max; margin check when T - T_min or T_max - T < temperature_margin_k | SOURCE_MISSING
+SOURCE_MISSING: the formula is a project convention or textbook definition whose reference text is not available to the tool yet (see docs/DECISIONS.md).
+Problems
+Problems and open items
+## table
+Severity | Code | Location | Message
+warning | THERMAL_NO_LIMITS | units/u1.yaml | Unit 'u1' has no operating temperature limits; it is not checked.
+warning | THERMAL_NO_LIMITS | units/u2.yaml | Unit 'u2' has no operating temperature limits; it is not checked.
+Provenance
+Provenance
+## table
+Item | Value
+Tool | System Budget Studio 0.1.0
+Python | 3.x
+Libraries | pinned for-golden-tests
+Project | Thermal test
+Project revision | r1
+Scenario | static (no scenario)
+Generated (UTC) | 2026-01-02T03:04:05Z
+User | Golden User

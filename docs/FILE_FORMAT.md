@@ -1,11 +1,11 @@
 # Project file format
 
-A project is a folder of YAML files (LF line endings). Every file starts with `schema_version` and `kind`. All kinds are at schema version 1 except `margin_policy` and `scenario` (version 2, see below).
+A project is a folder of YAML files (LF line endings). Every file starts with `schema_version` and `kind`. All kinds are at schema version 1 except `margin_policy`, `scenario` and `unit` (version 2, see below).
 
 ```
 project.yaml            kind: project            name, revision, description
 spacecraft.yaml         kind: spacecraft         name, buses[{name, nominal_voltage_v}], mission_phases[], body_frame
-units/<id>.yaml         kind: unit               name, subsystem, mass_kg, bus, maturity, modes[], mass_properties?, phases[]?
+units/<id>.yaml         kind: unit (v2)          name, subsystem, mass_kg, bus, maturity, modes[], mass_properties?, phases[]?, thermal_node?, temperature_limits?
 orbits/<id>.yaml         kind: orbit              name, tle[2] or elements{...}   (see ENVIRONMENT_FORMAT.md)
 ground_stations/<id>.yaml kind: ground_station   name, latitude_deg, longitude_deg, altitude_m, min_elevation_deg
 targets/<id>.yaml       kind: target             same fields as a ground station (imaging target)
@@ -16,11 +16,13 @@ config/margin_policy.yaml      kind: margin_policy (v2)  classes{name: {power_ma
 config/mass_limits.yaml        kind: mass_limits         limits[{name, phase?, limit_kg}]
 config/power_config.yaml       kind: power_config        distribution_loss_ratio, converter_efficiency_ratio{bus}
 config/power_system.yaml       kind: power_system        design_life_yr, solar_array{faces[], ...}, battery{...}, attitude{...}, limits{peak_power_w}   (optional)
+config/thermal_model.yaml      kind: thermal_model       nodes{id: {name}}, conductances[{first_node, second_node, conductance_wk}], surfaces[...]   (optional)
+config/thermal_environment.yaml kind: thermal_environment space_temperature_k, temperature_margin_k, cases{name: {...}}   (optional)
 config/ebn0_table.yaml         kind: ebn0_table          entries[{modulation, coding, required_ebn0_db}]
 config/attenuation_table.yaml  kind: attenuation_table   entries[{name, attenuation_kind, freq_hz, elevation_deg, loss_db}]
 ```
 
-Power mode: `name`, `avg_power_w`, `peak_power_w` (>= average), `duty_cycle_ratio` (0..1, default 1), optional `min_duration_s`, `max_duration_s`. Effective average power = `avg_power_w * duty_cycle_ratio` (D-024).
+Power mode: `name`, `avg_power_w`, `peak_power_w` (>= average), `duty_cycle_ratio` (0..1, default 1), `heat_dissipation_ratio` (0..1, optional, see Thermal), optional `min_duration_s`, `max_duration_s`. Effective average power = `avg_power_w * duty_cycle_ratio` (D-024).
 
 ## Mass properties (decisions D-048 to D-050)
 
@@ -72,6 +74,51 @@ limits:
 - The scenario's `mission_phase` selects the allowed depth of discharge; with a single mission phase it is optional.
 - Results: BOL (no degradation or fade) and EOL (the design life applied). Demand is the static per-mode source power (nominal or margined) through converter and distribution losses.
 
+## Thermal (decisions D-071 to D-076)
+
+- Per power mode: `heat_dissipation_ratio`, the share of the electrical power that becomes heat in the unit. Give 1.0 unless the unit radiates RF or exports power; if it is missing, thermal results that need it show n/a.
+- Per unit: `thermal_node` (default: the node named like the `subsystem`) and `temperature_limits: {operating_min_k, operating_max_k, survival_min_k, survival_max_k}` (any of them may be left out; a limit that is not given is not checked).
+- `config/thermal_model.yaml`:
+
+```yaml
+schema_version: 1
+kind: thermal_model
+nodes:
+  EPS: {name: Power board}
+conductances:                  # linear conduction between two nodes
+  - {first_node: EPS, second_node: DH, conductance_wk: {value: ..., source: ...}}
+surfaces:                      # outer surfaces: radiate to space, absorb sun, albedo, Earth infrared
+  - name: EPS panel
+    node: EPS
+    area_m2: 0.02
+    emissivity_ratio: {value: ..., source: ...}      # infrared
+    absorptivity_ratio: {value: ..., source: ...}    # solar
+    exposure:
+      hot: {solar_view_ratio: {...}, earth_view_ratio: {...}}   # per case name
+```
+
+- `config/thermal_environment.yaml`:
+
+```yaml
+schema_version: 1
+kind: thermal_environment
+space_temperature_k: {value: ..., source: ...}
+temperature_margin_k: {value: ..., source: ...}      # required headroom to the unit limits
+cases:
+  hot:
+    spacecraft_mode: imaging       # whose dissipation is applied
+    limit_set: operating           # or survival
+    solar_flux_wm2: {value: ..., source: ...}
+    albedo_ratio: {value: ..., source: ...}
+    earth_ir_wm2: {value: ..., source: ...}
+```
+
+- Results per case: node temperatures, heat absorbed, radiated and conducted, and a check of every unit against its limits (`ok`, `margin`, `exceeded`, `no limits`).
+
+## Unit schema 2
+
+`heat_dissipation_ratio` (per power mode), `thermal_node` and `temperature_limits` were added, all optional. Version 1 files migrate in memory unchanged (`FILE_MIGRATED`).
+
 ## Scenario schema 2
 
 `mission_phase` (optional) was added. Version 1 files migrate in memory unchanged (`FILE_MIGRATED`).
@@ -90,9 +137,9 @@ JSON Schemas for all kinds: `budget export-schemas <dir>` (also committed in `sr
 
 Errors: `FILE_NOT_FOUND`, `FILE_INVALID`, `YAML_SYNTAX`, `KIND_MISMATCH`, `SCHEMA_VERSION_MISSING`, `SCHEMA_TOO_NEW`, `SCHEMA_MIGRATION_MISSING`, `SCHEMA_MIGRATION_FAILED`, `FIELD_MISSING`, `FIELD_UNKNOWN`, `FIELD_INVALID`, `UNIT_INVALID`, `DUPLICATE_NAME`, `SOURCE_MISSING`, `REF_UNKNOWN_BUS`, `REF_UNKNOWN_MATURITY`, `REF_UNKNOWN_UNIT`, `REF_UNKNOWN_UNIT_MODE`, `UNIT_NOT_MAPPED`.
 Errors (config values): `CONFIG_VALUE_INVALID`, `REF_UNKNOWN_PHASE`, `PHASE_MASS_MISSING`.
-Environment: `REF_UNKNOWN_ORBIT`, `REF_UNKNOWN_SITE`, `REF_UNKNOWN_MODE`, `DUPLICATE_ID`, `IMPORT_DIR_MISSING`, `ORBIT_INVALID` (errors at load); `SCENARIO_UNKNOWN`, `ENV_INPUT_INVALID`, `ENV_PROPAGATION_FAILED` (errors when running a scenario).
-Result findings (errors): `MASS_LIMIT_EXCEEDED`; time-domain power: `BATTERY_DOD_EXCEEDED`, `BATTERY_DEPLETED`, `ORBIT_BALANCE_NEGATIVE`, `PEAK_POWER_EXCEEDED`. Warnings: `MASS_PROPS_MISSING`, `MASS_FRAME_UNDEFINED`, `RESULT_INCOMPLETE` (a result needs a placeholder number, shown as n/a), `CONFIG_MISSING`, `CONFIG_PLACEHOLDER`, `CONFIG_EMPTY_TABLE`. Info: `FILE_MIGRATED`, `MASS_INERTIA_POINT_MASS`.
+Thermal (errors at load): `THERMAL_NODE_UNKNOWN`, `REF_UNKNOWN_CASE`. Environment: `REF_UNKNOWN_ORBIT`, `REF_UNKNOWN_SITE`, `REF_UNKNOWN_MODE`, `DUPLICATE_ID`, `IMPORT_DIR_MISSING`, `ORBIT_INVALID` (errors at load); `SCENARIO_UNKNOWN`, `ENV_INPUT_INVALID`, `ENV_PROPAGATION_FAILED` (errors when running a scenario).
+Result findings (errors): `MASS_LIMIT_EXCEEDED`; thermal: `THERMAL_LIMIT_EXCEEDED`, `THERMAL_MARGIN_INSUFFICIENT`, `THERMAL_SOLVE_FAILED`; time-domain power: `BATTERY_DOD_EXCEEDED`, `BATTERY_DEPLETED`, `ORBIT_BALANCE_NEGATIVE`, `PEAK_POWER_EXCEEDED`. Warnings: `MASS_PROPS_MISSING`, `MASS_FRAME_UNDEFINED`, `RESULT_INCOMPLETE` (a result needs a placeholder number, shown as n/a), `CONFIG_MISSING`, `CONFIG_PLACEHOLDER`, `CONFIG_EMPTY_TABLE`, `THERMAL_NO_LIMITS`. Info: `FILE_MIGRATED`, `MASS_INERTIA_POINT_MASS`.
 
 ## Schema versions
 
-Older files are migrated in memory (`budget_core/io/migrations.py`, one function per version step); newer files fail with `SCHEMA_TOO_NEW`. `margin_policy` and `scenario` are at version 2; all other kinds are at version 1.
+Older files are migrated in memory (`budget_core/io/migrations.py`, one function per version step); newer files fail with `SCHEMA_TOO_NEW`. `margin_policy`, `scenario` and `unit` are at version 2; all other kinds are at version 1.

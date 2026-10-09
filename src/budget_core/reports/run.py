@@ -14,9 +14,16 @@ from budget_core.power.time_domain import TimeDomainResult
 from budget_core.problems import Problem
 from budget_core.provenance import Provenance
 from budget_core.reports.document import ReportDocument
-from budget_core.reports.export import mass_csv, result_csv, result_json
+from budget_core.reports.export import (
+    mass_csv,
+    result_csv,
+    result_json,
+    thermal_case_csv,
+    thermal_mode_csv,
+)
 from budget_core.reports.mass_report import build_mass_report
 from budget_core.reports.power_report import build_power_report
+from budget_core.reports.thermal_report import build_thermal_report
 from budget_core.reports.timeline_export import (
     balance_csv,
     series_csv,
@@ -24,6 +31,7 @@ from budget_core.reports.timeline_export import (
     violations_csv,
 )
 from budget_core.reports.timeline_report import build_timeline_report
+from budget_core.thermal.static_thermal import StaticThermalResult
 
 REPORT_KINDS = ("xlsx", "pdf", "docx", "json", "csv")
 
@@ -60,6 +68,18 @@ def mass_output(
     document = build_mass_report(project, mass, provenance, list(load_problems))
     csvs = tuple((f"mass_static_{p.phase}.csv", mass_csv(p)) for p in mass.phases)
     return BudgetOutput("mass_static", document, mass, provenance, csvs)
+
+
+def thermal_output(
+    project: Project,
+    thermal: StaticThermalResult,
+    provenance: Provenance,
+    load_problems: Sequence[Problem] = (),
+) -> BudgetOutput:
+    document = build_thermal_report(project, thermal, provenance, list(load_problems))
+    csvs = tuple((f"thermal_static_{m.mode_id}.csv", thermal_mode_csv(m)) for m in thermal.modes)
+    csvs += tuple((f"thermal_case_{c.case}.csv", thermal_case_csv(c)) for c in thermal.cases)
+    return BudgetOutput("thermal_static", document, thermal, provenance, csvs)
 
 
 def timeline_output(

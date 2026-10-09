@@ -1,0 +1,343 @@
+## sheet Summary rows=11 cols=3
+1: 'Thermal budget (static): Example 3U CubeSat' |  | 
+2: 'INCOMPLETE: some inputs are placeholders (source TBD or missing). Entries marked n/a depend on them and are not computed. Do not use this report as evidence until the placeholders are replaced with sourced values.' |  | 
+4: 'Heat dissipation by spacecraft mode' |  | 
+5: 'Mode' | 'Average (W)' | 'Peak (W)'
+6: 'Charging' | 1.5 | 2.45
+7: 'Downlink' | 2.53 | 5.75
+8: 'Imaging' | 3.84 | 6.95
+9: 'Nominal' | 2 | 3.15
+10: 'Safe' | 1 | 1.6
+11: 'Average = sum of unit power x duty cycle x heat dissipation ratio. Peak uses the unit peak powers. n/a: a unit has no heat dissipation ratio for its power mode.' |  | 
+## sheet Case cold rows=14 cols=8
+1: 'Eclipse with the lowest-power mode.' |  |  |  |  |  |  | 
+2: 'Node temperatures, case cold' |  |  |  |  |  |  | 
+3: 'Node' | 'Temperature (K)' |  |  |  |  |  | 
+4: 'not computed (inputs missing, see Problems)' | 'n/a' |  |  |  |  |  | 
+6: 'Unit temperature limits, case cold (operating)' |  |  |  |  |  |  | 
+7: 'Unit' | 'Node' | 'Temperature (K)' | 'Lower limit (K)' | 'Upper limit (K)' | 'Headroom to lower (K)' | 'Headroom to upper (K)' | 'Status'
+8: 'adcs' | 'ADCS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+9: 'camera' | 'PL' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+10: 'eps' | 'EPS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+11: 'gnss' | 'ADCS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+12: 'obc' | 'DH' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+13: 'radio' | 'TTC' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+14: 'Status: ok; margin = within the limits but closer than the required temperature margin; exceeded; no limits = the unit has no limits for this set (not checked).' |  |  |  |  |  |  | 
+## sheet Case hot rows=14 cols=8
+1: 'Sunlight with the highest-power mode.' |  |  |  |  |  |  | 
+2: 'Node temperatures, case hot' |  |  |  |  |  |  | 
+3: 'Node' | 'Temperature (K)' |  |  |  |  |  | 
+4: 'not computed (inputs missing, see Problems)' | 'n/a' |  |  |  |  |  | 
+6: 'Unit temperature limits, case hot (operating)' |  |  |  |  |  |  | 
+7: 'Unit' | 'Node' | 'Temperature (K)' | 'Lower limit (K)' | 'Upper limit (K)' | 'Headroom to lower (K)' | 'Headroom to upper (K)' | 'Status'
+8: 'adcs' | 'ADCS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+9: 'camera' | 'PL' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+10: 'eps' | 'EPS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+11: 'gnss' | 'ADCS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+12: 'obc' | 'DH' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+13: 'radio' | 'TTC' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+14: 'Status: ok; margin = within the limits but closer than the required temperature margin; exceeded; no limits = the unit has no limits for this set (not checked).' |  |  |  |  |  |  | 
+## sheet Mode charging rows=24 cols=9
+1: 'Units in mode Charging' |  |  |  |  |  |  |  | 
+2: 'Unit' | 'Name' | 'Subsystem' | 'Node' | 'Power mode' | 'Effective power (W)' | 'Dissipation ratio' | 'Dissipation (W)' | 'Peak dissipation (W)'
+3: 'adcs' | 'ADCS module' | 'ADCS' | 'ADCS' | 'charging' | 0.6 | 1 | 0.6 | 1
+4: 'camera' | 'Camera payload' | 'PL' | 'PL' | 'off' | 0 | 1 | 0 | 0
+5: 'eps' | 'Power board' | 'EPS' | 'EPS' | 'charging' | 0.15 | 1 | 0.15 | 0.25
+6: 'gnss' | 'GNSS receiver' | 'ADCS' | 'ADCS' | 'charging' | 0.25 | 1 | 0.25 | 0.4
+7: 'obc' | 'On-board computer' | 'DH' | 'DH' | 'charging' | 0.3 | 1 | 0.3 | 0.5
+8: 'radio' | 'UHF/VHF radio' | 'TTC' | 'TTC' | 'charging' | 0.2 | 1 | 0.2 | 0.3
+10: 'By subsystem' |  |  |  |  |  |  |  | 
+11: 'Subsystem' | 'Dissipation (W)' | 'Peak dissipation (W)' |  |  |  |  |  | 
+12: 'ADCS' | 0.85 | 1.4 |  |  |  |  |  | 
+13: 'DH' | 0.3 | 0.5 |  |  |  |  |  | 
+14: 'EPS' | 0.15 | 0.25 |  |  |  |  |  | 
+15: 'PL' | 0 | 0 |  |  |  |  |  | 
+16: 'TTC' | 0.2 | 0.3 |  |  |  |  |  | 
+18: 'By thermal node' |  |  |  |  |  |  |  | 
+19: 'Node' | 'Dissipation (W)' | 'Peak dissipation (W)' |  |  |  |  |  | 
+20: 'ADCS' | 0.85 | 1.4 |  |  |  |  |  | 
+21: 'DH' | 0.3 | 0.5 |  |  |  |  |  | 
+22: 'EPS' | 0.15 | 0.25 |  |  |  |  |  | 
+23: 'PL' | 0 | 0 |  |  |  |  |  | 
+24: 'TTC' | 0.2 | 0.3 |  |  |  |  |  | 
+## sheet Mode downlink rows=24 cols=9
+1: 'Units in mode Downlink' |  |  |  |  |  |  |  | 
+2: 'Unit' | 'Name' | 'Subsystem' | 'Node' | 'Power mode' | 'Effective power (W)' | 'Dissipation ratio' | 'Dissipation (W)' | 'Peak dissipation (W)'
+3: 'adcs' | 'ADCS module' | 'ADCS' | 'ADCS' | 'downlink' | 0.9 | 1 | 0.9 | 1.4
+4: 'camera' | 'Camera payload' | 'PL' | 'PL' | 'off' | 0 | 1 | 0 | 0
+5: 'eps' | 'Power board' | 'EPS' | 'EPS' | 'downlink' | 0.15 | 1 | 0.15 | 0.25
+6: 'gnss' | 'GNSS receiver' | 'ADCS' | 'ADCS' | 'downlink' | 0.25 | 1 | 0.25 | 0.4
+7: 'obc' | 'On-board computer' | 'DH' | 'DH' | 'downlink' | 0.6 | 1 | 0.6 | 0.9
+8: 'radio' | 'UHF/VHF radio' | 'TTC' | 'TTC' | 'downlink' | 0.9 | 0.7 | 0.63 | 2.8
+10: 'By subsystem' |  |  |  |  |  |  |  | 
+11: 'Subsystem' | 'Dissipation (W)' | 'Peak dissipation (W)' |  |  |  |  |  | 
+12: 'ADCS' | 1.15 | 1.8 |  |  |  |  |  | 
+13: 'DH' | 0.6 | 0.9 |  |  |  |  |  | 
+14: 'EPS' | 0.15 | 0.25 |  |  |  |  |  | 
+15: 'PL' | 0 | 0 |  |  |  |  |  | 
+16: 'TTC' | 0.63 | 2.8 |  |  |  |  |  | 
+18: 'By thermal node' |  |  |  |  |  |  |  | 
+19: 'Node' | 'Dissipation (W)' | 'Peak dissipation (W)' |  |  |  |  |  | 
+20: 'ADCS' | 1.15 | 1.8 |  |  |  |  |  | 
+21: 'DH' | 0.6 | 0.9 |  |  |  |  |  | 
+22: 'EPS' | 0.15 | 0.25 |  |  |  |  |  | 
+23: 'PL' | 0 | 0 |  |  |  |  |  | 
+24: 'TTC' | 0.63 | 2.8 |  |  |  |  |  | 
+## sheet Mode imaging rows=24 cols=9
+1: 'Units in mode Imaging' |  |  |  |  |  |  |  | 
+2: 'Unit' | 'Name' | 'Subsystem' | 'Node' | 'Power mode' | 'Effective power (W)' | 'Dissipation ratio' | 'Dissipation (W)' | 'Peak dissipation (W)'
+3: 'adcs' | 'ADCS module' | 'ADCS' | 'ADCS' | 'imaging' | 1.1 | 1 | 1.1 | 1.8
+4: 'camera' | 'Camera payload' | 'PL' | 'PL' | 'imaging' | 1.44 | 1 | 1.44 | 3.2
+5: 'eps' | 'Power board' | 'EPS' | 'EPS' | 'imaging' | 0.15 | 1 | 0.15 | 0.25
+6: 'gnss' | 'GNSS receiver' | 'ADCS' | 'ADCS' | 'imaging' | 0.25 | 1 | 0.25 | 0.4
+7: 'obc' | 'On-board computer' | 'DH' | 'DH' | 'imaging' | 0.7 | 1 | 0.7 | 1
+8: 'radio' | 'UHF/VHF radio' | 'TTC' | 'TTC' | 'imaging' | 0.2 | 1 | 0.2 | 0.3
+10: 'By subsystem' |  |  |  |  |  |  |  | 
+11: 'Subsystem' | 'Dissipation (W)' | 'Peak dissipation (W)' |  |  |  |  |  | 
+12: 'ADCS' | 1.35 | 2.2 |  |  |  |  |  | 
+13: 'DH' | 0.7 | 1 |  |  |  |  |  | 
+14: 'EPS' | 0.15 | 0.25 |  |  |  |  |  | 
+15: 'PL' | 1.44 | 3.2 |  |  |  |  |  | 
+16: 'TTC' | 0.2 | 0.3 |  |  |  |  |  | 
+18: 'By thermal node' |  |  |  |  |  |  |  | 
+19: 'Node' | 'Dissipation (W)' | 'Peak dissipation (W)' |  |  |  |  |  | 
+20: 'ADCS' | 1.35 | 2.2 |  |  |  |  |  | 
+21: 'DH' | 0.7 | 1 |  |  |  |  |  | 
+22: 'EPS' | 0.15 | 0.25 |  |  |  |  |  | 
+23: 'PL' | 1.44 | 3.2 |  |  |  |  |  | 
+24: 'TTC' | 0.2 | 0.3 |  |  |  |  |  | 
+## sheet Mode nominal rows=24 cols=9
+1: 'Units in mode Nominal' |  |  |  |  |  |  |  | 
+2: 'Unit' | 'Name' | 'Subsystem' | 'Node' | 'Power mode' | 'Effective power (W)' | 'Dissipation ratio' | 'Dissipation (W)' | 'Peak dissipation (W)'
+3: 'adcs' | 'ADCS module' | 'ADCS' | 'ADCS' | 'nominal' | 0.9 | 1 | 0.9 | 1.4
+4: 'camera' | 'Camera payload' | 'PL' | 'PL' | 'off' | 0 | 1 | 0 | 0
+5: 'eps' | 'Power board' | 'EPS' | 'EPS' | 'nominal' | 0.15 | 1 | 0.15 | 0.25
+6: 'gnss' | 'GNSS receiver' | 'ADCS' | 'ADCS' | 'nominal' | 0.25 | 1 | 0.25 | 0.4
+7: 'obc' | 'On-board computer' | 'DH' | 'DH' | 'nominal' | 0.5 | 1 | 0.5 | 0.8
+8: 'radio' | 'UHF/VHF radio' | 'TTC' | 'TTC' | 'nominal' | 0.2 | 1 | 0.2 | 0.3
+10: 'By subsystem' |  |  |  |  |  |  |  | 
+11: 'Subsystem' | 'Dissipation (W)' | 'Peak dissipation (W)' |  |  |  |  |  | 
+12: 'ADCS' | 1.15 | 1.8 |  |  |  |  |  | 
+13: 'DH' | 0.5 | 0.8 |  |  |  |  |  | 
+14: 'EPS' | 0.15 | 0.25 |  |  |  |  |  | 
+15: 'PL' | 0 | 0 |  |  |  |  |  | 
+16: 'TTC' | 0.2 | 0.3 |  |  |  |  |  | 
+18: 'By thermal node' |  |  |  |  |  |  |  | 
+19: 'Node' | 'Dissipation (W)' | 'Peak dissipation (W)' |  |  |  |  |  | 
+20: 'ADCS' | 1.15 | 1.8 |  |  |  |  |  | 
+21: 'DH' | 0.5 | 0.8 |  |  |  |  |  | 
+22: 'EPS' | 0.15 | 0.25 |  |  |  |  |  | 
+23: 'PL' | 0 | 0 |  |  |  |  |  | 
+24: 'TTC' | 0.2 | 0.3 |  |  |  |  |  | 
+## sheet Mode safe rows=24 cols=9
+1: 'Units in mode Safe' |  |  |  |  |  |  |  | 
+2: 'Unit' | 'Name' | 'Subsystem' | 'Node' | 'Power mode' | 'Effective power (W)' | 'Dissipation ratio' | 'Dissipation (W)' | 'Peak dissipation (W)'
+3: 'adcs' | 'ADCS module' | 'ADCS' | 'ADCS' | 'safe' | 0.4 | 1 | 0.4 | 0.6
+4: 'camera' | 'Camera payload' | 'PL' | 'PL' | 'off' | 0 | 1 | 0 | 0
+5: 'eps' | 'Power board' | 'EPS' | 'EPS' | 'safe' | 0.1 | 1 | 0.1 | 0.2
+6: 'gnss' | 'GNSS receiver' | 'ADCS' | 'ADCS' | 'off' | 0 | 1 | 0 | 0
+7: 'obc' | 'On-board computer' | 'DH' | 'DH' | 'safe' | 0.3 | 1 | 0.3 | 0.5
+8: 'radio' | 'UHF/VHF radio' | 'TTC' | 'TTC' | 'safe' | 0.2 | 1 | 0.2 | 0.3
+10: 'By subsystem' |  |  |  |  |  |  |  | 
+11: 'Subsystem' | 'Dissipation (W)' | 'Peak dissipation (W)' |  |  |  |  |  | 
+12: 'ADCS' | 0.4 | 0.6 |  |  |  |  |  | 
+13: 'DH' | 0.3 | 0.5 |  |  |  |  |  | 
+14: 'EPS' | 0.1 | 0.2 |  |  |  |  |  | 
+15: 'PL' | 0 | 0 |  |  |  |  |  | 
+16: 'TTC' | 0.2 | 0.3 |  |  |  |  |  | 
+18: 'By thermal node' |  |  |  |  |  |  |  | 
+19: 'Node' | 'Dissipation (W)' | 'Peak dissipation (W)' |  |  |  |  |  | 
+20: 'ADCS' | 0.4 | 0.6 |  |  |  |  |  | 
+21: 'DH' | 0.3 | 0.5 |  |  |  |  |  | 
+22: 'EPS' | 0.1 | 0.2 |  |  |  |  |  | 
+23: 'PL' | 0 | 0 |  |  |  |  |  | 
+24: 'TTC' | 0.2 | 0.3 |  |  |  |  |  | 
+## sheet Assumptions rows=53 cols=5
+1: 'Configuration numbers used' |  |  |  | 
+2: 'Name' | 'Value' | 'Unit' | 'Source' | 'Status'
+3: 'Space temperature' | 'n/a' | 'K' | 'TBD' | 'PLACEHOLDER'
+4: 'Temperature margin' | 'n/a' | 'K' | 'TBD' | 'PLACEHOLDER'
+5: 'Conductance ADCS - DH' | 'n/a' | 'W/K' | 'TBD' | 'PLACEHOLDER'
+6: 'Conductance DH - EPS' | 'n/a' | 'W/K' | 'TBD' | 'PLACEHOLDER'
+7: 'Conductance EPS - PL' | 'n/a' | 'W/K' | 'TBD' | 'PLACEHOLDER'
+8: 'Conductance PL - TTC' | 'n/a' | 'W/K' | 'TBD' | 'PLACEHOLDER'
+9: 'Solar flux, case cold' | 'n/a' | 'W/m2' | 'TBD' | 'PLACEHOLDER'
+10: 'Albedo, case cold' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+11: 'Earth infrared, case cold' | 'n/a' | 'W/m2' | 'TBD' | 'PLACEHOLDER'
+12: 'Emissivity, ADCS panel' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+13: 'Absorptivity, ADCS panel' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+14: 'Solar view, ADCS panel, case cold' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+15: 'Earth view, ADCS panel, case cold' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+16: 'Emissivity, DH panel' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+17: 'Absorptivity, DH panel' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+18: 'Solar view, DH panel, case cold' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+19: 'Earth view, DH panel, case cold' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+20: 'Emissivity, EPS panel' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+21: 'Absorptivity, EPS panel' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+22: 'Solar view, EPS panel, case cold' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+23: 'Earth view, EPS panel, case cold' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+24: 'Emissivity, PL panel' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+25: 'Absorptivity, PL panel' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+26: 'Solar view, PL panel, case cold' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+27: 'Earth view, PL panel, case cold' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+28: 'Emissivity, TTC panel' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+29: 'Absorptivity, TTC panel' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+30: 'Solar view, TTC panel, case cold' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+31: 'Earth view, TTC panel, case cold' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+32: 'Solar flux, case hot' | 'n/a' | 'W/m2' | 'TBD' | 'PLACEHOLDER'
+33: 'Albedo, case hot' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+34: 'Earth infrared, case hot' | 'n/a' | 'W/m2' | 'TBD' | 'PLACEHOLDER'
+35: 'Solar view, ADCS panel, case hot' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+36: 'Earth view, ADCS panel, case hot' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+37: 'Solar view, DH panel, case hot' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+38: 'Earth view, DH panel, case hot' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+39: 'Solar view, EPS panel, case hot' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+40: 'Earth view, EPS panel, case hot' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+41: 'Solar view, PL panel, case hot' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+42: 'Earth view, PL panel, case hot' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+43: 'Solar view, TTC panel, case hot' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+44: 'Earth view, TTC panel, case hot' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+46: 'Equations' |  |  |  | 
+47: 'ID' | 'Name' | 'Formula' | 'Source' | 
+48: 'TH-DISS' | 'Heat dissipated by a unit' | 'Q = P_avg * duty_cycle_ratio * heat_dissipation_ratio (peak: P_peak * ratio)' | 'SOURCE_MISSING' | 
+49: 'TH-ABS' | 'Heat absorbed by a surface' | 'Q = A * (alpha * f_sun * S + alpha * f_earth * a * S + eps * f_earth * E_IR)' | 'SOURCE_MISSING' | 
+50: 'TH-BAL' | 'Steady-state node heat balance' | 'sum_j G_ij (T_j - T_i) + sum_surfaces eps sigma A (T_space^4 - T_i^4) + Q_i = 0' | 'SOURCE_MISSING' | 
+51: 'TH-SB' | 'Stefan-Boltzmann constant' | 'sigma = 5.670374419e-8 W m^-2 K^-4' | 'CODATA 2018 / SI 2019 (exact from h, k, c)' | 
+52: 'TH-LIMIT' | 'Unit temperature limit check' | 'exceeded when T < T_min or T > T_max; margin check when T - T_min or T_max - T < temperature_margin_k' | 'SOURCE_MISSING' | 
+53: 'SOURCE_MISSING: the formula is a project convention or textbook definition whose reference text is not available to the tool yet (see docs/DECISIONS.md).' |  |  |  | 
+## sheet Problems rows=124 cols=4
+1: 'Problems and open items' |  |  | 
+2: 'Severity' | 'Code' | 'Location' | 'Message'
+3: 'warning' | 'CONFIG_EMPTY_TABLE' | 'config/attenuation_table.yaml:3' | 'The table has no entries.'
+4: 'warning' | 'CONFIG_EMPTY_TABLE' | 'config/ebn0_table.yaml:3' | 'The table has no entries.'
+5: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:6' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+6: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:10' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+7: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:15' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+8: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:19' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+9: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:24' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+10: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:28' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+11: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:32' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+12: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:36' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+13: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/mass_limits.yaml:7' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+14: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_config.yaml:4' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+15: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_config.yaml:9' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+16: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:4' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+17: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:45' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+18: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:49' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+19: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:53' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+20: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:57' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+21: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:61' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+22: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:65' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+23: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:69' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+24: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:73' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+25: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:77' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+26: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:82' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+27: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:86' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+28: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:92' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+29: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:96' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+30: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:100' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+31: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:104' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+32: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:109' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+33: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:113' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+34: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:128' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+35: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_environment.yaml' | "The albedo of case 'cold' is a placeholder."
+36: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_environment.yaml' | "The Earth infrared flux of case 'cold' is a placeholder."
+37: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_environment.yaml' | "The solar flux of case 'cold' is a placeholder."
+38: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_environment.yaml' | "The albedo of case 'hot' is a placeholder."
+39: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_environment.yaml' | "The Earth infrared flux of case 'hot' is a placeholder."
+40: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_environment.yaml' | "The solar flux of case 'hot' is a placeholder."
+41: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_environment.yaml' | 'The space temperature is a placeholder.'
+42: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_environment.yaml' | 'The temperature margin is a placeholder.'
+43: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_environment.yaml:4' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+44: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_environment.yaml:8' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+45: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_environment.yaml:17' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+46: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_environment.yaml:21' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+47: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_environment.yaml:25' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+48: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_environment.yaml:33' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+49: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_environment.yaml:37' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+50: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_environment.yaml:41' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+51: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_model.yaml' | 'A conductance is a placeholder.'
+52: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_model.yaml' | 'A conductance is a placeholder.'
+53: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_model.yaml' | 'A conductance is a placeholder.'
+54: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_model.yaml' | 'A conductance is a placeholder.'
+55: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_model.yaml' | "The absorptivity of surface 'ADCS panel' is a placeholder."
+56: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_model.yaml' | "The emissivity of surface 'ADCS panel' is a placeholder."
+57: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_model.yaml' | "The Earth view ratio of surface 'ADCS panel' is a placeholder."
+58: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_model.yaml' | "The solar view ratio of surface 'ADCS panel' is a placeholder."
+59: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_model.yaml' | "The Earth view ratio of surface 'ADCS panel' is a placeholder."
+60: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_model.yaml' | "The solar view ratio of surface 'ADCS panel' is a placeholder."
+61: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_model.yaml' | "The absorptivity of surface 'DH panel' is a placeholder."
+62: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_model.yaml' | "The emissivity of surface 'DH panel' is a placeholder."
+63: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_model.yaml' | "The Earth view ratio of surface 'DH panel' is a placeholder."
+64: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_model.yaml' | "The solar view ratio of surface 'DH panel' is a placeholder."
+65: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_model.yaml' | "The Earth view ratio of surface 'DH panel' is a placeholder."
+66: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_model.yaml' | "The solar view ratio of surface 'DH panel' is a placeholder."
+67: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_model.yaml' | "The absorptivity of surface 'EPS panel' is a placeholder."
+68: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_model.yaml' | "The emissivity of surface 'EPS panel' is a placeholder."
+69: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_model.yaml' | "The Earth view ratio of surface 'EPS panel' is a placeholder."
+70: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_model.yaml' | "The solar view ratio of surface 'EPS panel' is a placeholder."
+71: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_model.yaml' | "The Earth view ratio of surface 'EPS panel' is a placeholder."
+72: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_model.yaml' | "The solar view ratio of surface 'EPS panel' is a placeholder."
+73: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_model.yaml' | "The absorptivity of surface 'PL panel' is a placeholder."
+74: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_model.yaml' | "The emissivity of surface 'PL panel' is a placeholder."
+75: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_model.yaml' | "The Earth view ratio of surface 'PL panel' is a placeholder."
+76: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_model.yaml' | "The solar view ratio of surface 'PL panel' is a placeholder."
+77: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_model.yaml' | "The Earth view ratio of surface 'PL panel' is a placeholder."
+78: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_model.yaml' | "The solar view ratio of surface 'PL panel' is a placeholder."
+79: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_model.yaml' | "The absorptivity of surface 'TTC panel' is a placeholder."
+80: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_model.yaml' | "The emissivity of surface 'TTC panel' is a placeholder."
+81: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_model.yaml' | "The Earth view ratio of surface 'TTC panel' is a placeholder."
+82: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_model.yaml' | "The solar view ratio of surface 'TTC panel' is a placeholder."
+83: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_model.yaml' | "The Earth view ratio of surface 'TTC panel' is a placeholder."
+84: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_model.yaml' | "The solar view ratio of surface 'TTC panel' is a placeholder."
+85: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:18' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+86: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:24' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+87: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:30' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+88: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:36' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+89: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:44' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+90: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:48' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+91: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:54' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+92: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:58' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+93: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:63' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+94: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:67' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+95: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:74' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+96: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:78' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+97: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:84' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+98: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:88' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+99: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:93' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+100: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:97' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+101: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:104' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+102: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:108' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+103: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:114' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+104: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:118' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+105: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:123' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+106: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:127' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+107: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:134' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+108: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:138' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+109: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:144' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+110: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:148' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+111: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:153' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+112: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:157' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+113: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:164' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+114: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:168' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+115: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:174' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+116: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:178' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+117: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:183' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+118: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:187' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+119: 'warning' | 'THERMAL_NO_LIMITS' | 'units/adcs.yaml' | "Unit 'adcs' has no operating temperature limits; it is not checked."
+120: 'warning' | 'THERMAL_NO_LIMITS' | 'units/camera.yaml' | "Unit 'camera' has no operating temperature limits; it is not checked."
+121: 'warning' | 'THERMAL_NO_LIMITS' | 'units/eps.yaml' | "Unit 'eps' has no operating temperature limits; it is not checked."
+122: 'warning' | 'THERMAL_NO_LIMITS' | 'units/gnss.yaml' | "Unit 'gnss' has no operating temperature limits; it is not checked."
+123: 'warning' | 'THERMAL_NO_LIMITS' | 'units/obc.yaml' | "Unit 'obc' has no operating temperature limits; it is not checked."
+124: 'warning' | 'THERMAL_NO_LIMITS' | 'units/radio.yaml' | "Unit 'radio' has no operating temperature limits; it is not checked."
+## sheet Provenance rows=10 cols=2
+1: 'Provenance' | 
+2: 'Item' | 'Value'
+3: 'Tool' | 'System Budget Studio 0.1.0'
+4: 'Python' | '3.x'
+5: 'Libraries' | 'pinned for-golden-tests'
+6: 'Project' | 'Example 3U CubeSat'
+7: 'Project revision' | '1'
+8: 'Scenario' | 'static (no scenario)'
+9: 'Generated (UTC)' | '2026-01-02T03:04:05Z'
+10: 'User' | 'Golden User'

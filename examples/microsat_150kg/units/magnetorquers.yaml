@@ -1,4 +1,4 @@
-schema_version: 1
+schema_version: 2
 kind: unit
 name: Magnetorquers
 subsystem: AOCS
@@ -10,18 +10,22 @@ modes:
     avg_power_w: 0.0
     peak_power_w: 0.0
     duty_cycle_ratio: 1.0
+    heat_dissipation_ratio: 1.0
   - name: safe
     avg_power_w: 1.5
     peak_power_w: 3.0
     duty_cycle_ratio: 0.3
+    heat_dissipation_ratio: 1.0
   - name: nominal
     avg_power_w: 1.0
     peak_power_w: 3.0
     duty_cycle_ratio: 0.2
+    heat_dissipation_ratio: 1.0
   - name: survival
     avg_power_w: 1.5
     peak_power_w: 3.0
     duty_cycle_ratio: 0.3
+    heat_dissipation_ratio: 1.0
 mass_properties:
   position_m:
     - 0.0

@@ -1,4 +1,4 @@
-pages=19
+pages=22
 ## page 1
 System Budget Studio 0.1.0 | Example stress case (200 units) rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
 Page 1

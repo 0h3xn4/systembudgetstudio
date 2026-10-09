@@ -118,7 +118,20 @@ def scenario_v1_to_v2(data: dict[str, Any]) -> dict[str, Any]:
     return out
 
 
+def unit_v1_to_v2(data: dict[str, Any]) -> dict[str, Any]:
+    """v2 adds the optional `heat_dissipation_ratio` per power mode, `thermal_node` and
+    `temperature_limits`; a v1 unit is valid unchanged and its thermal results are n/a until the
+    dissipation ratios are given (decision D-071)."""
+    out = dict(data)
+    out["schema_version"] = 2
+    return out
+
+
 DEFAULT_REGISTRY = MigrationRegistry(
     CURRENT_VERSIONS,
-    {("margin_policy", 1): margin_policy_v1_to_v2, ("scenario", 1): scenario_v1_to_v2},
+    {
+        ("margin_policy", 1): margin_policy_v1_to_v2,
+        ("scenario", 1): scenario_v1_to_v2,
+        ("unit", 1): unit_v1_to_v2,
+    },
 )

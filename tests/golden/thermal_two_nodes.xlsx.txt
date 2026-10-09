@@ -1,0 +1,97 @@
+## sheet Summary rows=7 cols=3
+1: 'Thermal budget (static): Thermal test' |  | 
+3: 'Heat dissipation by spacecraft mode' |  | 
+4: 'Mode' | 'Average (W)' | 'Peak (W)'
+5: 'Cold' | 0 | 0
+6: 'Hot' | 16 | 33
+7: 'Average = sum of unit power x duty cycle x heat dissipation ratio. Peak uses the unit peak powers. n/a: a unit has no heat dissipation ratio for its power mode.' |  | 
+## sheet Case cold rows=11 cols=8
+1: 'Node temperatures, case cold' |  |  |  |  |  |  | 
+2: 'Node' | 'Temperature (K)' | 'Temperature (C)' | 'Dissipated (W)' | 'Absorbed from environment (W)' | 'Radiated to space (W)' | 'Conducted to other nodes (W)' | 
+3: 'A' | 4 | -269.15 | 0 | 0 | 0 | 0 | 
+4: 'B' | 4 | -269.15 | 0 | 0 | 0 | 0 | 
+5: 'Mode cold; limit set: operating. Largest node imbalance after solving: below 0.000001 W.' |  |  |  |  |  |  | 
+7: 'Unit temperature limits, case cold (operating)' |  |  |  |  |  |  | 
+8: 'Unit' | 'Node' | 'Temperature (K)' | 'Lower limit (K)' | 'Upper limit (K)' | 'Headroom to lower (K)' | 'Headroom to upper (K)' | 'Status'
+9: 'u1' | 'A' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+10: 'u2' | 'B' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+11: 'Status: ok; margin = within the limits but closer than the required temperature margin; exceeded; no limits = the unit has no limits for this set (not checked).' |  |  |  |  |  |  | 
+## sheet Case hot rows=11 cols=8
+1: 'Node temperatures, case hot' |  |  |  |  |  |  | 
+2: 'Node' | 'Temperature (K)' | 'Temperature (C)' | 'Dissipated (W)' | 'Absorbed from environment (W)' | 'Radiated to space (W)' | 'Conducted to other nodes (W)' | 
+3: 'A' | 283.007419021177 | 9.857419021177009 | 10 | 275 | 291.0000000000001 | -6 | 
+4: 'B' | 286.007419021177 | 12.85741902117701 | 6 | 0 | 0 | 6 | 
+5: 'Mode hot; limit set: operating. Largest node imbalance after solving: below 0.000001 W.' |  |  |  |  |  |  | 
+7: 'Unit temperature limits, case hot (operating)' |  |  |  |  |  |  | 
+8: 'Unit' | 'Node' | 'Temperature (K)' | 'Lower limit (K)' | 'Upper limit (K)' | 'Headroom to lower (K)' | 'Headroom to upper (K)' | 'Status'
+9: 'u1' | 'A' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+10: 'u2' | 'B' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+11: 'Status: ok; margin = within the limits but closer than the required temperature margin; exceeded; no limits = the unit has no limits for this set (not checked).' |  |  |  |  |  |  | 
+## sheet Mode cold rows=14 cols=9
+1: 'Units in mode Cold' |  |  |  |  |  |  |  | 
+2: 'Unit' | 'Name' | 'Subsystem' | 'Node' | 'Power mode' | 'Effective power (W)' | 'Dissipation ratio' | 'Dissipation (W)' | 'Peak dissipation (W)'
+3: 'u1' | 'U1' | 'A' | 'A' | 'off' | 0 | 1 | 0 | 0
+4: 'u2' | 'U2' | 'B' | 'B' | 'off' | 0 | 1 | 0 | 0
+6: 'By subsystem' |  |  |  |  |  |  |  | 
+7: 'Subsystem' | 'Dissipation (W)' | 'Peak dissipation (W)' |  |  |  |  |  | 
+8: 'A' | 0 | 0 |  |  |  |  |  | 
+9: 'B' | 0 | 0 |  |  |  |  |  | 
+11: 'By thermal node' |  |  |  |  |  |  |  | 
+12: 'Node' | 'Dissipation (W)' | 'Peak dissipation (W)' |  |  |  |  |  | 
+13: 'A' | 0 | 0 |  |  |  |  |  | 
+14: 'B' | 0 | 0 |  |  |  |  |  | 
+## sheet Mode hot rows=14 cols=9
+1: 'Units in mode Hot' |  |  |  |  |  |  |  | 
+2: 'Unit' | 'Name' | 'Subsystem' | 'Node' | 'Power mode' | 'Effective power (W)' | 'Dissipation ratio' | 'Dissipation (W)' | 'Peak dissipation (W)'
+3: 'u1' | 'U1' | 'A' | 'A' | 'on' | 10 | 1 | 10 | 15
+4: 'u2' | 'U2' | 'B' | 'B' | 'on' | 10 | 0.6 | 6 | 18
+6: 'By subsystem' |  |  |  |  |  |  |  | 
+7: 'Subsystem' | 'Dissipation (W)' | 'Peak dissipation (W)' |  |  |  |  |  | 
+8: 'A' | 10 | 15 |  |  |  |  |  | 
+9: 'B' | 6 | 18 |  |  |  |  |  | 
+11: 'By thermal node' |  |  |  |  |  |  |  | 
+12: 'Node' | 'Dissipation (W)' | 'Peak dissipation (W)' |  |  |  |  |  | 
+13: 'A' | 10 | 15 |  |  |  |  |  | 
+14: 'B' | 6 | 18 |  |  |  |  |  | 
+## sheet Assumptions rows=26 cols=5
+1: 'Configuration numbers used' |  |  |  | 
+2: 'Name' | 'Value' | 'Unit' | 'Source' | 'Status'
+3: 'Space temperature' | 4 | 'K' | 'test fixture' | 'sourced'
+4: 'Temperature margin' | 5 | 'K' | 'test fixture' | 'sourced'
+5: 'Conductance A - B' | 2 | 'W/K' | 'test fixture' | 'sourced'
+6: 'Solar flux, case cold' | 0 | 'W/m2' | 'test fixture' | 'sourced'
+7: 'Albedo, case cold' | 0 | 'ratio' | 'test fixture' | 'sourced'
+8: 'Earth infrared, case cold' | 0 | 'W/m2' | 'test fixture' | 'sourced'
+9: 'Emissivity, radiator' | 0.8 | 'ratio' | 'test fixture' | 'sourced'
+10: 'Absorptivity, radiator' | 0.3 | 'ratio' | 'test fixture' | 'sourced'
+11: 'Solar view, radiator, case cold' | 0 | 'ratio' | 'test fixture' | 'sourced'
+12: 'Earth view, radiator, case cold' | 0 | 'ratio' | 'test fixture' | 'sourced'
+13: 'Solar flux, case hot' | 1000 | 'W/m2' | 'test fixture' | 'sourced'
+14: 'Albedo, case hot' | 0.3 | 'ratio' | 'test fixture' | 'sourced'
+15: 'Earth infrared, case hot' | 200 | 'W/m2' | 'test fixture' | 'sourced'
+16: 'Solar view, radiator, case hot' | 0.5 | 'ratio' | 'test fixture' | 'sourced'
+17: 'Earth view, radiator, case hot' | 0.5 | 'ratio' | 'test fixture' | 'sourced'
+19: 'Equations' |  |  |  | 
+20: 'ID' | 'Name' | 'Formula' | 'Source' | 
+21: 'TH-DISS' | 'Heat dissipated by a unit' | 'Q = P_avg * duty_cycle_ratio * heat_dissipation_ratio (peak: P_peak * ratio)' | 'SOURCE_MISSING' | 
+22: 'TH-ABS' | 'Heat absorbed by a surface' | 'Q = A * (alpha * f_sun * S + alpha * f_earth * a * S + eps * f_earth * E_IR)' | 'SOURCE_MISSING' | 
+23: 'TH-BAL' | 'Steady-state node heat balance' | 'sum_j G_ij (T_j - T_i) + sum_surfaces eps sigma A (T_space^4 - T_i^4) + Q_i = 0' | 'SOURCE_MISSING' | 
+24: 'TH-SB' | 'Stefan-Boltzmann constant' | 'sigma = 5.670374419e-8 W m^-2 K^-4' | 'CODATA 2018 / SI 2019 (exact from h, k, c)' | 
+25: 'TH-LIMIT' | 'Unit temperature limit check' | 'exceeded when T < T_min or T > T_max; margin check when T - T_min or T_max - T < temperature_margin_k' | 'SOURCE_MISSING' | 
+26: 'SOURCE_MISSING: the formula is a project convention or textbook definition whose reference text is not available to the tool yet (see docs/DECISIONS.md).' |  |  |  | 
+## sheet Problems rows=4 cols=4
+1: 'Problems and open items' |  |  | 
+2: 'Severity' | 'Code' | 'Location' | 'Message'
+3: 'warning' | 'THERMAL_NO_LIMITS' | 'units/u1.yaml' | "Unit 'u1' has no operating temperature limits; it is not checked."
+4: 'warning' | 'THERMAL_NO_LIMITS' | 'units/u2.yaml' | "Unit 'u2' has no operating temperature limits; it is not checked."
+## sheet Provenance rows=10 cols=2
+1: 'Provenance' | 
+2: 'Item' | 'Value'
+3: 'Tool' | 'System Budget Studio 0.1.0'
+4: 'Python' | '3.x'
+5: 'Libraries' | 'pinned for-golden-tests'
+6: 'Project' | 'Thermal test'
+7: 'Project revision' | 'r1'
+8: 'Scenario' | 'static (no scenario)'
+9: 'Generated (UTC)' | '2026-01-02T03:04:05Z'
+10: 'User' | 'Golden User'

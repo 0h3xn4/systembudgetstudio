@@ -1,0 +1,35 @@
+schema_version: 1
+kind: thermal_environment
+space_temperature_k:
+  value: 3.0
+  source: Synthetic example value; not from a data sheet or a standard.
+temperature_margin_k:
+  value: 5.0
+  source: Synthetic example value; not from a data sheet or a standard.
+cases:
+  cold:
+    description: Eclipse with the lowest-power mode.
+    spacecraft_mode: safe
+    limit_set: operating
+    solar_flux_wm2:
+      value: 0.0
+      source: Synthetic example value; not from a data sheet or a standard.
+    albedo_ratio:
+      value: 0.0
+      source: Synthetic example value; not from a data sheet or a standard.
+    earth_ir_wm2:
+      value: 240.0
+      source: Synthetic example value; not from a data sheet or a standard.
+  hot:
+    description: Sunlight with the highest-power mode.
+    spacecraft_mode: imaging
+    limit_set: operating
+    solar_flux_wm2:
+      value: 1400.0
+      source: Synthetic example value; not from a data sheet or a standard.
+    albedo_ratio:
+      value: 0.3
+      source: Synthetic example value; not from a data sheet or a standard.
+    earth_ir_wm2:
+      value: 240.0
+      source: Synthetic example value; not from a data sheet or a standard.

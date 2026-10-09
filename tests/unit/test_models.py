@@ -36,7 +36,7 @@ def errors(exc: pytest.ExceptionInfo[ValidationError]) -> list[tuple[tuple[Any, 
 
 def test_valid_unit_defaults() -> None:
     u = Unit.model_validate(unit())
-    assert u.kind == "unit" and u.schema_version == 1
+    assert u.kind == "unit" and u.schema_version == 2
     assert u.modes[0].duty_cycle_ratio == 1.0
     assert u.catalogue_ref is None
 

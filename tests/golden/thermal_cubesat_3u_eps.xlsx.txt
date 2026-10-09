@@ -1,0 +1,238 @@
+## sheet Summary rows=10 cols=3
+1: 'Thermal budget (static): Example 3U CubeSat, complete power and thermal inputs' |  | 
+3: 'Heat dissipation by spacecraft mode' |  | 
+4: 'Mode' | 'Average (W)' | 'Peak (W)'
+5: 'Charging' | 1.5 | 2.45
+6: 'Downlink' | 2.53 | 5.75
+7: 'Imaging' | 3.84 | 6.95
+8: 'Nominal' | 2 | 3.15
+9: 'Safe' | 1 | 1.6
+10: 'Average = sum of unit power x duty cycle x heat dissipation ratio. Peak uses the unit peak powers. n/a: a unit has no heat dissipation ratio for its power mode.' |  | 
+## sheet Case cold rows=19 cols=8
+1: 'Eclipse with the lowest-power mode.' |  |  |  |  |  |  | 
+2: 'Node temperatures, case cold' |  |  |  |  |  |  | 
+3: 'Node' | 'Temperature (K)' | 'Temperature (C)' | 'Dissipated (W)' | 'Absorbed from environment (W)' | 'Radiated to space (W)' | 'Conducted to other nodes (W)' | 
+4: 'ADCS' | 245.5008206916443 | -27.64917930835563 | 0.4 | 3.264 | 3.501647633496169 | 0.1623523665038249 | 
+5: 'DH' | 245.1761159586367 | -27.97388404136328 | 0.3 | 3.264 | 3.483158932141698 | 0.08084106785830159 | 
+6: 'EPS' | 244.6897290899124 | -28.46027091008756 | 0.1 | 3.264 | 3.455601140481484 | -0.09160114048148671 | 
+7: 'PL' | 244.3865445021511 | -28.76345549784884 | 0 | 3.264 | 3.438506194483565 | -0.1745061944835555 | 
+8: 'TTC' | 244.432372303357 | -28.71762769664301 | 0.2 | 3.264 | 3.441086099397086 | 0.02291390060291576 | 
+9: 'Mode safe; limit set: operating. Largest node imbalance after solving: below 0.000001 W.' |  |  |  |  |  |  | 
+11: 'Unit temperature limits, case cold (operating)' |  |  |  |  |  |  | 
+12: 'Unit' | 'Node' | 'Temperature (K)' | 'Lower limit (K)' | 'Upper limit (K)' | 'Headroom to lower (K)' | 'Headroom to upper (K)' | 'Status'
+13: 'adcs' | 'ADCS' | 245.5008206916443 | 233.15 | 343.15 | 12.35082069164434 | 97.64917930835563 | 'ok'
+14: 'camera' | 'PL' | 244.3865445021511 | 233.15 | 343.15 | 11.23654450215113 | 98.76345549784884 | 'ok'
+15: 'eps' | 'EPS' | 244.6897290899124 | 233.15 | 343.15 | 11.53972908991241 | 98.46027091008756 | 'ok'
+16: 'gnss' | 'ADCS' | 245.5008206916443 | 233.15 | 343.15 | 12.35082069164434 | 97.64917930835563 | 'ok'
+17: 'obc' | 'DH' | 245.1761159586367 | 233.15 | 343.15 | 12.02611595863669 | 97.97388404136328 | 'ok'
+18: 'radio' | 'TTC' | 244.432372303357 | 233.15 | 335.15 | 11.28237230335696 | 90.717627696643 | 'ok'
+19: 'Status: ok; margin = within the limits but closer than the required temperature margin; exceeded; no limits = the unit has no limits for this set (not checked).' |  |  |  |  |  |  | 
+## sheet Case hot rows=19 cols=8
+1: 'Sunlight with the highest-power mode.' |  |  |  |  |  |  | 
+2: 'Node temperatures, case hot' |  |  |  |  |  |  | 
+3: 'Node' | 'Temperature (K)' | 'Temperature (C)' | 'Dissipated (W)' | 'Absorbed from environment (W)' | 'Radiated to space (W)' | 'Conducted to other nodes (W)' | 
+4: 'ADCS' | 334.4293647145371 | 61.27936471453717 | 1.35 | 11.136 | 12.05808304641556 | 0.4279169535844289 | 
+5: 'DH' | 333.5735308073683 | 60.42353080736831 | 0.7 | 11.136 | 11.93512529884109 | -0.09912529884104515 | 
+6: 'EPS' | 332.9159474978815 | 59.76594749788154 | 0.15 | 11.136 | 11.84129096831269 | -0.5552909683127041 | 
+7: 'PL' | 333.3689461250202 | 60.21894612502018 | 1.44 | 11.136 | 11.90587239715084 | 0.670127602849135 | 
+8: 'TTC' | 332.4816895464605 | 59.33168954646055 | 0.2 | 11.136 | 11.77962828927982 | -0.4436282892798147 | 
+9: 'Mode imaging; limit set: operating. Largest node imbalance after solving: below 0.000001 W.' |  |  |  |  |  |  | 
+11: 'Unit temperature limits, case hot (operating)' |  |  |  |  |  |  | 
+12: 'Unit' | 'Node' | 'Temperature (K)' | 'Lower limit (K)' | 'Upper limit (K)' | 'Headroom to lower (K)' | 'Headroom to upper (K)' | 'Status'
+13: 'adcs' | 'ADCS' | 334.4293647145371 | 233.15 | 343.15 | 101.2793647145371 | 8.720635285462834 | 'ok'
+14: 'camera' | 'PL' | 333.3689461250202 | 233.15 | 343.15 | 100.2189461250202 | 9.781053874979818 | 'ok'
+15: 'eps' | 'EPS' | 332.9159474978815 | 233.15 | 343.15 | 99.76594749788151 | 10.23405250211846 | 'ok'
+16: 'gnss' | 'ADCS' | 334.4293647145371 | 233.15 | 343.15 | 101.2793647145371 | 8.720635285462834 | 'ok'
+17: 'obc' | 'DH' | 333.5735308073683 | 233.15 | 343.15 | 100.4235308073683 | 9.576469192631691 | 'ok'
+18: 'radio' | 'TTC' | 332.4816895464605 | 233.15 | 335.15 | 99.33168954646052 | 2.668310453539448 | 'margin'
+19: 'Status: ok; margin = within the limits but closer than the required temperature margin; exceeded; no limits = the unit has no limits for this set (not checked).' |  |  |  |  |  |  | 
+## sheet Mode charging rows=24 cols=9
+1: 'Units in mode Charging' |  |  |  |  |  |  |  | 
+2: 'Unit' | 'Name' | 'Subsystem' | 'Node' | 'Power mode' | 'Effective power (W)' | 'Dissipation ratio' | 'Dissipation (W)' | 'Peak dissipation (W)'
+3: 'adcs' | 'ADCS module' | 'ADCS' | 'ADCS' | 'charging' | 0.6 | 1 | 0.6 | 1
+4: 'camera' | 'Camera payload' | 'PL' | 'PL' | 'off' | 0 | 1 | 0 | 0
+5: 'eps' | 'Power board' | 'EPS' | 'EPS' | 'charging' | 0.15 | 1 | 0.15 | 0.25
+6: 'gnss' | 'GNSS receiver' | 'ADCS' | 'ADCS' | 'charging' | 0.25 | 1 | 0.25 | 0.4
+7: 'obc' | 'On-board computer' | 'DH' | 'DH' | 'charging' | 0.3 | 1 | 0.3 | 0.5
+8: 'radio' | 'UHF/VHF radio' | 'TTC' | 'TTC' | 'charging' | 0.2 | 1 | 0.2 | 0.3
+10: 'By subsystem' |  |  |  |  |  |  |  | 
+11: 'Subsystem' | 'Dissipation (W)' | 'Peak dissipation (W)' |  |  |  |  |  | 
+12: 'ADCS' | 0.85 | 1.4 |  |  |  |  |  | 
+13: 'DH' | 0.3 | 0.5 |  |  |  |  |  | 
+14: 'EPS' | 0.15 | 0.25 |  |  |  |  |  | 
+15: 'PL' | 0 | 0 |  |  |  |  |  | 
+16: 'TTC' | 0.2 | 0.3 |  |  |  |  |  | 
+18: 'By thermal node' |  |  |  |  |  |  |  | 
+19: 'Node' | 'Dissipation (W)' | 'Peak dissipation (W)' |  |  |  |  |  | 
+20: 'ADCS' | 0.85 | 1.4 |  |  |  |  |  | 
+21: 'DH' | 0.3 | 0.5 |  |  |  |  |  | 
+22: 'EPS' | 0.15 | 0.25 |  |  |  |  |  | 
+23: 'PL' | 0 | 0 |  |  |  |  |  | 
+24: 'TTC' | 0.2 | 0.3 |  |  |  |  |  | 
+## sheet Mode downlink rows=24 cols=9
+1: 'Units in mode Downlink' |  |  |  |  |  |  |  | 
+2: 'Unit' | 'Name' | 'Subsystem' | 'Node' | 'Power mode' | 'Effective power (W)' | 'Dissipation ratio' | 'Dissipation (W)' | 'Peak dissipation (W)'
+3: 'adcs' | 'ADCS module' | 'ADCS' | 'ADCS' | 'downlink' | 0.9 | 1 | 0.9 | 1.4
+4: 'camera' | 'Camera payload' | 'PL' | 'PL' | 'off' | 0 | 1 | 0 | 0
+5: 'eps' | 'Power board' | 'EPS' | 'EPS' | 'downlink' | 0.15 | 1 | 0.15 | 0.25
+6: 'gnss' | 'GNSS receiver' | 'ADCS' | 'ADCS' | 'downlink' | 0.25 | 1 | 0.25 | 0.4
+7: 'obc' | 'On-board computer' | 'DH' | 'DH' | 'downlink' | 0.6 | 1 | 0.6 | 0.9
+8: 'radio' | 'UHF/VHF radio' | 'TTC' | 'TTC' | 'downlink' | 0.9 | 0.7 | 0.63 | 2.8
+10: 'By subsystem' |  |  |  |  |  |  |  | 
+11: 'Subsystem' | 'Dissipation (W)' | 'Peak dissipation (W)' |  |  |  |  |  | 
+12: 'ADCS' | 1.15 | 1.8 |  |  |  |  |  | 
+13: 'DH' | 0.6 | 0.9 |  |  |  |  |  | 
+14: 'EPS' | 0.15 | 0.25 |  |  |  |  |  | 
+15: 'PL' | 0 | 0 |  |  |  |  |  | 
+16: 'TTC' | 0.63 | 2.8 |  |  |  |  |  | 
+18: 'By thermal node' |  |  |  |  |  |  |  | 
+19: 'Node' | 'Dissipation (W)' | 'Peak dissipation (W)' |  |  |  |  |  | 
+20: 'ADCS' | 1.15 | 1.8 |  |  |  |  |  | 
+21: 'DH' | 0.6 | 0.9 |  |  |  |  |  | 
+22: 'EPS' | 0.15 | 0.25 |  |  |  |  |  | 
+23: 'PL' | 0 | 0 |  |  |  |  |  | 
+24: 'TTC' | 0.63 | 2.8 |  |  |  |  |  | 
+## sheet Mode imaging rows=24 cols=9
+1: 'Units in mode Imaging' |  |  |  |  |  |  |  | 
+2: 'Unit' | 'Name' | 'Subsystem' | 'Node' | 'Power mode' | 'Effective power (W)' | 'Dissipation ratio' | 'Dissipation (W)' | 'Peak dissipation (W)'
+3: 'adcs' | 'ADCS module' | 'ADCS' | 'ADCS' | 'imaging' | 1.1 | 1 | 1.1 | 1.8
+4: 'camera' | 'Camera payload' | 'PL' | 'PL' | 'imaging' | 1.44 | 1 | 1.44 | 3.2
+5: 'eps' | 'Power board' | 'EPS' | 'EPS' | 'imaging' | 0.15 | 1 | 0.15 | 0.25
+6: 'gnss' | 'GNSS receiver' | 'ADCS' | 'ADCS' | 'imaging' | 0.25 | 1 | 0.25 | 0.4
+7: 'obc' | 'On-board computer' | 'DH' | 'DH' | 'imaging' | 0.7 | 1 | 0.7 | 1
+8: 'radio' | 'UHF/VHF radio' | 'TTC' | 'TTC' | 'imaging' | 0.2 | 1 | 0.2 | 0.3
+10: 'By subsystem' |  |  |  |  |  |  |  | 
+11: 'Subsystem' | 'Dissipation (W)' | 'Peak dissipation (W)' |  |  |  |  |  | 
+12: 'ADCS' | 1.35 | 2.2 |  |  |  |  |  | 
+13: 'DH' | 0.7 | 1 |  |  |  |  |  | 
+14: 'EPS' | 0.15 | 0.25 |  |  |  |  |  | 
+15: 'PL' | 1.44 | 3.2 |  |  |  |  |  | 
+16: 'TTC' | 0.2 | 0.3 |  |  |  |  |  | 
+18: 'By thermal node' |  |  |  |  |  |  |  | 
+19: 'Node' | 'Dissipation (W)' | 'Peak dissipation (W)' |  |  |  |  |  | 
+20: 'ADCS' | 1.35 | 2.2 |  |  |  |  |  | 
+21: 'DH' | 0.7 | 1 |  |  |  |  |  | 
+22: 'EPS' | 0.15 | 0.25 |  |  |  |  |  | 
+23: 'PL' | 1.44 | 3.2 |  |  |  |  |  | 
+24: 'TTC' | 0.2 | 0.3 |  |  |  |  |  | 
+## sheet Mode nominal rows=24 cols=9
+1: 'Units in mode Nominal' |  |  |  |  |  |  |  | 
+2: 'Unit' | 'Name' | 'Subsystem' | 'Node' | 'Power mode' | 'Effective power (W)' | 'Dissipation ratio' | 'Dissipation (W)' | 'Peak dissipation (W)'
+3: 'adcs' | 'ADCS module' | 'ADCS' | 'ADCS' | 'nominal' | 0.9 | 1 | 0.9 | 1.4
+4: 'camera' | 'Camera payload' | 'PL' | 'PL' | 'off' | 0 | 1 | 0 | 0
+5: 'eps' | 'Power board' | 'EPS' | 'EPS' | 'nominal' | 0.15 | 1 | 0.15 | 0.25
+6: 'gnss' | 'GNSS receiver' | 'ADCS' | 'ADCS' | 'nominal' | 0.25 | 1 | 0.25 | 0.4
+7: 'obc' | 'On-board computer' | 'DH' | 'DH' | 'nominal' | 0.5 | 1 | 0.5 | 0.8
+8: 'radio' | 'UHF/VHF radio' | 'TTC' | 'TTC' | 'nominal' | 0.2 | 1 | 0.2 | 0.3
+10: 'By subsystem' |  |  |  |  |  |  |  | 
+11: 'Subsystem' | 'Dissipation (W)' | 'Peak dissipation (W)' |  |  |  |  |  | 
+12: 'ADCS' | 1.15 | 1.8 |  |  |  |  |  | 
+13: 'DH' | 0.5 | 0.8 |  |  |  |  |  | 
+14: 'EPS' | 0.15 | 0.25 |  |  |  |  |  | 
+15: 'PL' | 0 | 0 |  |  |  |  |  | 
+16: 'TTC' | 0.2 | 0.3 |  |  |  |  |  | 
+18: 'By thermal node' |  |  |  |  |  |  |  | 
+19: 'Node' | 'Dissipation (W)' | 'Peak dissipation (W)' |  |  |  |  |  | 
+20: 'ADCS' | 1.15 | 1.8 |  |  |  |  |  | 
+21: 'DH' | 0.5 | 0.8 |  |  |  |  |  | 
+22: 'EPS' | 0.15 | 0.25 |  |  |  |  |  | 
+23: 'PL' | 0 | 0 |  |  |  |  |  | 
+24: 'TTC' | 0.2 | 0.3 |  |  |  |  |  | 
+## sheet Mode safe rows=24 cols=9
+1: 'Units in mode Safe' |  |  |  |  |  |  |  | 
+2: 'Unit' | 'Name' | 'Subsystem' | 'Node' | 'Power mode' | 'Effective power (W)' | 'Dissipation ratio' | 'Dissipation (W)' | 'Peak dissipation (W)'
+3: 'adcs' | 'ADCS module' | 'ADCS' | 'ADCS' | 'safe' | 0.4 | 1 | 0.4 | 0.6
+4: 'camera' | 'Camera payload' | 'PL' | 'PL' | 'off' | 0 | 1 | 0 | 0
+5: 'eps' | 'Power board' | 'EPS' | 'EPS' | 'safe' | 0.1 | 1 | 0.1 | 0.2
+6: 'gnss' | 'GNSS receiver' | 'ADCS' | 'ADCS' | 'off' | 0 | 1 | 0 | 0
+7: 'obc' | 'On-board computer' | 'DH' | 'DH' | 'safe' | 0.3 | 1 | 0.3 | 0.5
+8: 'radio' | 'UHF/VHF radio' | 'TTC' | 'TTC' | 'safe' | 0.2 | 1 | 0.2 | 0.3
+10: 'By subsystem' |  |  |  |  |  |  |  | 
+11: 'Subsystem' | 'Dissipation (W)' | 'Peak dissipation (W)' |  |  |  |  |  | 
+12: 'ADCS' | 0.4 | 0.6 |  |  |  |  |  | 
+13: 'DH' | 0.3 | 0.5 |  |  |  |  |  | 
+14: 'EPS' | 0.1 | 0.2 |  |  |  |  |  | 
+15: 'PL' | 0 | 0 |  |  |  |  |  | 
+16: 'TTC' | 0.2 | 0.3 |  |  |  |  |  | 
+18: 'By thermal node' |  |  |  |  |  |  |  | 
+19: 'Node' | 'Dissipation (W)' | 'Peak dissipation (W)' |  |  |  |  |  | 
+20: 'ADCS' | 0.4 | 0.6 |  |  |  |  |  | 
+21: 'DH' | 0.3 | 0.5 |  |  |  |  |  | 
+22: 'EPS' | 0.1 | 0.2 |  |  |  |  |  | 
+23: 'PL' | 0 | 0 |  |  |  |  |  | 
+24: 'TTC' | 0.2 | 0.3 |  |  |  |  |  | 
+## sheet Assumptions rows=53 cols=5
+1: 'Configuration numbers used' |  |  |  | 
+2: 'Name' | 'Value' | 'Unit' | 'Source' | 'Status'
+3: 'Space temperature' | 3 | 'K' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+4: 'Temperature margin' | 5 | 'K' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+5: 'Conductance ADCS - DH' | 0.5 | 'W/K' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+6: 'Conductance DH - EPS' | 0.5 | 'W/K' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+7: 'Conductance EPS - PL' | 0.5 | 'W/K' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+8: 'Conductance PL - TTC' | 0.5 | 'W/K' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+9: 'Solar flux, case cold' | 0 | 'W/m2' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+10: 'Albedo, case cold' | 0 | 'ratio' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+11: 'Earth infrared, case cold' | 240 | 'W/m2' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+12: 'Emissivity, ADCS panel' | 0.85 | 'ratio' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+13: 'Absorptivity, ADCS panel' | 0.6 | 'ratio' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+14: 'Solar view, ADCS panel, case cold' | 0 | 'ratio' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+15: 'Earth view, ADCS panel, case cold' | 0.8 | 'ratio' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+16: 'Emissivity, DH panel' | 0.85 | 'ratio' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+17: 'Absorptivity, DH panel' | 0.6 | 'ratio' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+18: 'Solar view, DH panel, case cold' | 0 | 'ratio' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+19: 'Earth view, DH panel, case cold' | 0.8 | 'ratio' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+20: 'Emissivity, EPS panel' | 0.85 | 'ratio' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+21: 'Absorptivity, EPS panel' | 0.6 | 'ratio' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+22: 'Solar view, EPS panel, case cold' | 0 | 'ratio' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+23: 'Earth view, EPS panel, case cold' | 0.8 | 'ratio' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+24: 'Emissivity, PL panel' | 0.85 | 'ratio' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+25: 'Absorptivity, PL panel' | 0.6 | 'ratio' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+26: 'Solar view, PL panel, case cold' | 0 | 'ratio' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+27: 'Earth view, PL panel, case cold' | 0.8 | 'ratio' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+28: 'Emissivity, TTC panel' | 0.85 | 'ratio' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+29: 'Absorptivity, TTC panel' | 0.6 | 'ratio' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+30: 'Solar view, TTC panel, case cold' | 0 | 'ratio' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+31: 'Earth view, TTC panel, case cold' | 0.8 | 'ratio' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+32: 'Solar flux, case hot' | 1400 | 'W/m2' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+33: 'Albedo, case hot' | 0.3 | 'ratio' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+34: 'Earth infrared, case hot' | 240 | 'W/m2' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+35: 'Solar view, ADCS panel, case hot' | 0.5 | 'ratio' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+36: 'Earth view, ADCS panel, case hot' | 0.3 | 'ratio' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+37: 'Solar view, DH panel, case hot' | 0.5 | 'ratio' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+38: 'Earth view, DH panel, case hot' | 0.3 | 'ratio' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+39: 'Solar view, EPS panel, case hot' | 0.5 | 'ratio' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+40: 'Earth view, EPS panel, case hot' | 0.3 | 'ratio' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+41: 'Solar view, PL panel, case hot' | 0.5 | 'ratio' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+42: 'Earth view, PL panel, case hot' | 0.3 | 'ratio' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+43: 'Solar view, TTC panel, case hot' | 0.5 | 'ratio' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+44: 'Earth view, TTC panel, case hot' | 0.3 | 'ratio' | 'Synthetic example value; not from a data sheet or a standard.' | 'sourced'
+46: 'Equations' |  |  |  | 
+47: 'ID' | 'Name' | 'Formula' | 'Source' | 
+48: 'TH-DISS' | 'Heat dissipated by a unit' | 'Q = P_avg * duty_cycle_ratio * heat_dissipation_ratio (peak: P_peak * ratio)' | 'SOURCE_MISSING' | 
+49: 'TH-ABS' | 'Heat absorbed by a surface' | 'Q = A * (alpha * f_sun * S + alpha * f_earth * a * S + eps * f_earth * E_IR)' | 'SOURCE_MISSING' | 
+50: 'TH-BAL' | 'Steady-state node heat balance' | 'sum_j G_ij (T_j - T_i) + sum_surfaces eps sigma A (T_space^4 - T_i^4) + Q_i = 0' | 'SOURCE_MISSING' | 
+51: 'TH-SB' | 'Stefan-Boltzmann constant' | 'sigma = 5.670374419e-8 W m^-2 K^-4' | 'CODATA 2018 / SI 2019 (exact from h, k, c)' | 
+52: 'TH-LIMIT' | 'Unit temperature limit check' | 'exceeded when T < T_min or T > T_max; margin check when T - T_min or T_max - T < temperature_margin_k' | 'SOURCE_MISSING' | 
+53: 'SOURCE_MISSING: the formula is a project convention or textbook definition whose reference text is not available to the tool yet (see docs/DECISIONS.md).' |  |  |  | 
+## sheet Problems rows=10 cols=4
+1: 'Problems and open items' |  |  | 
+2: 'Severity' | 'Code' | 'Location' | 'Message'
+3: 'warning' | 'CONFIG_EMPTY_TABLE' | 'config/attenuation_table.yaml:3' | 'The table has no entries.'
+4: 'warning' | 'CONFIG_EMPTY_TABLE' | 'config/ebn0_table.yaml:3' | 'The table has no entries.'
+5: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:9' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+6: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:17' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+7: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:25' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+8: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:32' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+9: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/mass_limits.yaml:7' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+10: 'error' | 'THERMAL_MARGIN_INSUFFICIENT' | 'units/radio.yaml' | "Unit 'radio' is within its operating limits but closer than the required temperature margin."
+## sheet Provenance rows=10 cols=2
+1: 'Provenance' | 
+2: 'Item' | 'Value'
+3: 'Tool' | 'System Budget Studio 0.1.0'
+4: 'Python' | '3.x'
+5: 'Libraries' | 'pinned for-golden-tests'
+6: 'Project' | 'Example 3U CubeSat, complete power and thermal inputs'
+7: 'Project revision' | '1'
+8: 'Scenario' | 'static (no scenario)'
+9: 'Generated (UTC)' | '2026-01-02T03:04:05Z'
+10: 'User' | 'Golden User'

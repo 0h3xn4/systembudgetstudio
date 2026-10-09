@@ -1,4 +1,4 @@
-schema_version: 1
+schema_version: 2
 kind: unit
 name: On-board computer
 subsystem: DH
@@ -10,22 +10,27 @@ modes:
     avg_power_w: 0.3
     peak_power_w: 0.5
     duty_cycle_ratio: 1.0
+    heat_dissipation_ratio: 1.0
   - name: nominal
     avg_power_w: 0.5
     peak_power_w: 0.8
     duty_cycle_ratio: 1.0
+    heat_dissipation_ratio: 1.0
   - name: imaging
     avg_power_w: 0.7
     peak_power_w: 1.0
     duty_cycle_ratio: 1.0
+    heat_dissipation_ratio: 1.0
   - name: downlink
     avg_power_w: 0.6
     peak_power_w: 0.9
     duty_cycle_ratio: 1.0
+    heat_dissipation_ratio: 1.0
   - name: charging
     avg_power_w: 0.3
     peak_power_w: 0.5
     duty_cycle_ratio: 1.0
+    heat_dissipation_ratio: 1.0
 mass_properties:
   position_m:
     - 0.0
@@ -38,3 +43,8 @@ mass_properties:
     ixy_kgm2: 0.0
     ixz_kgm2: 0.0
     iyz_kgm2: 0.0
+temperature_limits:
+  operating_min_k: 233.15
+  operating_max_k: 343.15
+  survival_min_k: 218.15
+  survival_max_k: 358.15

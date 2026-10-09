@@ -120,6 +120,8 @@ def test_export_runs_in_a_worker_and_writes_files(
         "mass_static.xlsx",
         "power_static.json",
         "power_static.xlsx",
+        "thermal_static.json",
+        "thermal_static.xlsx",
     ]
     assert (tmp_path / "out" / "power_static.xlsx").stat().st_size > 1000
 
@@ -146,7 +148,7 @@ def test_tree_double_click_opens_the_file(window: MainWindow) -> None:
     window.tree.request_file("units/obc.yaml")
     editor = window.editors.current_editor()
     assert editor is not None and editor.rel_path == "units/obc.yaml"
-    assert "schema_version: 1" in editor.toPlainText()
+    assert "schema_version: 2" in editor.toPlainText()
 
 
 def test_dirty_state_is_shown_in_the_tab_title(window: MainWindow) -> None:
@@ -154,7 +156,7 @@ def test_dirty_state_is_shown_in_the_tab_title(window: MainWindow) -> None:
     window.tree.request_file("units/obc.yaml")
     editor = window.editors.current_editor()
     assert editor is not None
-    replace_text(editor, "schema_version: 1", "schema_version: 1 ")
+    replace_text(editor, "schema_version: 2", "schema_version: 2 ")
     assert window.editors.tabText(window.editors.currentIndex()).endswith("*")
     assert window.editors.has_unsaved_changes()
     editor.document().setModified(False)  # otherwise closing the window asks (tested below)
@@ -170,7 +172,7 @@ def test_closing_with_unsaved_changes_asks(
     window.tree.request_file("units/obc.yaml")
     editor = window.editors.current_editor()
     assert editor is not None
-    replace_text(editor, "schema_version: 1", "schema_version: 1 ")
+    replace_text(editor, "schema_version: 2", "schema_version: 2 ")
     monkeypatch.setattr(QMessageBox, "question", lambda *a, **k: QMessageBox.StandardButton.Cancel)
     assert window.close() is False
     monkeypatch.setattr(QMessageBox, "question", lambda *a, **k: QMessageBox.StandardButton.Discard)
