@@ -25,7 +25,9 @@ src/budget_core/      no GUI, no network imports (enforced by import-linter test
   units/              suffix conventions, pint parse/format, dB helpers
   config/             schemas (*.schema.json) and loaders; every number carries `source`
   environment/        Environment interface; SpaceMissionStudioImport; ElementsPropagator (sgp4)
-  power/              static_budget.py, array.py, battery.py, timeline_solver.py (pure functions)
+  power/              static_budget.py; time domain: array.py, battery.py, attitude.py, orbits.py,
+                      signals.py, time_domain.py (pure functions over NumPy arrays)
+  plots/              PlotSpec (neutral), power plot builder, Pillow PNG renderer (reports)
   mass/               static_mass.py (roll-up, margins, limits), mass_properties.py (CG, inertia, phases)
   thermal/            dissipation.py (heat by unit/mode, limits), steady_state.py (nodal heat balance)
   link/               link_budget.py, propagation.py, passes.py, data_volume.py (pure functions)
@@ -84,7 +86,7 @@ class Environment(Protocol):
 
 ## 6. Solvers (summary)
 
-**Power static**: per-mode sum over units of `avg_power_w * (1+margin(maturity))` → converter-efficiency-adjusted bus load → totals, peak. **Power time domain**: scenario timeline → per-step load; array output `= n_cells · A_cell · η · G · cosθ · (1 + α(T−T_ref)) · (1−L_degr) · (1−L_pack) · (1−L_harness)` (constants from config, sourced); battery energy integration with charge/discharge efficiency, DoD limit per phase; violations as intervals with timestamps. Vectorised over steps; eclipse/mode changes handled by segment arithmetic so a 604,800-step week stays < 10 s. **Link**: `Eb/N0 = EIRP − L_path − L_other + G/T − 10log10(k) − 10log10(R_b)` (Friis; ECSS-E-ST-50-05C usage flagged), margin vs table value (from config), per-time-step over passes, data volume from margin-constrained rate selection. All formulae named in the registry with sources or `SOURCE_MISSING`.
+**Power static**: per-mode sum over units of `avg_power_w * (1+margin(maturity))` → converter-efficiency-adjusted bus load → totals, peak. **Power time domain** (M4, implemented; D-061 to D-066): scenario timeline and environment, steps from the environment grid, demand per step by exact overlap of the mode segments with the step, sunlit share by exact overlap of the eclipses; array output `P = E * sum_faces(N_cells * max(0, cos theta)) * A_cell * eta_ref * k_T * (1 - l_pack) * (1 - l_harness) * k_age * f_lit` (constants from `config/power_system.yaml`, sourced); energy-based battery with charge and discharge efficiency, full and empty saturation, depth of discharge per phase; BOL and EOL cases; violations as intervals with time stamps. Pure NumPy over steps plus one scalar loop for the battery; a 604,800-step week runs in about 1 s on top of the environment. **Link**: `Eb/N0 = EIRP − L_path − L_other + G/T − 10log10(k) − 10log10(R_b)` (Friis; ECSS-E-ST-50-05C usage flagged), margin vs table value (from config), per-time-step over passes, data volume from margin-constrained rate selection. All formulae named in the registry with sources or `SOURCE_MISSING`.
 
 ## 6a. Mass budget (added by D-033)
 

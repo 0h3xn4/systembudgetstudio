@@ -12,12 +12,13 @@ from budget_core.io.project_loader import load_project
 from budget_core.mass.static_mass import static_mass_budget
 from budget_core.power.static_budget import static_power_budget
 from budget_core.provenance import make_provenance
+from budget_core.reports.docx import render_docx
 from budget_core.reports.export import mass_csv, result_csv, result_json
 from budget_core.reports.mass_report import build_mass_report
 from budget_core.reports.pdf import render_pdf
 from budget_core.reports.power_report import build_power_report
 from budget_core.reports.xlsx import render_xlsx
-from tests.golden_util import check_golden, dump_pdf, dump_xlsx
+from tests.golden_util import check_golden, dump_docx, dump_pdf, dump_xlsx
 
 EXAMPLES = Path(__file__).resolve().parents[2] / "examples"
 WHEN = datetime(2026, 1, 2, 3, 4, 5, tzinfo=UTC)
@@ -112,3 +113,11 @@ def test_mass_json_golden(name: str) -> None:
 def test_mass_csv_golden_microsat() -> None:
     mass, _, _ = build_mass("microsat_150kg")
     check_golden("microsat_150kg_mass_launch.csv", mass_csv(mass.phases[0]))
+
+
+@pytest.mark.parametrize("name", ["cubesat_3u", "microsat_150kg"])
+def test_docx_golden(name: str) -> None:
+    _, _, doc = build(name)
+    check_golden(f"{name}_power.docx.txt", dump_docx(render_docx(doc)))
+    _, _, mass_doc = build_mass(name)
+    check_golden(f"{name}_mass.docx.txt", dump_docx(render_docx(mass_doc)))

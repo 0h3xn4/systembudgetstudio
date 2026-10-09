@@ -1,0 +1,40 @@
+schema_version: 1
+kind: unit
+name: Power board
+subsystem: EPS
+mass_kg: 0.25
+bus: main
+maturity: class_a
+modes:
+  - name: safe
+    avg_power_w: 0.1
+    peak_power_w: 0.2
+    duty_cycle_ratio: 1.0
+  - name: nominal
+    avg_power_w: 0.15
+    peak_power_w: 0.25
+    duty_cycle_ratio: 1.0
+  - name: imaging
+    avg_power_w: 0.15
+    peak_power_w: 0.25
+    duty_cycle_ratio: 1.0
+  - name: downlink
+    avg_power_w: 0.15
+    peak_power_w: 0.25
+    duty_cycle_ratio: 1.0
+  - name: charging
+    avg_power_w: 0.15
+    peak_power_w: 0.25
+    duty_cycle_ratio: 1.0
+mass_properties:
+  position_m:
+    - 0.0
+    - 0.0
+    - 0.08
+  inertia:
+    ixx_kgm2: 0.000187
+    iyy_kgm2: 0.000187
+    izz_kgm2: 0.000337
+    ixy_kgm2: 0.0
+    ixz_kgm2: 0.0
+    iyz_kgm2: 0.0

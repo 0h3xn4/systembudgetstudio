@@ -1,0 +1,130 @@
+schema_version: 1
+kind: power_system
+design_life_yr:
+  value: null
+  source: TBD
+  note: "Placeholder: supply the project's value."
+solar_array:
+  faces:
+    - name: plus_x
+      normal_body:
+        - 1.0
+        - 0.0
+        - 0.0
+      strings: 2
+      cells_per_string: 3
+    - name: minus_x
+      normal_body:
+        - -1.0
+        - 0.0
+        - 0.0
+      strings: 2
+      cells_per_string: 3
+    - name: plus_y
+      normal_body:
+        - 0.0
+        - 1.0
+        - 0.0
+      strings: 2
+      cells_per_string: 3
+    - name: minus_y
+      normal_body:
+        - 0.0
+        - -1.0
+        - 0.0
+      strings: 2
+      cells_per_string: 3
+    - name: minus_z
+      normal_body:
+        - 0.0
+        - 0.0
+        - -1.0
+      strings: 1
+      cells_per_string: 2
+  solar_irradiance_wm2:
+    value: null
+    source: TBD
+    note: "Placeholder: supply the project's value."
+  cell_area_m2:
+    value: null
+    source: TBD
+    note: "Placeholder: supply the project's value."
+  cell_efficiency_ratio:
+    value: null
+    source: TBD
+    note: "Placeholder: supply the project's value."
+  reference_temperature_k:
+    value: null
+    source: TBD
+    note: "Placeholder: supply the project's value."
+  cell_temperature_k:
+    value: null
+    source: TBD
+    note: "Placeholder: supply the project's value."
+  efficiency_temp_coeff_perk:
+    value: null
+    source: TBD
+    note: "Placeholder: supply the project's value."
+  packing_loss_ratio:
+    value: null
+    source: TBD
+    note: "Placeholder: supply the project's value."
+  harness_loss_ratio:
+    value: null
+    source: TBD
+    note: "Placeholder: supply the project's value."
+  annual_degradation_ratio:
+    value: null
+    source: TBD
+    note: "Placeholder: supply the project's value."
+battery:
+  cell_capacity_ah:
+    value: null
+    source: TBD
+    note: "Placeholder: supply the project's value."
+  cell_nominal_voltage_v:
+    value: null
+    source: TBD
+    note: "Placeholder: supply the project's value."
+  cells_in_series: 2
+  cells_in_parallel: 2
+  charge_efficiency_ratio:
+    value: null
+    source: TBD
+    note: "Placeholder: supply the project's value."
+  discharge_efficiency_ratio:
+    value: null
+    source: TBD
+    note: "Placeholder: supply the project's value."
+  annual_capacity_fade_ratio:
+    value: null
+    source: TBD
+    note: "Placeholder: supply the project's value."
+  initial_soc_ratio:
+    value: null
+    source: TBD
+    note: "Placeholder: supply the project's value."
+  max_dod_ratio:
+    eol:
+      value: null
+      source: TBD
+      note: "Placeholder: supply the project's value."
+    launch:
+      value: null
+      source: TBD
+      note: "Placeholder: supply the project's value."
+attitude:
+  default: sun
+  by_mode:
+    downlink: nadir
+    imaging: nadir
+    nominal: nadir
+  sun_direction_body:
+    - 1.0
+    - 0.0
+    - 0.0
+limits:
+  peak_power_w:
+    value: null
+    source: TBD
+    note: "Placeholder: supply the project's value."

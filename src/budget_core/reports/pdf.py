@@ -13,10 +13,19 @@ from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.units import mm
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer, Table, TableStyle
+from reportlab.platypus import (
+    Image,
+    KeepTogether,
+    Paragraph,
+    SimpleDocTemplate,
+    Spacer,
+    Table,
+    TableStyle,
+)
 
 from budget_core.assets import font_path
-from budget_core.reports.document import Column, ReportDocument, format_cell
+from budget_core.plots.render import image_size
+from budget_core.reports.document import Column, Figure, ReportDocument, format_cell
 from budget_core.reports.document import Table as DocTable
 
 # ReportLab can fetch images from URLs (and imports urllib.request/ssl for it, unconditionally).
@@ -96,6 +105,22 @@ def _flowable(table: DocTable, styles: dict[str, ParagraphStyle], width: float) 
     return out
 
 
+def _figure_flowable(
+    figure: Figure,
+    styles: dict[str, ParagraphStyle],
+    width: float,
+    height: float,
+    lead: list[object],
+) -> list[object]:
+    w_px, h_px = image_size(figure.png)
+    scale = min(width / w_px, (height - 12 * mm) / h_px)
+    image = Image(io.BytesIO(figure.png), width=w_px * scale, height=h_px * scale)
+    parts: list[object] = [*lead, Paragraph(escape(figure.title), styles["h2"]), image]
+    if figure.alt:
+        parts.append(Paragraph(escape(figure.alt), styles["note"]))
+    return [KeepTogether(parts), Spacer(1, 4 * mm)]
+
+
 def render_pdf(doc: ReportDocument) -> bytes:
     _register_fonts()
     styles = _styles()
@@ -121,10 +146,17 @@ def render_pdf(doc: ReportDocument) -> bytes:
     if doc.banner:
         story += [Spacer(1, 2 * mm), Paragraph(escape(doc.banner), styles["banner"])]
     for section in doc.sections:
-        story.append(Paragraph(escape(section.title), styles["h1"]))
-        story += [Paragraph(escape(t), styles["cell"]) for t in section.paragraphs]
+        lead: list[object] = [Paragraph(escape(section.title), styles["h1"])]
+        lead += [Paragraph(escape(t), styles["cell"]) for t in section.paragraphs]
+        if section.tables or not section.figures:
+            story += lead
+            lead = []
         for table in section.tables:
             story += _flowable(table, styles, width)
+        for figure in section.figures:
+            height = page[1] - margin - 16 * mm - 14 * mm
+            story += _figure_flowable(figure, styles, width, height, lead)
+            lead = []
 
     footer = (
         f"{prov.tool} {prov.tool_version} | {prov.project_name} rev {prov.project_revision} | "

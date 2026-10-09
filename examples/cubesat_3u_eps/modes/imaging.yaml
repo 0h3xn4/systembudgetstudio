@@ -1,0 +1,11 @@
+schema_version: 1
+kind: spacecraft_mode
+name: Imaging
+description: Camera on.
+assignments:
+  adcs: imaging
+  camera: imaging
+  eps: imaging
+  gnss: imaging
+  obc: imaging
+  radio: imaging

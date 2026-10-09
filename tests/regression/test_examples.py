@@ -43,17 +43,43 @@ def test_every_unit_is_mapped_in_every_mode() -> None:
             assert set(mode.assignments) == set(project.units)
 
 
+COMPLETE_POWER = "cubesat_3u_eps"
+
+
 def test_examples_contain_no_numbers_from_standards() -> None:
-    """Config numbers are placeholders: every Sourced value is null with source TBD."""
+    """Config numbers are placeholders: every Sourced value is null with source TBD. The one
+    example with complete power inputs carries invented values that say so in their source."""
     from budget_core.io.validation import iter_sourced
 
     for name in EXAMPLES:
         project = load_project(ROOT / name).project
         assert project is not None
-        for model in (
-            project.config.margin_policy,
-            project.config.power_config,
-            project.config.mass_limits,
-        ):
+        models = [project.config.mass_limits]
+        if name != COMPLETE_POWER:
+            models += [
+                project.config.margin_policy,
+                project.config.power_config,
+                project.config.power_system,
+            ]
+        for model in models:
             for _, sourced in iter_sourced(model):
                 assert sourced.value is None and sourced.source == "TBD"
+
+
+def test_complete_power_example_has_synthetic_sources_only() -> None:
+    from budget_core.io.validation import iter_sourced
+
+    project = load_project(ROOT / COMPLETE_POWER).project
+    assert project is not None
+    power_models = (
+        project.config.power_config,
+        project.config.power_system,
+        project.config.margin_policy,
+    )
+    for model in power_models:
+        for path, sourced in iter_sourced(model):
+            if "mass_margin_ratio" in path or "system_mass_margin_ratio" in path:
+                assert sourced.is_placeholder
+            else:
+                assert not sourced.is_placeholder
+                assert sourced.source.startswith("Synthetic example value")

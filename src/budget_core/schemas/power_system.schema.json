@@ -1,0 +1,280 @@
+{
+  "$defs": {
+    "ArrayFace": {
+      "additionalProperties": false,
+      "description": "One array panel: its outward normal in the body frame and its cell count.",
+      "properties": {
+        "cells_per_string": {
+          "minimum": 1,
+          "title": "Cells Per String",
+          "type": "integer"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "normal_body": {
+          "items": {
+            "type": "number"
+          },
+          "title": "Normal Body",
+          "type": "array"
+        },
+        "strings": {
+          "minimum": 1,
+          "title": "Strings",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "name",
+        "normal_body",
+        "strings",
+        "cells_per_string"
+      ],
+      "title": "ArrayFace",
+      "type": "object"
+    },
+    "Attitude": {
+      "additionalProperties": false,
+      "description": "Pointing per spacecraft mode. `sun`: the Sun is along `sun_direction_body`. `nadir`: the\nbody frame is aligned with the local orbital frame (+Z to the Earth, +X along track,\n+Y opposite the orbit normal).",
+      "properties": {
+        "by_mode": {
+          "additionalProperties": {
+            "enum": [
+              "sun",
+              "nadir"
+            ],
+            "type": "string"
+          },
+          "title": "By Mode",
+          "type": "object"
+        },
+        "default": {
+          "anyOf": [
+            {
+              "enum": [
+                "sun",
+                "nadir"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Default"
+        },
+        "sun_direction_body": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sun Direction Body"
+        }
+      },
+      "title": "Attitude",
+      "type": "object"
+    },
+    "Battery": {
+      "additionalProperties": false,
+      "properties": {
+        "annual_capacity_fade_ratio": {
+          "$ref": "#/$defs/Sourced"
+        },
+        "cell_capacity_ah": {
+          "$ref": "#/$defs/Sourced"
+        },
+        "cell_nominal_voltage_v": {
+          "$ref": "#/$defs/Sourced"
+        },
+        "cells_in_parallel": {
+          "minimum": 1,
+          "title": "Cells In Parallel",
+          "type": "integer"
+        },
+        "cells_in_series": {
+          "minimum": 1,
+          "title": "Cells In Series",
+          "type": "integer"
+        },
+        "charge_efficiency_ratio": {
+          "$ref": "#/$defs/Sourced"
+        },
+        "discharge_efficiency_ratio": {
+          "$ref": "#/$defs/Sourced"
+        },
+        "initial_soc_ratio": {
+          "$ref": "#/$defs/Sourced"
+        },
+        "max_dod_ratio": {
+          "additionalProperties": {
+            "$ref": "#/$defs/Sourced"
+          },
+          "title": "Max Dod Ratio",
+          "type": "object"
+        }
+      },
+      "required": [
+        "cell_capacity_ah",
+        "cell_nominal_voltage_v",
+        "cells_in_series",
+        "cells_in_parallel",
+        "charge_efficiency_ratio",
+        "discharge_efficiency_ratio",
+        "annual_capacity_fade_ratio",
+        "initial_soc_ratio"
+      ],
+      "title": "Battery",
+      "type": "object"
+    },
+    "PowerLimits": {
+      "additionalProperties": false,
+      "properties": {
+        "peak_power_w": {
+          "$ref": "#/$defs/Sourced"
+        }
+      },
+      "required": [
+        "peak_power_w"
+      ],
+      "title": "PowerLimits",
+      "type": "object"
+    },
+    "SolarArray": {
+      "additionalProperties": false,
+      "properties": {
+        "annual_degradation_ratio": {
+          "$ref": "#/$defs/Sourced"
+        },
+        "cell_area_m2": {
+          "$ref": "#/$defs/Sourced"
+        },
+        "cell_efficiency_ratio": {
+          "$ref": "#/$defs/Sourced"
+        },
+        "cell_temperature_k": {
+          "$ref": "#/$defs/Sourced"
+        },
+        "efficiency_temp_coeff_perk": {
+          "$ref": "#/$defs/Sourced"
+        },
+        "faces": {
+          "items": {
+            "$ref": "#/$defs/ArrayFace"
+          },
+          "title": "Faces",
+          "type": "array"
+        },
+        "harness_loss_ratio": {
+          "$ref": "#/$defs/Sourced"
+        },
+        "packing_loss_ratio": {
+          "$ref": "#/$defs/Sourced"
+        },
+        "reference_temperature_k": {
+          "$ref": "#/$defs/Sourced"
+        },
+        "solar_irradiance_wm2": {
+          "$ref": "#/$defs/Sourced"
+        }
+      },
+      "required": [
+        "solar_irradiance_wm2",
+        "cell_area_m2",
+        "cell_efficiency_ratio",
+        "reference_temperature_k",
+        "cell_temperature_k",
+        "efficiency_temp_coeff_perk",
+        "packing_loss_ratio",
+        "harness_loss_ratio",
+        "annual_degradation_ratio"
+      ],
+      "title": "SolarArray",
+      "type": "object"
+    },
+    "Sourced": {
+      "additionalProperties": false,
+      "description": "A number from a standard, policy or data sheet. `source: TBD` or a null value marks a\nplaceholder that must be replaced before results are trusted (spec constraint 15).",
+      "properties": {
+        "note": {
+          "default": "",
+          "title": "Note",
+          "type": "string"
+        },
+        "source": {
+          "minLength": 1,
+          "title": "Source",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "value",
+        "source"
+      ],
+      "title": "Sourced",
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "attitude": {
+      "$ref": "#/$defs/Attitude"
+    },
+    "battery": {
+      "$ref": "#/$defs/Battery"
+    },
+    "design_life_yr": {
+      "$ref": "#/$defs/Sourced"
+    },
+    "kind": {
+      "const": "power_system",
+      "default": "power_system",
+      "title": "Kind",
+      "type": "string"
+    },
+    "limits": {
+      "$ref": "#/$defs/PowerLimits"
+    },
+    "schema_version": {
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "solar_array": {
+      "$ref": "#/$defs/SolarArray"
+    }
+  },
+  "required": [
+    "battery",
+    "design_life_yr",
+    "kind",
+    "limits",
+    "schema_version",
+    "solar_array"
+  ],
+  "title": "System Budget Studio power_system",
+  "type": "object"
+}

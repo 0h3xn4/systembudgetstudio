@@ -1,0 +1,11 @@
+schema_version: 1
+kind: spacecraft_mode
+name: Charging
+description: Sun-pointing to charge the battery.
+assignments:
+  adcs: charging
+  camera: off
+  eps: charging
+  gnss: charging
+  obc: charging
+  radio: charging

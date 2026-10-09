@@ -1,4 +1,4 @@
-"""`budget` command: `validate` and `export-schemas` (M1). Solvers and reports follow in M2+."""
+"""`budget` command: validate, run (static budgets), scenario, power-timeline, schemas, examples."""
 
 from __future__ import annotations
 
@@ -14,6 +14,7 @@ from budget_core.examples import export_examples
 from budget_core.io.project_loader import load_project
 from budget_core.mass.static_mass import static_mass_budget
 from budget_core.power.static_budget import static_power_budget
+from budget_core.power.time_domain import time_domain_budget, violation_problems
 from budget_core.problems import Problem, Severity, sort_problems
 from budget_core.provenance import make_provenance
 from budget_core.reports.run import (
@@ -21,6 +22,7 @@ from budget_core.reports.run import (
     BudgetOutput,
     mass_output,
     power_output,
+    timeline_output,
     write_outputs,
 )
 from budget_core.scenario.export import write_scenario_outputs
@@ -86,6 +88,46 @@ def build_parser() -> argparse.ArgumentParser:
     scn.add_argument("--out", type=Path, help="Output folder (default: <project>/results).")
     scn.add_argument("--user", help="User name for the provenance block.")
     scn.add_argument("--date", type=_iso_datetime, help="Generation time, ISO 8601.")
+
+    pt = sub.add_parser(
+        "power-timeline",
+        help="Compute the time-domain power budget of a scenario (array, battery, violations).",
+    )
+    pt.add_argument("project", type=Path, help="Project folder (contains project.yaml).")
+    pt.add_argument(
+        "--scenario", help="Scenario id (file name in scenarios/); optional if only one."
+    )
+    pt.add_argument(
+        "--case",
+        choices=("bol", "eol", "both"),
+        default="both",
+        help="Beginning of life, end of life or both (default: both).",
+    )
+    pt.add_argument(
+        "--load-basis",
+        choices=("nominal", "margined"),
+        default="nominal",
+        help="Demand without margins or with unit and system margins (default: nominal).",
+    )
+    pt.add_argument("--phase", help="Mission phase for the depth-of-discharge limit.")
+    pt.add_argument(
+        "--report",
+        action="append",
+        choices=REPORTS + ("all",),
+        help="Output kind; repeat for several (default: all).",
+    )
+    pt.add_argument("--out", type=Path, help="Output folder (default: <project>/results).")
+    pt.add_argument(
+        "--series-every",
+        type=int,
+        default=1,
+        metavar="N",
+        help="Keep every N-th step in the series CSV (default 1: all steps).",
+    )
+    pt.add_argument("--no-plots", action="store_true", help="Leave the plots out of the reports.")
+    pt.add_argument("--user", help="User name for the provenance block.")
+    pt.add_argument("--date", type=_iso_datetime, help="Generation time, ISO 8601.")
+    pt.add_argument("--strict", action="store_true", help="Treat warnings as failures.")
 
     sub.add_parser(
         "self-test", help="Check that this installation can compute and render a budget."
@@ -204,6 +246,65 @@ def _scenario(args: argparse.Namespace) -> int:
     return 0
 
 
+def _power_timeline(args: argparse.Namespace) -> int:
+    loaded = load_project(args.project)
+    errors = _count(loaded.problems, Severity.ERROR)
+    if loaded.project is None or errors:
+        for problem in loaded.problems:
+            print(problem.format())
+        print(f"{_plural(errors, 'error')}; nothing was written.")
+        return 1
+    project = loaded.project
+    scenario_id = args.scenario
+    if scenario_id is None and len(project.scenarios) == 1:
+        scenario_id = next(iter(project.scenarios))
+    try:
+        run = run_scenario(project, scenario_id or "")
+    except ScenarioRunError as exc:
+        print(exc.problem.format())
+        return 1
+    cases = ("bol", "eol") if args.case == "both" else (args.case,)
+    result = time_domain_budget(
+        project, run, load_basis=args.load_basis, cases=cases, mission_phase=args.phase
+    )
+    provenance = make_provenance(
+        project, scenario=run.scenario_id, user=args.user, generated_at=args.date
+    )
+    output = timeline_output(
+        project,
+        result,
+        provenance,
+        loaded.problems,
+        plots=not args.no_plots,
+        series_every=args.series_every,
+    )
+    wanted = set(args.report or ["all"])
+    if "all" in wanted:
+        wanted = set(REPORTS)
+    written = write_outputs([output], args.out or (args.project / "results"), wanted)
+    for path in written:
+        print(f"Wrote {path}")
+    for case in result.cases:
+        s = case.summary
+        if s.generated_wh is None:
+            print(f"{case.case.upper()}: n/a (inputs missing, see the problems below).")
+            continue
+        soc = "n/a" if s.minimum_soc_ratio is None else f"{s.minimum_soc_ratio * 100:.1f} %"
+        print(
+            f"{case.case.upper()}: generated {s.generated_wh:.1f} Wh, lowest state of charge "
+            f"{soc}, {len(case.violations)} violation(s)."
+        )
+    problems = sort_problems([*result.problems, *violation_problems(result)])
+    findings = [p for p in problems if p.severity is Severity.ERROR]
+    warnings = _count(problems, Severity.WARNING)
+    for problem in findings:
+        print(problem.format())
+    if output.document.banner:
+        print(output.document.banner)
+    print(f"{_plural(len(findings), 'error')}, {_plural(warnings, 'warning')}.")
+    return 1 if findings or (args.strict and warnings) else 0
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
@@ -211,6 +312,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         return _validate(args)
     if args.command == "scenario":
         return _scenario(args)
+    if args.command == "power-timeline":
+        return _power_timeline(args)
     if args.command == "self-test":
         failures = run_selftest()
         for failure in failures:

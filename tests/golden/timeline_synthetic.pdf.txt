@@ -1,0 +1,481 @@
+pages=6
+## page 1
+System Budget Studio 0.1.0 | Time-domain test rev r1 | synthetic | 2026-01-02T03:04:05Z | Golden User
+Page 1
+Power budget over time: Time-domain test
+Summary
+Scenario synthetic: Synthetic.
+Environment source: synthetic; shadow model: cylindrical; start 2026-01-01T00:00:00Z; duration 12000 s; step 20 s (600 steps).
+Eclipse fraction 30.00 % of the scenario; 2 complete orbit(s).
+Demand basis: nominal; mission phase for the depth-of-discharge limit: eol.
+Beginning of life (BOL): no array degradation or battery fade. End of life (EOL): the design life applied to both.
+Results by case
+Quantity
+Unit
+BOL
+EOL
+Battery capacity
+Wh
+ 100.000
+ 95.099
+Average generation
+W
+ 70.000
+ 63.274
+Average demand at source
+W
+ 58.000
+ 58.000
+Energy generated
+Wh
+ 233.333
+ 210.915
+Energy demanded
+Wh
+ 193.333
+ 193.333
+Smallest margin (generation - demand)
+W
+ -100.000
+ -100.000
+Lowest state of charge
+%
+ 50.000
+ 47.423
+Deepest depth of discharge
+%
+ 50.000
+ 52.577
+Energy not supplied
+Wh
+ 0.000
+ 0.000
+Energy curtailed (battery full)
+Wh
+ 70.000
+ 50.784
+Stored energy change over the scenario
+Wh
+ -30.000
+ -33.203
+Violations
+count
+ 2
+ 2
+Violations
+Case
+Finding
+From (T+)
+To (T+)
+Duration
+(s)
+Worst
+value
+Limit
+Unit
+Input to change
+both
+Peak power above the limit
+T+00:50:00
+T+01:20:00
+ 1800.0
+ 120.0000
+ 110.0000
+W
+limits.peak_power_w
+EOL
+Depth of discharge above the allowed limit
+T+00:58:33
+T+02:02:32
+ 3839.4
+ 0.5258
+ 0.1500
+ratio
+battery.max_dod_ratio.eol
+BOL
+Depth of discharge above the allowed limit
+T+00:59:00
+T+01:55:00
+ 3360.0
+ 0.5000
+ 0.1500
+ratio
+battery.max_dod_ratio.eol
+both
+Peak power above the limit
+T+02:30:00
+T+03:00:00
+ 1800.0
+ 120.0000
+ 110.0000
+W
+limits.peak_power_w
+EOL
+Depth of discharge above the allowed limit
+T+02:38:33
+T+03:20:00
+ 2486.5
+ 0.5258
+ 0.1500
+ratio
+battery.max_dod_ratio.eol
+BOL
+Depth of discharge above the allowed limit
+T+02:39:00
+T+03:20:00
+ 2460.0
+ 0.5000
+ 0.1500
+ratio
+battery.max_dod_ratio.eol
+## page 2
+System Budget Studio 0.1.0 | Time-domain test rev r1 | synthetic | 2026-01-02T03:04:05Z | Golden User
+Page 2
+Plots, BOL
+Power over time, BOL
+Generation, demand, state of charge and margin with eclipses and passes shaded.
+## page 3
+System Budget Studio 0.1.0 | Time-domain test rev r1 | synthetic | 2026-01-02T03:04:05Z | Golden User
+Page 3
+Plots, EOL
+Power over time, EOL
+Generation, demand, state of charge and margin with eclipses and passes shaded.
+## page 4
+System Budget Studio 0.1.0 | Time-domain test rev r1 | synthetic | 2026-01-02T03:04:05Z | Golden User
+Page 4
+Modes and orbits
+Spacecraft modes in the scenario
+Mode
+Name
+Time (s)
+Share
+Load (W)
+Demand at source (W)
+Peak at source (W)
+a
+Mode A
+ 8400.0
+ 70.0 %
+ 40.000
+ 40.000
+ 50.000
+b
+Mode B
+ 3600.0
+ 30.0 %
+ 100.000
+ 100.000
+ 120.000
+Demand basis: nominal.
+Orbit energy balance, BOL
+Orbit
+Start (T+)
+Length (s)
+Eclipse (s)
+Generated (Wh)
+Demanded (Wh)
+Balance (Wh)
+Stored change (Wh)
+1
+T+00:00:00
+ 6000.0
+ 1800.0
+ 116.667
+ 96.667
+ 20.000
+ -30.000
+2
+T+01:40:00
+ 6000.0
+ 1800.0
+ 116.667
+ 96.667
+ 20.000
+ 0.000
+Complete orbits only; the balance is generation minus demand at the source.
+Orbit energy balance, EOL
+Orbit
+Start (T+)
+Length (s)
+Eclipse (s)
+Generated (Wh)
+Demanded (Wh)
+Balance (Wh)
+Stored change (Wh)
+1
+T+00:00:00
+ 6000.0
+ 1800.0
+ 105.457
+ 96.667
+ 8.791
+ -33.203
+2
+T+01:40:00
+ 6000.0
+ 1800.0
+ 105.457
+ 96.667
+ 8.791
+ 0.000
+Complete orbits only; the balance is generation minus demand at the source.
+Static power
+The static budget of every mode, the input of the time-domain run.
+Power by spacecraft mode
+Mode
+Average load
+(W)
+Average, unit margins
+(W)
+Average, system margin
+(W)
+Average at source
+(W)
+Average at source, with margins (W)
+Peak load
+(W)
+Peak at source, with margins (W)
+Mode A
+ 40.000
+ 44.000
+ 46.200
+ 40.000
+ 46.200
+ 50.000
+ 57.750
+Mode B
+ 100.000
+ 110.000
+ 115.500
+ 100.000
+ 115.500
+ 120.000
+ 138.600
+Average = sum of unit power x duty cycle. Peak = sum of unit peak powers. Source = after converter and distribution losses.
+Assumptions
+Configuration numbers used
+Name
+Value
+Unit
+Source
+Status
+Margin, maturity class m1
+ 0.1000
+ratio
+test fixture
+sourced
+System margin
+ 0.0500
+ratio
+test fixture
+sourced
+Distribution loss
+ 0.0000
+ratio
+test fixture
+sourced
+Converter efficiency, bus main
+ 1.0000
+ratio
+test fixture
+sourced
+## page 5
+System Budget Studio 0.1.0 | Time-domain test rev r1 | synthetic | 2026-01-02T03:04:05Z | Golden User
+Page 5
+Name
+Value
+Unit
+Source
+Status
+Solar irradiance
+ 1000.0000
+W/m2
+test fixture
+sourced
+Cell area
+ 0.0005
+m2
+test fixture
+sourced
+Cell efficiency
+ 0.5000
+ratio
+test fixture
+sourced
+Reference temperature
+ 300.0000
+K
+test fixture
+sourced
+Cell temperature
+ 300.0000
+K
+test fixture
+sourced
+Efficiency temperature coefficient
+ -0.0020
+1/K
+test fixture
+sourced
+Packing loss
+ 0.0000
+ratio
+test fixture
+sourced
+Harness loss
+ 0.0000
+ratio
+test fixture
+sourced
+Design life
+ 5.0000
+yr
+test fixture
+sourced
+Battery cell capacity
+ 5.0000
+Ah
+test fixture
+sourced
+Battery cell voltage
+ 4.0000
+V
+test fixture
+sourced
+Battery charge efficiency
+ 1.0000
+ratio
+test fixture
+sourced
+Battery discharge efficiency
+ 1.0000
+ratio
+test fixture
+sourced
+Battery annual capacity fade
+ 0.0100
+ratio
+test fixture
+sourced
+Battery initial state of charge
+ 1.0000
+ratio
+test fixture
+sourced
+Allowed depth of discharge, phase eol
+ 0.1500
+ratio
+test fixture
+sourced
+Array annual degradation
+ 0.0200
+ratio
+test fixture
+sourced
+Peak power limit
+ 110.0000
+W
+test fixture
+sourced
+Equations
+ID
+Name
+Formula
+Source
+TDP-ARRAY
+Array output power per step
+P_gen = E * (sum_faces N_cells * max(0, cos theta)) * A_cell * eta_ref * k_T * (1 -
+l_pack) * (1 - l_harness) * k_age * f_lit
+SOURCE_MISSING
+TDP-TEMP
+Cell efficiency at the operating temperature
+k_T = max(0, 1 + alpha * (T_cell - T_ref))
+SOURCE_MISSING
+TDP-AGE
+Array degradation over life
+k_age = (1 - annual_degradation_ratio) ^ years
+SOURCE_MISSING
+TDP-COS
+Sun incidence on a face
+cos theta = n_face . s_body (unit vectors), zero on the back side
+SOURCE_MISSING
+TDP-LIT
+Sunlit share of a step
+f_lit = 1 - (eclipse time inside the step) / step; trapezoid of the shadow ratio for a soft
+shadow
+SOURCE_MISSING
+TDP-DEMAND
+Demand per step
+P_dem = sum over modes of overlap(mode segment, step) * P_source(mode) / step
+SOURCE_MISSING
+TDP-CAP
+Battery capacity
+E_cap = C_cell * V_cell * N_series * N_parallel * (1 - annual_capacity_fade_ratio) ^
+years
+SOURCE_MISSING
+TDP-SOC
+Battery state of charge
+surplus: E += eta_c * min(P*dt, (E_cap - E) / eta_c); deficit: E -= min(P*dt, E * eta_d) /
+eta_d (P = generation - demand)
+SOURCE_MISSING
+TDP-DOD
+Depth of discharge
+DoD = 1 - E / E_cap; violation when DoD > allowed depth of discharge of the phase
+SOURCE_MISSING
+TDP-BALANCE
+Orbit energy balance
+balance = integral(P_gen - P_dem) dt over one revolution; negative is a violation
+SOURCE_MISSING
+## page 6
+System Budget Studio 0.1.0 | Time-domain test rev r1 | synthetic | 2026-01-02T03:04:05Z | Golden User
+Page 6
+ID
+Name
+Formula
+Source
+TDP-PEAK
+Peak power at the source
+P_peak,source = sum of unit peaks through converter and distribution losses;
+violation when above the power limit during the mode
+SOURCE_MISSING
+SOURCE_MISSING: the formula is a project convention or textbook definition whose reference text is not available to the tool yet (see docs/DECISIONS.md).
+Problems
+Problems and open items
+Severity
+Code
+Location
+Message
+error
+BATTERY_DOD_EXCEEDED
+config/power_system.yaml
+The battery depth of discharge exceeds the limit of the mission phase. Case BOL. 2 interval(s), the first
+at T+00:59:00.
+error
+BATTERY_DOD_EXCEEDED
+config/power_system.yaml
+The battery depth of discharge exceeds the limit of the mission phase. Case EOL. 2 interval(s), the first
+at T+00:58:33.
+error
+PEAK_POWER_EXCEEDED
+config/power_system.yaml
+The peak power demand at the source exceeds the power limit. 2 interval(s), the first at T+00:50:00.
+Provenance
+Provenance
+Item
+Value
+Tool
+System Budget Studio 0.1.0
+Python
+3.x
+Libraries
+pinned for-golden-tests
+Project
+Time-domain test
+Project revision
+r1
+Scenario
+synthetic
+Generated (UTC)
+2026-01-02T03:04:05Z
+User
+Golden User

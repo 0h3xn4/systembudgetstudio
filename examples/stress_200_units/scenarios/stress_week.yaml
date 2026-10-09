@@ -1,4 +1,4 @@
-schema_version: 1
+schema_version: 2
 kind: scenario
 name: One week at 1 s resolution
 environment_source: elements

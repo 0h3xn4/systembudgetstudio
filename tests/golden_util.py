@@ -6,6 +6,7 @@ import io
 import os
 from pathlib import Path
 
+from docx import Document
 from openpyxl import load_workbook
 from pypdf import PdfReader
 
@@ -36,6 +37,23 @@ def dump_pdf(data: bytes, max_pages: int | None = None) -> str:
             break
         lines.append(f"## page {number}")
         lines.append((page.extract_text() or "").strip())
+    return "\n".join(lines) + "\n"
+
+
+def dump_docx(data: bytes) -> str:
+    """Paragraph texts and table cells in document order, plus the picture count."""
+    doc = Document(io.BytesIO(data))
+    lines = [f"pictures={len(doc.inline_shapes)}"]
+    body = doc.element.body
+    paragraphs = {p._p: p for p in doc.paragraphs}
+    tables = {t._tbl: t for t in doc.tables}
+    for child in body.iterchildren():
+        if child in paragraphs and paragraphs[child].text.strip():
+            lines.append(paragraphs[child].text)
+        elif child in tables:
+            lines.append("## table")
+            for row in tables[child].rows:
+                lines.append(" | ".join(cell.text for cell in row.cells))
     return "\n".join(lines) + "\n"
 
 

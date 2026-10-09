@@ -1,0 +1,10 @@
+schema_version: 1
+kind: spacecraft
+name: CubeSat 3U
+buses:
+  - name: main
+    nominal_voltage_v: 5.0
+mission_phases:
+  - launch
+  - eol
+body_frame: 'Right-handed body frame. Origin: centre of the launch-vehicle interface plane. +Z: along the launch axis, away from the interface. X and Y: in the interface plane. Positions are item centres of mass in metres. Synthetic example.'

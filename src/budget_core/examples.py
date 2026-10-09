@@ -1,7 +1,9 @@
-"""The three reference projects. All data is invented; nothing here is a real spacecraft.
+"""The reference projects. All data is invented; nothing here is a real spacecraft.
 
-Every configuration number is a placeholder (`source: TBD`) so the examples exercise the
-Problems list instead of suggesting plausible-looking standards values (spec constraint 15).
+Three examples keep every configuration number a placeholder (`source: TBD`) so they exercise the
+Problems list instead of suggesting plausible-looking standards values (spec constraint 15). The
+fourth, `cubesat_3u_eps`, has invented round values for the power inputs (margins, converters,
+array, battery) so the time-domain budget shows results; its mass inputs are still placeholders.
 """
 
 from __future__ import annotations
@@ -11,7 +13,10 @@ from pathlib import Path
 
 from budget_core.io.project_loader import write_project
 from budget_core.model import (
+    ArrayFace,
     AttenuationTable,
+    Attitude,
+    Battery,
     Bus,
     Ebn0Table,
     Elements,
@@ -25,19 +30,23 @@ from budget_core.model import (
     MaturityClass,
     Orbit,
     PowerConfig,
+    PowerLimits,
     PowerMode,
+    PowerSystem,
     Project,
     ProjectConfig,
     ProjectMeta,
     Scenario,
     ScenarioRule,
     ScenarioSegment,
+    SolarArray,
     Sourced,
     Spacecraft,
     SpacecraftMode,
     Target,
     Unit,
 )
+from budget_core.model.power_system import Pointing
 
 SYNTHETIC = "Synthetic example data; not a real spacecraft."
 CLASSES = ("class_a", "class_b", "class_c")
@@ -47,19 +56,87 @@ def _tbd() -> Sourced:
     return Sourced(value=None, source="TBD", note="Placeholder: supply the project's value.")
 
 
-def _config(buses: list[str]) -> ProjectConfig:
+SYNTH_VALUE = "Synthetic example value; not from a data sheet or a standard."
+
+
+def _val(value: float) -> Sourced:
+    return Sourced(value=value, source=SYNTH_VALUE)
+
+
+def _power_system(
+    filled: bool, phases: list[str], by_mode: dict[str, Pointing] | None = None
+) -> PowerSystem:
+    """Array and battery of the 3U CubeSat example. The design (faces, cell counts, pointing) is
+    always given; the electrical numbers are placeholders unless `filled`, in which case they are
+    invented round values (the project data of an example, not standards values)."""
+
+    def n(value: float) -> Sourced:
+        return _val(value) if filled else _tbd()
+
+    faces = [
+        ArrayFace(name="plus_x", normal_body=[1.0, 0.0, 0.0], strings=2, cells_per_string=3),
+        ArrayFace(name="minus_x", normal_body=[-1.0, 0.0, 0.0], strings=2, cells_per_string=3),
+        ArrayFace(name="plus_y", normal_body=[0.0, 1.0, 0.0], strings=2, cells_per_string=3),
+        ArrayFace(name="minus_y", normal_body=[0.0, -1.0, 0.0], strings=2, cells_per_string=3),
+        ArrayFace(name="minus_z", normal_body=[0.0, 0.0, -1.0], strings=1, cells_per_string=2),
+    ]
+    return PowerSystem(
+        design_life_yr=n(2.0),
+        solar_array=SolarArray(
+            faces=faces,
+            solar_irradiance_wm2=n(1360.0),
+            cell_area_m2=n(0.003),
+            cell_efficiency_ratio=n(0.28),
+            reference_temperature_k=n(301.0),
+            cell_temperature_k=n(318.0),
+            efficiency_temp_coeff_perk=n(-0.0020),
+            packing_loss_ratio=n(0.03),
+            harness_loss_ratio=n(0.02),
+            annual_degradation_ratio=n(0.03),
+        ),
+        battery=Battery(
+            cell_capacity_ah=n(2.6),
+            cell_nominal_voltage_v=n(3.6),
+            cells_in_series=2,
+            cells_in_parallel=2,
+            charge_efficiency_ratio=n(0.95),
+            discharge_efficiency_ratio=n(0.95),
+            annual_capacity_fade_ratio=n(0.04),
+            initial_soc_ratio=n(0.9),
+            max_dod_ratio={p: n(0.3) for p in phases},
+        ),
+        attitude=Attitude(
+            default="sun",
+            by_mode=by_mode or {},
+            sun_direction_body=[1.0, 0.0, 0.0],
+        ),
+        limits=PowerLimits(peak_power_w=n(7.5)),
+    )
+
+
+def _config(
+    buses: list[str], power_system: PowerSystem | None = None, filled_power: bool = False
+) -> ProjectConfig:
+    """Margin policy and power configuration: placeholders, or (for the complete power example)
+    invented round values. Mass numbers and tables stay placeholders in every example."""
+
+    def p(value: float) -> Sourced:
+        return _val(value) if filled_power else _tbd()
+
+    margins = {"class_a": 0.05, "class_b": 0.10, "class_c": 0.20}
     return ProjectConfig(
+        power_system=power_system,
         margin_policy=MarginPolicy(
             classes={
-                c: MaturityClass(power_margin_ratio=_tbd(), mass_margin_ratio=_tbd())
+                c: MaturityClass(power_margin_ratio=p(margins[c]), mass_margin_ratio=_tbd())
                 for c in CLASSES
             },
-            system_power_margin_ratio=_tbd(),
+            system_power_margin_ratio=p(0.10),
             system_mass_margin_ratio=_tbd(),
         ),
         power_config=PowerConfig(
-            distribution_loss_ratio=_tbd(),
-            converter_efficiency_ratio={b: _tbd() for b in buses},
+            distribution_loss_ratio=p(0.03),
+            converter_efficiency_ratio={b: p(0.90) for b in buses},
         ),
         ebn0_table=Ebn0Table(),
         attenuation_table=AttenuationTable(),
@@ -539,7 +616,7 @@ def _cubesat() -> Project:
         ),
         units=units,
         modes=_mode_map(units, CUBESAT_MODES),
-        config=_config(["main"]),
+        config=_config(["main"], _power_system(False, ["launch", "eol"], CUBESAT_POINTING)),
         orbits={"leo": EXAMPLE_ORBIT},
         ground_stations=EXAMPLE_STATIONS,
         targets=EXAMPLE_TARGETS,
@@ -561,6 +638,40 @@ def _cubesat() -> Project:
                 ],
             )
         },
+    )
+
+
+CUBESAT_POINTING: dict[str, Pointing] = {
+    "downlink": "nadir",
+    "imaging": "nadir",
+    "nominal": "nadir",
+}
+
+
+def _cubesat_eps() -> Project:
+    """The 3U CubeSat with complete power inputs (invented values), to show the time-domain
+    budget with results instead of n/a."""
+    base = _cubesat()
+    scenario = base.scenarios["one_day"].model_copy(
+        update={"name": "One day with complete power inputs", "mission_phase": "eol"}
+    )
+    return Project(
+        root=base.root,
+        meta=ProjectMeta(
+            name="Example 3U CubeSat, complete power inputs",
+            revision="1",
+            description=SYNTHETIC + " Array, battery and power configuration have invented values.",
+        ),
+        spacecraft=base.spacecraft,
+        units=base.units,
+        modes=base.modes,
+        config=_config(
+            ["main"], _power_system(True, ["launch", "eol"], CUBESAT_POINTING), filled_power=True
+        ),
+        orbits=base.orbits,
+        ground_stations=base.ground_stations,
+        targets=base.targets,
+        scenarios={"one_day": scenario},
     )
 
 
@@ -590,7 +701,7 @@ def _microsat() -> Project:
         ),
         units=units,
         modes=_mode_map(units, MICROSAT_MODES),
-        config=_config(["main_28v", "payload_12v"]),
+        config=_config(["main_28v", "payload_12v"], _power_system(False, PHASES)),
         expendables={"propellant": propellant},
         orbits={"leo": EXAMPLE_ORBIT},
         ground_stations=EXAMPLE_STATIONS,
@@ -664,7 +775,7 @@ def _stress() -> Project:
         ),
         units=units,
         modes=_mode_map(units, plan),
-        config=_config(["main", "aux"]),
+        config=_config(["main", "aux"], _power_system(False, ["launch", "eol"])),
         orbits={"leo": EXAMPLE_ORBIT},
         ground_stations=EXAMPLE_STATIONS,
         targets=EXAMPLE_TARGETS,
@@ -692,6 +803,7 @@ def _stress() -> Project:
 
 EXAMPLES: dict[str, Callable[[], Project]] = {
     "cubesat_3u": _cubesat,
+    "cubesat_3u_eps": _cubesat_eps,
     "microsat_150kg": _microsat,
     "stress_200_units": _stress,
 }

@@ -123,6 +123,18 @@
       "title": "Kind",
       "type": "string"
     },
+    "mission_phase": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mission Phase"
+    },
     "name": {
       "minLength": 1,
       "title": "Name",
@@ -148,7 +160,7 @@
       "type": "array"
     },
     "schema_version": {
-      "default": 1,
+      "default": 2,
       "title": "Schema Version",
       "type": "integer"
     },

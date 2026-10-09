@@ -16,7 +16,7 @@ def _w(header: str) -> Column:
     return Column(f"{header} (W)", "number", 3, "W")
 
 
-def _summary(result: StaticPowerResult) -> Table:
+def power_summary_table(result: StaticPowerResult) -> Table:
     rows: list[tuple[Cell, ...]] = []
     for m in result.modes:
         a, p = m.average, m.peak
@@ -155,7 +155,7 @@ def build_power_report(
 ) -> ReportDocument:
     used: set[str] = set()
     sections: list[Section] = [
-        Section("Summary", sheet_name("Summary", used), tables=(_summary(result),))
+        Section("Summary", sheet_name("Summary", used), tables=(power_summary_table(result),))
     ]
     for m in result.modes:
         sections.append(

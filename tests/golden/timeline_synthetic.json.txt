@@ -1,0 +1,488 @@
+{
+  "assumptions": [
+    {
+      "file": "config/margin_policy.yaml",
+      "name": "Margin, maturity class m1",
+      "path": "classes.m1.power_margin_ratio",
+      "placeholder": false,
+      "source": "test fixture",
+      "unit": "ratio",
+      "value": 0.1
+    },
+    {
+      "file": "config/margin_policy.yaml",
+      "name": "System margin",
+      "path": "system_power_margin_ratio",
+      "placeholder": false,
+      "source": "test fixture",
+      "unit": "ratio",
+      "value": 0.05
+    },
+    {
+      "file": "config/power_config.yaml",
+      "name": "Distribution loss",
+      "path": "distribution_loss_ratio",
+      "placeholder": false,
+      "source": "test fixture",
+      "unit": "ratio",
+      "value": 0.0
+    },
+    {
+      "file": "config/power_config.yaml",
+      "name": "Converter efficiency, bus main",
+      "path": "converter_efficiency_ratio.main",
+      "placeholder": false,
+      "source": "test fixture",
+      "unit": "ratio",
+      "value": 1.0
+    },
+    {
+      "file": "config/power_system.yaml",
+      "name": "Solar irradiance",
+      "path": "solar_array.solar_irradiance_wm2",
+      "placeholder": false,
+      "source": "test fixture",
+      "unit": "W/m2",
+      "value": 1000.0
+    },
+    {
+      "file": "config/power_system.yaml",
+      "name": "Cell area",
+      "path": "solar_array.cell_area_m2",
+      "placeholder": false,
+      "source": "test fixture",
+      "unit": "m2",
+      "value": 0.0005
+    },
+    {
+      "file": "config/power_system.yaml",
+      "name": "Cell efficiency",
+      "path": "solar_array.cell_efficiency_ratio",
+      "placeholder": false,
+      "source": "test fixture",
+      "unit": "ratio",
+      "value": 0.5
+    },
+    {
+      "file": "config/power_system.yaml",
+      "name": "Reference temperature",
+      "path": "solar_array.reference_temperature_k",
+      "placeholder": false,
+      "source": "test fixture",
+      "unit": "K",
+      "value": 300.0
+    },
+    {
+      "file": "config/power_system.yaml",
+      "name": "Cell temperature",
+      "path": "solar_array.cell_temperature_k",
+      "placeholder": false,
+      "source": "test fixture",
+      "unit": "K",
+      "value": 300.0
+    },
+    {
+      "file": "config/power_system.yaml",
+      "name": "Efficiency temperature coefficient",
+      "path": "solar_array.efficiency_temp_coeff_perk",
+      "placeholder": false,
+      "source": "test fixture",
+      "unit": "1/K",
+      "value": -0.002
+    },
+    {
+      "file": "config/power_system.yaml",
+      "name": "Packing loss",
+      "path": "solar_array.packing_loss_ratio",
+      "placeholder": false,
+      "source": "test fixture",
+      "unit": "ratio",
+      "value": 0.0
+    },
+    {
+      "file": "config/power_system.yaml",
+      "name": "Harness loss",
+      "path": "solar_array.harness_loss_ratio",
+      "placeholder": false,
+      "source": "test fixture",
+      "unit": "ratio",
+      "value": 0.0
+    },
+    {
+      "file": "config/power_system.yaml",
+      "name": "Design life",
+      "path": "design_life_yr",
+      "placeholder": false,
+      "source": "test fixture",
+      "unit": "yr",
+      "value": 5.0
+    },
+    {
+      "file": "config/power_system.yaml",
+      "name": "Battery cell capacity",
+      "path": "battery.cell_capacity_ah",
+      "placeholder": false,
+      "source": "test fixture",
+      "unit": "Ah",
+      "value": 5.0
+    },
+    {
+      "file": "config/power_system.yaml",
+      "name": "Battery cell voltage",
+      "path": "battery.cell_nominal_voltage_v",
+      "placeholder": false,
+      "source": "test fixture",
+      "unit": "V",
+      "value": 4.0
+    },
+    {
+      "file": "config/power_system.yaml",
+      "name": "Battery charge efficiency",
+      "path": "battery.charge_efficiency_ratio",
+      "placeholder": false,
+      "source": "test fixture",
+      "unit": "ratio",
+      "value": 1.0
+    },
+    {
+      "file": "config/power_system.yaml",
+      "name": "Battery discharge efficiency",
+      "path": "battery.discharge_efficiency_ratio",
+      "placeholder": false,
+      "source": "test fixture",
+      "unit": "ratio",
+      "value": 1.0
+    },
+    {
+      "file": "config/power_system.yaml",
+      "name": "Battery annual capacity fade",
+      "path": "battery.annual_capacity_fade_ratio",
+      "placeholder": false,
+      "source": "test fixture",
+      "unit": "ratio",
+      "value": 0.01
+    },
+    {
+      "file": "config/power_system.yaml",
+      "name": "Battery initial state of charge",
+      "path": "battery.initial_soc_ratio",
+      "placeholder": false,
+      "source": "test fixture",
+      "unit": "ratio",
+      "value": 1.0
+    },
+    {
+      "file": "config/power_system.yaml",
+      "name": "Allowed depth of discharge, phase eol",
+      "path": "battery.max_dod_ratio.eol",
+      "placeholder": false,
+      "source": "test fixture",
+      "unit": "ratio",
+      "value": 0.15
+    },
+    {
+      "file": "config/power_system.yaml",
+      "name": "Array annual degradation",
+      "path": "solar_array.annual_degradation_ratio",
+      "placeholder": false,
+      "source": "test fixture",
+      "unit": "ratio",
+      "value": 0.02
+    },
+    {
+      "file": "config/power_system.yaml",
+      "name": "Peak power limit",
+      "path": "limits.peak_power_w",
+      "placeholder": false,
+      "source": "test fixture",
+      "unit": "W",
+      "value": 110.0
+    }
+  ],
+  "cases": {
+    "bol": {
+      "age_years": 0.0,
+      "balances": [
+        {
+          "balance_wh": 20.0,
+          "battery_change_wh": -30.000000000000128,
+          "demand_wh": 96.66666666666667,
+          "eclipse_s": 1800.0,
+          "end_s": 6000.0,
+          "generation_wh": 116.66666666666667,
+          "index": 1,
+          "start_s": 0.0
+        },
+        {
+          "balance_wh": 20.0,
+          "battery_change_wh": 0.0,
+          "demand_wh": 96.66666666666667,
+          "eclipse_s": 1800.0,
+          "end_s": 12000.0,
+          "generation_wh": 116.66666666666667,
+          "index": 2,
+          "start_s": 6000.0
+        }
+      ],
+      "capacity_wh": 100.0,
+      "summary": {
+        "average_demand_w": 58.0,
+        "average_generation_w": 70.0,
+        "curtailed_wh": 69.99999999999946,
+        "demanded_wh": 193.33333333333334,
+        "energy_change_wh": -30.000000000000128,
+        "generated_wh": 233.33333333333334,
+        "maximum_dod_ratio": 0.5000000000000014,
+        "minimum_margin_w": -100.0,
+        "minimum_soc_ratio": 0.49999999999999856,
+        "unmet_wh": 0.0
+      },
+      "violations": [
+        {
+          "case": "bol",
+          "code": "BATTERY_DOD_EXCEEDED",
+          "end_s": 6900.000000000021,
+          "extreme": 0.5000000000000014,
+          "file": "config/power_system.yaml",
+          "limit": 0.15,
+          "path": "battery.max_dod_ratio.eol",
+          "start_offset": "T+00:59:00",
+          "start_s": 3539.999999999998,
+          "unit": "ratio"
+        },
+        {
+          "case": "bol",
+          "code": "BATTERY_DOD_EXCEEDED",
+          "end_s": 12000.0,
+          "extreme": 0.5000000000000014,
+          "file": "config/power_system.yaml",
+          "limit": 0.15,
+          "path": "battery.max_dod_ratio.eol",
+          "start_offset": "T+02:39:00",
+          "start_s": 9539.999999999998,
+          "unit": "ratio"
+        }
+      ]
+    },
+    "eol": {
+      "age_years": 5.0,
+      "balances": [
+        {
+          "balance_wh": 8.790759626666414,
+          "battery_change_wh": -33.202640106666905,
+          "demand_wh": 96.66666666666667,
+          "eclipse_s": 1800.0,
+          "end_s": 6000.0,
+          "generation_wh": 105.45742629333309,
+          "index": 1,
+          "start_s": 0.0
+        },
+        {
+          "balance_wh": 8.790759626666357,
+          "battery_change_wh": 0.0,
+          "demand_wh": 96.66666666666667,
+          "eclipse_s": 1800.0,
+          "end_s": 12000.0,
+          "generation_wh": 105.45742629333303,
+          "index": 2,
+          "start_s": 6000.0
+        }
+      ],
+      "capacity_wh": 95.09900499,
+      "summary": {
+        "average_demand_w": 58.0,
+        "average_generation_w": 63.274455775999996,
+        "curtailed_wh": 50.78415935999957,
+        "demanded_wh": 193.33333333333334,
+        "energy_change_wh": -33.202640106666905,
+        "generated_wh": 210.91485258666665,
+        "maximum_dod_ratio": 0.5257678564066766,
+        "minimum_margin_w": -100.0,
+        "minimum_soc_ratio": 0.4742321435933234,
+        "unmet_wh": 0.0
+      },
+      "violations": [
+        {
+          "case": "eol",
+          "code": "BATTERY_DOD_EXCEEDED",
+          "end_s": 7352.911848892386,
+          "extreme": 0.5257678564066766,
+          "file": "config/power_system.yaml",
+          "limit": 0.15,
+          "path": "battery.max_dod_ratio.eol",
+          "start_offset": "T+00:58:33",
+          "start_s": 3513.5346269459988,
+          "unit": "ratio"
+        },
+        {
+          "case": "eol",
+          "code": "BATTERY_DOD_EXCEEDED",
+          "end_s": 12000.0,
+          "extreme": 0.5257678564066766,
+          "file": "config/power_system.yaml",
+          "limit": 0.15,
+          "path": "battery.max_dod_ratio.eol",
+          "start_offset": "T+02:38:33",
+          "start_s": 9513.534626945999,
+          "unit": "ratio"
+        }
+      ]
+    }
+  },
+  "environment": {
+    "eclipse_fraction": 0.3,
+    "orbits": 2,
+    "shadow_model": "cylindrical",
+    "source": "synthetic"
+  },
+  "grid": {
+    "duration_s": 12000.0,
+    "start_utc": "2026-01-01T00:00:00Z",
+    "step_s": 20.0,
+    "steps": 600
+  },
+  "limits": {
+    "dod_limit_ratio": 0.15,
+    "peak_power_w": 110.0
+  },
+  "load_basis": "nominal",
+  "mission_phase": "eol",
+  "modes": [
+    {
+      "demand_w": 40.0,
+      "duration_s": 8400.0,
+      "load_w": 40.0,
+      "mode_id": "a",
+      "mode_name": "Mode A",
+      "peak_demand_w": 50.0
+    },
+    {
+      "demand_w": 100.0,
+      "duration_s": 3600.0,
+      "load_w": 100.0,
+      "mode_id": "b",
+      "mode_name": "Mode B",
+      "peak_demand_w": 120.0
+    }
+  ],
+  "problems": [
+    {
+      "code": "BATTERY_DOD_EXCEEDED",
+      "file": "config/power_system.yaml",
+      "hint": "Open the violations table for every interval; change the input named here or the scenario.",
+      "line": null,
+      "message": "The battery depth of discharge exceeds the limit of the mission phase. Case BOL. 2 interval(s), the first at T+00:59:00.",
+      "path": "battery.max_dod_ratio.eol",
+      "severity": "error"
+    },
+    {
+      "code": "BATTERY_DOD_EXCEEDED",
+      "file": "config/power_system.yaml",
+      "hint": "Open the violations table for every interval; change the input named here or the scenario.",
+      "line": null,
+      "message": "The battery depth of discharge exceeds the limit of the mission phase. Case EOL. 2 interval(s), the first at T+00:58:33.",
+      "path": "battery.max_dod_ratio.eol",
+      "severity": "error"
+    },
+    {
+      "code": "PEAK_POWER_EXCEEDED",
+      "file": "config/power_system.yaml",
+      "hint": "Open the violations table for every interval; change the input named here or the scenario.",
+      "line": null,
+      "message": "The peak power demand at the source exceeds the power limit. 2 interval(s), the first at T+00:50:00.",
+      "path": "limits.peak_power_w",
+      "severity": "error"
+    }
+  ],
+  "provenance": {
+    "generated": "2026-01-02T03:04:05Z",
+    "libraries": [
+      [
+        "pinned",
+        "for-golden-tests"
+      ]
+    ],
+    "project_name": "Time-domain test",
+    "project_revision": "r1",
+    "python_version": "3.x",
+    "scenario": "synthetic",
+    "tool": "System Budget Studio",
+    "tool_version": "0.1.0",
+    "user": "Golden User"
+  },
+  "scenario": "synthetic",
+  "violations": [
+    {
+      "case": null,
+      "code": "PEAK_POWER_EXCEEDED",
+      "end_s": 4800.0,
+      "extreme": 120.0,
+      "file": "config/power_system.yaml",
+      "limit": 110.0,
+      "path": "limits.peak_power_w",
+      "start_offset": "T+00:50:00",
+      "start_s": 3000.0,
+      "unit": "W"
+    },
+    {
+      "case": "eol",
+      "code": "BATTERY_DOD_EXCEEDED",
+      "end_s": 7352.911848892386,
+      "extreme": 0.5257678564066766,
+      "file": "config/power_system.yaml",
+      "limit": 0.15,
+      "path": "battery.max_dod_ratio.eol",
+      "start_offset": "T+00:58:33",
+      "start_s": 3513.5346269459988,
+      "unit": "ratio"
+    },
+    {
+      "case": "bol",
+      "code": "BATTERY_DOD_EXCEEDED",
+      "end_s": 6900.000000000021,
+      "extreme": 0.5000000000000014,
+      "file": "config/power_system.yaml",
+      "limit": 0.15,
+      "path": "battery.max_dod_ratio.eol",
+      "start_offset": "T+00:59:00",
+      "start_s": 3539.999999999998,
+      "unit": "ratio"
+    },
+    {
+      "case": null,
+      "code": "PEAK_POWER_EXCEEDED",
+      "end_s": 10800.0,
+      "extreme": 120.0,
+      "file": "config/power_system.yaml",
+      "limit": 110.0,
+      "path": "limits.peak_power_w",
+      "start_offset": "T+02:30:00",
+      "start_s": 9000.0,
+      "unit": "W"
+    },
+    {
+      "case": "eol",
+      "code": "BATTERY_DOD_EXCEEDED",
+      "end_s": 12000.0,
+      "extreme": 0.5257678564066766,
+      "file": "config/power_system.yaml",
+      "limit": 0.15,
+      "path": "battery.max_dod_ratio.eol",
+      "start_offset": "T+02:38:33",
+      "start_s": 9513.534626945999,
+      "unit": "ratio"
+    },
+    {
+      "case": "bol",
+      "code": "BATTERY_DOD_EXCEEDED",
+      "end_s": 12000.0,
+      "extreme": 0.5000000000000014,
+      "file": "config/power_system.yaml",
+      "limit": 0.15,
+      "path": "battery.max_dod_ratio.eol",
+      "start_offset": "T+02:39:00",
+      "start_s": 9539.999999999998,
+      "unit": "ratio"
+    }
+  ]
+}

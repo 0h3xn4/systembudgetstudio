@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from collections.abc import Collection
+from dataclasses import replace
 from pathlib import Path
 
 from PySide6.QtCore import Qt, Signal
@@ -16,9 +17,12 @@ from PySide6.QtWidgets import (
 )
 
 from budget_core import APP_NAME, __version__
+from budget_core.problems import sort_problems
 from budget_core.reports.run import REPORT_KINDS
 from budget_gui.editor import EditorTabs
+from budget_gui.scenario_view import ScenarioView
 from budget_gui.session import ProjectSession
+from budget_gui.timeline_view import PowerTimelineView
 from budget_gui.unit_editor import UnitEditor
 from budget_gui.widgets import PowerView, ProblemsPanel, ProjectTree
 from budget_gui.worker import ExportWorker
@@ -40,6 +44,12 @@ class MainWindow(QMainWindow):
         self.editors = EditorTabs()
         self.editors.add_fixed(self.power_view, "Power budget")
         self.editors.add_fixed(self.mass_view, "Mass budget")
+        self.scenario_view = ScenarioView()
+        self.editors.add_fixed(self.scenario_view, "Scenario")
+        self.editors.register_modifiable(self.scenario_view.editor)
+        self.timeline_view = PowerTimelineView()
+        self.timeline_view.run_provider = self.scenario_view.reusable_run
+        self.editors.add_fixed(self.timeline_view, "Power timeline")
         self.setCentralWidget(self.editors)
         self._worker: ExportWorker | None = None
 
@@ -54,9 +64,12 @@ class MainWindow(QMainWindow):
 
         self._build_menu()
         self.session.changed.connect(self._refresh)
+        self.scenario_view.editor.saved.connect(self.session.reload)
         self.tree.file_requested.connect(lambda rel: self.open_file(rel))
         self.tree.unit_requested.connect(lambda unit_id: self.open_unit_editor(unit_id))
         self.problems_panel.jump_requested.connect(lambda rel, line: self.open_file(rel, line))
+        self.timeline_view.computed.connect(lambda _result: self._update_problems())
+        self.timeline_view.jump_requested.connect(self.jump_to_input)
 
     # ---- actions -----------------------------------------------------------------------------
     def _build_menu(self) -> None:
@@ -74,6 +87,7 @@ class MainWindow(QMainWindow):
         file_menu.addSeparator()
         add("Edit unit &power modes\u2026", QKeySequence("Ctrl+M"), self._edit_selected_unit)
         add("&Export reports…", QKeySequence("Ctrl+E"), self._choose_export)
+        add("Export power &timeline…", QKeySequence("Ctrl+Shift+E"), self._choose_timeline_export)
         file_menu.addSeparator()
         add("&Quit", QKeySequence.StandardKey.Quit, self.close)
 
@@ -81,6 +95,24 @@ class MainWindow(QMainWindow):
         folder = QFileDialog.getExistingDirectory(self, "Open project folder")
         if folder:
             self.open_project(Path(folder))
+
+    def _choose_scenario_export(self) -> None:
+        if self.scenario_view.last_run is None:
+            QMessageBox.information(self, APP_NAME, "Compute a scenario first (Ctrl+R).")
+            return
+        folder = QFileDialog.getExistingDirectory(self, "Export scenario results to folder")
+        if folder:
+            self.scenario_view.export_to(Path(folder))
+
+    def _choose_timeline_export(self) -> None:
+        if self.timeline_view.result is None:
+            QMessageBox.information(
+                self, APP_NAME, "Compute the power timeline first (Power timeline tab)."
+            )
+            return
+        folder = QFileDialog.getExistingDirectory(self, "Export power timeline to folder")
+        if folder:
+            self.timeline_view.export_to(Path(folder), set(REPORT_KINDS))
 
     def _edit_selected_unit(self) -> None:
         unit_id = self.tree.current_unit_id()
@@ -108,6 +140,16 @@ class MainWindow(QMainWindow):
         if self.session.path is None or not (self.session.path / rel).is_file():
             return
         self.editors.open_file(self.session.path, rel, line)
+
+    def _line_of(self, rel: str, path: str) -> int | None:
+        lines = self.session.load_result.lines.get(rel) if self.session.load_result else None
+        if lines is None:
+            return None
+        return lines.lookup(tuple(p for p in path.split(".") if p))
+
+    def jump_to_input(self, rel: str, path: str) -> None:
+        """Open the file that governs a finding at the line of the named field."""
+        self.open_file(rel, self._line_of(rel, path))
 
     def open_unit_editor(self, unit_id: str) -> UnitEditor | None:
         """Open (or focus) the power-mode table editor of a unit of the loaded project."""
@@ -152,13 +194,36 @@ class MainWindow(QMainWindow):
         session = self.session
         project = session.project
         self.tree.set_project(session.path, project)
-        self.problems_panel.set_problems(session.problems)
         self.power_view.set_document(session.document)
         self.mass_view.set_document(session.mass_document)
+        self.scenario_view.set_project(project)
+        load_problems = session.load_result.problems if session.load_result else []
+        self.timeline_view.set_project(project, load_problems)
+        self._update_problems()
         self.editors.reload_clean_files()
         name = project.meta.name if project else (session.path.name if session.path else "")
         self.setWindowTitle(f"{name} — {APP_NAME}" if name else APP_NAME)
         self.statusBar().showMessage(f"{name}: {self.problems_panel.summary.text()}")
+
+    def _update_problems(self) -> None:
+        """Project problems plus the findings of the last power timeline (violations, gaps), each
+        with the line of its input so the panel can jump to it."""
+        known = {(p.code, p.file, p.path, p.message) for p in self.session.problems}
+        extra = [
+            p
+            for p in self.timeline_view.problems()
+            if (p.code, p.file, p.path, p.message) not in known
+        ]
+        located = [
+            replace(p, line=self._line_of(p.file, p.path))
+            if p.line is None and p.file and p.path
+            else p
+            for p in [*self.session.problems, *extra]
+        ]
+        self.problems_panel.set_problems(sort_problems(located))
+        if self.session.project is not None:
+            name = self.session.project.meta.name
+            self.statusBar().showMessage(f"{name}: {self.problems_panel.summary.text()}")
 
     # ---- export ------------------------------------------------------------------------------
     def export_to(self, folder: Path, kinds: Collection[str]) -> None:
@@ -185,6 +250,8 @@ class MainWindow(QMainWindow):
     def closeEvent(self, event: QCloseEvent) -> None:  # noqa: N802 (Qt naming)
         if self._worker is not None and self._worker.isRunning():
             self._worker.wait(10000)
+        self.scenario_view.wait_for_worker()
+        self.timeline_view.wait_for_worker()
         if self.editors.has_unsaved_changes():
             answer = QMessageBox.question(
                 self,

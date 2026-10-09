@@ -1,0 +1,252 @@
+pictures=0
+Mass budget (static): Example 150 kg microsatellite
+INCOMPLETE: some inputs are placeholders (source TBD or missing). Entries marked n/a depend on them and are not computed. Do not use this report as evidence until the placeholders are replaced with sourced values.
+Summary
+Body frame: Right-handed body frame. Origin: centre of the launch-vehicle interface plane. +Z: along the launch axis, away from the interface. X and Y: in the interface plane. Positions are item centres of mass in metres. Synthetic example.
+Mass and centre of gravity by mission phase
+## table
+Phase | Total (kg) | With unit margins (kg) | With system margin (kg) | CG x (m) | CG y (m) | CG z (m) | CG coverage
+launch | 152.600 | n/a | n/a | -0.0235 | 0.0125 | 0.4565 | 100.0 %
+bol | 149.600 | n/a | n/a | -0.0240 | 0.0127 | 0.4650 | 100.0 %
+eol | 141.900 | n/a | n/a | -0.0253 | 0.0134 | 0.4713 | 100.0 %
+CG and inertia use nominal masses of items with a position; coverage is their share of the nominal total.
+Mass limits (checked against the system-margined total)
+## table
+Phase | Limit | Limit value (kg) | Total (kg) | Margin (kg) | Status
+launch | Launch mass | n/a | n/a | n/a | n/a
+Phase: launch
+Items
+## table
+Item | Name | Kind | Subsystem | Maturity | Mass (kg) | Margin | With margin (kg) | x (m) | y (m) | z (m) | Own inertia
+adapter | Separation adapter | unit | STRUCT | class_a | 2.500 | n/a | n/a | 0.0000 | 0.0000 | -0.0300 | yes
+battery | Battery pack | unit | EPS | class_b | 18.000 | n/a | n/a | -0.1500 | 0.1000 | 0.2000 | yes
+camera | Imager | unit | PL | class_c | 7.500 | n/a | n/a | 0.0000 | 0.0000 | 0.8500 | yes
+gnss | GNSS receiver | unit | AOCS | class_b | 0.400 | n/a | n/a | -0.3000 | -0.2500 | 0.9500 | no
+heaters | Thermal heaters | unit | THERM | class_a | 0.600 | n/a | n/a | 0.0000 | 0.0000 | 0.5000 | no
+magnetorquers | Magnetorquers | unit | AOCS | class_b | 1.500 | n/a | n/a | 0.0000 | 0.0000 | 0.6000 | yes
+obc_a | OBC A | unit | DH | class_a | 1.200 | n/a | n/a | 0.2000 | 0.1000 | 0.4000 | yes
+obc_b | OBC B (cold redundant) | unit | DH | class_a | 1.200 | n/a | n/a | 0.2000 | -0.1000 | 0.4000 | yes
+pcdu | Power conditioning unit | unit | EPS | class_a | 4.500 | n/a | n/a | -0.2000 | 0.0000 | 0.3500 | yes
+pdu_data | Payload data unit | unit | PL-DATA | class_c | 2.200 | n/a | n/a | -0.2000 | -0.1500 | 0.5000 | yes
+reaction_wheels | Reaction wheels | unit | AOCS | class_b | 6.000 | n/a | n/a | 0.0000 | 0.0000 | 0.3000 | yes
+sband_trx | S-band transceiver | unit | TTC | class_b | 1.100 | n/a | n/a | 0.2000 | 0.0000 | 0.5500 | yes
+solar_array | Solar array panels | unit | EPS | class_b | 14.000 | n/a | n/a | 0.0000 | 0.0000 | 0.5000 | yes
+star_tracker | Star tracker | unit | AOCS | class_b | 0.900 | n/a | n/a | 0.3000 | 0.2500 | 0.9000 | yes
+structure | Primary structure | unit | STRUCT | class_a | 80.000 | n/a | n/a | 0.0000 | 0.0000 | 0.5000 | yes
+sun_sensors | Coarse sun sensors | unit | AOCS | class_a | 0.200 | n/a | n/a | 0.2500 | -0.2500 | 0.9800 | no
+xband_tx | X-band transmitter | unit | PL-DATA | class_c | 1.800 | n/a | n/a | -0.2500 | 0.2000 | 0.5500 | yes
+propellant | Propellant | expendable | PROP | class_c | 9.000 | n/a | n/a | 0.0000 | 0.0000 | 0.3500 | no
+By subsystem
+## table
+Subsystem | Mass (kg) | With margin (kg)
+AOCS | 9.000 | n/a
+DH | 2.400 | n/a
+EPS | 36.500 | n/a
+PL | 7.500 | n/a
+PL-DATA | 4.000 | n/a
+PROP | 9.000 | n/a
+STRUCT | 82.500 | n/a
+THERM | 0.600 | n/a
+TTC | 1.100 | n/a
+Totals and centre of gravity
+## table
+Quantity | Value
+Total, nominal | 152.6000
+Total, with unit margins | n/a
+Total, with system margin | n/a
+Centre of gravity x (m) | -0.0235
+Centre of gravity y (m) | 0.0125
+Centre of gravity z (m) | 0.4565
+Mass in the CG calculation (kg) | 152.6000
+Inertia tensor
+## table
+Entry | About CG (kg m2) | About origin (kg m2)
+Ixx | 16.54283 | 48.37101
+Iyy | 19.45512 | 51.34398
+Izz | 14.60382 | 14.71206
+Ixy | 0.16418 | 0.20900
+Ixz | -0.80743 | 0.83150
+Iyz | 0.41818 | -0.45150
+Tensor entries in the body frame; Ixy, Ixz, Iyz are tensor elements (minus the products of inertia), see docs/DECISIONS.md D-048.
+Phase: bol
+Items
+## table
+Item | Name | Kind | Subsystem | Maturity | Mass (kg) | Margin | With margin (kg) | x (m) | y (m) | z (m) | Own inertia
+battery | Battery pack | unit | EPS | class_b | 18.000 | n/a | n/a | -0.1500 | 0.1000 | 0.2000 | yes
+camera | Imager | unit | PL | class_c | 7.500 | n/a | n/a | 0.0000 | 0.0000 | 0.8500 | yes
+gnss | GNSS receiver | unit | AOCS | class_b | 0.400 | n/a | n/a | -0.3000 | -0.2500 | 0.9500 | no
+heaters | Thermal heaters | unit | THERM | class_a | 0.600 | n/a | n/a | 0.0000 | 0.0000 | 0.5000 | no
+magnetorquers | Magnetorquers | unit | AOCS | class_b | 1.500 | n/a | n/a | 0.0000 | 0.0000 | 0.6000 | yes
+obc_a | OBC A | unit | DH | class_a | 1.200 | n/a | n/a | 0.2000 | 0.1000 | 0.4000 | yes
+obc_b | OBC B (cold redundant) | unit | DH | class_a | 1.200 | n/a | n/a | 0.2000 | -0.1000 | 0.4000 | yes
+pcdu | Power conditioning unit | unit | EPS | class_a | 4.500 | n/a | n/a | -0.2000 | 0.0000 | 0.3500 | yes
+pdu_data | Payload data unit | unit | PL-DATA | class_c | 2.200 | n/a | n/a | -0.2000 | -0.1500 | 0.5000 | yes
+reaction_wheels | Reaction wheels | unit | AOCS | class_b | 6.000 | n/a | n/a | 0.0000 | 0.0000 | 0.3000 | yes
+sband_trx | S-band transceiver | unit | TTC | class_b | 1.100 | n/a | n/a | 0.2000 | 0.0000 | 0.5500 | yes
+solar_array | Solar array panels | unit | EPS | class_b | 14.000 | n/a | n/a | 0.0000 | 0.0000 | 0.5000 | yes
+star_tracker | Star tracker | unit | AOCS | class_b | 0.900 | n/a | n/a | 0.3000 | 0.2500 | 0.9000 | yes
+structure | Primary structure | unit | STRUCT | class_a | 80.000 | n/a | n/a | 0.0000 | 0.0000 | 0.5000 | yes
+sun_sensors | Coarse sun sensors | unit | AOCS | class_a | 0.200 | n/a | n/a | 0.2500 | -0.2500 | 0.9800 | no
+xband_tx | X-band transmitter | unit | PL-DATA | class_c | 1.800 | n/a | n/a | -0.2500 | 0.2000 | 0.5500 | yes
+propellant | Propellant | expendable | PROP | class_c | 8.500 | n/a | n/a | 0.0000 | 0.0000 | 0.3500 | no
+By subsystem
+## table
+Subsystem | Mass (kg) | With margin (kg)
+AOCS | 9.000 | n/a
+DH | 2.400 | n/a
+EPS | 36.500 | n/a
+PL | 7.500 | n/a
+PL-DATA | 4.000 | n/a
+PROP | 8.500 | n/a
+STRUCT | 80.000 | n/a
+THERM | 0.600 | n/a
+TTC | 1.100 | n/a
+Totals and centre of gravity
+## table
+Quantity | Value
+Total, nominal | 149.6000
+Total, with unit margins | n/a
+Total, with system margin | n/a
+Centre of gravity x (m) | -0.0240
+Centre of gravity y (m) | 0.0127
+Centre of gravity z (m) | 0.4650
+Mass in the CG calculation (kg) | 149.6000
+Inertia tensor
+## table
+Entry | About CG (kg m2) | About origin (kg m2)
+Ixx | 15.76464 | 48.13801
+Iyy | 18.67571 | 51.11098
+Izz | 14.26415 | 14.37456
+Ixy | 0.16329 | 0.20900
+Ixz | -0.83790 | 0.83150
+Iyz | 0.43435 | -0.45150
+Tensor entries in the body frame; Ixy, Ixz, Iyz are tensor elements (minus the products of inertia), see docs/DECISIONS.md D-048.
+Phase: eol
+Items
+## table
+Item | Name | Kind | Subsystem | Maturity | Mass (kg) | Margin | With margin (kg) | x (m) | y (m) | z (m) | Own inertia
+battery | Battery pack | unit | EPS | class_b | 18.000 | n/a | n/a | -0.1500 | 0.1000 | 0.2000 | yes
+camera | Imager | unit | PL | class_c | 7.500 | n/a | n/a | 0.0000 | 0.0000 | 0.8500 | yes
+gnss | GNSS receiver | unit | AOCS | class_b | 0.400 | n/a | n/a | -0.3000 | -0.2500 | 0.9500 | no
+heaters | Thermal heaters | unit | THERM | class_a | 0.600 | n/a | n/a | 0.0000 | 0.0000 | 0.5000 | no
+magnetorquers | Magnetorquers | unit | AOCS | class_b | 1.500 | n/a | n/a | 0.0000 | 0.0000 | 0.6000 | yes
+obc_a | OBC A | unit | DH | class_a | 1.200 | n/a | n/a | 0.2000 | 0.1000 | 0.4000 | yes
+obc_b | OBC B (cold redundant) | unit | DH | class_a | 1.200 | n/a | n/a | 0.2000 | -0.1000 | 0.4000 | yes
+pcdu | Power conditioning unit | unit | EPS | class_a | 4.500 | n/a | n/a | -0.2000 | 0.0000 | 0.3500 | yes
+pdu_data | Payload data unit | unit | PL-DATA | class_c | 2.200 | n/a | n/a | -0.2000 | -0.1500 | 0.5000 | yes
+reaction_wheels | Reaction wheels | unit | AOCS | class_b | 6.000 | n/a | n/a | 0.0000 | 0.0000 | 0.3000 | yes
+sband_trx | S-band transceiver | unit | TTC | class_b | 1.100 | n/a | n/a | 0.2000 | 0.0000 | 0.5500 | yes
+solar_array | Solar array panels | unit | EPS | class_b | 14.000 | n/a | n/a | 0.0000 | 0.0000 | 0.5000 | yes
+star_tracker | Star tracker | unit | AOCS | class_b | 0.900 | n/a | n/a | 0.3000 | 0.2500 | 0.9000 | yes
+structure | Primary structure | unit | STRUCT | class_a | 80.000 | n/a | n/a | 0.0000 | 0.0000 | 0.5000 | yes
+sun_sensors | Coarse sun sensors | unit | AOCS | class_a | 0.200 | n/a | n/a | 0.2500 | -0.2500 | 0.9800 | no
+xband_tx | X-band transmitter | unit | PL-DATA | class_c | 1.800 | n/a | n/a | -0.2500 | 0.2000 | 0.5500 | yes
+propellant | Propellant | expendable | PROP | class_c | 0.800 | n/a | n/a | 0.0000 | 0.0000 | 0.3500 | no
+By subsystem
+## table
+Subsystem | Mass (kg) | With margin (kg)
+AOCS | 9.000 | n/a
+DH | 2.400 | n/a
+EPS | 36.500 | n/a
+PL | 7.500 | n/a
+PL-DATA | 4.000 | n/a
+PROP | 0.800 | n/a
+STRUCT | 80.000 | n/a
+THERM | 0.600 | n/a
+TTC | 1.100 | n/a
+Totals and centre of gravity
+## table
+Quantity | Value
+Total, nominal | 141.9000
+Total, with unit margins | n/a
+Total, with system margin | n/a
+Centre of gravity x (m) | -0.0253
+Centre of gravity y (m) | 0.0134
+Centre of gravity z (m) | 0.4713
+Mass in the CG calculation (kg) | 141.9000
+Inertia tensor
+## table
+Entry | About CG (kg m2) | About origin (kg m2)
+Ixx | 15.65594 | 47.19476
+Iyy | 18.56365 | 50.16773
+Izz | 14.25816 | 14.37456
+Ixy | 0.16080 | 0.20900
+Ixz | -0.86030 | 0.83150
+Iyz | 0.44624 | -0.45150
+Tensor entries in the body frame; Ixy, Ixz, Iyz are tensor elements (minus the products of inertia), see docs/DECISIONS.md D-048.
+Assumptions
+Configuration numbers used
+## table
+Name | Value | Unit | Source | Status
+Mass margin, maturity class class_a | n/a | ratio | TBD | PLACEHOLDER
+Mass margin, maturity class class_b | n/a | ratio | TBD | PLACEHOLDER
+Mass margin, maturity class class_c | n/a | ratio | TBD | PLACEHOLDER
+System mass margin | n/a | ratio | TBD | PLACEHOLDER
+Mass limit, Launch mass | n/a | kg | TBD | PLACEHOLDER
+Equations
+## table
+ID | Name | Formula | Source
+MASS-MARGIN | Item mass with maturity margin | m_m = m * (1 + mass_margin_ratio(maturity)) | SOURCE_MISSING
+MASS-SYSMARGIN | System mass margin on the margined total | m_sys = (sum m_m) * (1 + system_mass_margin_ratio) | SOURCE_MISSING
+MASS-COG | Centre of gravity | r_cg = sum(m_i r_i) / sum(m_i), nominal masses of items with a position | SOURCE_MISSING
+MASS-PARALLEL | Parallel-axis (Huygens-Steiner) theorem | I = sum(I_i + m_i (|d_i|^2 E - d_i d_i^T)), d_i = r_i - r_ref | SOURCE_MISSING
+SOURCE_MISSING: the formula is a project convention or textbook definition whose reference text is not available to the tool yet (see docs/DECISIONS.md).
+Problems
+Problems and open items
+## table
+Severity | Code | Location | Message
+warning | CONFIG_EMPTY_TABLE | config/attenuation_table.yaml:3 | The table has no entries.
+warning | CONFIG_EMPTY_TABLE | config/ebn0_table.yaml:3 | The table has no entries.
+warning | RESULT_INCOMPLETE | config/margin_policy.yaml | The mass margin of maturity class 'class_a' is a placeholder.
+warning | RESULT_INCOMPLETE | config/margin_policy.yaml | The mass margin of maturity class 'class_b' is a placeholder.
+warning | RESULT_INCOMPLETE | config/margin_policy.yaml | The mass margin of maturity class 'class_c' is a placeholder.
+warning | RESULT_INCOMPLETE | config/margin_policy.yaml | The system mass margin is a placeholder.
+warning | CONFIG_PLACEHOLDER | config/margin_policy.yaml:6 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/margin_policy.yaml:10 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/margin_policy.yaml:15 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/margin_policy.yaml:19 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/margin_policy.yaml:24 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/margin_policy.yaml:28 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/margin_policy.yaml:32 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/margin_policy.yaml:36 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | RESULT_INCOMPLETE | config/mass_limits.yaml | The mass limit 'Launch mass' is a placeholder.
+warning | CONFIG_PLACEHOLDER | config/mass_limits.yaml:7 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/power_config.yaml:4 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/power_config.yaml:9 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/power_config.yaml:13 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/power_system.yaml:4 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/power_system.yaml:45 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/power_system.yaml:49 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/power_system.yaml:53 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/power_system.yaml:57 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/power_system.yaml:61 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/power_system.yaml:65 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/power_system.yaml:69 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/power_system.yaml:73 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/power_system.yaml:77 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/power_system.yaml:82 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/power_system.yaml:86 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/power_system.yaml:92 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/power_system.yaml:96 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/power_system.yaml:100 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/power_system.yaml:104 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/power_system.yaml:109 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/power_system.yaml:113 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/power_system.yaml:117 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/power_system.yaml:129 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+info | MASS_INERTIA_POINT_MASS | expendables/propellant.yaml | 'propellant' has no own inertia; it is treated as a point mass.
+info | MASS_INERTIA_POINT_MASS | units/gnss.yaml | 'gnss' has no own inertia; it is treated as a point mass.
+info | MASS_INERTIA_POINT_MASS | units/heaters.yaml | 'heaters' has no own inertia; it is treated as a point mass.
+info | MASS_INERTIA_POINT_MASS | units/sun_sensors.yaml | 'sun_sensors' has no own inertia; it is treated as a point mass.
+Provenance
+Provenance
+## table
+Item | Value
+Tool | System Budget Studio 0.1.0
+Python | 3.x
+Libraries | pinned for-golden-tests
+Project | Example 150 kg microsatellite
+Project revision | 1
+Scenario | static (no scenario)
+Generated (UTC) | 2026-01-02T03:04:05Z
+User | Golden User

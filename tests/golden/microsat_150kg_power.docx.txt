@@ -1,0 +1,315 @@
+pictures=0
+Power budget (static): Example 150 kg microsatellite
+INCOMPLETE: some inputs are placeholders (source TBD or missing). Entries marked n/a depend on them and are not computed. Do not use this report as evidence until the placeholders are replaced with sourced values.
+Summary
+Power by spacecraft mode
+## table
+Mode | Average load (W) | Average, unit margins (W) | Average, system margin (W) | Average at source (W) | Average at source, with margins (W) | Peak load (W) | Peak at source, with margins (W)
+Downlink | 74.900 | n/a | n/a | n/a | n/a | 149.300 | n/a
+Imaging | 70.100 | n/a | n/a | n/a | n/a | 136.300 | n/a
+Nominal | 35.800 | n/a | n/a | n/a | n/a | 86.300 | n/a
+Safe | 17.550 | n/a | n/a | n/a | n/a | 48.500 | n/a
+Survival | 19.750 | n/a | n/a | n/a | n/a | 32.500 | n/a
+Average = sum of unit power x duty cycle. Peak = sum of unit peak powers. Source = after converter and distribution losses.
+Mode: Downlink
+Units in mode Downlink
+## table
+Unit | Name | Subsystem | Bus | Power mode | Average (W) | Duty | Effective (W) | Margin | With margin (W) | Peak (W)
+adapter | Separation adapter | STRUCT | main_28v | off | 0.000 | 1.00 | 0.000 | n/a | n/a | 0.000
+battery | Battery pack | EPS | main_28v | off | 0.000 | 1.00 | 0.000 | n/a | n/a | 0.000
+camera | Imager | PL | payload_12v | off | 0.000 | 1.00 | 0.000 | n/a | n/a | 0.000
+gnss | GNSS receiver | AOCS | main_28v | downlink | 1.200 | 1.00 | 1.200 | n/a | n/a | 1.800
+heaters | Thermal heaters | THERM | main_28v | downlink | 6.000 | 0.30 | 1.800 | n/a | n/a | 16.000
+magnetorquers | Magnetorquers | AOCS | main_28v | off | 0.000 | 1.00 | 0.000 | n/a | n/a | 0.000
+obc_a | OBC A | DH | main_28v | downlink | 7.000 | 1.00 | 7.000 | n/a | n/a | 10.000
+obc_b | OBC B (cold redundant) | DH | main_28v | off | 0.000 | 1.00 | 0.000 | n/a | n/a | 0.000
+pcdu | Power conditioning unit | EPS | main_28v | downlink | 9.000 | 1.00 | 9.000 | n/a | n/a | 12.000
+pdu_data | Payload data unit | PL-DATA | payload_12v | downlink | 10.000 | 1.00 | 10.000 | n/a | n/a | 14.000
+reaction_wheels | Reaction wheels | AOCS | main_28v | downlink | 12.000 | 0.60 | 7.200 | n/a | n/a | 30.000
+sband_trx | S-band transceiver | TTC | main_28v | downlink | 12.000 | 0.80 | 9.600 | n/a | n/a | 20.000
+solar_array | Solar array panels | EPS | main_28v | off | 0.000 | 1.00 | 0.000 | n/a | n/a | 0.000
+star_tracker | Star tracker | AOCS | main_28v | downlink | 3.500 | 1.00 | 3.500 | n/a | n/a | 5.000
+structure | Primary structure | STRUCT | main_28v | off | 0.000 | 1.00 | 0.000 | n/a | n/a | 0.000
+sun_sensors | Coarse sun sensors | AOCS | main_28v | downlink | 0.400 | 1.00 | 0.400 | n/a | n/a | 0.500
+xband_tx | X-band transmitter | PL-DATA | payload_12v | downlink | 28.000 | 0.90 | 25.200 | n/a | n/a | 40.000
+By subsystem
+## table
+Subsystem | Effective (W) | With margin (W) | Peak (W) | Peak with margin (W)
+AOCS | 12.300 | n/a | 37.300 | n/a
+DH | 7.000 | n/a | 10.000 | n/a
+EPS | 9.000 | n/a | 12.000 | n/a
+PL | 0.000 | n/a | 0.000 | n/a
+PL-DATA | 35.200 | n/a | 54.000 | n/a
+STRUCT | 0.000 | n/a | 0.000 | n/a
+THERM | 1.800 | n/a | 16.000 | n/a
+TTC | 9.600 | n/a | 20.000 | n/a
+By supply bus
+## table
+Bus | Converter efficiency | Average load (W) | Average load, with margins (W) | Average at source (W) | Average at source, with margins (W) | Peak load (W) | Peak at source, with margins (W)
+main_28v | n/a | 39.700 | n/a | n/a | n/a | 95.300 | n/a
+payload_12v | n/a | 35.200 | n/a | n/a | n/a | 54.000 | n/a
+Totals
+## table
+Quantity | Average (W) | Peak (W)
+Load, nominal | 74.900 | 149.300
+Load, with unit margins | n/a | n/a
+Load, with system margin | n/a | n/a
+Source, nominal | n/a | n/a
+Source, with margins | n/a | n/a
+Mode: Imaging
+Units in mode Imaging
+## table
+Unit | Name | Subsystem | Bus | Power mode | Average (W) | Duty | Effective (W) | Margin | With margin (W) | Peak (W)
+adapter | Separation adapter | STRUCT | main_28v | off | 0.000 | 1.00 | 0.000 | n/a | n/a | 0.000
+battery | Battery pack | EPS | main_28v | off | 0.000 | 1.00 | 0.000 | n/a | n/a | 0.000
+camera | Imager | PL | payload_12v | imaging | 22.000 | 0.80 | 17.600 | n/a | n/a | 30.000
+gnss | GNSS receiver | AOCS | main_28v | imaging | 1.200 | 1.00 | 1.200 | n/a | n/a | 1.800
+heaters | Thermal heaters | THERM | main_28v | imaging | 6.000 | 0.30 | 1.800 | n/a | n/a | 16.000
+magnetorquers | Magnetorquers | AOCS | main_28v | off | 0.000 | 1.00 | 0.000 | n/a | n/a | 0.000
+obc_a | OBC A | DH | main_28v | imaging | 7.500 | 1.00 | 7.500 | n/a | n/a | 10.000
+obc_b | OBC B (cold redundant) | DH | main_28v | off | 0.000 | 1.00 | 0.000 | n/a | n/a | 0.000
+pcdu | Power conditioning unit | EPS | main_28v | imaging | 9.000 | 1.00 | 9.000 | n/a | n/a | 12.000
+pdu_data | Payload data unit | PL-DATA | payload_12v | imaging | 14.000 | 1.00 | 14.000 | n/a | n/a | 18.000
+reaction_wheels | Reaction wheels | AOCS | main_28v | imaging | 18.000 | 0.70 | 12.600 | n/a | n/a | 40.000
+sband_trx | S-band transceiver | TTC | main_28v | imaging | 2.500 | 1.00 | 2.500 | n/a | n/a | 3.000
+solar_array | Solar array panels | EPS | main_28v | off | 0.000 | 1.00 | 0.000 | n/a | n/a | 0.000
+star_tracker | Star tracker | AOCS | main_28v | imaging | 3.500 | 1.00 | 3.500 | n/a | n/a | 5.000
+structure | Primary structure | STRUCT | main_28v | off | 0.000 | 1.00 | 0.000 | n/a | n/a | 0.000
+sun_sensors | Coarse sun sensors | AOCS | main_28v | imaging | 0.400 | 1.00 | 0.400 | n/a | n/a | 0.500
+xband_tx | X-band transmitter | PL-DATA | payload_12v | off | 0.000 | 1.00 | 0.000 | n/a | n/a | 0.000
+By subsystem
+## table
+Subsystem | Effective (W) | With margin (W) | Peak (W) | Peak with margin (W)
+AOCS | 17.700 | n/a | 47.300 | n/a
+DH | 7.500 | n/a | 10.000 | n/a
+EPS | 9.000 | n/a | 12.000 | n/a
+PL | 17.600 | n/a | 30.000 | n/a
+PL-DATA | 14.000 | n/a | 18.000 | n/a
+STRUCT | 0.000 | n/a | 0.000 | n/a
+THERM | 1.800 | n/a | 16.000 | n/a
+TTC | 2.500 | n/a | 3.000 | n/a
+By supply bus
+## table
+Bus | Converter efficiency | Average load (W) | Average load, with margins (W) | Average at source (W) | Average at source, with margins (W) | Peak load (W) | Peak at source, with margins (W)
+main_28v | n/a | 38.500 | n/a | n/a | n/a | 88.300 | n/a
+payload_12v | n/a | 31.600 | n/a | n/a | n/a | 48.000 | n/a
+Totals
+## table
+Quantity | Average (W) | Peak (W)
+Load, nominal | 70.100 | 136.300
+Load, with unit margins | n/a | n/a
+Load, with system margin | n/a | n/a
+Source, nominal | n/a | n/a
+Source, with margins | n/a | n/a
+Mode: Nominal
+Units in mode Nominal
+## table
+Unit | Name | Subsystem | Bus | Power mode | Average (W) | Duty | Effective (W) | Margin | With margin (W) | Peak (W)
+adapter | Separation adapter | STRUCT | main_28v | off | 0.000 | 1.00 | 0.000 | n/a | n/a | 0.000
+battery | Battery pack | EPS | main_28v | off | 0.000 | 1.00 | 0.000 | n/a | n/a | 0.000
+camera | Imager | PL | payload_12v | off | 0.000 | 1.00 | 0.000 | n/a | n/a | 0.000
+gnss | GNSS receiver | AOCS | main_28v | nominal | 1.200 | 1.00 | 1.200 | n/a | n/a | 1.800
+heaters | Thermal heaters | THERM | main_28v | nominal | 6.000 | 0.30 | 1.800 | n/a | n/a | 16.000
+magnetorquers | Magnetorquers | AOCS | main_28v | nominal | 1.000 | 0.20 | 0.200 | n/a | n/a | 3.000
+obc_a | OBC A | DH | main_28v | nominal | 6.000 | 1.00 | 6.000 | n/a | n/a | 9.000
+obc_b | OBC B (cold redundant) | DH | main_28v | off | 0.000 | 1.00 | 0.000 | n/a | n/a | 0.000
+pcdu | Power conditioning unit | EPS | main_28v | nominal | 9.000 | 1.00 | 9.000 | n/a | n/a | 12.000
+pdu_data | Payload data unit | PL-DATA | payload_12v | nominal | 4.000 | 1.00 | 4.000 | n/a | n/a | 6.000
+reaction_wheels | Reaction wheels | AOCS | main_28v | nominal | 12.000 | 0.60 | 7.200 | n/a | n/a | 30.000
+sband_trx | S-band transceiver | TTC | main_28v | nominal | 2.500 | 1.00 | 2.500 | n/a | n/a | 3.000
+solar_array | Solar array panels | EPS | main_28v | off | 0.000 | 1.00 | 0.000 | n/a | n/a | 0.000
+star_tracker | Star tracker | AOCS | main_28v | nominal | 3.500 | 1.00 | 3.500 | n/a | n/a | 5.000
+structure | Primary structure | STRUCT | main_28v | off | 0.000 | 1.00 | 0.000 | n/a | n/a | 0.000
+sun_sensors | Coarse sun sensors | AOCS | main_28v | nominal | 0.400 | 1.00 | 0.400 | n/a | n/a | 0.500
+xband_tx | X-band transmitter | PL-DATA | payload_12v | off | 0.000 | 1.00 | 0.000 | n/a | n/a | 0.000
+By subsystem
+## table
+Subsystem | Effective (W) | With margin (W) | Peak (W) | Peak with margin (W)
+AOCS | 12.500 | n/a | 40.300 | n/a
+DH | 6.000 | n/a | 9.000 | n/a
+EPS | 9.000 | n/a | 12.000 | n/a
+PL | 0.000 | n/a | 0.000 | n/a
+PL-DATA | 4.000 | n/a | 6.000 | n/a
+STRUCT | 0.000 | n/a | 0.000 | n/a
+THERM | 1.800 | n/a | 16.000 | n/a
+TTC | 2.500 | n/a | 3.000 | n/a
+By supply bus
+## table
+Bus | Converter efficiency | Average load (W) | Average load, with margins (W) | Average at source (W) | Average at source, with margins (W) | Peak load (W) | Peak at source, with margins (W)
+main_28v | n/a | 31.800 | n/a | n/a | n/a | 80.300 | n/a
+payload_12v | n/a | 4.000 | n/a | n/a | n/a | 6.000 | n/a
+Totals
+## table
+Quantity | Average (W) | Peak (W)
+Load, nominal | 35.800 | 86.300
+Load, with unit margins | n/a | n/a
+Load, with system margin | n/a | n/a
+Source, nominal | n/a | n/a
+Source, with margins | n/a | n/a
+Mode: Safe
+Units in mode Safe
+## table
+Unit | Name | Subsystem | Bus | Power mode | Average (W) | Duty | Effective (W) | Margin | With margin (W) | Peak (W)
+adapter | Separation adapter | STRUCT | main_28v | off | 0.000 | 1.00 | 0.000 | n/a | n/a | 0.000
+battery | Battery pack | EPS | main_28v | off | 0.000 | 1.00 | 0.000 | n/a | n/a | 0.000
+camera | Imager | PL | payload_12v | off | 0.000 | 1.00 | 0.000 | n/a | n/a | 0.000
+gnss | GNSS receiver | AOCS | main_28v | off | 0.000 | 1.00 | 0.000 | n/a | n/a | 0.000
+heaters | Thermal heaters | THERM | main_28v | safe | 8.000 | 0.40 | 3.200 | n/a | n/a | 16.000
+magnetorquers | Magnetorquers | AOCS | main_28v | safe | 1.500 | 0.30 | 0.450 | n/a | n/a | 3.000
+obc_a | OBC A | DH | main_28v | safe | 4.000 | 1.00 | 4.000 | n/a | n/a | 6.000
+obc_b | OBC B (cold redundant) | DH | main_28v | safe | 0.000 | 1.00 | 0.000 | n/a | n/a | 0.000
+pcdu | Power conditioning unit | EPS | main_28v | safe | 6.000 | 1.00 | 6.000 | n/a | n/a | 8.000
+pdu_data | Payload data unit | PL-DATA | payload_12v | off | 0.000 | 1.00 | 0.000 | n/a | n/a | 0.000
+reaction_wheels | Reaction wheels | AOCS | main_28v | safe | 2.000 | 0.50 | 1.000 | n/a | n/a | 12.000
+sband_trx | S-band transceiver | TTC | main_28v | safe | 2.500 | 1.00 | 2.500 | n/a | n/a | 3.000
+solar_array | Solar array panels | EPS | main_28v | off | 0.000 | 1.00 | 0.000 | n/a | n/a | 0.000
+star_tracker | Star tracker | AOCS | main_28v | off | 0.000 | 1.00 | 0.000 | n/a | n/a | 0.000
+structure | Primary structure | STRUCT | main_28v | off | 0.000 | 1.00 | 0.000 | n/a | n/a | 0.000
+sun_sensors | Coarse sun sensors | AOCS | main_28v | safe | 0.400 | 1.00 | 0.400 | n/a | n/a | 0.500
+xband_tx | X-band transmitter | PL-DATA | payload_12v | off | 0.000 | 1.00 | 0.000 | n/a | n/a | 0.000
+By subsystem
+## table
+Subsystem | Effective (W) | With margin (W) | Peak (W) | Peak with margin (W)
+AOCS | 1.850 | n/a | 15.500 | n/a
+DH | 4.000 | n/a | 6.000 | n/a
+EPS | 6.000 | n/a | 8.000 | n/a
+PL | 0.000 | n/a | 0.000 | n/a
+PL-DATA | 0.000 | n/a | 0.000 | n/a
+STRUCT | 0.000 | n/a | 0.000 | n/a
+THERM | 3.200 | n/a | 16.000 | n/a
+TTC | 2.500 | n/a | 3.000 | n/a
+By supply bus
+## table
+Bus | Converter efficiency | Average load (W) | Average load, with margins (W) | Average at source (W) | Average at source, with margins (W) | Peak load (W) | Peak at source, with margins (W)
+main_28v | n/a | 17.550 | n/a | n/a | n/a | 48.500 | n/a
+payload_12v | n/a | 0.000 | n/a | n/a | n/a | 0.000 | n/a
+Totals
+## table
+Quantity | Average (W) | Peak (W)
+Load, nominal | 17.550 | 48.500
+Load, with unit margins | n/a | n/a
+Load, with system margin | n/a | n/a
+Source, nominal | n/a | n/a
+Source, with margins | n/a | n/a
+Mode: Survival
+Units in mode Survival
+## table
+Unit | Name | Subsystem | Bus | Power mode | Average (W) | Duty | Effective (W) | Margin | With margin (W) | Peak (W)
+adapter | Separation adapter | STRUCT | main_28v | off | 0.000 | 1.00 | 0.000 | n/a | n/a | 0.000
+battery | Battery pack | EPS | main_28v | off | 0.000 | 1.00 | 0.000 | n/a | n/a | 0.000
+camera | Imager | PL | payload_12v | off | 0.000 | 1.00 | 0.000 | n/a | n/a | 0.000
+gnss | GNSS receiver | AOCS | main_28v | off | 0.000 | 1.00 | 0.000 | n/a | n/a | 0.000
+heaters | Thermal heaters | THERM | main_28v | survival | 14.000 | 0.60 | 8.400 | n/a | n/a | 16.000
+magnetorquers | Magnetorquers | AOCS | main_28v | survival | 1.500 | 0.30 | 0.450 | n/a | n/a | 3.000
+obc_a | OBC A | DH | main_28v | survival | 3.000 | 1.00 | 3.000 | n/a | n/a | 4.000
+obc_b | OBC B (cold redundant) | DH | main_28v | off | 0.000 | 1.00 | 0.000 | n/a | n/a | 0.000
+pcdu | Power conditioning unit | EPS | main_28v | survival | 5.000 | 1.00 | 5.000 | n/a | n/a | 6.000
+pdu_data | Payload data unit | PL-DATA | payload_12v | off | 0.000 | 1.00 | 0.000 | n/a | n/a | 0.000
+reaction_wheels | Reaction wheels | AOCS | main_28v | off | 0.000 | 1.00 | 0.000 | n/a | n/a | 0.000
+sband_trx | S-band transceiver | TTC | main_28v | survival | 2.500 | 1.00 | 2.500 | n/a | n/a | 3.000
+solar_array | Solar array panels | EPS | main_28v | off | 0.000 | 1.00 | 0.000 | n/a | n/a | 0.000
+star_tracker | Star tracker | AOCS | main_28v | off | 0.000 | 1.00 | 0.000 | n/a | n/a | 0.000
+structure | Primary structure | STRUCT | main_28v | off | 0.000 | 1.00 | 0.000 | n/a | n/a | 0.000
+sun_sensors | Coarse sun sensors | AOCS | main_28v | survival | 0.400 | 1.00 | 0.400 | n/a | n/a | 0.500
+xband_tx | X-band transmitter | PL-DATA | payload_12v | off | 0.000 | 1.00 | 0.000 | n/a | n/a | 0.000
+By subsystem
+## table
+Subsystem | Effective (W) | With margin (W) | Peak (W) | Peak with margin (W)
+AOCS | 0.850 | n/a | 3.500 | n/a
+DH | 3.000 | n/a | 4.000 | n/a
+EPS | 5.000 | n/a | 6.000 | n/a
+PL | 0.000 | n/a | 0.000 | n/a
+PL-DATA | 0.000 | n/a | 0.000 | n/a
+STRUCT | 0.000 | n/a | 0.000 | n/a
+THERM | 8.400 | n/a | 16.000 | n/a
+TTC | 2.500 | n/a | 3.000 | n/a
+By supply bus
+## table
+Bus | Converter efficiency | Average load (W) | Average load, with margins (W) | Average at source (W) | Average at source, with margins (W) | Peak load (W) | Peak at source, with margins (W)
+main_28v | n/a | 19.750 | n/a | n/a | n/a | 32.500 | n/a
+payload_12v | n/a | 0.000 | n/a | n/a | n/a | 0.000 | n/a
+Totals
+## table
+Quantity | Average (W) | Peak (W)
+Load, nominal | 19.750 | 32.500
+Load, with unit margins | n/a | n/a
+Load, with system margin | n/a | n/a
+Source, nominal | n/a | n/a
+Source, with margins | n/a | n/a
+Assumptions
+Configuration numbers used
+## table
+Name | Value | Unit | Source | Status
+Margin, maturity class class_a | n/a | ratio | TBD | PLACEHOLDER
+Margin, maturity class class_b | n/a | ratio | TBD | PLACEHOLDER
+Margin, maturity class class_c | n/a | ratio | TBD | PLACEHOLDER
+System margin | n/a | ratio | TBD | PLACEHOLDER
+Distribution loss | n/a | ratio | TBD | PLACEHOLDER
+Converter efficiency, bus main_28v | n/a | ratio | TBD | PLACEHOLDER
+Converter efficiency, bus payload_12v | n/a | ratio | TBD | PLACEHOLDER
+Equations
+## table
+ID | Name | Formula | Source
+PWR-EFF | Effective unit power | P_eff = P_avg * duty_cycle_ratio | SOURCE_MISSING
+PWR-MARGIN | Unit power with maturity margin | P_m = P_eff * (1 + margin_ratio(maturity)) | SOURCE_MISSING
+PWR-SYSMARGIN | System margin on the sum of margined loads | P_sys = (sum P_m) * (1 + system_margin_ratio) | SOURCE_MISSING
+PWR-SOURCE | Source power through converter and distribution | P_source = P_load / (eta_converter(bus) * (1 - distribution_loss_ratio)) | SOURCE_MISSING
+PWR-PEAK | Peak power | P_peak = sum of unit peak_power_w (all units at peak at once, conservative) | SOURCE_MISSING
+SOURCE_MISSING: the formula is a project convention or textbook definition whose reference text is not available to the tool yet (see docs/DECISIONS.md).
+Problems
+Problems and open items
+## table
+Severity | Code | Location | Message
+warning | CONFIG_EMPTY_TABLE | config/attenuation_table.yaml:3 | The table has no entries.
+warning | CONFIG_EMPTY_TABLE | config/ebn0_table.yaml:3 | The table has no entries.
+warning | RESULT_INCOMPLETE | config/margin_policy.yaml | The margin of maturity class 'class_a' is a placeholder.
+warning | RESULT_INCOMPLETE | config/margin_policy.yaml | The margin of maturity class 'class_b' is a placeholder.
+warning | RESULT_INCOMPLETE | config/margin_policy.yaml | The margin of maturity class 'class_c' is a placeholder.
+warning | RESULT_INCOMPLETE | config/margin_policy.yaml | The system margin is a placeholder.
+warning | CONFIG_PLACEHOLDER | config/margin_policy.yaml:6 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/margin_policy.yaml:10 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/margin_policy.yaml:15 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/margin_policy.yaml:19 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/margin_policy.yaml:24 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/margin_policy.yaml:28 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/margin_policy.yaml:32 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/margin_policy.yaml:36 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/mass_limits.yaml:7 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | RESULT_INCOMPLETE | config/power_config.yaml | The converter efficiency of bus 'main_28v' is a placeholder.
+warning | RESULT_INCOMPLETE | config/power_config.yaml | The converter efficiency of bus 'payload_12v' is a placeholder.
+warning | RESULT_INCOMPLETE | config/power_config.yaml | The distribution loss is a placeholder.
+warning | CONFIG_PLACEHOLDER | config/power_config.yaml:4 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/power_config.yaml:9 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/power_config.yaml:13 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/power_system.yaml:4 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/power_system.yaml:45 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/power_system.yaml:49 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/power_system.yaml:53 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/power_system.yaml:57 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/power_system.yaml:61 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/power_system.yaml:65 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/power_system.yaml:69 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/power_system.yaml:73 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/power_system.yaml:77 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/power_system.yaml:82 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/power_system.yaml:86 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/power_system.yaml:92 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/power_system.yaml:96 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/power_system.yaml:100 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/power_system.yaml:104 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/power_system.yaml:109 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/power_system.yaml:113 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/power_system.yaml:117 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning | CONFIG_PLACEHOLDER | config/power_system.yaml:129 | This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+Provenance
+Provenance
+## table
+Item | Value
+Tool | System Budget Studio 0.1.0
+Python | 3.x
+Libraries | pinned for-golden-tests
+Project | Example 150 kg microsatellite
+Project revision | 1
+Scenario | static (no scenario)
+Generated (UTC) | 2026-01-02T03:04:05Z
+User | Golden User
