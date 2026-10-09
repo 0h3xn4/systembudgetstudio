@@ -6,3 +6,7 @@ buses:
     nominal_voltage_v: 28.0
   - name: aux
     nominal_voltage_v: 12.0
+mission_phases:
+  - launch
+  - eol
+body_frame: 'Right-handed body frame. Origin: centre of the launch-vehicle interface plane. +Z: along the launch axis, away from the interface. X and Y: in the interface plane. Positions are item centres of mass in metres. Synthetic example.'

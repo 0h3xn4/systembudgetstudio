@@ -1,0 +1,86 @@
+## sheet Summary rows=13 cols=8
+1: 'Mass budget (static): Example stress case (200 units)' |  |  |  |  |  |  | 
+2: 'INCOMPLETE: some inputs are placeholders (source TBD or missing). Entries marked n/a depend on them and are not computed. Do not use this report as evidence until the placeholders are replaced with sourced values.' |  |  |  |  |  |  | 
+4: 'Body frame: Right-handed body frame. Origin: centre of the launch-vehicle interface plane. +Z: along the launch axis, away from the interface. X and Y: in the interface plane. Positions are item centres of mass in metres. Synthetic example.' |  |  |  |  |  |  | 
+5: 'Mass and centre of gravity by mission phase' |  |  |  |  |  |  | 
+6: 'Phase' | 'Total (kg)' | 'With unit margins (kg)' | 'With system margin (kg)' | 'CG x (m)' | 'CG y (m)' | 'CG z (m)' | 'CG coverage'
+7: 'launch' | 79.37 | 'n/a' | 'n/a' | -0.001644198059720297 | -0.002582839863928436 | 0.3332518583847802 | 1
+8: 'eol' | 79.37 | 'n/a' | 'n/a' | -0.001644198059720297 | -0.002582839863928436 | 0.3332518583847802 | 1
+9: 'CG and inertia use nominal masses of items with a position; coverage is their share of the nominal total.' |  |  |  |  |  |  | 
+11: 'Mass limits (checked against the system-margined total)' |  |  |  |  |  |  | 
+12: 'Phase' | 'Limit' | 'Limit value (kg)' | 'Total (kg)' | 'Margin (kg)' | 'Status' |  | 
+13: 'launch' | 'Launch mass' | 'n/a' | 'n/a' | 'n/a' | 'n/a' |  | 
+## sheet Phase launch rows=233 cols=12
+1: 'Items' |  |  |  |  |  |  |  |  |  |  | 
+2: 'Item' | 'Name' | 'Kind' | 'Subsystem' | 'Maturity' | 'Mass (kg)' | 'Margin' | 'With margin (kg)' | 'x (m)' | 'y (m)' | 'z (m)' | 'Own inertia'
+3: 'unit_000' | 'Stress unit 000' | 'unit' | 'DH' | 'class_a' | 0.05 | 'n/a' | 'n/a' | -0.15 | -0.15 | 0.1 | 'no'
+4: 'unit_001' | 'Stress unit 001' | 'unit' | 'EPS' | 'class_b' | 0.12 | 'n/a' | 'n/a' | -0.1 | -0.15 | 0.14 | 'yes'
+5: 'unit_002' | 'Stress unit 002' | 'unit' | 'AOCS' | 'class_c' | 0.19 | 'n/a' | 'n/a' | -0.05 | -0.15 | 0.18 | 'yes'
+6: 'unit_003' | 'Stress unit 003' | 'unit' | 'TTC' | 'class_a' | 0.26 | 'n/a' | 'n/a' | 0 | -0.15 | 0.22 | 'yes'
+7: 'unit_004' | 'Stress unit 004' | 'unit' | 'PL' | 'class_b' | 0.33 | 'n/a' | 'n/a' | 0.05 | -0.15 | 0.26 | 'yes'
+8: 'unit_005' | 'Stress unit 005' | 'unit' | 'THERM' | 'class_c' | 0.4 | 'n/a' | 'n/a' | 0.1 | -0.15 | 0.3 | 'no'
+9: 'unit_006' | 'Stress unit 006' | 'unit' | 'PL-DATA' | 'class_a' | 0.47 | 'n/a' | 'n/a' | 0.15 | -0.15 | 0.34 | 'yes'
+10: 'unit_007' | 'Stress unit 007' | 'unit' | 'HARNESS' | 'class_b' | 0.54 | 'n/a' | 'n/a' | -0.15 | -0.1 | 0.38 | 'yes'
+11: 'unit_008' | 'Stress unit 008' | 'unit' | 'DH' | 'class_c' | 0.61 | 'n/a' | 'n/a' | -0.1 | -0.1 | 0.42 | 'yes'
+12: 'unit_009' | 'Stress unit 009' | 'unit' | 'EPS' | 'class_a' | 0.68 | 'n/a' | 'n/a' | -0.05 | -0.1 | 0.46 | 'yes'
+13: 'unit_010' | 'Stress unit 010' | 'unit' | 'AOCS' | 'class_b' | 0.75 | 'n/a' | 'n/a' | 0 | -0.1 | 0.5 | 'no'
+14: 'unit_011' | 'Stress unit 011' | 'unit' | 'TTC' | 'class_c' | 0.05 | 'n/a' | 'n/a' | 0.05 | -0.1 | 0.54 | 'yes'
+...
+## sheet Phase eol rows=233 cols=12
+1: 'Items' |  |  |  |  |  |  |  |  |  |  | 
+2: 'Item' | 'Name' | 'Kind' | 'Subsystem' | 'Maturity' | 'Mass (kg)' | 'Margin' | 'With margin (kg)' | 'x (m)' | 'y (m)' | 'z (m)' | 'Own inertia'
+3: 'unit_000' | 'Stress unit 000' | 'unit' | 'DH' | 'class_a' | 0.05 | 'n/a' | 'n/a' | -0.15 | -0.15 | 0.1 | 'no'
+4: 'unit_001' | 'Stress unit 001' | 'unit' | 'EPS' | 'class_b' | 0.12 | 'n/a' | 'n/a' | -0.1 | -0.15 | 0.14 | 'yes'
+5: 'unit_002' | 'Stress unit 002' | 'unit' | 'AOCS' | 'class_c' | 0.19 | 'n/a' | 'n/a' | -0.05 | -0.15 | 0.18 | 'yes'
+6: 'unit_003' | 'Stress unit 003' | 'unit' | 'TTC' | 'class_a' | 0.26 | 'n/a' | 'n/a' | 0 | -0.15 | 0.22 | 'yes'
+7: 'unit_004' | 'Stress unit 004' | 'unit' | 'PL' | 'class_b' | 0.33 | 'n/a' | 'n/a' | 0.05 | -0.15 | 0.26 | 'yes'
+8: 'unit_005' | 'Stress unit 005' | 'unit' | 'THERM' | 'class_c' | 0.4 | 'n/a' | 'n/a' | 0.1 | -0.15 | 0.3 | 'no'
+9: 'unit_006' | 'Stress unit 006' | 'unit' | 'PL-DATA' | 'class_a' | 0.47 | 'n/a' | 'n/a' | 0.15 | -0.15 | 0.34 | 'yes'
+10: 'unit_007' | 'Stress unit 007' | 'unit' | 'HARNESS' | 'class_b' | 0.54 | 'n/a' | 'n/a' | -0.15 | -0.1 | 0.38 | 'yes'
+11: 'unit_008' | 'Stress unit 008' | 'unit' | 'DH' | 'class_c' | 0.61 | 'n/a' | 'n/a' | -0.1 | -0.1 | 0.42 | 'yes'
+12: 'unit_009' | 'Stress unit 009' | 'unit' | 'EPS' | 'class_a' | 0.68 | 'n/a' | 'n/a' | -0.05 | -0.1 | 0.46 | 'yes'
+13: 'unit_010' | 'Stress unit 010' | 'unit' | 'AOCS' | 'class_b' | 0.75 | 'n/a' | 'n/a' | 0 | -0.1 | 0.5 | 'no'
+14: 'unit_011' | 'Stress unit 011' | 'unit' | 'TTC' | 'class_c' | 0.05 | 'n/a' | 'n/a' | 0.05 | -0.1 | 0.54 | 'yes'
+...
+## sheet Assumptions rows=15 cols=5
+1: 'Configuration numbers used' |  |  |  | 
+2: 'Name' | 'Value' | 'Unit' | 'Source' | 'Status'
+3: 'Mass margin, maturity class class_a' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+4: 'Mass margin, maturity class class_b' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+5: 'Mass margin, maturity class class_c' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+6: 'System mass margin' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+7: 'Mass limit, Launch mass' | 'n/a' | 'kg' | 'TBD' | 'PLACEHOLDER'
+9: 'Equations' |  |  |  | 
+10: 'ID' | 'Name' | 'Formula' | 'Source' | 
+11: 'MASS-MARGIN' | 'Item mass with maturity margin' | 'm_m = m * (1 + mass_margin_ratio(maturity))' | 'SOURCE_MISSING' | 
+12: 'MASS-SYSMARGIN' | 'System mass margin on the margined total' | 'm_sys = (sum m_m) * (1 + system_mass_margin_ratio)' | 'SOURCE_MISSING' | 
+13: 'MASS-COG' | 'Centre of gravity' | 'r_cg = sum(m_i r_i) / sum(m_i), nominal masses of items with a position' | 'SOURCE_MISSING' | 
+14: 'MASS-PARALLEL' | 'Parallel-axis (Huygens-Steiner) theorem' | 'I = sum(I_i + m_i (|d_i|^2 E - d_i d_i^T)), d_i = r_i - r_ref' | 'SOURCE_MISSING' | 
+...
+## sheet Problems rows=61 cols=4
+1: 'Problems and open items' |  |  | 
+2: 'Severity' | 'Code' | 'Location' | 'Message'
+3: 'warning' | 'CONFIG_EMPTY_TABLE' | 'config/attenuation_table.yaml:3' | 'The table has no entries.'
+4: 'warning' | 'CONFIG_EMPTY_TABLE' | 'config/ebn0_table.yaml:3' | 'The table has no entries.'
+5: 'warning' | 'RESULT_INCOMPLETE' | 'config/margin_policy.yaml' | "The mass margin of maturity class 'class_a' is a placeholder."
+6: 'warning' | 'RESULT_INCOMPLETE' | 'config/margin_policy.yaml' | "The mass margin of maturity class 'class_b' is a placeholder."
+7: 'warning' | 'RESULT_INCOMPLETE' | 'config/margin_policy.yaml' | "The mass margin of maturity class 'class_c' is a placeholder."
+8: 'warning' | 'RESULT_INCOMPLETE' | 'config/margin_policy.yaml' | 'The system mass margin is a placeholder.'
+9: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:6' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+10: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:10' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+11: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:15' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+12: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:19' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+13: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:24' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+14: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:28' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+...
+## sheet Provenance rows=10 cols=2
+1: 'Provenance' | 
+2: 'Item' | 'Value'
+3: 'Tool' | 'System Budget Studio 0.1.0'
+4: 'Python' | '3.x'
+5: 'Libraries' | 'pinned for-golden-tests'
+6: 'Project' | 'Example stress case (200 units)'
+7: 'Project revision' | '1'
+8: 'Scenario' | 'static (no scenario)'
+9: 'Generated (UTC)' | '2026-01-02T03:04:05Z'
+10: 'User' | 'Golden User'

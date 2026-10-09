@@ -3,6 +3,8 @@ kind: spacecraft_mode
 name: Downlink
 description: Payload data downlink over a ground-station pass.
 assignments:
+  adapter: off
+  battery: off
   camera: off
   gnss: downlink
   heaters: downlink
@@ -13,6 +15,8 @@ assignments:
   pdu_data: downlink
   reaction_wheels: downlink
   sband_trx: downlink
+  solar_array: off
   star_tracker: downlink
+  structure: off
   sun_sensors: downlink
   xband_tx: downlink

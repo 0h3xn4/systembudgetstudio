@@ -86,8 +86,12 @@ def project(
         modes=spacecraft_modes,
         config=ProjectConfig(
             margin_policy=MarginPolicy(
-                classes={k: MaturityClass(margin_ratio=s(v)) for k, v in margins.items()},
-                system_margin_ratio=s(system),
+                classes={
+                    k: MaturityClass(power_margin_ratio=s(v), mass_margin_ratio=s(v))
+                    for k, v in margins.items()
+                },
+                system_power_margin_ratio=s(system),
+                system_mass_margin_ratio=s(system),
             ),
             power_config=PowerConfig(
                 distribution_loss_ratio=s(loss),
@@ -232,8 +236,15 @@ def test_case12_tbd_source_is_a_placeholder_even_with_a_value() -> None:
     cfg = p.config.margin_policy
     assert cfg is not None
     tbd = MarginPolicy(
-        classes={**cfg.classes, "m1": MaturityClass(margin_ratio=Sourced(value=0.1, source="TBD"))},
-        system_margin_ratio=cfg.system_margin_ratio,
+        classes={
+            **cfg.classes,
+            "m1": MaturityClass(
+                power_margin_ratio=Sourced(value=0.1, source="TBD"),
+                mass_margin_ratio=Sourced(value=0.1, source="TBD"),
+            ),
+        },
+        system_power_margin_ratio=cfg.system_power_margin_ratio,
+        system_mass_margin_ratio=cfg.system_mass_margin_ratio,
     )
     p2 = Project(
         p.root,

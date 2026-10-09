@@ -104,7 +104,7 @@
 13: 'PWR-EFF' | 'Effective unit power' | 'P_eff = P_avg * duty_cycle_ratio' | 'SOURCE_MISSING' | 
 14: 'PWR-MARGIN' | 'Unit power with maturity margin' | 'P_m = P_eff * (1 + margin_ratio(maturity))' | 'SOURCE_MISSING' | 
 ...
-## sheet Problems rows=18 cols=4
+## sheet Problems rows=23 cols=4
 1: 'Problems and open items' |  |  | 
 2: 'Severity' | 'Code' | 'Location' | 'Message'
 3: 'warning' | 'CONFIG_EMPTY_TABLE' | 'config/attenuation_table.yaml:3' | 'The table has no entries.'
@@ -114,11 +114,11 @@
 7: 'warning' | 'RESULT_INCOMPLETE' | 'config/margin_policy.yaml' | "The margin of maturity class 'class_c' is a placeholder."
 8: 'warning' | 'RESULT_INCOMPLETE' | 'config/margin_policy.yaml' | 'The system margin is a placeholder.'
 9: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:6' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
-10: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:11' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
-11: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:16' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
-12: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:20' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
-13: 'warning' | 'RESULT_INCOMPLETE' | 'config/power_config.yaml' | "The converter efficiency of bus 'aux' is a placeholder."
-14: 'warning' | 'RESULT_INCOMPLETE' | 'config/power_config.yaml' | "The converter efficiency of bus 'main' is a placeholder."
+10: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:10' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+11: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:15' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+12: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:19' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+13: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:24' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+14: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:28' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
 ...
 ## sheet Provenance rows=10 cols=2
 1: 'Provenance' | 

@@ -11,8 +11,9 @@ import math
 from collections.abc import Iterable
 from dataclasses import dataclass
 
+from budget_core.assumptions import Assumption, incomplete
 from budget_core.model import Project, Sourced
-from budget_core.problems import Problem, Severity
+from budget_core.problems import Problem
 
 # ---- scalar building blocks (pure) ----------------------------------------------------------
 
@@ -107,19 +108,6 @@ class ModePowerResult:
 
 
 @dataclass(frozen=True)
-class Assumption:
-    """A configuration number used by the budget, with its source and placeholder status."""
-
-    name: str
-    value: float | None
-    unit: str
-    source: str
-    file: str
-    path: str
-    placeholder: bool
-
-
-@dataclass(frozen=True)
 class StaticPowerResult:
     modes: tuple[ModePowerResult, ...]
     assumptions: tuple[Assumption, ...]
@@ -164,28 +152,17 @@ def _combine(flows: list[Flow]) -> Flow:
     )
 
 
-def _incomplete(message: str, file: str, path: str) -> Problem:
-    return Problem(
-        Severity.WARNING,
-        "RESULT_INCOMPLETE",
-        message,
-        file=file,
-        path=path,
-        hint="Replace the placeholder with a sourced value; results that need it show n/a.",
-    )
-
-
 def static_power_budget(project: Project) -> StaticPowerResult:
     """Compute the power table of every spacecraft mode. The project must be valid."""
     policy = project.config.margin_policy
     power = project.config.power_config
-    system_margin = _value(policy.system_margin_ratio) if policy else None
+    system_margin = _value(policy.system_power_margin_ratio) if policy else None
     loss = _value(power.distribution_loss_ratio) if power else None
 
     def class_margin(maturity: str) -> float | None:
         if policy is None or maturity not in policy.classes:
             return None
-        return _value(policy.classes[maturity].margin_ratio)
+        return _value(policy.classes[maturity].power_margin_ratio)
 
     def efficiency(bus: str) -> float | None:
         if power is None or bus not in power.converter_efficiency_ratio:
@@ -279,11 +256,11 @@ def _assumptions(project: Project) -> tuple[list[Assumption], list[Problem]]:
     def add(name: str, item: Sourced | None, unit: str, file: str, path: str, what: str) -> None:
         if item is None:
             out.append(Assumption(name, None, unit, "missing", file, path, True))
-            problems.append(_incomplete(f"{what} is missing ({file} not provided).", file, path))
+            problems.append(incomplete(f"{what} is missing ({file} not provided).", file, path))
             return
         out.append(Assumption(name, item.value, unit, item.source, file, path, item.is_placeholder))
         if item.is_placeholder:
-            problems.append(_incomplete(f"{what} is a placeholder.", file, path))
+            problems.append(incomplete(f"{what} is a placeholder.", file, path))
 
     used_classes = sorted({u.maturity for u in project.units.values()})
     used_buses = sorted({u.bus for u in project.units.values()})
@@ -292,18 +269,18 @@ def _assumptions(project: Project) -> tuple[list[Assumption], list[Problem]]:
         item = policy.classes.get(cls) if policy else None
         add(
             f"Margin, maturity class {cls}",
-            item.margin_ratio if item else None,
+            item.power_margin_ratio if item else None,
             "ratio",
             mfile,
-            f"classes.{cls}.margin_ratio",
+            f"classes.{cls}.power_margin_ratio",
             f"The margin of maturity class '{cls}'",
         )
     add(
         "System margin",
-        policy.system_margin_ratio if policy else None,
+        policy.system_power_margin_ratio if policy else None,
         "ratio",
         mfile,
-        "system_margin_ratio",
+        "system_power_margin_ratio",
         "The system margin",
     )
     add(

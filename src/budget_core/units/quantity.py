@@ -32,6 +32,7 @@ _SUFFIXES: dict[str, _Suffix] = {
     "wh": _Suffix("Wh", "energy", "watt_hour"),
     "hz": _Suffix("Hz", "frequency", "hertz"),
     "kg": _Suffix("kg", "mass", "kilogram"),
+    "kgm2": _Suffix("kg m2", "moment of inertia", "kilogram * meter ** 2"),
     "m": _Suffix("m", "length", "meter"),
     "s": _Suffix("s", "time", "second"),
     "k": _Suffix("K", "temperature", "kelvin"),

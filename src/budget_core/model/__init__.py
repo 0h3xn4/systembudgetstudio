@@ -11,6 +11,14 @@ from budget_core.model.config import (
     PowerConfig,
 )
 from budget_core.model.equipment import Bus, PowerMode, Spacecraft, SpacecraftMode, Unit
+from budget_core.model.mass import (
+    Expendable,
+    Inertia,
+    MassLimit,
+    MassLimits,
+    MassProperties,
+    inertia_is_physical,
+)
 from budget_core.model.project import Project, ProjectConfig, ProjectMeta
 from budget_core.model.versions import CURRENT_VERSIONS
 
@@ -22,6 +30,11 @@ __all__ = [
     "Bus",
     "Ebn0Entry",
     "Ebn0Table",
+    "Expendable",
+    "Inertia",
+    "MassLimit",
+    "MassLimits",
+    "MassProperties",
     "MarginPolicy",
     "MaturityClass",
     "PowerConfig",
@@ -33,4 +46,5 @@ __all__ = [
     "Spacecraft",
     "SpacecraftMode",
     "Unit",
+    "inertia_is_physical",
 ]

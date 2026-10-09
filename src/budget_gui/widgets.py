@@ -196,6 +196,7 @@ class ProjectTree(QTreeWidget):
                 add(top, name, name)
         for folder, title in (
             ("units", "Units"),
+            ("expendables", "Expendables"),
             ("modes", "Spacecraft modes"),
             ("config", "Configuration"),
         ):

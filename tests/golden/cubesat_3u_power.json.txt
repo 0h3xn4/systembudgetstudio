@@ -3,7 +3,7 @@
     {
       "file": "config/margin_policy.yaml",
       "name": "Margin, maturity class class_a",
-      "path": "classes.class_a.margin_ratio",
+      "path": "classes.class_a.power_margin_ratio",
       "placeholder": true,
       "source": "TBD",
       "unit": "ratio",
@@ -12,7 +12,7 @@
     {
       "file": "config/margin_policy.yaml",
       "name": "Margin, maturity class class_b",
-      "path": "classes.class_b.margin_ratio",
+      "path": "classes.class_b.power_margin_ratio",
       "placeholder": true,
       "source": "TBD",
       "unit": "ratio",
@@ -21,7 +21,7 @@
     {
       "file": "config/margin_policy.yaml",
       "name": "Margin, maturity class class_c",
-      "path": "classes.class_c.margin_ratio",
+      "path": "classes.class_c.power_margin_ratio",
       "placeholder": true,
       "source": "TBD",
       "unit": "ratio",
@@ -30,7 +30,7 @@
     {
       "file": "config/margin_policy.yaml",
       "name": "System margin",
-      "path": "system_margin_ratio",
+      "path": "system_power_margin_ratio",
       "placeholder": true,
       "source": "TBD",
       "unit": "ratio",
@@ -899,7 +899,7 @@
       "hint": "Replace the placeholder with a sourced value; results that need it show n/a.",
       "line": null,
       "message": "The margin of maturity class 'class_a' is a placeholder.",
-      "path": "classes.class_a.margin_ratio",
+      "path": "classes.class_a.power_margin_ratio",
       "severity": "warning"
     },
     {
@@ -908,7 +908,7 @@
       "hint": "Replace the placeholder with a sourced value; results that need it show n/a.",
       "line": null,
       "message": "The margin of maturity class 'class_b' is a placeholder.",
-      "path": "classes.class_b.margin_ratio",
+      "path": "classes.class_b.power_margin_ratio",
       "severity": "warning"
     },
     {
@@ -917,7 +917,7 @@
       "hint": "Replace the placeholder with a sourced value; results that need it show n/a.",
       "line": null,
       "message": "The margin of maturity class 'class_c' is a placeholder.",
-      "path": "classes.class_c.margin_ratio",
+      "path": "classes.class_c.power_margin_ratio",
       "severity": "warning"
     },
     {
@@ -926,7 +926,7 @@
       "hint": "Replace the placeholder with a sourced value; results that need it show n/a.",
       "line": null,
       "message": "The system margin is a placeholder.",
-      "path": "system_margin_ratio",
+      "path": "system_power_margin_ratio",
       "severity": "warning"
     },
     {

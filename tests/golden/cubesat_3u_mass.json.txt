@@ -1,0 +1,523 @@
+{
+  "assumptions": [
+    {
+      "file": "config/margin_policy.yaml",
+      "name": "Mass margin, maturity class class_a",
+      "path": "classes.class_a.mass_margin_ratio",
+      "placeholder": true,
+      "source": "TBD",
+      "unit": "ratio",
+      "value": null
+    },
+    {
+      "file": "config/margin_policy.yaml",
+      "name": "Mass margin, maturity class class_b",
+      "path": "classes.class_b.mass_margin_ratio",
+      "placeholder": true,
+      "source": "TBD",
+      "unit": "ratio",
+      "value": null
+    },
+    {
+      "file": "config/margin_policy.yaml",
+      "name": "Mass margin, maturity class class_c",
+      "path": "classes.class_c.mass_margin_ratio",
+      "placeholder": true,
+      "source": "TBD",
+      "unit": "ratio",
+      "value": null
+    },
+    {
+      "file": "config/margin_policy.yaml",
+      "name": "System mass margin",
+      "path": "system_mass_margin_ratio",
+      "placeholder": true,
+      "source": "TBD",
+      "unit": "ratio",
+      "value": null
+    },
+    {
+      "file": "config/mass_limits.yaml",
+      "name": "Mass limit, Launch mass",
+      "path": "limits[0].limit_kg",
+      "placeholder": true,
+      "source": "TBD",
+      "unit": "kg",
+      "value": null
+    }
+  ],
+  "phases": [
+    {
+      "cog": {
+        "coverage_ratio": 1.0,
+        "excluded_ids": [],
+        "inertia_cg": {
+          "ixx": 0.006788035714285715,
+          "ixy": 0.0,
+          "ixz": -0.0001655357142857143,
+          "iyy": 0.006814071428571429,
+          "iyz": 0.0,
+          "izz": 0.0010610357142857142
+        },
+        "inertia_origin": {
+          "ixx": 0.024711000000000004,
+          "ixy": 0.0,
+          "ixz": -0.000297,
+          "iyy": 0.024738000000000003,
+          "iyz": 0.0,
+          "izz": 0.001062
+        },
+        "mass_kg": 0.84,
+        "point_mass_ids": [
+          "gnss"
+        ],
+        "position_m": [
+          0.0010714285714285715,
+          0.0,
+          0.14607142857142857
+        ]
+      },
+      "limits": [
+        {
+          "limit_kg": null,
+          "margin_kg": null,
+          "name": "Launch mass",
+          "status": "n/a",
+          "total_kg": null
+        }
+      ],
+      "phase": "launch",
+      "rows": [
+        {
+          "item_id": "adcs",
+          "kind": "unit",
+          "margin_ratio": null,
+          "margined_mass_kg": null,
+          "mass_kg": 0.15,
+          "maturity": "class_b",
+          "name": "ADCS module",
+          "own_inertia": {
+            "ixx": 0.000121,
+            "ixy": 0.0,
+            "ixz": 0.0,
+            "iyy": 0.000121,
+            "iyz": 0.0,
+            "izz": 0.000202
+          },
+          "position_m": [
+            0.0,
+            0.0,
+            0.16
+          ],
+          "subsystem": "ADCS"
+        },
+        {
+          "item_id": "camera",
+          "kind": "unit",
+          "margin_ratio": null,
+          "margined_mass_kg": null,
+          "mass_kg": 0.2,
+          "maturity": "class_c",
+          "name": "Camera payload",
+          "own_inertia": {
+            "ixx": 0.000433,
+            "ixy": 0.0,
+            "ixz": 0.0,
+            "iyy": 0.000433,
+            "iyz": 0.0,
+            "izz": 0.000213
+          },
+          "position_m": [
+            0.0,
+            0.0,
+            0.26
+          ],
+          "subsystem": "PL"
+        },
+        {
+          "item_id": "eps",
+          "kind": "unit",
+          "margin_ratio": null,
+          "margined_mass_kg": null,
+          "mass_kg": 0.25,
+          "maturity": "class_a",
+          "name": "Power board",
+          "own_inertia": {
+            "ixx": 0.000187,
+            "ixy": 0.0,
+            "ixz": 0.0,
+            "iyy": 0.000187,
+            "iyz": 0.0,
+            "izz": 0.000337
+          },
+          "position_m": [
+            0.0,
+            0.0,
+            0.08
+          ],
+          "subsystem": "EPS"
+        },
+        {
+          "item_id": "gnss",
+          "kind": "unit",
+          "margin_ratio": null,
+          "margined_mass_kg": null,
+          "mass_kg": 0.03,
+          "maturity": "class_b",
+          "name": "GNSS receiver",
+          "own_inertia": null,
+          "position_m": [
+            0.03,
+            0.0,
+            0.33
+          ],
+          "subsystem": "ADCS"
+        },
+        {
+          "item_id": "obc",
+          "kind": "unit",
+          "margin_ratio": null,
+          "margined_mass_kg": null,
+          "mass_kg": 0.12,
+          "maturity": "class_a",
+          "name": "On-board computer",
+          "own_inertia": {
+            "ixx": 8.3e-05,
+            "ixy": 0.0,
+            "ixz": 0.0,
+            "iyy": 8.3e-05,
+            "iyz": 0.0,
+            "izz": 0.000162
+          },
+          "position_m": [
+            0.0,
+            0.0,
+            0.05
+          ],
+          "subsystem": "DH"
+        },
+        {
+          "item_id": "radio",
+          "kind": "unit",
+          "margin_ratio": null,
+          "margined_mass_kg": null,
+          "mass_kg": 0.09,
+          "maturity": "class_b",
+          "name": "UHF/VHF radio",
+          "own_inertia": {
+            "ixx": 6.4e-05,
+            "ixy": 0.0,
+            "ixz": 0.0,
+            "iyy": 6.4e-05,
+            "iyz": 0.0,
+            "izz": 0.000121
+          },
+          "position_m": [
+            0.0,
+            0.0,
+            0.12
+          ],
+          "subsystem": "TTC"
+        }
+      ],
+      "subsystems": [
+        {
+          "margined_kg": null,
+          "mass_kg": 0.18,
+          "subsystem": "ADCS"
+        },
+        {
+          "margined_kg": null,
+          "mass_kg": 0.12,
+          "subsystem": "DH"
+        },
+        {
+          "margined_kg": null,
+          "mass_kg": 0.25,
+          "subsystem": "EPS"
+        },
+        {
+          "margined_kg": null,
+          "mass_kg": 0.2,
+          "subsystem": "PL"
+        },
+        {
+          "margined_kg": null,
+          "mass_kg": 0.09,
+          "subsystem": "TTC"
+        }
+      ],
+      "system_margined_kg": null,
+      "total_kg": 0.84,
+      "unit_margined_kg": null
+    },
+    {
+      "cog": {
+        "coverage_ratio": 1.0,
+        "excluded_ids": [],
+        "inertia_cg": {
+          "ixx": 0.006788035714285715,
+          "ixy": 0.0,
+          "ixz": -0.0001655357142857143,
+          "iyy": 0.006814071428571429,
+          "iyz": 0.0,
+          "izz": 0.0010610357142857142
+        },
+        "inertia_origin": {
+          "ixx": 0.024711000000000004,
+          "ixy": 0.0,
+          "ixz": -0.000297,
+          "iyy": 0.024738000000000003,
+          "iyz": 0.0,
+          "izz": 0.001062
+        },
+        "mass_kg": 0.84,
+        "point_mass_ids": [
+          "gnss"
+        ],
+        "position_m": [
+          0.0010714285714285715,
+          0.0,
+          0.14607142857142857
+        ]
+      },
+      "limits": [],
+      "phase": "eol",
+      "rows": [
+        {
+          "item_id": "adcs",
+          "kind": "unit",
+          "margin_ratio": null,
+          "margined_mass_kg": null,
+          "mass_kg": 0.15,
+          "maturity": "class_b",
+          "name": "ADCS module",
+          "own_inertia": {
+            "ixx": 0.000121,
+            "ixy": 0.0,
+            "ixz": 0.0,
+            "iyy": 0.000121,
+            "iyz": 0.0,
+            "izz": 0.000202
+          },
+          "position_m": [
+            0.0,
+            0.0,
+            0.16
+          ],
+          "subsystem": "ADCS"
+        },
+        {
+          "item_id": "camera",
+          "kind": "unit",
+          "margin_ratio": null,
+          "margined_mass_kg": null,
+          "mass_kg": 0.2,
+          "maturity": "class_c",
+          "name": "Camera payload",
+          "own_inertia": {
+            "ixx": 0.000433,
+            "ixy": 0.0,
+            "ixz": 0.0,
+            "iyy": 0.000433,
+            "iyz": 0.0,
+            "izz": 0.000213
+          },
+          "position_m": [
+            0.0,
+            0.0,
+            0.26
+          ],
+          "subsystem": "PL"
+        },
+        {
+          "item_id": "eps",
+          "kind": "unit",
+          "margin_ratio": null,
+          "margined_mass_kg": null,
+          "mass_kg": 0.25,
+          "maturity": "class_a",
+          "name": "Power board",
+          "own_inertia": {
+            "ixx": 0.000187,
+            "ixy": 0.0,
+            "ixz": 0.0,
+            "iyy": 0.000187,
+            "iyz": 0.0,
+            "izz": 0.000337
+          },
+          "position_m": [
+            0.0,
+            0.0,
+            0.08
+          ],
+          "subsystem": "EPS"
+        },
+        {
+          "item_id": "gnss",
+          "kind": "unit",
+          "margin_ratio": null,
+          "margined_mass_kg": null,
+          "mass_kg": 0.03,
+          "maturity": "class_b",
+          "name": "GNSS receiver",
+          "own_inertia": null,
+          "position_m": [
+            0.03,
+            0.0,
+            0.33
+          ],
+          "subsystem": "ADCS"
+        },
+        {
+          "item_id": "obc",
+          "kind": "unit",
+          "margin_ratio": null,
+          "margined_mass_kg": null,
+          "mass_kg": 0.12,
+          "maturity": "class_a",
+          "name": "On-board computer",
+          "own_inertia": {
+            "ixx": 8.3e-05,
+            "ixy": 0.0,
+            "ixz": 0.0,
+            "iyy": 8.3e-05,
+            "iyz": 0.0,
+            "izz": 0.000162
+          },
+          "position_m": [
+            0.0,
+            0.0,
+            0.05
+          ],
+          "subsystem": "DH"
+        },
+        {
+          "item_id": "radio",
+          "kind": "unit",
+          "margin_ratio": null,
+          "margined_mass_kg": null,
+          "mass_kg": 0.09,
+          "maturity": "class_b",
+          "name": "UHF/VHF radio",
+          "own_inertia": {
+            "ixx": 6.4e-05,
+            "ixy": 0.0,
+            "ixz": 0.0,
+            "iyy": 6.4e-05,
+            "iyz": 0.0,
+            "izz": 0.000121
+          },
+          "position_m": [
+            0.0,
+            0.0,
+            0.12
+          ],
+          "subsystem": "TTC"
+        }
+      ],
+      "subsystems": [
+        {
+          "margined_kg": null,
+          "mass_kg": 0.18,
+          "subsystem": "ADCS"
+        },
+        {
+          "margined_kg": null,
+          "mass_kg": 0.12,
+          "subsystem": "DH"
+        },
+        {
+          "margined_kg": null,
+          "mass_kg": 0.25,
+          "subsystem": "EPS"
+        },
+        {
+          "margined_kg": null,
+          "mass_kg": 0.2,
+          "subsystem": "PL"
+        },
+        {
+          "margined_kg": null,
+          "mass_kg": 0.09,
+          "subsystem": "TTC"
+        }
+      ],
+      "system_margined_kg": null,
+      "total_kg": 0.84,
+      "unit_margined_kg": null
+    }
+  ],
+  "problems": [
+    {
+      "code": "RESULT_INCOMPLETE",
+      "file": "config/margin_policy.yaml",
+      "hint": "Replace the placeholder with a sourced value; results that need it show n/a.",
+      "line": null,
+      "message": "The mass margin of maturity class 'class_a' is a placeholder.",
+      "path": "classes.class_a.mass_margin_ratio",
+      "severity": "warning"
+    },
+    {
+      "code": "RESULT_INCOMPLETE",
+      "file": "config/margin_policy.yaml",
+      "hint": "Replace the placeholder with a sourced value; results that need it show n/a.",
+      "line": null,
+      "message": "The mass margin of maturity class 'class_b' is a placeholder.",
+      "path": "classes.class_b.mass_margin_ratio",
+      "severity": "warning"
+    },
+    {
+      "code": "RESULT_INCOMPLETE",
+      "file": "config/margin_policy.yaml",
+      "hint": "Replace the placeholder with a sourced value; results that need it show n/a.",
+      "line": null,
+      "message": "The mass margin of maturity class 'class_c' is a placeholder.",
+      "path": "classes.class_c.mass_margin_ratio",
+      "severity": "warning"
+    },
+    {
+      "code": "RESULT_INCOMPLETE",
+      "file": "config/margin_policy.yaml",
+      "hint": "Replace the placeholder with a sourced value; results that need it show n/a.",
+      "line": null,
+      "message": "The system mass margin is a placeholder.",
+      "path": "system_mass_margin_ratio",
+      "severity": "warning"
+    },
+    {
+      "code": "RESULT_INCOMPLETE",
+      "file": "config/mass_limits.yaml",
+      "hint": "Replace the placeholder with a sourced value; results that need it show n/a.",
+      "line": null,
+      "message": "The mass limit 'Launch mass' is a placeholder.",
+      "path": "limits[0].limit_kg",
+      "severity": "warning"
+    },
+    {
+      "code": "MASS_INERTIA_POINT_MASS",
+      "file": "units/gnss.yaml",
+      "hint": "",
+      "line": null,
+      "message": "'gnss' has no own inertia; it is treated as a point mass.",
+      "path": "mass_properties",
+      "severity": "info"
+    }
+  ],
+  "provenance": {
+    "generated": "2026-01-02T03:04:05Z",
+    "libraries": [
+      [
+        "pinned",
+        "for-golden-tests"
+      ]
+    ],
+    "project_name": "Example 3U CubeSat",
+    "project_revision": "1",
+    "python_version": "3.x",
+    "scenario": "static (no scenario)",
+    "tool": "System Budget Studio",
+    "tool_version": "0.1.0",
+    "user": "Golden User"
+  }
+}

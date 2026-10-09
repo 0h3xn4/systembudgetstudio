@@ -3,6 +3,8 @@ kind: spacecraft_mode
 name: Nominal
 description: Earth-pointing housekeeping.
 assignments:
+  adapter: off
+  battery: off
   camera: off
   gnss: nominal
   heaters: nominal
@@ -13,6 +15,8 @@ assignments:
   pdu_data: nominal
   reaction_wheels: nominal
   sband_trx: nominal
+  solar_array: off
   star_tracker: nominal
+  structure: off
   sun_sensors: nominal
   xband_tx: off

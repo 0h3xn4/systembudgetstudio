@@ -84,4 +84,33 @@ class MigrationRegistry:
         )
 
 
-DEFAULT_REGISTRY = MigrationRegistry(CURRENT_VERSIONS)
+def _placeholder(note: str) -> dict[str, Any]:
+    return {"value": None, "source": "TBD", "note": note}
+
+
+def margin_policy_v1_to_v2(data: dict[str, Any]) -> dict[str, Any]:
+    """v1 had one margin per class and one system margin (used for power). v2 separates power and
+    mass margins; the mass values do not exist in v1 and become placeholders (decision D-051)."""
+    out: dict[str, Any] = {"schema_version": 2, "kind": data.get("kind", "margin_policy")}
+    classes: dict[str, Any] = {}
+    for name, cls in (data.get("classes") or {}).items():
+        item: dict[str, Any] = {}
+        if isinstance(cls, dict):
+            item["power_margin_ratio"] = cls.get("margin_ratio")
+            item["mass_margin_ratio"] = _placeholder(
+                "Added by migration to schema 2; supply a value."
+            )
+            if "description" in cls:
+                item["description"] = cls["description"]
+        classes[name] = item
+    out["classes"] = classes
+    out["system_power_margin_ratio"] = data.get("system_margin_ratio")
+    out["system_mass_margin_ratio"] = _placeholder(
+        "Added by migration to schema 2; supply a value."
+    )
+    return out
+
+
+DEFAULT_REGISTRY = MigrationRegistry(
+    CURRENT_VERSIONS, {("margin_policy", 1): margin_policy_v1_to_v2}
+)

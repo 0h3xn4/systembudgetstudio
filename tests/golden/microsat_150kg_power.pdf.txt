@@ -80,6 +80,28 @@ With margin
 (W)
 Peak
 (W)
+adapter
+Separation adapter
+STRUCT
+main_28v
+off
+ 0.000
+ 1.00
+ 0.000
+ n/a
+ n/a
+ 0.000
+battery
+Battery pack
+EPS
+main_28v
+off
+ 0.000
+ 1.00
+ 0.000
+ n/a
+ n/a
+ 0.000
 camera
 Imager
 PL
@@ -190,6 +212,17 @@ downlink
  n/a
  n/a
  20.000
+solar_array
+Solar array panels
+EPS
+main_28v
+off
+ 0.000
+ 1.00
+ 0.000
+ n/a
+ n/a
+ 0.000
 star_tracker
 Star tracker
 AOCS
@@ -201,6 +234,17 @@ downlink
  n/a
  n/a
  5.000
+structure
+Primary structure
+STRUCT
+main_28v
+off
+ 0.000
+ 1.00
+ 0.000
+ n/a
+ n/a
+ 0.000
 sun_sensors
 Coarse sun sensors
 AOCS
@@ -212,6 +256,25 @@ downlink
  n/a
  n/a
  0.500
+## page 2
+System Budget Studio 0.1.0 | Example 150 kg microsatellite rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 2
+Unit
+Name
+Subsyste
+m
+Bus
+Power mode
+Average
+(W)
+Duty
+Effective
+(W)
+Margin
+With margin
+(W)
+Peak
+(W)
 xband_tx
 X-band transmitter
 PL-DATA
@@ -224,9 +287,6 @@ downlink
  n/a
  40.000
 By subsystem
-## page 2
-System Budget Studio 0.1.0 | Example 150 kg microsatellite rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
-Page 2
 Subsystem
 Effective (W)
 With margin (W)
@@ -256,6 +316,11 @@ PL-DATA
  35.200
  n/a
  54.000
+ n/a
+STRUCT
+ 0.000
+ n/a
+ 0.000
  n/a
 THERM
  1.800
@@ -320,6 +385,47 @@ Source, with margins
  n/a
 Mode: Imaging
 Units in mode Imaging
+Unit
+Name
+Subsyste
+m
+Bus
+Power
+mode
+Average
+(W)
+Duty
+Effective
+(W)
+Margin
+With margin
+(W)
+Peak (W)
+adapter
+Separation adapter
+STRUCT
+main_28v
+off
+ 0.000
+ 1.00
+ 0.000
+ n/a
+ n/a
+ 0.000
+battery
+Battery pack
+EPS
+main_28v
+off
+ 0.000
+ 1.00
+ 0.000
+ n/a
+ n/a
+ 0.000
+## page 3
+System Budget Studio 0.1.0 | Example 150 kg microsatellite rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 3
 Unit
 Name
 Subsyste
@@ -424,25 +530,6 @@ imaging
  n/a
  n/a
  18.000
-## page 3
-System Budget Studio 0.1.0 | Example 150 kg microsatellite rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
-Page 3
-Unit
-Name
-Subsyste
-m
-Bus
-Power
-mode
-Average
-(W)
-Duty
-Effective
-(W)
-Margin
-With margin
-(W)
-Peak (W)
 reaction_wheels
 Reaction wheels
 AOCS
@@ -465,6 +552,17 @@ imaging
  n/a
  n/a
  3.000
+solar_array
+Solar array panels
+EPS
+main_28v
+off
+ 0.000
+ 1.00
+ 0.000
+ n/a
+ n/a
+ 0.000
 star_tracker
 Star tracker
 AOCS
@@ -476,6 +574,17 @@ imaging
  n/a
  n/a
  5.000
+structure
+Primary structure
+STRUCT
+main_28v
+off
+ 0.000
+ 1.00
+ 0.000
+ n/a
+ n/a
+ 0.000
 sun_sensors
 Coarse sun sensors
 AOCS
@@ -529,6 +638,11 @@ PL-DATA
  n/a
  18.000
  n/a
+STRUCT
+ 0.000
+ n/a
+ 0.000
+ n/a
 THERM
  1.800
  n/a
@@ -572,6 +686,9 @@ payload_12v
  48.000
  n/a
 Totals
+## page 4
+System Budget Studio 0.1.0 | Example 150 kg microsatellite rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 4
 Quantity
 Average (W)
 Peak (W)
@@ -592,9 +709,6 @@ Source, with margins
  n/a
 Mode: Nominal
 Units in mode Nominal
-## page 4
-System Budget Studio 0.1.0 | Example 150 kg microsatellite rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
-Page 4
 Unit
 Name
 Subsyste
@@ -611,6 +725,28 @@ Margin
 With margin
 (W)
 Peak (W)
+adapter
+Separation adapter
+STRUCT
+main_28v
+off
+ 0.000
+ 1.00
+ 0.000
+ n/a
+ n/a
+ 0.000
+battery
+Battery pack
+EPS
+main_28v
+off
+ 0.000
+ 1.00
+ 0.000
+ n/a
+ n/a
+ 0.000
 camera
 Imager
 PL
@@ -721,6 +857,17 @@ nominal
  n/a
  n/a
  3.000
+solar_array
+Solar array panels
+EPS
+main_28v
+off
+ 0.000
+ 1.00
+ 0.000
+ n/a
+ n/a
+ 0.000
 star_tracker
 Star tracker
 AOCS
@@ -732,6 +879,17 @@ nominal
  n/a
  n/a
  5.000
+structure
+Primary structure
+STRUCT
+main_28v
+off
+ 0.000
+ 1.00
+ 0.000
+ n/a
+ n/a
+ 0.000
 sun_sensors
 Coarse sun sensors
 AOCS
@@ -780,10 +938,23 @@ PL
  n/a
  0.000
  n/a
+## page 5
+System Budget Studio 0.1.0 | Example 150 kg microsatellite rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 5
+Subsystem
+Effective (W)
+With margin (W)
+Peak (W)
+Peak with margin (W)
 PL-DATA
  4.000
  n/a
  6.000
+ n/a
+STRUCT
+ 0.000
+ n/a
+ 0.000
  n/a
 THERM
  1.800
@@ -837,12 +1008,6 @@ Load, nominal
 Load, with unit margins
  n/a
  n/a
-## page 5
-System Budget Studio 0.1.0 | Example 150 kg microsatellite rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
-Page 5
-Quantity
-Average (W)
-Peak (W)
 Load, with system margin
  n/a
  n/a
@@ -869,6 +1034,28 @@ Margin
 With margin
 (W)
 Peak (W)
+adapter
+Separation adapter
+STRUCT
+main_28v
+off
+ 0.000
+ 1.00
+ 0.000
+ n/a
+ n/a
+ 0.000
+battery
+Battery pack
+EPS
+main_28v
+off
+ 0.000
+ 1.00
+ 0.000
+ n/a
+ n/a
+ 0.000
 camera
 Imager
 PL
@@ -968,6 +1155,24 @@ safe
  n/a
  n/a
  12.000
+## page 6
+System Budget Studio 0.1.0 | Example 150 kg microsatellite rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 6
+Unit
+Name
+Subsystem
+Bus
+Power
+mode
+Average
+(W)
+Duty
+Effective
+(W)
+Margin
+With margin
+(W)
+Peak (W)
 sband_trx
 S-band transceiver
 TTC
@@ -979,9 +1184,31 @@ safe
  n/a
  n/a
  3.000
+solar_array
+Solar array panels
+EPS
+main_28v
+off
+ 0.000
+ 1.00
+ 0.000
+ n/a
+ n/a
+ 0.000
 star_tracker
 Star tracker
 AOCS
+main_28v
+off
+ 0.000
+ 1.00
+ 0.000
+ n/a
+ n/a
+ 0.000
+structure
+Primary structure
+STRUCT
 main_28v
 off
  0.000
@@ -1043,6 +1270,11 @@ PL-DATA
  n/a
  0.000
  n/a
+STRUCT
+ 0.000
+ n/a
+ 0.000
+ n/a
 THERM
  3.200
  n/a
@@ -1054,9 +1286,6 @@ TTC
  3.000
  n/a
 By supply bus
-## page 6
-System Budget Studio 0.1.0 | Example 150 kg microsatellite rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
-Page 6
 Bus
 Converter
 efficiency
@@ -1108,6 +1337,9 @@ Source, with margins
  n/a
  n/a
 Mode: Survival
+## page 7
+System Budget Studio 0.1.0 | Example 150 kg microsatellite rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 7
 Units in mode Survival
 Unit
 Name
@@ -1125,6 +1357,28 @@ With margin
 (W)
 Peak
 (W)
+adapter
+Separation adapter
+STRUCT
+main_28v
+off
+ 0.000
+ 1.00
+ 0.000
+ n/a
+ n/a
+ 0.000
+battery
+Battery pack
+EPS
+main_28v
+off
+ 0.000
+ 1.00
+ 0.000
+ n/a
+ n/a
+ 0.000
 camera
 Imager
 PL
@@ -1235,9 +1489,31 @@ survival
  n/a
  n/a
  3.000
+solar_array
+Solar array panels
+EPS
+main_28v
+off
+ 0.000
+ 1.00
+ 0.000
+ n/a
+ n/a
+ 0.000
 star_tracker
 Star tracker
 AOCS
+main_28v
+off
+ 0.000
+ 1.00
+ 0.000
+ n/a
+ n/a
+ 0.000
+structure
+Primary structure
+STRUCT
 main_28v
 off
  0.000
@@ -1284,14 +1560,6 @@ DH
  n/a
  4.000
  n/a
-## page 7
-System Budget Studio 0.1.0 | Example 150 kg microsatellite rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
-Page 7
-Subsystem
-Effective (W)
-With margin (W)
-Peak (W)
-Peak with margin (W)
 EPS
  5.000
  n/a
@@ -1303,6 +1571,11 @@ PL
  0.000
  n/a
 PL-DATA
+ 0.000
+ n/a
+ 0.000
+ n/a
+STRUCT
  0.000
  n/a
  0.000
@@ -1341,6 +1614,24 @@ main_28v
  n/a
  32.500
  n/a
+## page 8
+System Budget Studio 0.1.0 | Example 150 kg microsatellite rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 8
+Bus
+Converter
+efficiency
+Average load
+(W)
+Average load, with margins
+(W)
+Average at source
+(W)
+Average at source, with margins
+(W)
+Peak load
+(W)
+Peak at source, with margins
+(W)
 payload_12v
  n/a
  0.000
@@ -1419,13 +1710,6 @@ PWR-EFF
 Effective unit power
 P_eff = P_avg * duty_cycle_ratio
 SOURCE_MISSING
-## page 8
-System Budget Studio 0.1.0 | Example 150 kg microsatellite rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
-Page 8
-ID
-Name
-Formula
-Source
 PWR-MARGIN
 Unit power with maturity margin
 P_m = P_eff * (1 + margin_ratio(maturity))
@@ -1442,9 +1726,12 @@ PWR-PEAK
 Peak power
 P_peak = sum of unit peak_power_w (all units at peak at once, conservative)
 SOURCE_MISSING
-SOURCE_MISSING: the formula is a project convention whose reference text is not available to the tool yet (decision D-040).
+SOURCE_MISSING: the formula is a project convention or textbook definition whose reference text is not available to the tool yet (see docs/DECISIONS.md).
 Problems
 Problems and open items
+## page 9
+System Budget Studio 0.1.0 | Example 150 kg microsatellite rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 9
 Severity
 Code
 Location
@@ -1479,15 +1766,35 @@ config/margin_policy.yaml:6
 This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
 warning
 CONFIG_PLACEHOLDER
-config/margin_policy.yaml:11
+config/margin_policy.yaml:10
 This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
 warning
 CONFIG_PLACEHOLDER
-config/margin_policy.yaml:16
+config/margin_policy.yaml:15
 This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
 warning
 CONFIG_PLACEHOLDER
-config/margin_policy.yaml:20
+config/margin_policy.yaml:19
+This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/margin_policy.yaml:24
+This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/margin_policy.yaml:28
+This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/margin_policy.yaml:32
+This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/margin_policy.yaml:36
+This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/mass_limits.yaml:7
 This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
 warning
 RESULT_INCOMPLETE
@@ -1525,11 +1832,6 @@ Libraries
 pinned for-golden-tests
 Project
 Example 150 kg microsatellite
-## page 9
-System Budget Studio 0.1.0 | Example 150 kg microsatellite rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
-Page 9
-Item
-Value
 Project revision
 1
 Scenario

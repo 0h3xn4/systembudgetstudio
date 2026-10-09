@@ -30,7 +30,7 @@ def test_committed_examples_match_generator(tmp_path: Path) -> None:
 
 def test_example_sizes() -> None:
     assert len(load_project(ROOT / "cubesat_3u").project.units) == 6  # type: ignore[union-attr]
-    assert len(load_project(ROOT / "microsat_150kg").project.units) == 13  # type: ignore[union-attr]
+    assert len(load_project(ROOT / "microsat_150kg").project.units) == 17  # type: ignore[union-attr]
     stress = load_project(ROOT / "stress_200_units").project
     assert stress is not None and len(stress.units) == 200 and len(stress.modes) == 5
 
@@ -50,6 +50,10 @@ def test_examples_contain_no_numbers_from_standards() -> None:
     for name in EXAMPLES:
         project = load_project(ROOT / name).project
         assert project is not None
-        for model in (project.config.margin_policy, project.config.power_config):
+        for model in (
+            project.config.margin_policy,
+            project.config.power_config,
+            project.config.mass_limits,
+        ):
             for _, sourced in iter_sourced(model):
                 assert sourced.value is None and sourced.source == "TBD"

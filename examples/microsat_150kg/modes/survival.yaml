@@ -3,6 +3,8 @@ kind: spacecraft_mode
 name: Survival
 description: Battery survival, heaters only.
 assignments:
+  adapter: off
+  battery: off
   camera: off
   gnss: off
   heaters: survival
@@ -13,6 +15,8 @@ assignments:
   pdu_data: off
   reaction_wheels: off
   sband_trx: survival
+  solar_array: off
   star_tracker: off
+  structure: off
   sun_sensors: survival
   xband_tx: off

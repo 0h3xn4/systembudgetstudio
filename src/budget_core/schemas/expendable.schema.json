@@ -1,0 +1,136 @@
+{
+  "$defs": {
+    "Inertia": {
+      "additionalProperties": false,
+      "properties": {
+        "ixx_kgm2": {
+          "minimum": 0,
+          "title": "Ixx Kgm2",
+          "type": "number"
+        },
+        "ixy_kgm2": {
+          "default": 0.0,
+          "title": "Ixy Kgm2",
+          "type": "number"
+        },
+        "ixz_kgm2": {
+          "default": 0.0,
+          "title": "Ixz Kgm2",
+          "type": "number"
+        },
+        "iyy_kgm2": {
+          "minimum": 0,
+          "title": "Iyy Kgm2",
+          "type": "number"
+        },
+        "iyz_kgm2": {
+          "default": 0.0,
+          "title": "Iyz Kgm2",
+          "type": "number"
+        },
+        "izz_kgm2": {
+          "minimum": 0,
+          "title": "Izz Kgm2",
+          "type": "number"
+        }
+      },
+      "required": [
+        "ixx_kgm2",
+        "iyy_kgm2",
+        "izz_kgm2"
+      ],
+      "title": "Inertia",
+      "type": "object"
+    },
+    "MassProperties": {
+      "additionalProperties": false,
+      "description": "Centre-of-mass position (body frame, metres) and optional own inertia of one item.",
+      "properties": {
+        "inertia": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Inertia"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "position_m": {
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 3,
+          "minItems": 3,
+          "title": "Position M",
+          "type": "array"
+        }
+      },
+      "required": [
+        "position_m"
+      ],
+      "title": "MassProperties",
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Propellant, consumables or jettisoned equipment: mass differs per mission phase.",
+  "properties": {
+    "kind": {
+      "const": "expendable",
+      "default": "expendable",
+      "title": "Kind",
+      "type": "string"
+    },
+    "mass_properties": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/MassProperties"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "masses_kg": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Masses Kg",
+      "type": "object"
+    },
+    "maturity": {
+      "minLength": 1,
+      "title": "Maturity",
+      "type": "string"
+    },
+    "name": {
+      "minLength": 1,
+      "title": "Name",
+      "type": "string"
+    },
+    "schema_version": {
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "subsystem": {
+      "minLength": 1,
+      "title": "Subsystem",
+      "type": "string"
+    }
+  },
+  "required": [
+    "kind",
+    "masses_kg",
+    "maturity",
+    "name",
+    "schema_version",
+    "subsystem"
+  ],
+  "title": "System Budget Studio expendable",
+  "type": "object"
+}

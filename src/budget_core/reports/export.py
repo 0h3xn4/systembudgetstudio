@@ -8,7 +8,8 @@ import json
 from dataclasses import asdict
 from typing import Any
 
-from budget_core.power.static_budget import ModePowerResult, StaticPowerResult
+from budget_core.mass.static_mass import PhaseMass
+from budget_core.power.static_budget import ModePowerResult
 from budget_core.provenance import Provenance
 
 CSV_COLUMNS = (
@@ -37,7 +38,7 @@ def _plain(value: Any) -> Any:
     return value
 
 
-def result_json(result: StaticPowerResult, provenance: Provenance) -> str:
+def result_json(result: Any, provenance: Provenance) -> str:
     data = _plain(asdict(result))
     data["problems"] = [p.to_dict() for p in result.problems]
     data["provenance"] = _plain(asdict(provenance))
@@ -52,6 +53,45 @@ def result_csv(mode: ModePowerResult) -> str:
     for row in mode.rows:
         values = asdict(row)
         writer.writerow(["" if values[c] is None else _cell(values[c]) for c in CSV_COLUMNS])
+    return buffer.getvalue()
+
+
+MASS_CSV_COLUMNS = (
+    "item_id",
+    "name",
+    "kind",
+    "subsystem",
+    "maturity",
+    "mass_kg",
+    "margin_ratio",
+    "margined_mass_kg",
+    "x_m",
+    "y_m",
+    "z_m",
+)
+
+
+def mass_csv(phase: PhaseMass) -> str:
+    """One phase's item table. Unavailable values (placeholders, no position) are empty cells."""
+    buffer = io.StringIO()
+    writer = csv.writer(buffer, lineterminator="\n")
+    writer.writerow(MASS_CSV_COLUMNS)
+    for row in phase.rows:
+        x, y, z = row.position_m if row.position_m else (None, None, None)
+        values = [
+            row.item_id,
+            row.name,
+            row.kind,
+            row.subsystem,
+            row.maturity,
+            row.mass_kg,
+            row.margin_ratio,
+            row.margined_mass_kg,
+            x,
+            y,
+            z,
+        ]
+        writer.writerow(["" if v is None else _cell(v) for v in values])
     return buffer.getvalue()
 
 

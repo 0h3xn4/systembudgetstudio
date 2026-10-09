@@ -1,0 +1,669 @@
+pages=18
+## page 1
+System Budget Studio 0.1.0 | Example stress case (200 units) rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 1
+Mass budget (static): Example stress case (200 units)
+INCOMPLETE: some inputs are placeholders (source TBD or missing). Entries marked n/a depend on them and are not computed. Do not use this report as evidence until the
+placeholders are replaced with sourced values.
+Summary
+Body frame: Right-handed body frame. Origin: centre of the launch-vehicle interface plane. +Z: along the launch axis, away from the interface. X and Y: in the interface plane. Positions are item centres of mass in
+metres. Synthetic example.
+Mass and centre of gravity by mission phase
+Phase
+Total (kg)
+With unit margins (kg)
+With system margin (kg)
+CG x (m)
+CG y (m)
+CG z (m)
+CG coverage
+launch
+ 79.370
+ n/a
+ n/a
+ -0.0016
+ -0.0026
+ 0.3333
+ 100.0 %
+eol
+ 79.370
+ n/a
+ n/a
+ -0.0016
+ -0.0026
+ 0.3333
+ 100.0 %
+CG and inertia use nominal masses of items with a position; coverage is their share of the nominal total.
+Mass limits (checked against the system-margined total)
+Phase
+Limit
+Limit value (kg)
+Total (kg)
+Margin (kg)
+Status
+launch
+Launch mass
+ n/a
+ n/a
+ n/a
+n/a
+Phase: launch
+Items
+Item
+Name
+Kind
+Subsystem
+Maturity
+Mass (kg)
+Margin
+With margin (kg)
+x (m)
+y (m)
+z (m)
+Own
+inertia
+unit_000
+Stress unit 000
+unit
+DH
+class_a
+ 0.050
+ n/a
+ n/a
+ -0.1500
+ -0.1500
+ 0.1000
+no
+unit_001
+Stress unit 001
+unit
+EPS
+class_b
+ 0.120
+ n/a
+ n/a
+ -0.1000
+ -0.1500
+ 0.1400
+yes
+unit_002
+Stress unit 002
+unit
+AOCS
+class_c
+ 0.190
+ n/a
+ n/a
+ -0.0500
+ -0.1500
+ 0.1800
+yes
+unit_003
+Stress unit 003
+unit
+TTC
+class_a
+ 0.260
+ n/a
+ n/a
+ 0.0000
+ -0.1500
+ 0.2200
+yes
+unit_004
+Stress unit 004
+unit
+PL
+class_b
+ 0.330
+ n/a
+ n/a
+ 0.0500
+ -0.1500
+ 0.2600
+yes
+unit_005
+Stress unit 005
+unit
+THERM
+class_c
+ 0.400
+ n/a
+ n/a
+ 0.1000
+ -0.1500
+ 0.3000
+no
+unit_006
+Stress unit 006
+unit
+PL-DATA
+class_a
+ 0.470
+ n/a
+ n/a
+ 0.1500
+ -0.1500
+ 0.3400
+yes
+unit_007
+Stress unit 007
+unit
+HARNESS
+class_b
+ 0.540
+ n/a
+ n/a
+ -0.1500
+ -0.1000
+ 0.3800
+yes
+unit_008
+Stress unit 008
+unit
+DH
+class_c
+ 0.610
+ n/a
+ n/a
+ -0.1000
+ -0.1000
+ 0.4200
+yes
+unit_009
+Stress unit 009
+unit
+EPS
+class_a
+ 0.680
+ n/a
+ n/a
+ -0.0500
+ -0.1000
+ 0.4600
+yes
+unit_010
+Stress unit 010
+unit
+AOCS
+class_b
+ 0.750
+ n/a
+ n/a
+ 0.0000
+ -0.1000
+ 0.5000
+no
+unit_011
+Stress unit 011
+unit
+TTC
+class_c
+ 0.050
+ n/a
+ n/a
+ 0.0500
+ -0.1000
+ 0.5400
+yes
+unit_012
+Stress unit 012
+unit
+PL
+class_a
+ 0.120
+ n/a
+ n/a
+ 0.1000
+ -0.1000
+ 0.5800
+yes
+unit_013
+Stress unit 013
+unit
+THERM
+class_b
+ 0.190
+ n/a
+ n/a
+ 0.1500
+ -0.1000
+ 0.1000
+yes
+unit_014
+Stress unit 014
+unit
+PL-DATA
+class_c
+ 0.260
+ n/a
+ n/a
+ -0.1500
+ -0.0500
+ 0.1400
+yes
+## page 2
+System Budget Studio 0.1.0 | Example stress case (200 units) rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 2
+Item
+Name
+Kind
+Subsystem
+Maturity
+Mass (kg)
+Margin
+With margin (kg)
+x (m)
+y (m)
+z (m)
+Own
+inertia
+unit_015
+Stress unit 015
+unit
+HARNESS
+class_a
+ 0.330
+ n/a
+ n/a
+ -0.1000
+ -0.0500
+ 0.1800
+no
+unit_016
+Stress unit 016
+unit
+DH
+class_b
+ 0.400
+ n/a
+ n/a
+ -0.0500
+ -0.0500
+ 0.2200
+yes
+unit_017
+Stress unit 017
+unit
+EPS
+class_c
+ 0.470
+ n/a
+ n/a
+ 0.0000
+ -0.0500
+ 0.2600
+yes
+unit_018
+Stress unit 018
+unit
+AOCS
+class_a
+ 0.540
+ n/a
+ n/a
+ 0.0500
+ -0.0500
+ 0.3000
+yes
+unit_019
+Stress unit 019
+unit
+TTC
+class_b
+ 0.610
+ n/a
+ n/a
+ 0.1000
+ -0.0500
+ 0.3400
+yes
+unit_020
+Stress unit 020
+unit
+PL
+class_c
+ 0.680
+ n/a
+ n/a
+ 0.1500
+ -0.0500
+ 0.3800
+no
+unit_021
+Stress unit 021
+unit
+THERM
+class_a
+ 0.750
+ n/a
+ n/a
+ -0.1500
+ 0.0000
+ 0.4200
+yes
+unit_022
+Stress unit 022
+unit
+PL-DATA
+class_b
+ 0.050
+ n/a
+ n/a
+ -0.1000
+ 0.0000
+ 0.4600
+yes
+unit_023
+Stress unit 023
+unit
+HARNESS
+class_c
+ 0.120
+ n/a
+ n/a
+ -0.0500
+ 0.0000
+ 0.5000
+yes
+unit_024
+Stress unit 024
+unit
+DH
+class_a
+ 0.190
+ n/a
+ n/a
+ 0.0000
+ 0.0000
+ 0.5400
+yes
+unit_025
+Stress unit 025
+unit
+EPS
+class_b
+ 0.260
+ n/a
+ n/a
+ 0.0500
+ 0.0000
+ 0.5800
+no
+unit_026
+Stress unit 026
+unit
+AOCS
+class_c
+ 0.330
+ n/a
+ n/a
+ 0.1000
+ 0.0000
+ 0.1000
+yes
+unit_027
+Stress unit 027
+unit
+TTC
+class_a
+ 0.400
+ n/a
+ n/a
+ 0.1500
+ 0.0000
+ 0.1400
+yes
+unit_028
+Stress unit 028
+unit
+PL
+class_b
+ 0.470
+ n/a
+ n/a
+ -0.1500
+ 0.0500
+ 0.1800
+yes
+unit_029
+Stress unit 029
+unit
+THERM
+class_c
+ 0.540
+ n/a
+ n/a
+ -0.1000
+ 0.0500
+ 0.2200
+yes
+unit_030
+Stress unit 030
+unit
+PL-DATA
+class_a
+ 0.610
+ n/a
+ n/a
+ -0.0500
+ 0.0500
+ 0.2600
+no
+unit_031
+Stress unit 031
+unit
+HARNESS
+class_b
+ 0.680
+ n/a
+ n/a
+ 0.0000
+ 0.0500
+ 0.3000
+yes
+unit_032
+Stress unit 032
+unit
+DH
+class_c
+ 0.750
+ n/a
+ n/a
+ 0.0500
+ 0.0500
+ 0.3400
+yes
+unit_033
+Stress unit 033
+unit
+EPS
+class_a
+ 0.050
+ n/a
+ n/a
+ 0.1000
+ 0.0500
+ 0.3800
+yes
+unit_034
+Stress unit 034
+unit
+AOCS
+class_b
+ 0.120
+ n/a
+ n/a
+ 0.1500
+ 0.0500
+ 0.4200
+yes
+unit_035
+Stress unit 035
+unit
+TTC
+class_c
+ 0.190
+ n/a
+ n/a
+ -0.1500
+ 0.1000
+ 0.4600
+no
+unit_036
+Stress unit 036
+unit
+PL
+class_a
+ 0.260
+ n/a
+ n/a
+ -0.1000
+ 0.1000
+ 0.5000
+yes
+unit_037
+Stress unit 037
+unit
+THERM
+class_b
+ 0.330
+ n/a
+ n/a
+ -0.0500
+ 0.1000
+ 0.5400
+yes
+unit_038
+Stress unit 038
+unit
+PL-DATA
+class_c
+ 0.400
+ n/a
+ n/a
+ 0.0000
+ 0.1000
+ 0.5800
+yes
+unit_039
+Stress unit 039
+unit
+HARNESS
+class_a
+ 0.470
+ n/a
+ n/a
+ 0.0500
+ 0.1000
+ 0.1000
+yes
+unit_040
+Stress unit 040
+unit
+DH
+class_b
+ 0.540
+ n/a
+ n/a
+ 0.1000
+ 0.1000
+ 0.1400
+no
+unit_041
+Stress unit 041
+unit
+EPS
+class_c
+ 0.610
+ n/a
+ n/a
+ 0.1500
+ 0.1000
+ 0.1800
+yes
+unit_042
+Stress unit 042
+unit
+AOCS
+class_a
+ 0.680
+ n/a
+ n/a
+ -0.1500
+ 0.1500
+ 0.2200
+yes
+unit_043
+Stress unit 043
+unit
+TTC
+class_b
+ 0.750
+ n/a
+ n/a
+ -0.1000
+ 0.1500
+ 0.2600
+yes
+unit_044
+Stress unit 044
+unit
+PL
+class_c
+ 0.050
+ n/a
+ n/a
+ -0.0500
+ 0.1500
+ 0.3000
+yes
+unit_045
+Stress unit 045
+unit
+THERM
+class_a
+ 0.120
+ n/a
+ n/a
+ 0.0000
+ 0.1500
+ 0.3400
+no
+unit_046
+Stress unit 046
+unit
+PL-DATA
+class_b
+ 0.190
+ n/a
+ n/a
+ 0.0500
+ 0.1500
+ 0.3800
+yes
+unit_047
+Stress unit 047
+unit
+HARNESS
+class_c
+ 0.260
+ n/a
+ n/a
+ 0.1000
+ 0.1500
+ 0.4200
+yes
+unit_048
+Stress unit 048
+unit
+DH
+class_a
+ 0.330
+ n/a
+ n/a
+ 0.1500
+ 0.1500
+ 0.4600
+yes
+...

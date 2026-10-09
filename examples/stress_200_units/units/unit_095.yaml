@@ -30,3 +30,8 @@ modes:
     avg_power_w: 2.38
     peak_power_w: 3.57
     duty_cycle_ratio: 0.5
+mass_properties:
+  position_m:
+    - 0.05
+    - 0.15
+    - 0.26

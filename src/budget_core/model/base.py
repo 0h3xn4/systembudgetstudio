@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, get_args, get_origin
 
 from pydantic import BaseModel, ConfigDict, Field, ValidationInfo, field_validator
 from pydantic_core import PydanticCustomError
@@ -21,14 +21,35 @@ class BudgetModel(BaseModel):
         numeric = has_unit_suffix(name) or name == "value"
         if numeric and isinstance(value, bool):
             raise PydanticCustomError("unit_invalid", "expected a number, not a yes/no value")
-        if has_unit_suffix(name) and isinstance(value, str):
-            try:
-                return parse_quantity(value, name)
-            except UnitError as exc:
-                raise PydanticCustomError(
-                    "unit_invalid", "{reason}", {"reason": str(exc)}
-                ) from None
+        if not has_unit_suffix(name):
+            return value
+        if isinstance(value, str):
+            return _parse(value, name)
+        if not _holds_numbers(cls.model_fields[name].annotation):
+            return value  # e.g. a nested model such as Sourced: its own fields parse themselves
+        if isinstance(value, list):
+            return [_parse(v, name) if isinstance(v, str) else v for v in value]
+        if isinstance(value, dict):
+            return {k: _parse(v, name) if isinstance(v, str) else v for k, v in value.items()}
         return value
+
+
+def _holds_numbers(annotation: Any) -> bool:
+    """True for list[float] and dict[str, float] (the containers whose items carry the unit)."""
+    origin = get_origin(annotation)
+    args = get_args(annotation)
+    if origin is list:
+        return args == (float,)
+    if origin is dict:
+        return len(args) == 2 and args[1] is float
+    return False
+
+
+def _parse(text: str, name: str) -> float:
+    try:
+        return parse_quantity(text, name)
+    except UnitError as exc:
+        raise PydanticCustomError("unit_invalid", "{reason}", {"reason": str(exc)}) from None
 
 
 def duplicate_names(names: list[str]) -> bool:

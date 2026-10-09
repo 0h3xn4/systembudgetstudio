@@ -128,9 +128,10 @@ def validate_references(project: Project, lines: dict[str, LineMap]) -> list[Pro
                     )
                 )
 
+    out.extend(_mass_references(project, lines))
     out.extend(_value_ranges(project, lines))
 
-    for kind in ("margin_policy", "power_config", "ebn0_table", "attenuation_table"):
+    for kind in ("margin_policy", "power_config", "ebn0_table", "attenuation_table", "mass_limits"):
         model = getattr(project.config, kind)
         if model is None:
             continue
@@ -150,6 +151,18 @@ def validate_references(project: Project, lines: dict[str, LineMap]) -> list[Pro
                         "sheet and cite the source.",
                     )
                 )
+        if kind == "mass_limits" and not model.limits:
+            out.append(
+                _p(
+                    Severity.WARNING,
+                    "CONFIG_EMPTY_TABLE",
+                    "The table has no entries.",
+                    file,
+                    ("limits",),
+                    lines,
+                    "Add mass limits with their sources (for example launch mass).",
+                )
+            )
         if kind in ("ebn0_table", "attenuation_table") and not model.entries:
             out.append(
                 _p(
@@ -207,12 +220,22 @@ def _value_ranges(project: Project, lines: dict[str, LineMap]) -> list[Problem]:
     if policy is not None:
         f = "config/margin_policy.yaml"
         for name, cls in policy.classes.items():
+            for field in ("power_margin_ratio", "mass_margin_ratio"):
+                check(f, ("classes", name, field), getattr(cls, field), "A margin ratio", 0.0, 10.0)
+        for field in ("system_power_margin_ratio", "system_mass_margin_ratio"):
+            check(f, (field,), getattr(policy, field), "The system margin", 0.0, 10.0)
+    limits = project.config.mass_limits
+    if limits is not None:
+        for index, limit in enumerate(limits.limits):
             check(
-                f, ("classes", name, "margin_ratio"), cls.margin_ratio, "A margin ratio", 0.0, 10.0
+                "config/mass_limits.yaml",
+                ("limits", index, "limit_kg"),
+                limit.limit_kg,
+                "A mass limit",
+                0.0,
+                1e9,
+                lo_open=True,
             )
-        check(
-            f, ("system_margin_ratio",), policy.system_margin_ratio, "The system margin", 0.0, 10.0
-        )
     power = project.config.power_config
     if power is not None:
         f = "config/power_config.yaml"
@@ -235,4 +258,101 @@ def _value_ranges(project: Project, lines: dict[str, LineMap]) -> list[Problem]:
                 1.0,
                 lo_open=True,
             )
+    return out
+
+
+def _mass_references(project: Project, lines: dict[str, LineMap]) -> list[Problem]:
+    out: list[Problem] = []
+    err = Severity.ERROR
+    phases = project.phases
+    known = ", ".join(phases)
+    policy = project.config.margin_policy
+
+    for uid, unit in project.units.items():
+        for index, name in enumerate(unit.phases or []):
+            if name not in phases:
+                out.append(
+                    _p(
+                        err,
+                        "REF_UNKNOWN_PHASE",
+                        f"Phase '{name}' is not a mission phase.",
+                        f"units/{uid}.yaml",
+                        ("phases", index),
+                        lines,
+                        f"Defined phases: {known}.",
+                    )
+                )
+
+    for eid, exp in project.expendables.items():
+        file = f"expendables/{eid}.yaml"
+        if policy is not None and exp.maturity not in policy.classes:
+            out.append(
+                _p(
+                    err,
+                    "REF_UNKNOWN_MATURITY",
+                    "The maturity class is not defined in config/margin_policy.yaml.",
+                    file,
+                    ("maturity",),
+                    lines,
+                    "Defined classes: " + ", ".join(policy.classes) + ".",
+                )
+            )
+        for phase in phases:
+            if phase not in exp.masses_kg:
+                out.append(
+                    _p(
+                        err,
+                        "PHASE_MASS_MISSING",
+                        f"No mass is given for phase '{phase}'.",
+                        file,
+                        ("masses_kg",),
+                        lines,
+                        f"Add '{phase}: <mass in kg>' (write 0.0 if it is not present).",
+                    )
+                )
+        for phase in exp.masses_kg:
+            if phase not in phases:
+                out.append(
+                    _p(
+                        err,
+                        "REF_UNKNOWN_PHASE",
+                        f"Phase '{phase}' is not a mission phase.",
+                        file,
+                        ("masses_kg", phase),
+                        lines,
+                        f"Defined phases: {known}.",
+                    )
+                )
+
+    limits = project.config.mass_limits
+    for index, limit in enumerate(limits.limits if limits else []):
+        if limit.phase is not None and limit.phase not in phases:
+            out.append(
+                _p(
+                    err,
+                    "REF_UNKNOWN_PHASE",
+                    f"Phase '{limit.phase}' is not a mission phase.",
+                    "config/mass_limits.yaml",
+                    ("limits", index, "phase"),
+                    lines,
+                    f"Defined phases: {known}.",
+                )
+            )
+
+    uses_positions = any(u.mass_properties for u in project.units.values()) or any(
+        e.mass_properties for e in project.expendables.values()
+    )
+    if uses_positions and not project.spacecraft.body_frame.strip():
+        out.append(
+            _p(
+                Severity.WARNING,
+                "MASS_FRAME_UNDEFINED",
+                "Positions are given but the body frame is not described.",
+                "spacecraft.yaml",
+                ("body_frame",),
+                lines,
+                "Describe the axes and origin in 'body_frame' (for example: origin at the "
+                "centre of the launch interface plane, +Z along the launch axis).",
+            )
+        )
     return out

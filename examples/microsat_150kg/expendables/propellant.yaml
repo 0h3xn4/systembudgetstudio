@@ -1,0 +1,14 @@
+schema_version: 1
+kind: expendable
+name: Propellant
+subsystem: PROP
+maturity: class_c
+masses_kg:
+  bol: 8.5
+  eol: 0.8
+  launch: 9.0
+mass_properties:
+  position_m:
+    - 0.0
+    - 0.0
+    - 0.35

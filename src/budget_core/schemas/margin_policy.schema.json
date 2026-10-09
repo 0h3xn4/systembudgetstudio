@@ -8,12 +8,16 @@
           "title": "Description",
           "type": "string"
         },
-        "margin_ratio": {
+        "mass_margin_ratio": {
+          "$ref": "#/$defs/Sourced"
+        },
+        "power_margin_ratio": {
           "$ref": "#/$defs/Sourced"
         }
       },
       "required": [
-        "margin_ratio"
+        "power_margin_ratio",
+        "mass_margin_ratio"
       ],
       "title": "MaturityClass",
       "type": "object"
@@ -69,11 +73,14 @@
       "type": "string"
     },
     "schema_version": {
-      "default": 1,
+      "default": 2,
       "title": "Schema Version",
       "type": "integer"
     },
-    "system_margin_ratio": {
+    "system_mass_margin_ratio": {
+      "$ref": "#/$defs/Sourced"
+    },
+    "system_power_margin_ratio": {
       "$ref": "#/$defs/Sourced"
     }
   },
@@ -81,7 +88,8 @@
     "classes",
     "kind",
     "schema_version",
-    "system_margin_ratio"
+    "system_mass_margin_ratio",
+    "system_power_margin_ratio"
   ],
   "title": "System Budget Studio margin_policy",
   "type": "object"

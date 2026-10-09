@@ -68,5 +68,34 @@ EQUATIONS: dict[str, Equation] = {
             None,
             _CONVENTION,
         ),
+        Equation(
+            "MASS-MARGIN",
+            "Item mass with maturity margin",
+            "m_m = m * (1 + mass_margin_ratio(maturity))",
+            None,
+            _CONVENTION,
+        ),
+        Equation(
+            "MASS-SYSMARGIN",
+            "System mass margin on the margined total",
+            "m_sys = (sum m_m) * (1 + system_mass_margin_ratio)",
+            None,
+            _CONVENTION,
+        ),
+        Equation(
+            "MASS-COG",
+            "Centre of gravity",
+            "r_cg = sum(m_i r_i) / sum(m_i), nominal masses of items with a position",
+            None,
+            "Classical mechanics (definition); no standards text cited. Margin mass has no "
+            "position (DEVIATIONS DV-M1).",
+        ),
+        Equation(
+            "MASS-PARALLEL",
+            "Parallel-axis (Huygens-Steiner) theorem",
+            "I = sum(I_i + m_i (|d_i|^2 E - d_i d_i^T)), d_i = r_i - r_ref",
+            None,
+            "Classical rigid-body mechanics; tensor entries convention in DECISIONS D-048.",
+        ),
     )
 }

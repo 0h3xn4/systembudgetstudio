@@ -1,0 +1,96 @@
+{
+  "$defs": {
+    "MassLimit": {
+      "additionalProperties": false,
+      "properties": {
+        "limit_kg": {
+          "$ref": "#/$defs/Sourced"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "phase": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Phase"
+        }
+      },
+      "required": [
+        "name",
+        "limit_kg"
+      ],
+      "title": "MassLimit",
+      "type": "object"
+    },
+    "Sourced": {
+      "additionalProperties": false,
+      "description": "A number from a standard, policy or data sheet. `source: TBD` or a null value marks a\nplaceholder that must be replaced before results are trusted (spec constraint 15).",
+      "properties": {
+        "note": {
+          "default": "",
+          "title": "Note",
+          "type": "string"
+        },
+        "source": {
+          "minLength": 1,
+          "title": "Source",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "value",
+        "source"
+      ],
+      "title": "Sourced",
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "kind": {
+      "const": "mass_limits",
+      "default": "mass_limits",
+      "title": "Kind",
+      "type": "string"
+    },
+    "limits": {
+      "items": {
+        "$ref": "#/$defs/MassLimit"
+      },
+      "title": "Limits",
+      "type": "array"
+    },
+    "schema_version": {
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "kind",
+    "schema_version"
+  ],
+  "title": "System Budget Studio mass_limits",
+  "type": "object"
+}

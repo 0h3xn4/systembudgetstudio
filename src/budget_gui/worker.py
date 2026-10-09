@@ -2,15 +2,12 @@
 
 from __future__ import annotations
 
-from collections.abc import Collection
+from collections.abc import Collection, Sequence
 from pathlib import Path
 
 from PySide6.QtCore import QThread, Signal
 
-from budget_core.power.static_budget import StaticPowerResult
-from budget_core.provenance import Provenance
-from budget_core.reports.document import ReportDocument
-from budget_core.reports.run import write_power_reports
+from budget_core.reports.run import BudgetOutput, write_outputs
 
 
 class ExportWorker(QThread):
@@ -18,20 +15,15 @@ class ExportWorker(QThread):
     failed = Signal(str)
 
     def __init__(
-        self,
-        document: ReportDocument,
-        power: StaticPowerResult,
-        provenance: Provenance,
-        folder: Path,
-        kinds: Collection[str],
+        self, outputs: Sequence[BudgetOutput], folder: Path, kinds: Collection[str]
     ) -> None:
         super().__init__()
-        self._args = (document, power, provenance, folder, set(kinds))
+        self._args = (list(outputs), folder, set(kinds))
 
     def run(self) -> None:
-        document, power, provenance, folder, kinds = self._args
+        outputs, folder, kinds = self._args
         try:
-            written = write_power_reports(document, power, provenance, folder, kinds)
+            written = write_outputs(outputs, folder, kinds)
         except OSError:
             self.failed.emit(
                 "The reports could not be written. Check that the folder exists, is a folder "

@@ -150,7 +150,71 @@ def test_sourced_requires_a_source() -> None:
 
 def test_margin_policy_classes_sorted() -> None:
     s = {"value": None, "source": "TBD"}
+    cls = {"power_margin_ratio": s, "mass_margin_ratio": s}
     p = MarginPolicy.model_validate(
-        {"classes": {"b": {"margin_ratio": s}, "a": {"margin_ratio": s}}, "system_margin_ratio": s}
+        {
+            "classes": {"b": cls, "a": cls},
+            "system_power_margin_ratio": s,
+            "system_mass_margin_ratio": s,
+        }
     )
     assert list(p.classes) == ["a", "b"]
+
+
+def test_mass_properties_accept_units_and_validate_inertia() -> None:
+    from budget_core.model import MassProperties
+
+    props = MassProperties.model_validate(
+        {
+            "position_m": ["10 cm", "0 m", 0.2],
+            "inertia": {"ixx_kgm2": "5 kg*m^2", "iyy_kgm2": 5.0, "izz_kgm2": 5.0},
+        }
+    )
+    assert props.position_m == [pytest.approx(0.1), 0.0, 0.2]
+    assert props.inertia is not None and props.inertia.ixx_kgm2 == 5.0
+
+
+@pytest.mark.parametrize(
+    "bad",
+    [
+        {"position_m": [0.0, 0.0]},  # needs three coordinates
+        {"position_m": [0.0, 0.0, 0.0, 0.0]},
+        {"position_m": [0.0, 0.0, "3 kg"]},  # wrong unit kind
+        {"position_m": [0.0, 0.0, 0.0], "inertia": {"ixx_kgm2": 1, "iyy_kgm2": 1, "izz_kgm2": 3}},
+        {"position_m": [0.0, 0.0, 0.0], "inertia": {"ixx_kgm2": -1, "iyy_kgm2": 1, "izz_kgm2": 1}},
+        {
+            "position_m": [0.0, 0.0, 0.0],
+            "inertia": {"ixx_kgm2": 1, "iyy_kgm2": 1, "izz_kgm2": 1, "ixy_kgm2": 0.9},
+        },
+    ],
+)
+def test_invalid_mass_properties_are_rejected(bad: dict[str, Any]) -> None:
+    from budget_core.model import MassProperties
+
+    with pytest.raises(ValidationError):
+        MassProperties.model_validate(bad)
+
+
+def test_expendable_masses_sorted_and_non_negative() -> None:
+    from budget_core.model import Expendable
+
+    base = {"name": "Fuel", "subsystem": "PROP", "maturity": "m1"}
+    e = Expendable.model_validate({**base, "masses_kg": {"launch": 5.0, "bol": 4.0}})
+    assert list(e.masses_kg) == ["bol", "launch"]
+    with pytest.raises(ValidationError):
+        Expendable.model_validate({**base, "masses_kg": {"launch": -1.0}})
+
+
+def test_phase_lists_must_be_unique() -> None:
+    bus = {"name": "main", "nominal_voltage_v": 28.0}
+    with pytest.raises(ValidationError):
+        Spacecraft.model_validate({"name": "S", "buses": [bus], "mission_phases": ["a", "a"]})
+    with pytest.raises(ValidationError):
+        Unit.model_validate(unit(phases=["a", "a"]))
+
+
+def test_kgm2_suffix_parses() -> None:
+    from budget_core.units.quantity import canonical_unit, parse_quantity
+
+    assert parse_quantity("2 kg*m^2", "ixx_kgm2") == pytest.approx(2.0)
+    assert canonical_unit("ixx_kgm2") == "kg m2"

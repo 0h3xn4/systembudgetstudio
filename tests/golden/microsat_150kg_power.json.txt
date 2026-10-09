@@ -3,7 +3,7 @@
     {
       "file": "config/margin_policy.yaml",
       "name": "Margin, maturity class class_a",
-      "path": "classes.class_a.margin_ratio",
+      "path": "classes.class_a.power_margin_ratio",
       "placeholder": true,
       "source": "TBD",
       "unit": "ratio",
@@ -12,7 +12,7 @@
     {
       "file": "config/margin_policy.yaml",
       "name": "Margin, maturity class class_b",
-      "path": "classes.class_b.margin_ratio",
+      "path": "classes.class_b.power_margin_ratio",
       "placeholder": true,
       "source": "TBD",
       "unit": "ratio",
@@ -21,7 +21,7 @@
     {
       "file": "config/margin_policy.yaml",
       "name": "Margin, maturity class class_c",
-      "path": "classes.class_c.margin_ratio",
+      "path": "classes.class_c.power_margin_ratio",
       "placeholder": true,
       "source": "TBD",
       "unit": "ratio",
@@ -30,7 +30,7 @@
     {
       "file": "config/margin_policy.yaml",
       "name": "System margin",
-      "path": "system_margin_ratio",
+      "path": "system_power_margin_ratio",
       "placeholder": true,
       "source": "TBD",
       "unit": "ratio",
@@ -121,6 +121,36 @@
         "unit_margined_w": null
       },
       "rows": [
+        {
+          "avg_power_w": 0.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_a",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "STRUCT",
+          "unit_id": "adapter",
+          "unit_name": "Separation adapter"
+        },
+        {
+          "avg_power_w": 0.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "EPS",
+          "unit_id": "battery",
+          "unit_name": "Battery pack"
+        },
         {
           "avg_power_w": 0.0,
           "bus": "payload_12v",
@@ -272,6 +302,21 @@
           "unit_name": "S-band transceiver"
         },
         {
+          "avg_power_w": 0.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "EPS",
+          "unit_id": "solar_array",
+          "unit_name": "Solar array panels"
+        },
+        {
           "avg_power_w": 3.5,
           "bus": "main_28v",
           "duty_cycle_ratio": 1.0,
@@ -285,6 +330,21 @@
           "subsystem": "AOCS",
           "unit_id": "star_tracker",
           "unit_name": "Star tracker"
+        },
+        {
+          "avg_power_w": 0.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_a",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "STRUCT",
+          "unit_id": "structure",
+          "unit_name": "Primary structure"
         },
         {
           "avg_power_w": 0.4,
@@ -352,6 +412,13 @@
           "margined_w": null,
           "peak_w": 54.0,
           "subsystem": "PL-DATA"
+        },
+        {
+          "effective_w": 0.0,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 0.0,
+          "subsystem": "STRUCT"
         },
         {
           "effective_w": 1.7999999999999998,
@@ -425,6 +492,36 @@
         "unit_margined_w": null
       },
       "rows": [
+        {
+          "avg_power_w": 0.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_a",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "STRUCT",
+          "unit_id": "adapter",
+          "unit_name": "Separation adapter"
+        },
+        {
+          "avg_power_w": 0.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "EPS",
+          "unit_id": "battery",
+          "unit_name": "Battery pack"
+        },
         {
           "avg_power_w": 22.0,
           "bus": "payload_12v",
@@ -576,6 +673,21 @@
           "unit_name": "S-band transceiver"
         },
         {
+          "avg_power_w": 0.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "EPS",
+          "unit_id": "solar_array",
+          "unit_name": "Solar array panels"
+        },
+        {
           "avg_power_w": 3.5,
           "bus": "main_28v",
           "duty_cycle_ratio": 1.0,
@@ -589,6 +701,21 @@
           "subsystem": "AOCS",
           "unit_id": "star_tracker",
           "unit_name": "Star tracker"
+        },
+        {
+          "avg_power_w": 0.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_a",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "STRUCT",
+          "unit_id": "structure",
+          "unit_name": "Primary structure"
         },
         {
           "avg_power_w": 0.4,
@@ -656,6 +783,13 @@
           "margined_w": null,
           "peak_w": 18.0,
           "subsystem": "PL-DATA"
+        },
+        {
+          "effective_w": 0.0,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 0.0,
+          "subsystem": "STRUCT"
         },
         {
           "effective_w": 1.7999999999999998,
@@ -729,6 +863,36 @@
         "unit_margined_w": null
       },
       "rows": [
+        {
+          "avg_power_w": 0.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_a",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "STRUCT",
+          "unit_id": "adapter",
+          "unit_name": "Separation adapter"
+        },
+        {
+          "avg_power_w": 0.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "EPS",
+          "unit_id": "battery",
+          "unit_name": "Battery pack"
+        },
         {
           "avg_power_w": 0.0,
           "bus": "payload_12v",
@@ -880,6 +1044,21 @@
           "unit_name": "S-band transceiver"
         },
         {
+          "avg_power_w": 0.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "EPS",
+          "unit_id": "solar_array",
+          "unit_name": "Solar array panels"
+        },
+        {
           "avg_power_w": 3.5,
           "bus": "main_28v",
           "duty_cycle_ratio": 1.0,
@@ -893,6 +1072,21 @@
           "subsystem": "AOCS",
           "unit_id": "star_tracker",
           "unit_name": "Star tracker"
+        },
+        {
+          "avg_power_w": 0.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_a",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "STRUCT",
+          "unit_id": "structure",
+          "unit_name": "Primary structure"
         },
         {
           "avg_power_w": 0.4,
@@ -960,6 +1154,13 @@
           "margined_w": null,
           "peak_w": 6.0,
           "subsystem": "PL-DATA"
+        },
+        {
+          "effective_w": 0.0,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 0.0,
+          "subsystem": "STRUCT"
         },
         {
           "effective_w": 1.7999999999999998,
@@ -1033,6 +1234,36 @@
         "unit_margined_w": null
       },
       "rows": [
+        {
+          "avg_power_w": 0.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_a",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "STRUCT",
+          "unit_id": "adapter",
+          "unit_name": "Separation adapter"
+        },
+        {
+          "avg_power_w": 0.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "EPS",
+          "unit_id": "battery",
+          "unit_name": "Battery pack"
+        },
         {
           "avg_power_w": 0.0,
           "bus": "payload_12v",
@@ -1194,9 +1425,39 @@
           "maturity": "class_b",
           "peak_power_w": 0.0,
           "power_mode": "off",
+          "subsystem": "EPS",
+          "unit_id": "solar_array",
+          "unit_name": "Solar array panels"
+        },
+        {
+          "avg_power_w": 0.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
           "subsystem": "AOCS",
           "unit_id": "star_tracker",
           "unit_name": "Star tracker"
+        },
+        {
+          "avg_power_w": 0.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_a",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "STRUCT",
+          "unit_id": "structure",
+          "unit_name": "Primary structure"
         },
         {
           "avg_power_w": 0.4,
@@ -1264,6 +1525,13 @@
           "margined_w": null,
           "peak_w": 0.0,
           "subsystem": "PL-DATA"
+        },
+        {
+          "effective_w": 0.0,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 0.0,
+          "subsystem": "STRUCT"
         },
         {
           "effective_w": 3.2,
@@ -1337,6 +1605,36 @@
         "unit_margined_w": null
       },
       "rows": [
+        {
+          "avg_power_w": 0.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_a",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "STRUCT",
+          "unit_id": "adapter",
+          "unit_name": "Separation adapter"
+        },
+        {
+          "avg_power_w": 0.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "EPS",
+          "unit_id": "battery",
+          "unit_name": "Battery pack"
+        },
         {
           "avg_power_w": 0.0,
           "bus": "payload_12v",
@@ -1498,9 +1796,39 @@
           "maturity": "class_b",
           "peak_power_w": 0.0,
           "power_mode": "off",
+          "subsystem": "EPS",
+          "unit_id": "solar_array",
+          "unit_name": "Solar array panels"
+        },
+        {
+          "avg_power_w": 0.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
           "subsystem": "AOCS",
           "unit_id": "star_tracker",
           "unit_name": "Star tracker"
+        },
+        {
+          "avg_power_w": 0.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_a",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "STRUCT",
+          "unit_id": "structure",
+          "unit_name": "Primary structure"
         },
         {
           "avg_power_w": 0.4,
@@ -1570,6 +1898,13 @@
           "subsystem": "PL-DATA"
         },
         {
+          "effective_w": 0.0,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 0.0,
+          "subsystem": "STRUCT"
+        },
+        {
           "effective_w": 8.4,
           "margined_peak_w": null,
           "margined_w": null,
@@ -1593,7 +1928,7 @@
       "hint": "Replace the placeholder with a sourced value; results that need it show n/a.",
       "line": null,
       "message": "The margin of maturity class 'class_a' is a placeholder.",
-      "path": "classes.class_a.margin_ratio",
+      "path": "classes.class_a.power_margin_ratio",
       "severity": "warning"
     },
     {
@@ -1602,7 +1937,7 @@
       "hint": "Replace the placeholder with a sourced value; results that need it show n/a.",
       "line": null,
       "message": "The margin of maturity class 'class_b' is a placeholder.",
-      "path": "classes.class_b.margin_ratio",
+      "path": "classes.class_b.power_margin_ratio",
       "severity": "warning"
     },
     {
@@ -1611,7 +1946,7 @@
       "hint": "Replace the placeholder with a sourced value; results that need it show n/a.",
       "line": null,
       "message": "The margin of maturity class 'class_c' is a placeholder.",
-      "path": "classes.class_c.margin_ratio",
+      "path": "classes.class_c.power_margin_ratio",
       "severity": "warning"
     },
     {
@@ -1620,7 +1955,7 @@
       "hint": "Replace the placeholder with a sourced value; results that need it show n/a.",
       "line": null,
       "message": "The system margin is a placeholder.",
-      "path": "system_margin_ratio",
+      "path": "system_power_margin_ratio",
       "severity": "warning"
     },
     {

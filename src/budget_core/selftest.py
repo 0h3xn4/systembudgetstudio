@@ -1,14 +1,17 @@
 """Self-test of an installed or packaged build: no files read from the user, nothing written.
 
 Builds an example project in memory, parses a unit string with pint, computes the static power
-budget and renders XLSX and PDF with the bundled fonts. Used to verify the PyInstaller bundle.
+and mass budgets and renders XLSX and PDF with the bundled fonts. Used to verify the
+PyInstaller bundle.
 """
 
 from __future__ import annotations
 
 from budget_core.examples import EXAMPLES
+from budget_core.mass.static_mass import static_mass_budget
 from budget_core.power.static_budget import static_power_budget
 from budget_core.provenance import make_provenance
+from budget_core.reports.mass_report import build_mass_report
 from budget_core.reports.power_report import build_power_report
 from budget_core.units.quantity import parse_quantity
 
@@ -27,6 +30,9 @@ def run_selftest() -> list[str]:
         power = static_power_budget(project)
         provenance = make_provenance(project, user="self-test")
         document = build_power_report(project, power, provenance)
+        mass_document = build_mass_report(project, static_mass_budget(project), provenance)
+        if not render_xlsx(mass_document).startswith(b"PK"):
+            failures.append("mass XLSX output is not a ZIP file")
         if not render_xlsx(document).startswith(b"PK"):
             failures.append("XLSX output is not a ZIP file")
         pdf = render_pdf(document)

@@ -1,0 +1,19 @@
+item_id,name,kind,subsystem,maturity,mass_kg,margin_ratio,margined_mass_kg,x_m,y_m,z_m
+adapter,Separation adapter,unit,STRUCT,class_a,2.5,,,0.0,0.0,-0.03
+battery,Battery pack,unit,EPS,class_b,18.0,,,-0.15,0.1,0.2
+camera,Imager,unit,PL,class_c,7.5,,,0.0,0.0,0.85
+gnss,GNSS receiver,unit,AOCS,class_b,0.4,,,-0.3,-0.25,0.95
+heaters,Thermal heaters,unit,THERM,class_a,0.6,,,0.0,0.0,0.5
+magnetorquers,Magnetorquers,unit,AOCS,class_b,1.5,,,0.0,0.0,0.6
+obc_a,OBC A,unit,DH,class_a,1.2,,,0.2,0.1,0.4
+obc_b,OBC B (cold redundant),unit,DH,class_a,1.2,,,0.2,-0.1,0.4
+pcdu,Power conditioning unit,unit,EPS,class_a,4.5,,,-0.2,0.0,0.35
+pdu_data,Payload data unit,unit,PL-DATA,class_c,2.2,,,-0.2,-0.15,0.5
+reaction_wheels,Reaction wheels,unit,AOCS,class_b,6.0,,,0.0,0.0,0.3
+sband_trx,S-band transceiver,unit,TTC,class_b,1.1,,,0.2,0.0,0.55
+solar_array,Solar array panels,unit,EPS,class_b,14.0,,,0.0,0.0,0.5
+star_tracker,Star tracker,unit,AOCS,class_b,0.9,,,0.3,0.25,0.9
+structure,Primary structure,unit,STRUCT,class_a,80.0,,,0.0,0.0,0.5
+sun_sensors,Coarse sun sensors,unit,AOCS,class_a,0.2,,,0.25,-0.25,0.98
+xband_tx,X-band transmitter,unit,PL-DATA,class_c,1.8,,,-0.25,0.2,0.55
+propellant,Propellant,expendable,PROP,class_c,9.0,,,0.0,0.0,0.35
