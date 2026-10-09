@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import hashlib
+import json
 from dataclasses import dataclass
 
 from budget_core.environment.data import (
@@ -16,6 +18,7 @@ from budget_core.environment.spacemissionstudio import (
     EnvironmentInputError,
     SpaceMissionStudioImport,
 )
+from budget_core.io.project_loader import model_to_data
 from budget_core.model import Project, Scenario
 from budget_core.problems import Problem, Severity
 from budget_core.scenario.timeline import TimelineSegment, build_timeline
@@ -123,3 +126,36 @@ def run_scenario(project: Project, scenario_id: str) -> ScenarioRun:
         ) from None
     notes = tuple(getattr(adapter, "notes", ()))
     return ScenarioRun(scenario_id, scenario, env, build_timeline(scenario, env), notes)
+
+
+def environment_key(project: Project, scenario: Scenario) -> str:
+    """Fingerprint of everything the environment depends on. Rules, segments, the default mode
+    and the name only change the timeline, so they are not part of it. Equal keys allow reusing a
+    computed environment."""
+    parts: dict[str, object] = {
+        "source": scenario.environment_source,
+        "start_utc": scenario.start_utc,
+        "duration_s": scenario.duration_s,
+        "step_s": scenario.step_s,
+        "shadow_model": scenario.shadow_model,
+        "sites": [
+            [site_id, model_to_data((project.ground_stations | project.targets)[site_id])]
+            for site_id in scenario.sites
+            if site_id in project.ground_stations or site_id in project.targets
+        ],
+    }
+    if scenario.environment_source == "elements" and scenario.orbit in project.orbits:
+        parts["orbit"] = model_to_data(project.orbits[scenario.orbit])
+    if scenario.environment_source == "spacemissionstudio" and scenario.import_dir:
+        folder = project.root / scenario.import_dir
+        files = sorted(folder.glob("*.csv")) if folder.is_dir() else []
+        parts["import"] = [[p.name, p.stat().st_size, p.stat().st_mtime_ns] for p in files]
+    text = json.dumps(parts, sort_keys=True, default=str)
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+def rebuild_timeline(run: ScenarioRun, scenario: Scenario) -> ScenarioRun:
+    """The same environment with the timeline of an edited scenario (rules, segments, default)."""
+    return ScenarioRun(
+        run.scenario_id, scenario, run.env, build_timeline(scenario, run.env), run.notes
+    )

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+from typing import Any
 
 from PySide6.QtCore import QRect, QSize, Qt, Signal
 from PySide6.QtGui import (
@@ -129,6 +130,7 @@ class EditorTabs(QTabWidget):
         self.tabCloseRequested.connect(self._close_tab)
         self._editors: dict[str, YamlEditor] = {}
         self._unit_editors: dict[str, UnitEditor] = {}
+        self._modifiable: list[Any] = []  # fixed widgets with is_modified() and discard_changes()
 
     def add_fixed(self, widget: QWidget, title: str) -> None:
         index = self.addTab(widget, title)
@@ -195,9 +197,14 @@ class EditorTabs(QTabWidget):
             )
         self.dirty_changed.emit()
 
+    def register_modifiable(self, widget: Any) -> None:
+        self._modifiable.append(widget)
+
     def has_unsaved_changes(self) -> bool:
-        return any(e.document().isModified() for e in self._editors.values()) or any(
-            u.is_modified() for u in self._unit_editors.values()
+        return (
+            any(e.document().isModified() for e in self._editors.values())
+            or any(u.is_modified() for u in self._unit_editors.values())
+            or any(w.is_modified() for w in self._modifiable)
         )
 
     def discard_all_changes(self) -> None:
@@ -206,6 +213,8 @@ class EditorTabs(QTabWidget):
             editor.document().setModified(False)
         for unit_editor in self._unit_editors.values():
             unit_editor.discard_changes()
+        for widget in self._modifiable:
+            widget.discard_changes()
 
     def close_all_files(self) -> None:
         for rel in list(self._editors):

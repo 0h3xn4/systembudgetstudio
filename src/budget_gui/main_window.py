@@ -18,6 +18,7 @@ from PySide6.QtWidgets import (
 from budget_core import APP_NAME, __version__
 from budget_core.reports.run import REPORT_KINDS
 from budget_gui.editor import EditorTabs
+from budget_gui.scenario_view import ScenarioView
 from budget_gui.session import ProjectSession
 from budget_gui.unit_editor import UnitEditor
 from budget_gui.widgets import PowerView, ProblemsPanel, ProjectTree
@@ -40,6 +41,9 @@ class MainWindow(QMainWindow):
         self.editors = EditorTabs()
         self.editors.add_fixed(self.power_view, "Power budget")
         self.editors.add_fixed(self.mass_view, "Mass budget")
+        self.scenario_view = ScenarioView()
+        self.editors.add_fixed(self.scenario_view, "Scenario")
+        self.editors.register_modifiable(self.scenario_view.editor)
         self.setCentralWidget(self.editors)
         self._worker: ExportWorker | None = None
 
@@ -54,6 +58,7 @@ class MainWindow(QMainWindow):
 
         self._build_menu()
         self.session.changed.connect(self._refresh)
+        self.scenario_view.editor.saved.connect(self.session.reload)
         self.tree.file_requested.connect(lambda rel: self.open_file(rel))
         self.tree.unit_requested.connect(lambda unit_id: self.open_unit_editor(unit_id))
         self.problems_panel.jump_requested.connect(lambda rel, line: self.open_file(rel, line))
@@ -81,6 +86,14 @@ class MainWindow(QMainWindow):
         folder = QFileDialog.getExistingDirectory(self, "Open project folder")
         if folder:
             self.open_project(Path(folder))
+
+    def _choose_scenario_export(self) -> None:
+        if self.scenario_view.last_run is None:
+            QMessageBox.information(self, APP_NAME, "Compute a scenario first (Ctrl+R).")
+            return
+        folder = QFileDialog.getExistingDirectory(self, "Export scenario results to folder")
+        if folder:
+            self.scenario_view.export_to(Path(folder))
 
     def _edit_selected_unit(self) -> None:
         unit_id = self.tree.current_unit_id()
@@ -155,6 +168,7 @@ class MainWindow(QMainWindow):
         self.problems_panel.set_problems(session.problems)
         self.power_view.set_document(session.document)
         self.mass_view.set_document(session.mass_document)
+        self.scenario_view.set_project(project)
         self.editors.reload_clean_files()
         name = project.meta.name if project else (session.path.name if session.path else "")
         self.setWindowTitle(f"{name} — {APP_NAME}" if name else APP_NAME)
@@ -185,6 +199,7 @@ class MainWindow(QMainWindow):
     def closeEvent(self, event: QCloseEvent) -> None:  # noqa: N802 (Qt naming)
         if self._worker is not None and self._worker.isRunning():
             self._worker.wait(10000)
+        self.scenario_view.wait_for_worker()
         if self.editors.has_unsaved_changes():
             answer = QMessageBox.question(
                 self,

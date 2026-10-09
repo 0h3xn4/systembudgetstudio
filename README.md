@@ -2,7 +2,7 @@
 
 Offline desktop tool for satellite power budgets and RF link budgets: one spacecraft model, versioned YAML inputs, sourced equations, reproducible reports. No cloud, no telemetry, no background network access.
 
-Status: **M3a Environment** (eclipse, ground-station and target passes, scenario mode timelines, `budget scenario`) on top of **M2 Static budgets** (model, validation, static power budget, static mass budget with centre of gravity, inertia and phases, XLSX/PDF/JSON/CSV reports). See `docs/SPEC.md`, `docs/ARCHITECTURE.md` and `docs/PLAN.md`.
+Status: **M3 Environment** (eclipse, ground-station and target passes, scenario mode timelines, `budget scenario`, GUI scenario view with timeline editor) on top of **M2 Static budgets** (model, validation, static power budget, static mass budget with centre of gravity, inertia and phases, XLSX/PDF/JSON/CSV reports). See `docs/SPEC.md`, `docs/ARCHITECTURE.md` and `docs/PLAN.md`.
 
 ## Install (Python 3.11 to 3.13)
 

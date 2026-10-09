@@ -198,6 +198,10 @@ class ProjectTree(QTreeWidget):
             ("units", "Units"),
             ("expendables", "Expendables"),
             ("modes", "Spacecraft modes"),
+            ("orbits", "Orbits"),
+            ("ground_stations", "Ground stations"),
+            ("targets", "Imaging targets"),
+            ("scenarios", "Scenarios"),
             ("config", "Configuration"),
         ):
             files = sorted((root / folder).glob("*.yaml")) if (root / folder).is_dir() else []

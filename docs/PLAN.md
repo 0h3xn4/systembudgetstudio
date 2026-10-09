@@ -22,7 +22,7 @@ Scope: shared margin handling; Problems panel (GUI, wired to validate and the bu
 Acceptance: at least 10 hand-calculated cases per solver (power table; mass roll-up; CG of point masses; inertia by parallel axis, e.g. two equal masses on an axis; phase changes) with stated tolerances; Hypothesis properties (adding mass never lowers the total, CG lies inside the bounding box of the unit positions, inertia tensor symmetric and positive semi-definite); XLSX/PDF golden tests byte-identical on re-run; GUI flow: open example, edit a unit, Problems update, export; `pip install` of the bundle still starts and can validate a project.
 Needs from you: margin policy and mass margin values (placeholders otherwise), mass limits with sources, confirmation of the body-frame convention (axes and origin) when M2b starts.
 
-## M3 Environment (L, two PRs: M3a core and CLI, M3b GUI timeline editor)
+## M3 Environment (L, two PRs: M3a core and CLI, done; M3b GUI timeline editor, done)
 Scope: `Environment` interface; `ElementsPropagator` (TLE/Keplerian, shadow model, passes); `SpaceMissionStudioImport` (needs sample files); scenario model, rule-based generation (downlink on pass); timeline editor.
 Acceptance: eclipse fraction and pass count/duration for textbook circular LEO cases match hand calculation within stated tolerance; adapters interchangeable behind the interface in solver tests; timeline editor creates/edits/validates scenarios.
 Needs from you: SpaceMissionStudio sample export files.
