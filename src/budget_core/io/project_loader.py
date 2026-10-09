@@ -20,14 +20,18 @@ from budget_core.model import (
     BudgetModel,
     Ebn0Table,
     Expendable,
+    GroundStation,
     MarginPolicy,
     MassLimits,
+    Orbit,
     PowerConfig,
     Project,
     ProjectConfig,
     ProjectMeta,
+    Scenario,
     Spacecraft,
     SpacecraftMode,
+    Target,
     Unit,
 )
 from budget_core.problems import Problem, Severity, sort_problems
@@ -93,6 +97,14 @@ def write_project(project: Project, root: FsPath) -> None:
         _write(root / "modes" / f"{mid}.yaml", mode)
     for eid, expendable in project.expendables.items():
         _write(root / "expendables" / f"{eid}.yaml", expendable)
+    for folder, items in (
+        ("orbits", project.orbits),
+        ("ground_stations", project.ground_stations),
+        ("targets", project.targets),
+        ("scenarios", project.scenarios),
+    ):
+        for item_id, model in items.items():
+            _write(root / folder / f"{item_id}.yaml", model)
     for kind in CONFIG_FILES:
         model = getattr(project.config, kind)
         if model is not None:
@@ -219,6 +231,19 @@ def load_project(root: FsPath, registry: MigrationRegistry = DEFAULT_REGISTRY) -
         if item is not None:
             expendables[path.stem] = item
 
+    def load_dir(folder: str, cls: type[M], kind: str) -> dict[str, M]:
+        found: dict[str, M] = {}
+        for path in sorted((root / folder).glob("*.yaml")):
+            item = loader.load(f"{folder}/{path.name}", cls, kind)
+            if item is not None:
+                found[path.stem] = item
+        return found
+
+    orbits = load_dir("orbits", Orbit, "orbit")
+    stations = load_dir("ground_stations", GroundStation, "ground_station")
+    targets = load_dir("targets", Target, "target")
+    scenarios = load_dir("scenarios", Scenario, "scenario")
+
     configs: dict[str, Any] = {}
     for kind, cls in CONFIG_FILES.items():
         rel = f"config/{kind}.yaml"
@@ -239,7 +264,17 @@ def load_project(root: FsPath, registry: MigrationRegistry = DEFAULT_REGISTRY) -
     project: Project | None = None
     if meta is not None and spacecraft is not None:
         project = Project(
-            root, meta, spacecraft, units, modes, ProjectConfig(**configs), expendables
+            root,
+            meta,
+            spacecraft,
+            units,
+            modes,
+            ProjectConfig(**configs),
+            expendables,
+            orbits,
+            stations,
+            targets,
+            scenarios,
         )
         problems = problems + validate_references(project, loader.lines)
     problems = sort_problems(problems)

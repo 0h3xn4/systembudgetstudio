@@ -149,3 +149,16 @@ def test_reportlab_refuses_remote_resources() -> None:
         allowed=REPORTLAB_IMPORTS,
     )
     assert r.returncode == 0, r.stderr
+
+
+def test_scenario_command_is_strictly_offline(tmp_path) -> None:  # type: ignore[no-untyped-def]
+    r = _run(f"""
+        import pathlib
+        from budget_cli.main import main
+        from budget_core.examples import export_examples
+        export_examples(pathlib.Path({str(tmp_path)!r}))
+        project = {str(tmp_path / "cubesat_3u")!r}
+        code = main(["scenario", project, "--out", {str(tmp_path / "out")!r}])
+        assert code == 0
+    """)
+    assert r.returncode == 0, r.stderr

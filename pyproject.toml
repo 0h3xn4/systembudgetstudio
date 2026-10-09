@@ -15,6 +15,8 @@ dependencies = [
     "pint>=0.24,<0.27",
     "openpyxl>=3.1,<4",
     "reportlab>=4.2,<5",
+    "numpy>=1.26,<3",
+    "sgp4>=2.23,<3",
 ]
 
 [project.optional-dependencies]
@@ -64,7 +66,7 @@ mypy_path = "src"
 packages = ["budget_core", "budget_cli", "budget_gui"]
 
 [[tool.mypy.overrides]]
-module = ["PySide6.*", "ruamel.*", "pint.*", "jsonschema.*", "openpyxl.*", "reportlab.*", "pypdf.*"]
+module = ["PySide6.*", "ruamel.*", "pint.*", "jsonschema.*", "openpyxl.*", "reportlab.*", "pypdf.*", "sgp4.*"]
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]

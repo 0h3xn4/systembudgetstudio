@@ -10,6 +10,16 @@ from budget_core.model.config import (
     MaturityClass,
     PowerConfig,
 )
+from budget_core.model.environment import (
+    Elements,
+    GroundSite,
+    GroundStation,
+    Orbit,
+    Scenario,
+    ScenarioRule,
+    ScenarioSegment,
+    Target,
+)
 from budget_core.model.equipment import Bus, PowerMode, Spacecraft, SpacecraftMode, Unit
 from budget_core.model.mass import (
     Expendable,
@@ -29,6 +39,14 @@ __all__ = [
     "BudgetModel",
     "Bus",
     "Ebn0Entry",
+    "Elements",
+    "GroundSite",
+    "GroundStation",
+    "Orbit",
+    "Scenario",
+    "ScenarioRule",
+    "ScenarioSegment",
+    "Target",
     "Ebn0Table",
     "Expendable",
     "Inertia",

@@ -11,20 +11,26 @@ from budget_core.model import (
     Bus,
     Ebn0Entry,
     Ebn0Table,
+    Elements,
     Expendable,
+    GroundStation,
     MarginPolicy,
     MassLimit,
     MassLimits,
     MassProperties,
     MaturityClass,
+    Orbit,
     PowerConfig,
     PowerMode,
     Project,
     ProjectConfig,
     ProjectMeta,
+    Scenario,
+    ScenarioRule,
     Sourced,
     Spacecraft,
     SpacecraftMode,
+    Target,
     Unit,
 )
 
@@ -63,6 +69,53 @@ def build_project(root: Path) -> Project:
         modes={
             "nominal": SpacecraftMode(name="Nominal", assignments={"obc": "on", "radio": "rx"}),
             "downlink": SpacecraftMode(name="Downlink", assignments={"obc": "on", "radio": "tx"}),
+        },
+        orbits={
+            "leo": Orbit(
+                name="LEO",
+                elements=Elements(
+                    epoch_utc="2026-01-01T00:00:00Z",
+                    semi_major_axis_m=6878137.0,
+                    eccentricity_ratio=0.001,
+                    inclination_deg=97.5,
+                    raan_deg=100.0,
+                    arg_perigee_deg=0.0,
+                    mean_anomaly_deg=0.0,
+                ),
+            )
+        },
+        ground_stations={
+            "gs1": GroundStation(
+                name="Station 1",
+                latitude_deg=60.0,
+                longitude_deg=10.0,
+                altitude_m=100.0,
+                min_elevation_deg=5.0,
+            )
+        },
+        targets={
+            "tgt1": Target(
+                name="Target 1",
+                latitude_deg=40.0,
+                longitude_deg=-100.0,
+                altitude_m=0.0,
+                min_elevation_deg=30.0,
+            )
+        },
+        scenarios={
+            "day": Scenario(
+                name="One day",
+                orbit="leo",
+                start_utc="2026-01-01T00:00:00Z",
+                duration_s=86400.0,
+                step_s=30.0,
+                sites=["gs1", "tgt1"],
+                default_mode="nominal",
+                rules=[
+                    ScenarioRule(kind="during_pass", site="gs1", mode="downlink"),
+                    ScenarioRule(kind="during_pass", site="tgt1", mode="nominal"),
+                ],
+            )
         },
         expendables={
             "fuel": Expendable(

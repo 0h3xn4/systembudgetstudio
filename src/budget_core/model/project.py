@@ -10,6 +10,7 @@ from pydantic import Field
 
 from budget_core.model.base import BudgetModel
 from budget_core.model.config import AttenuationTable, Ebn0Table, MarginPolicy, PowerConfig
+from budget_core.model.environment import GroundStation, Orbit, Scenario, Target
 from budget_core.model.equipment import Spacecraft, SpacecraftMode, Unit
 from budget_core.model.mass import Expendable, MassLimits
 from budget_core.model.versions import CURRENT_VERSIONS
@@ -41,6 +42,10 @@ class Project:
     modes: dict[str, SpacecraftMode] = field(default_factory=dict)
     config: ProjectConfig = field(default_factory=ProjectConfig)
     expendables: dict[str, Expendable] = field(default_factory=dict)
+    orbits: dict[str, Orbit] = field(default_factory=dict)
+    ground_stations: dict[str, GroundStation] = field(default_factory=dict)
+    targets: dict[str, Target] = field(default_factory=dict)
+    scenarios: dict[str, Scenario] = field(default_factory=dict)
 
     @property
     def phases(self) -> tuple[str, ...]:
