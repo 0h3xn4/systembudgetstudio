@@ -25,6 +25,11 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "additionalProperties": false,
   "properties": {
+    "body_frame": {
+      "default": "",
+      "title": "Body Frame",
+      "type": "string"
+    },
     "buses": {
       "items": {
         "$ref": "#/$defs/Bus"
@@ -38,6 +43,13 @@
       "default": "spacecraft",
       "title": "Kind",
       "type": "string"
+    },
+    "mission_phases": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Mission Phases",
+      "type": "array"
     },
     "name": {
       "minLength": 1,

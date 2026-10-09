@@ -890,7 +890,7 @@ PWR-PEAK
 Peak power
 P_peak = sum of unit peak_power_w (all units at peak at once, conservative)
 SOURCE_MISSING
-SOURCE_MISSING: the formula is a project convention whose reference text is not available to the tool yet (decision D-040).
+SOURCE_MISSING: the formula is a project convention or textbook definition whose reference text is not available to the tool yet (see docs/DECISIONS.md).
 Problems
 Problems and open items
 Severity
@@ -927,15 +927,42 @@ config/margin_policy.yaml:6
 This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
 warning
 CONFIG_PLACEHOLDER
-config/margin_policy.yaml:11
+config/margin_policy.yaml:10
 This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
 warning
 CONFIG_PLACEHOLDER
-config/margin_policy.yaml:16
+config/margin_policy.yaml:15
 This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
 warning
 CONFIG_PLACEHOLDER
-config/margin_policy.yaml:20
+config/margin_policy.yaml:19
+This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/margin_policy.yaml:24
+This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/margin_policy.yaml:28
+This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/margin_policy.yaml:32
+This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/margin_policy.yaml:36
+This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+## page 7
+System Budget Studio 0.1.0 | Example 3U CubeSat rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 7
+Severity
+Code
+Location
+Message
+warning
+CONFIG_PLACEHOLDER
+config/mass_limits.yaml:7
 This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
 warning
 RESULT_INCOMPLETE
@@ -953,9 +980,6 @@ warning
 CONFIG_PLACEHOLDER
 config/power_config.yaml:9
 This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
-## page 7
-System Budget Studio 0.1.0 | Example 3U CubeSat rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
-Page 7
 Provenance
 Provenance
 Item

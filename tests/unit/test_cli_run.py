@@ -11,7 +11,7 @@ FIXED = ["--user", "Test User", "--date", "2026-01-02T03:04:05Z"]
 
 
 def run(*args: str) -> int:
-    return main(["run", *args])
+    return main(["run", "--budget", "power", *args])
 
 
 @pytest.fixture
@@ -23,15 +23,22 @@ def root(tmp_path: Path) -> Path:
 def test_default_writes_all_reports_into_results(
     root: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
-    assert run(str(root), *FIXED) == 0
+    assert main(["run", str(root), *FIXED]) == 0  # default: every budget
     out = root / "results"
     names = sorted(p.name for p in out.iterdir())
-    assert names == [
+    assert [n for n in names if n.startswith("power_")] == [
         "power_static.json",
         "power_static.pdf",
         "power_static.xlsx",
         "power_static_downlink.csv",
         "power_static_nominal.csv",
+    ]
+    assert [n for n in names if n.startswith("mass_")] == [
+        "mass_static.json",
+        "mass_static.pdf",
+        "mass_static.xlsx",
+        "mass_static_eol.csv",
+        "mass_static_launch.csv",
     ]
     text = capsys.readouterr().out
     assert "Wrote" in text and "Traceback" not in text

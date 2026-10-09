@@ -19,7 +19,9 @@ from budget_core.model import (
     AttenuationTable,
     BudgetModel,
     Ebn0Table,
+    Expendable,
     MarginPolicy,
+    MassLimits,
     PowerConfig,
     Project,
     ProjectConfig,
@@ -37,6 +39,7 @@ CONFIG_FILES: dict[str, type[BudgetModel]] = {
     "power_config": PowerConfig,
     "ebn0_table": Ebn0Table,
     "attenuation_table": AttenuationTable,
+    "mass_limits": MassLimits,
 }
 
 
@@ -88,6 +91,8 @@ def write_project(project: Project, root: FsPath) -> None:
         _write(root / "units" / f"{uid}.yaml", unit)
     for mid, mode in project.modes.items():
         _write(root / "modes" / f"{mid}.yaml", mode)
+    for eid, expendable in project.expendables.items():
+        _write(root / "expendables" / f"{eid}.yaml", expendable)
     for kind in CONFIG_FILES:
         model = getattr(project.config, kind)
         if model is not None:
@@ -208,6 +213,12 @@ def load_project(root: FsPath, registry: MigrationRegistry = DEFAULT_REGISTRY) -
         if mode is not None:
             modes[path.stem] = mode
 
+    expendables: dict[str, Expendable] = {}
+    for path in sorted((root / "expendables").glob("*.yaml")):
+        item = loader.load(f"expendables/{path.name}", Expendable, "expendable")
+        if item is not None:
+            expendables[path.stem] = item
+
     configs: dict[str, Any] = {}
     for kind, cls in CONFIG_FILES.items():
         rel = f"config/{kind}.yaml"
@@ -227,7 +238,9 @@ def load_project(root: FsPath, registry: MigrationRegistry = DEFAULT_REGISTRY) -
     problems = loader.problems
     project: Project | None = None
     if meta is not None and spacecraft is not None:
-        project = Project(root, meta, spacecraft, units, modes, ProjectConfig(**configs))
+        project = Project(
+            root, meta, spacecraft, units, modes, ProjectConfig(**configs), expendables
+        )
         problems = problems + validate_references(project, loader.lines)
     problems = sort_problems(problems)
     if any(p.severity is Severity.ERROR for p in problems):

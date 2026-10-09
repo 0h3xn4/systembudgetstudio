@@ -1,0 +1,213 @@
+## sheet Summary rows=14 cols=8
+1: 'Mass budget (static): Example 150 kg microsatellite' |  |  |  |  |  |  | 
+2: 'INCOMPLETE: some inputs are placeholders (source TBD or missing). Entries marked n/a depend on them and are not computed. Do not use this report as evidence until the placeholders are replaced with sourced values.' |  |  |  |  |  |  | 
+4: 'Body frame: Right-handed body frame. Origin: centre of the launch-vehicle interface plane. +Z: along the launch axis, away from the interface. X and Y: in the interface plane. Positions are item centres of mass in metres. Synthetic example.' |  |  |  |  |  |  | 
+5: 'Mass and centre of gravity by mission phase' |  |  |  |  |  |  | 
+6: 'Phase' | 'Total (kg)' | 'With unit margins (kg)' | 'With system margin (kg)' | 'CG x (m)' | 'CG y (m)' | 'CG z (m)' | 'CG coverage'
+7: 'launch' | 152.6 | 'n/a' | 'n/a' | -0.02352555701179554 | 0.01248361730013106 | 0.456526867627785 | 1
+8: 'bol' | 149.6 | 'n/a' | 'n/a' | -0.02399732620320856 | 0.01273395721925134 | 0.4650133689839572 | 1
+9: 'eol' | 141.9 | 'n/a' | 'n/a' | -0.02529950669485553 | 0.01342494714587738 | 0.4712544045102184 | 1
+10: 'CG and inertia use nominal masses of items with a position; coverage is their share of the nominal total.' |  |  |  |  |  |  | 
+12: 'Mass limits (checked against the system-margined total)' |  |  |  |  |  |  | 
+13: 'Phase' | 'Limit' | 'Limit value (kg)' | 'Total (kg)' | 'Margin (kg)' | 'Status' |  | 
+14: 'launch' | 'Launch mass' | 'n/a' | 'n/a' | 'n/a' | 'n/a' |  | 
+## sheet Phase launch rows=52 cols=12
+1: 'Items' |  |  |  |  |  |  |  |  |  |  | 
+2: 'Item' | 'Name' | 'Kind' | 'Subsystem' | 'Maturity' | 'Mass (kg)' | 'Margin' | 'With margin (kg)' | 'x (m)' | 'y (m)' | 'z (m)' | 'Own inertia'
+3: 'adapter' | 'Separation adapter' | 'unit' | 'STRUCT' | 'class_a' | 2.5 | 'n/a' | 'n/a' | 0 | 0 | -0.03 | 'yes'
+4: 'battery' | 'Battery pack' | 'unit' | 'EPS' | 'class_b' | 18 | 'n/a' | 'n/a' | -0.15 | 0.1 | 0.2 | 'yes'
+5: 'camera' | 'Imager' | 'unit' | 'PL' | 'class_c' | 7.5 | 'n/a' | 'n/a' | 0 | 0 | 0.85 | 'yes'
+6: 'gnss' | 'GNSS receiver' | 'unit' | 'AOCS' | 'class_b' | 0.4 | 'n/a' | 'n/a' | -0.3 | -0.25 | 0.95 | 'no'
+7: 'heaters' | 'Thermal heaters' | 'unit' | 'THERM' | 'class_a' | 0.6 | 'n/a' | 'n/a' | 0 | 0 | 0.5 | 'no'
+8: 'magnetorquers' | 'Magnetorquers' | 'unit' | 'AOCS' | 'class_b' | 1.5 | 'n/a' | 'n/a' | 0 | 0 | 0.6 | 'yes'
+9: 'obc_a' | 'OBC A' | 'unit' | 'DH' | 'class_a' | 1.2 | 'n/a' | 'n/a' | 0.2 | 0.1 | 0.4 | 'yes'
+10: 'obc_b' | 'OBC B (cold redundant)' | 'unit' | 'DH' | 'class_a' | 1.2 | 'n/a' | 'n/a' | 0.2 | -0.1 | 0.4 | 'yes'
+11: 'pcdu' | 'Power conditioning unit' | 'unit' | 'EPS' | 'class_a' | 4.5 | 'n/a' | 'n/a' | -0.2 | 0 | 0.35 | 'yes'
+12: 'pdu_data' | 'Payload data unit' | 'unit' | 'PL-DATA' | 'class_c' | 2.2 | 'n/a' | 'n/a' | -0.2 | -0.15 | 0.5 | 'yes'
+13: 'reaction_wheels' | 'Reaction wheels' | 'unit' | 'AOCS' | 'class_b' | 6 | 'n/a' | 'n/a' | 0 | 0 | 0.3 | 'yes'
+14: 'sband_trx' | 'S-band transceiver' | 'unit' | 'TTC' | 'class_b' | 1.1 | 'n/a' | 'n/a' | 0.2 | 0 | 0.55 | 'yes'
+15: 'solar_array' | 'Solar array panels' | 'unit' | 'EPS' | 'class_b' | 14 | 'n/a' | 'n/a' | 0 | 0 | 0.5 | 'yes'
+16: 'star_tracker' | 'Star tracker' | 'unit' | 'AOCS' | 'class_b' | 0.9 | 'n/a' | 'n/a' | 0.3 | 0.25 | 0.9 | 'yes'
+17: 'structure' | 'Primary structure' | 'unit' | 'STRUCT' | 'class_a' | 80 | 'n/a' | 'n/a' | 0 | 0 | 0.5 | 'yes'
+18: 'sun_sensors' | 'Coarse sun sensors' | 'unit' | 'AOCS' | 'class_a' | 0.2 | 'n/a' | 'n/a' | 0.25 | -0.25 | 0.98 | 'no'
+19: 'xband_tx' | 'X-band transmitter' | 'unit' | 'PL-DATA' | 'class_c' | 1.8 | 'n/a' | 'n/a' | -0.25 | 0.2 | 0.55 | 'yes'
+20: 'propellant' | 'Propellant' | 'expendable' | 'PROP' | 'class_c' | 9 | 'n/a' | 'n/a' | 0 | 0 | 0.35 | 'no'
+22: 'By subsystem' |  |  |  |  |  |  |  |  |  |  | 
+23: 'Subsystem' | 'Mass (kg)' | 'With margin (kg)' |  |  |  |  |  |  |  |  | 
+24: 'AOCS' | 9 | 'n/a' |  |  |  |  |  |  |  |  | 
+25: 'DH' | 2.4 | 'n/a' |  |  |  |  |  |  |  |  | 
+26: 'EPS' | 36.5 | 'n/a' |  |  |  |  |  |  |  |  | 
+27: 'PL' | 7.5 | 'n/a' |  |  |  |  |  |  |  |  | 
+28: 'PL-DATA' | 4 | 'n/a' |  |  |  |  |  |  |  |  | 
+29: 'PROP' | 9 | 'n/a' |  |  |  |  |  |  |  |  | 
+30: 'STRUCT' | 82.5 | 'n/a' |  |  |  |  |  |  |  |  | 
+31: 'THERM' | 0.6 | 'n/a' |  |  |  |  |  |  |  |  | 
+32: 'TTC' | 1.1 | 'n/a' |  |  |  |  |  |  |  |  | 
+34: 'Totals and centre of gravity' |  |  |  |  |  |  |  |  |  |  | 
+35: 'Quantity' | 'Value' |  |  |  |  |  |  |  |  |  | 
+36: 'Total, nominal' | 152.6 |  |  |  |  |  |  |  |  |  | 
+37: 'Total, with unit margins' | 'n/a' |  |  |  |  |  |  |  |  |  | 
+38: 'Total, with system margin' | 'n/a' |  |  |  |  |  |  |  |  |  | 
+39: 'Centre of gravity x (m)' | -0.02352555701179554 |  |  |  |  |  |  |  |  |  | 
+40: 'Centre of gravity y (m)' | 0.01248361730013106 |  |  |  |  |  |  |  |  |  | 
+41: 'Centre of gravity z (m)' | 0.456526867627785 |  |  |  |  |  |  |  |  |  | 
+42: 'Mass in the CG calculation (kg)' | 152.6 |  |  |  |  |  |  |  |  |  | 
+44: 'Inertia tensor' |  |  |  |  |  |  |  |  |  |  | 
+45: 'Entry' | 'About CG (kg m2)' | 'About origin (kg m2)' |  |  |  |  |  |  |  |  | 
+46: 'Ixx' | 16.54283294888598 | 48.371015 |  |  |  |  |  |  |  |  | 
+47: 'Iyy' | 19.45512049017038 | 51.343978 |  |  |  |  |  |  |  |  | 
+48: 'Izz' | 14.60382295937091 | 14.712061 |  |  |  |  |  |  |  |  | 
+49: 'Ixy' | 0.1641838138925295 | 0.209 |  |  |  |  |  |  |  |  | 
+50: 'Ixz' | -0.8074314547837483 | 0.8314999999999999 |  |  |  |  |  |  |  |  | 
+51: 'Iyz' | 0.4181836828309305 | -0.4515000000000001 |  |  |  |  |  |  |  |  | 
+52: 'Tensor entries in the body frame; Ixy, Ixz, Iyz are tensor elements (minus the products of inertia), see docs/DECISIONS.md D-048.' |  |  |  |  |  |  |  |  |  |  | 
+## sheet Phase bol rows=51 cols=12
+1: 'Items' |  |  |  |  |  |  |  |  |  |  | 
+2: 'Item' | 'Name' | 'Kind' | 'Subsystem' | 'Maturity' | 'Mass (kg)' | 'Margin' | 'With margin (kg)' | 'x (m)' | 'y (m)' | 'z (m)' | 'Own inertia'
+3: 'battery' | 'Battery pack' | 'unit' | 'EPS' | 'class_b' | 18 | 'n/a' | 'n/a' | -0.15 | 0.1 | 0.2 | 'yes'
+4: 'camera' | 'Imager' | 'unit' | 'PL' | 'class_c' | 7.5 | 'n/a' | 'n/a' | 0 | 0 | 0.85 | 'yes'
+5: 'gnss' | 'GNSS receiver' | 'unit' | 'AOCS' | 'class_b' | 0.4 | 'n/a' | 'n/a' | -0.3 | -0.25 | 0.95 | 'no'
+6: 'heaters' | 'Thermal heaters' | 'unit' | 'THERM' | 'class_a' | 0.6 | 'n/a' | 'n/a' | 0 | 0 | 0.5 | 'no'
+7: 'magnetorquers' | 'Magnetorquers' | 'unit' | 'AOCS' | 'class_b' | 1.5 | 'n/a' | 'n/a' | 0 | 0 | 0.6 | 'yes'
+8: 'obc_a' | 'OBC A' | 'unit' | 'DH' | 'class_a' | 1.2 | 'n/a' | 'n/a' | 0.2 | 0.1 | 0.4 | 'yes'
+9: 'obc_b' | 'OBC B (cold redundant)' | 'unit' | 'DH' | 'class_a' | 1.2 | 'n/a' | 'n/a' | 0.2 | -0.1 | 0.4 | 'yes'
+10: 'pcdu' | 'Power conditioning unit' | 'unit' | 'EPS' | 'class_a' | 4.5 | 'n/a' | 'n/a' | -0.2 | 0 | 0.35 | 'yes'
+11: 'pdu_data' | 'Payload data unit' | 'unit' | 'PL-DATA' | 'class_c' | 2.2 | 'n/a' | 'n/a' | -0.2 | -0.15 | 0.5 | 'yes'
+12: 'reaction_wheels' | 'Reaction wheels' | 'unit' | 'AOCS' | 'class_b' | 6 | 'n/a' | 'n/a' | 0 | 0 | 0.3 | 'yes'
+13: 'sband_trx' | 'S-band transceiver' | 'unit' | 'TTC' | 'class_b' | 1.1 | 'n/a' | 'n/a' | 0.2 | 0 | 0.55 | 'yes'
+14: 'solar_array' | 'Solar array panels' | 'unit' | 'EPS' | 'class_b' | 14 | 'n/a' | 'n/a' | 0 | 0 | 0.5 | 'yes'
+15: 'star_tracker' | 'Star tracker' | 'unit' | 'AOCS' | 'class_b' | 0.9 | 'n/a' | 'n/a' | 0.3 | 0.25 | 0.9 | 'yes'
+16: 'structure' | 'Primary structure' | 'unit' | 'STRUCT' | 'class_a' | 80 | 'n/a' | 'n/a' | 0 | 0 | 0.5 | 'yes'
+17: 'sun_sensors' | 'Coarse sun sensors' | 'unit' | 'AOCS' | 'class_a' | 0.2 | 'n/a' | 'n/a' | 0.25 | -0.25 | 0.98 | 'no'
+18: 'xband_tx' | 'X-band transmitter' | 'unit' | 'PL-DATA' | 'class_c' | 1.8 | 'n/a' | 'n/a' | -0.25 | 0.2 | 0.55 | 'yes'
+19: 'propellant' | 'Propellant' | 'expendable' | 'PROP' | 'class_c' | 8.5 | 'n/a' | 'n/a' | 0 | 0 | 0.35 | 'no'
+21: 'By subsystem' |  |  |  |  |  |  |  |  |  |  | 
+22: 'Subsystem' | 'Mass (kg)' | 'With margin (kg)' |  |  |  |  |  |  |  |  | 
+23: 'AOCS' | 9 | 'n/a' |  |  |  |  |  |  |  |  | 
+24: 'DH' | 2.4 | 'n/a' |  |  |  |  |  |  |  |  | 
+25: 'EPS' | 36.5 | 'n/a' |  |  |  |  |  |  |  |  | 
+26: 'PL' | 7.5 | 'n/a' |  |  |  |  |  |  |  |  | 
+27: 'PL-DATA' | 4 | 'n/a' |  |  |  |  |  |  |  |  | 
+28: 'PROP' | 8.5 | 'n/a' |  |  |  |  |  |  |  |  | 
+29: 'STRUCT' | 80 | 'n/a' |  |  |  |  |  |  |  |  | 
+30: 'THERM' | 0.6 | 'n/a' |  |  |  |  |  |  |  |  | 
+31: 'TTC' | 1.1 | 'n/a' |  |  |  |  |  |  |  |  | 
+33: 'Totals and centre of gravity' |  |  |  |  |  |  |  |  |  |  | 
+34: 'Quantity' | 'Value' |  |  |  |  |  |  |  |  |  | 
+35: 'Total, nominal' | 149.6 |  |  |  |  |  |  |  |  |  | 
+36: 'Total, with unit margins' | 'n/a' |  |  |  |  |  |  |  |  |  | 
+37: 'Total, with system margin' | 'n/a' |  |  |  |  |  |  |  |  |  | 
+38: 'Centre of gravity x (m)' | -0.02399732620320856 |  |  |  |  |  |  |  |  |  | 
+39: 'Centre of gravity y (m)' | 0.01273395721925134 |  |  |  |  |  |  |  |  |  | 
+40: 'Centre of gravity z (m)' | 0.4650133689839572 |  |  |  |  |  |  |  |  |  | 
+41: 'Mass in the CG calculation (kg)' | 149.6 |  |  |  |  |  |  |  |  |  | 
+43: 'Inertia tensor' |  |  |  |  |  |  |  |  |  |  | 
+44: 'Entry' | 'About CG (kg m2)' | 'About origin (kg m2)' |  |  |  |  |  |  |  |  | 
+45: 'Ixx' | 15.76463678475936 | 48.138015 |  |  |  |  |  |  |  |  | 
+46: 'Iyy' | 18.67570757219251 | 51.110978 |  |  |  |  |  |  |  |  | 
+47: 'Izz' | 14.26415241042781 | 14.374561 |  |  |  |  |  |  |  |  | 
+48: 'Ixy' | 0.1632850935828877 | 0.209 |  |  |  |  |  |  |  |  | 
+49: 'Ixz' | -0.8378979946524064 | 0.8314999999999999 |  |  |  |  |  |  |  |  | 
+50: 'Iyz' | 0.4343504679144385 | -0.4515000000000001 |  |  |  |  |  |  |  |  | 
+51: 'Tensor entries in the body frame; Ixy, Ixz, Iyz are tensor elements (minus the products of inertia), see docs/DECISIONS.md D-048.' |  |  |  |  |  |  |  |  |  |  | 
+## sheet Phase eol rows=51 cols=12
+1: 'Items' |  |  |  |  |  |  |  |  |  |  | 
+2: 'Item' | 'Name' | 'Kind' | 'Subsystem' | 'Maturity' | 'Mass (kg)' | 'Margin' | 'With margin (kg)' | 'x (m)' | 'y (m)' | 'z (m)' | 'Own inertia'
+3: 'battery' | 'Battery pack' | 'unit' | 'EPS' | 'class_b' | 18 | 'n/a' | 'n/a' | -0.15 | 0.1 | 0.2 | 'yes'
+4: 'camera' | 'Imager' | 'unit' | 'PL' | 'class_c' | 7.5 | 'n/a' | 'n/a' | 0 | 0 | 0.85 | 'yes'
+5: 'gnss' | 'GNSS receiver' | 'unit' | 'AOCS' | 'class_b' | 0.4 | 'n/a' | 'n/a' | -0.3 | -0.25 | 0.95 | 'no'
+6: 'heaters' | 'Thermal heaters' | 'unit' | 'THERM' | 'class_a' | 0.6 | 'n/a' | 'n/a' | 0 | 0 | 0.5 | 'no'
+7: 'magnetorquers' | 'Magnetorquers' | 'unit' | 'AOCS' | 'class_b' | 1.5 | 'n/a' | 'n/a' | 0 | 0 | 0.6 | 'yes'
+8: 'obc_a' | 'OBC A' | 'unit' | 'DH' | 'class_a' | 1.2 | 'n/a' | 'n/a' | 0.2 | 0.1 | 0.4 | 'yes'
+9: 'obc_b' | 'OBC B (cold redundant)' | 'unit' | 'DH' | 'class_a' | 1.2 | 'n/a' | 'n/a' | 0.2 | -0.1 | 0.4 | 'yes'
+10: 'pcdu' | 'Power conditioning unit' | 'unit' | 'EPS' | 'class_a' | 4.5 | 'n/a' | 'n/a' | -0.2 | 0 | 0.35 | 'yes'
+11: 'pdu_data' | 'Payload data unit' | 'unit' | 'PL-DATA' | 'class_c' | 2.2 | 'n/a' | 'n/a' | -0.2 | -0.15 | 0.5 | 'yes'
+12: 'reaction_wheels' | 'Reaction wheels' | 'unit' | 'AOCS' | 'class_b' | 6 | 'n/a' | 'n/a' | 0 | 0 | 0.3 | 'yes'
+13: 'sband_trx' | 'S-band transceiver' | 'unit' | 'TTC' | 'class_b' | 1.1 | 'n/a' | 'n/a' | 0.2 | 0 | 0.55 | 'yes'
+14: 'solar_array' | 'Solar array panels' | 'unit' | 'EPS' | 'class_b' | 14 | 'n/a' | 'n/a' | 0 | 0 | 0.5 | 'yes'
+15: 'star_tracker' | 'Star tracker' | 'unit' | 'AOCS' | 'class_b' | 0.9 | 'n/a' | 'n/a' | 0.3 | 0.25 | 0.9 | 'yes'
+16: 'structure' | 'Primary structure' | 'unit' | 'STRUCT' | 'class_a' | 80 | 'n/a' | 'n/a' | 0 | 0 | 0.5 | 'yes'
+17: 'sun_sensors' | 'Coarse sun sensors' | 'unit' | 'AOCS' | 'class_a' | 0.2 | 'n/a' | 'n/a' | 0.25 | -0.25 | 0.98 | 'no'
+18: 'xband_tx' | 'X-band transmitter' | 'unit' | 'PL-DATA' | 'class_c' | 1.8 | 'n/a' | 'n/a' | -0.25 | 0.2 | 0.55 | 'yes'
+19: 'propellant' | 'Propellant' | 'expendable' | 'PROP' | 'class_c' | 0.8 | 'n/a' | 'n/a' | 0 | 0 | 0.35 | 'no'
+21: 'By subsystem' |  |  |  |  |  |  |  |  |  |  | 
+22: 'Subsystem' | 'Mass (kg)' | 'With margin (kg)' |  |  |  |  |  |  |  |  | 
+23: 'AOCS' | 9 | 'n/a' |  |  |  |  |  |  |  |  | 
+24: 'DH' | 2.4 | 'n/a' |  |  |  |  |  |  |  |  | 
+25: 'EPS' | 36.5 | 'n/a' |  |  |  |  |  |  |  |  | 
+26: 'PL' | 7.5 | 'n/a' |  |  |  |  |  |  |  |  | 
+27: 'PL-DATA' | 4 | 'n/a' |  |  |  |  |  |  |  |  | 
+28: 'PROP' | 0.8 | 'n/a' |  |  |  |  |  |  |  |  | 
+29: 'STRUCT' | 80 | 'n/a' |  |  |  |  |  |  |  |  | 
+30: 'THERM' | 0.6 | 'n/a' |  |  |  |  |  |  |  |  | 
+31: 'TTC' | 1.1 | 'n/a' |  |  |  |  |  |  |  |  | 
+33: 'Totals and centre of gravity' |  |  |  |  |  |  |  |  |  |  | 
+34: 'Quantity' | 'Value' |  |  |  |  |  |  |  |  |  | 
+35: 'Total, nominal' | 141.9 |  |  |  |  |  |  |  |  |  | 
+36: 'Total, with unit margins' | 'n/a' |  |  |  |  |  |  |  |  |  | 
+37: 'Total, with system margin' | 'n/a' |  |  |  |  |  |  |  |  |  | 
+38: 'Centre of gravity x (m)' | -0.02529950669485553 |  |  |  |  |  |  |  |  |  | 
+39: 'Centre of gravity y (m)' | 0.01342494714587738 |  |  |  |  |  |  |  |  |  | 
+40: 'Centre of gravity z (m)' | 0.4712544045102184 |  |  |  |  |  |  |  |  |  | 
+41: 'Mass in the CG calculation (kg)' | 141.9 |  |  |  |  |  |  |  |  |  | 
+43: 'Inertia tensor' |  |  |  |  |  |  |  |  |  |  | 
+44: 'Entry' | 'About CG (kg m2)' | 'About origin (kg m2)' |  |  |  |  |  |  |  |  | 
+45: 'Ixx' | 15.65593719168428 | 47.194765 |  |  |  |  |  |  |  |  | 
+46: 'Iyy' | 18.56364948696265 | 50.167728 |  |  |  |  |  |  |  |  | 
+47: 'Izz' | 14.25816124665257 | 14.374561 |  |  |  |  |  |  |  |  | 
+48: 'Ixy' | 0.1608044397463002 | 0.209 |  |  |  |  |  |  |  |  | 
+49: 'Ixz' | -0.8603033121916842 | 0.8314999999999999 |  |  |  |  |  |  |  |  | 
+50: 'Iyz' | 0.4462396405919661 | -0.4515000000000001 |  |  |  |  |  |  |  |  | 
+51: 'Tensor entries in the body frame; Ixy, Ixz, Iyz are tensor elements (minus the products of inertia), see docs/DECISIONS.md D-048.' |  |  |  |  |  |  |  |  |  |  | 
+## sheet Assumptions rows=15 cols=5
+1: 'Configuration numbers used' |  |  |  | 
+2: 'Name' | 'Value' | 'Unit' | 'Source' | 'Status'
+3: 'Mass margin, maturity class class_a' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+4: 'Mass margin, maturity class class_b' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+5: 'Mass margin, maturity class class_c' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+6: 'System mass margin' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+7: 'Mass limit, Launch mass' | 'n/a' | 'kg' | 'TBD' | 'PLACEHOLDER'
+9: 'Equations' |  |  |  | 
+10: 'ID' | 'Name' | 'Formula' | 'Source' | 
+11: 'MASS-MARGIN' | 'Item mass with maturity margin' | 'm_m = m * (1 + mass_margin_ratio(maturity))' | 'SOURCE_MISSING' | 
+12: 'MASS-SYSMARGIN' | 'System mass margin on the margined total' | 'm_sys = (sum m_m) * (1 + system_mass_margin_ratio)' | 'SOURCE_MISSING' | 
+13: 'MASS-COG' | 'Centre of gravity' | 'r_cg = sum(m_i r_i) / sum(m_i), nominal masses of items with a position' | 'SOURCE_MISSING' | 
+14: 'MASS-PARALLEL' | 'Parallel-axis (Huygens-Steiner) theorem' | 'I = sum(I_i + m_i (|d_i|^2 E - d_i d_i^T)), d_i = r_i - r_ref' | 'SOURCE_MISSING' | 
+15: 'SOURCE_MISSING: the formula is a project convention or textbook definition whose reference text is not available to the tool yet (see docs/DECISIONS.md).' |  |  |  | 
+## sheet Problems rows=25 cols=4
+1: 'Problems and open items' |  |  | 
+2: 'Severity' | 'Code' | 'Location' | 'Message'
+3: 'warning' | 'CONFIG_EMPTY_TABLE' | 'config/attenuation_table.yaml:3' | 'The table has no entries.'
+4: 'warning' | 'CONFIG_EMPTY_TABLE' | 'config/ebn0_table.yaml:3' | 'The table has no entries.'
+5: 'warning' | 'RESULT_INCOMPLETE' | 'config/margin_policy.yaml' | "The mass margin of maturity class 'class_a' is a placeholder."
+6: 'warning' | 'RESULT_INCOMPLETE' | 'config/margin_policy.yaml' | "The mass margin of maturity class 'class_b' is a placeholder."
+7: 'warning' | 'RESULT_INCOMPLETE' | 'config/margin_policy.yaml' | "The mass margin of maturity class 'class_c' is a placeholder."
+8: 'warning' | 'RESULT_INCOMPLETE' | 'config/margin_policy.yaml' | 'The system mass margin is a placeholder.'
+9: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:6' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+10: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:10' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+11: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:15' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+12: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:19' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+13: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:24' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+14: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:28' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+15: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:32' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+16: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:36' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+17: 'warning' | 'RESULT_INCOMPLETE' | 'config/mass_limits.yaml' | "The mass limit 'Launch mass' is a placeholder."
+18: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/mass_limits.yaml:7' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+19: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_config.yaml:4' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+20: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_config.yaml:9' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+21: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_config.yaml:13' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+22: 'info' | 'MASS_INERTIA_POINT_MASS' | 'expendables/propellant.yaml' | "'propellant' has no own inertia; it is treated as a point mass."
+23: 'info' | 'MASS_INERTIA_POINT_MASS' | 'units/gnss.yaml' | "'gnss' has no own inertia; it is treated as a point mass."
+24: 'info' | 'MASS_INERTIA_POINT_MASS' | 'units/heaters.yaml' | "'heaters' has no own inertia; it is treated as a point mass."
+25: 'info' | 'MASS_INERTIA_POINT_MASS' | 'units/sun_sensors.yaml' | "'sun_sensors' has no own inertia; it is treated as a point mass."
+## sheet Provenance rows=10 cols=2
+1: 'Provenance' | 
+2: 'Item' | 'Value'
+3: 'Tool' | 'System Budget Studio 0.1.0'
+4: 'Python' | '3.x'
+5: 'Libraries' | 'pinned for-golden-tests'
+6: 'Project' | 'Example 150 kg microsatellite'
+7: 'Project revision' | '1'
+8: 'Scenario' | 'static (no scenario)'
+9: 'Generated (UTC)' | '2026-01-02T03:04:05Z'
+10: 'User' | 'Golden User'

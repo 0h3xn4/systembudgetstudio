@@ -11,6 +11,7 @@ from pydantic import Field
 from budget_core.model.base import BudgetModel
 from budget_core.model.config import AttenuationTable, Ebn0Table, MarginPolicy, PowerConfig
 from budget_core.model.equipment import Spacecraft, SpacecraftMode, Unit
+from budget_core.model.mass import Expendable, MassLimits
 from budget_core.model.versions import CURRENT_VERSIONS
 
 
@@ -28,6 +29,7 @@ class ProjectConfig:
     power_config: PowerConfig | None = None
     ebn0_table: Ebn0Table | None = None
     attenuation_table: AttenuationTable | None = None
+    mass_limits: MassLimits | None = None
 
 
 @dataclass(frozen=True)
@@ -38,3 +40,9 @@ class Project:
     units: dict[str, Unit] = field(default_factory=dict)
     modes: dict[str, SpacecraftMode] = field(default_factory=dict)
     config: ProjectConfig = field(default_factory=ProjectConfig)
+    expendables: dict[str, Expendable] = field(default_factory=dict)
+
+    @property
+    def phases(self) -> tuple[str, ...]:
+        """Mission phases in order; a project without phases has the single phase "all"."""
+        return tuple(self.spacecraft.mission_phases) or ("all",)

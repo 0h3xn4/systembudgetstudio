@@ -1,22 +1,38 @@
-schema_version: 1
+schema_version: 2
 kind: margin_policy
 classes:
   class_a:
-    margin_ratio:
+    power_margin_ratio:
+      value: null
+      source: TBD
+      note: "Placeholder: supply the project's value."
+    mass_margin_ratio:
       value: null
       source: TBD
       note: "Placeholder: supply the project's value."
   class_b:
-    margin_ratio:
+    power_margin_ratio:
+      value: null
+      source: TBD
+      note: "Placeholder: supply the project's value."
+    mass_margin_ratio:
       value: null
       source: TBD
       note: "Placeholder: supply the project's value."
   class_c:
-    margin_ratio:
+    power_margin_ratio:
       value: null
       source: TBD
       note: "Placeholder: supply the project's value."
-system_margin_ratio:
+    mass_margin_ratio:
+      value: null
+      source: TBD
+      note: "Placeholder: supply the project's value."
+system_power_margin_ratio:
+  value: null
+  source: TBD
+  note: "Placeholder: supply the project's value."
+system_mass_margin_ratio:
   value: null
   source: TBD
   note: "Placeholder: supply the project's value."

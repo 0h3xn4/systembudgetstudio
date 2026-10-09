@@ -14,7 +14,8 @@ from budget_core.model.versions import CURRENT_VERSIONS
 
 
 class MaturityClass(BudgetModel):
-    margin_ratio: Sourced
+    power_margin_ratio: Sourced
+    mass_margin_ratio: Sourced
     description: str = ""
 
 
@@ -22,7 +23,8 @@ class MarginPolicy(BudgetModel):
     schema_version: int = CURRENT_VERSIONS["margin_policy"]
     kind: Literal["margin_policy"] = "margin_policy"
     classes: dict[str, MaturityClass]
-    system_margin_ratio: Sourced
+    system_power_margin_ratio: Sourced
+    system_mass_margin_ratio: Sourced
 
     @field_validator("classes")
     @classmethod

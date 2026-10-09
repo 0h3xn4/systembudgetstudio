@@ -36,8 +36,10 @@ class MainWindow(QMainWindow):
         self.tree = ProjectTree()
         self.problems_panel = ProblemsPanel()
         self.power_view = PowerView()
+        self.mass_view = PowerView()
         self.editors = EditorTabs()
         self.editors.add_fixed(self.power_view, "Power budget")
+        self.editors.add_fixed(self.mass_view, "Mass budget")
         self.setCentralWidget(self.editors)
         self._worker: ExportWorker | None = None
 
@@ -86,7 +88,7 @@ class MainWindow(QMainWindow):
             self.open_unit_editor(unit_id)
 
     def _choose_export(self) -> None:
-        if self.session.document is None:
+        if not self.session.outputs:
             QMessageBox.information(
                 self,
                 APP_NAME,
@@ -152,6 +154,7 @@ class MainWindow(QMainWindow):
         self.tree.set_project(session.path, project)
         self.problems_panel.set_problems(session.problems)
         self.power_view.set_document(session.document)
+        self.mass_view.set_document(session.mass_document)
         self.editors.reload_clean_files()
         name = project.meta.name if project else (session.path.name if session.path else "")
         self.setWindowTitle(f"{name} — {APP_NAME}" if name else APP_NAME)
@@ -160,10 +163,10 @@ class MainWindow(QMainWindow):
     # ---- export ------------------------------------------------------------------------------
     def export_to(self, folder: Path, kinds: Collection[str]) -> None:
         session = self.session
-        if session.document is None or session.power is None or session.provenance is None:
+        if not session.outputs:
             self.export_failed.emit("There is no budget to export; fix the errors first.")
             return
-        worker = ExportWorker(session.document, session.power, session.provenance, folder, kinds)
+        worker = ExportWorker(session.outputs, folder, kinds)
         worker.finished_ok.connect(self._export_done)
         worker.failed.connect(self._export_failed)
         self._worker = worker

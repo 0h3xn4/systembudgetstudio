@@ -11,7 +11,11 @@ from budget_core.model import (
     Bus,
     Ebn0Entry,
     Ebn0Table,
+    Expendable,
     MarginPolicy,
+    MassLimit,
+    MassLimits,
+    MassProperties,
     MaturityClass,
     PowerConfig,
     PowerMode,
@@ -39,13 +43,19 @@ def build_project(root: Path) -> Project:
             mass_kg=0.2,
             bus="main",
             maturity="m1",
+            mass_properties=MassProperties(position_m=[0.1, 0.0, 0.2]),
             modes=[PowerMode(name=n, avg_power_w=a, peak_power_w=p) for n, a, p in modes],
         )
 
     return Project(
         root=root,
         meta=ProjectMeta(name="Test project", revision="r1"),
-        spacecraft=Spacecraft(name="SAT", buses=[Bus(name="main", nominal_voltage_v=28.0)]),
+        spacecraft=Spacecraft(
+            name="SAT",
+            buses=[Bus(name="main", nominal_voltage_v=28.0)],
+            mission_phases=["launch", "eol"],
+            body_frame="test frame",
+        ),
         units={
             "obc": unit("OBC", [("on", 1.0, 2.0), ("off", 0.0, 0.0)]),
             "radio": unit("Radio", [("rx", 1.0, 1.5), ("tx", 5.0, 8.0)]),
@@ -54,13 +64,30 @@ def build_project(root: Path) -> Project:
             "nominal": SpacecraftMode(name="Nominal", assignments={"obc": "on", "radio": "rx"}),
             "downlink": SpacecraftMode(name="Downlink", assignments={"obc": "on", "radio": "tx"}),
         },
+        expendables={
+            "fuel": Expendable(
+                name="Fuel",
+                subsystem="PROP",
+                maturity="m1",
+                masses_kg={"launch": 2.0, "eol": 0.5},
+                mass_properties=MassProperties(position_m=[0.0, 0.0, 0.1]),
+            )
+        },
         config=ProjectConfig(
+            mass_limits=MassLimits(
+                limits=[MassLimit(name="launch mass", phase="launch", limit_kg=sourced(100.0))]
+            ),
             margin_policy=MarginPolicy(
                 classes={
-                    "m1": MaturityClass(margin_ratio=sourced(0.1)),
-                    "m2": MaturityClass(margin_ratio=sourced(0.2)),
+                    "m1": MaturityClass(
+                        power_margin_ratio=sourced(0.1), mass_margin_ratio=sourced(0.1)
+                    ),
+                    "m2": MaturityClass(
+                        power_margin_ratio=sourced(0.2), mass_margin_ratio=sourced(0.2)
+                    ),
                 },
-                system_margin_ratio=sourced(0.05),
+                system_power_margin_ratio=sourced(0.05),
+                system_mass_margin_ratio=sourced(0.05),
             ),
             power_config=PowerConfig(
                 distribution_loss_ratio=sourced(0.02),

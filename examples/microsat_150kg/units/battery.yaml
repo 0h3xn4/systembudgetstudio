@@ -1,0 +1,24 @@
+schema_version: 1
+kind: unit
+name: Battery pack
+subsystem: EPS
+mass_kg: 18.0
+bus: main_28v
+maturity: class_b
+modes:
+  - name: off
+    avg_power_w: 0.0
+    peak_power_w: 0.0
+    duty_cycle_ratio: 1.0
+mass_properties:
+  position_m:
+    - -0.15
+    - 0.1
+    - 0.2
+  inertia:
+    ixx_kgm2: 0.09375
+    iyy_kgm2: 0.16875
+    izz_kgm2: 0.195
+    ixy_kgm2: 0.0
+    ixz_kgm2: 0.0
+    iyz_kgm2: 0.0

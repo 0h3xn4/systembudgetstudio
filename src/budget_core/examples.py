@@ -14,7 +14,12 @@ from budget_core.model import (
     AttenuationTable,
     Bus,
     Ebn0Table,
+    Expendable,
+    Inertia,
     MarginPolicy,
+    MassLimit,
+    MassLimits,
+    MassProperties,
     MaturityClass,
     PowerConfig,
     PowerMode,
@@ -38,8 +43,12 @@ def _tbd() -> Sourced:
 def _config(buses: list[str]) -> ProjectConfig:
     return ProjectConfig(
         margin_policy=MarginPolicy(
-            classes={c: MaturityClass(margin_ratio=_tbd()) for c in CLASSES},
-            system_margin_ratio=_tbd(),
+            classes={
+                c: MaturityClass(power_margin_ratio=_tbd(), mass_margin_ratio=_tbd())
+                for c in CLASSES
+            },
+            system_power_margin_ratio=_tbd(),
+            system_mass_margin_ratio=_tbd(),
         ),
         power_config=PowerConfig(
             distribution_loss_ratio=_tbd(),
@@ -47,6 +56,9 @@ def _config(buses: list[str]) -> ProjectConfig:
         ),
         ebn0_table=Ebn0Table(),
         attenuation_table=AttenuationTable(),
+        mass_limits=MassLimits(
+            limits=[MassLimit(name="Launch mass", phase="launch", limit_kg=_tbd())]
+        ),
     )
 
 
@@ -54,7 +66,36 @@ def _config(buses: list[str]) -> ProjectConfig:
 UnitRow = tuple[str, str, str, float, str, str, dict[str, tuple[float, float, float]]]
 
 
-def _unit(row: UnitRow) -> tuple[str, Unit]:
+Geometry = tuple[tuple[float, float, float], tuple[float, float, float] | None]
+BODY_FRAME = (
+    "Right-handed body frame. Origin: centre of the launch-vehicle interface plane. +Z: along the "
+    "launch axis, away from the interface. X and Y: in the interface plane. Positions are item "
+    "centres of mass in metres. Synthetic example."
+)
+
+
+def _box_inertia(mass: float, dims: tuple[float, float, float]) -> Inertia:
+    """Uniform box about its centre: I_xx = m (dy^2 + dz^2) / 12, and so on (textbook formula)."""
+    dx, dy, dz = dims
+    return Inertia(
+        ixx_kgm2=round(mass * (dy * dy + dz * dz) / 12.0, 6),
+        iyy_kgm2=round(mass * (dx * dx + dz * dz) / 12.0, 6),
+        izz_kgm2=round(mass * (dx * dx + dy * dy) / 12.0, 6),
+    )
+
+
+def _props(mass: float, geometry: Geometry | None) -> MassProperties | None:
+    if geometry is None:
+        return None
+    position, dims = geometry
+    return MassProperties(
+        position_m=list(position), inertia=_box_inertia(mass, dims) if dims else None
+    )
+
+
+def _unit(
+    row: UnitRow, geometry: Geometry | None = None, phases: list[str] | None = None
+) -> tuple[str, Unit]:
     uid, name, subsystem, mass, bus, maturity, modes = row
     return uid, Unit(
         name=name,
@@ -66,6 +107,8 @@ def _unit(row: UnitRow) -> tuple[str, Unit]:
             PowerMode(name=m, avg_power_w=a, peak_power_w=p, duty_cycle_ratio=d)
             for m, (a, p, d) in modes.items()
         ],
+        mass_properties=_props(mass, geometry),
+        phases=phases,
     )
 
 
@@ -371,12 +414,83 @@ STRESS_SUBSYSTEMS = ("DH", "EPS", "AOCS", "TTC", "PL", "THERM", "PL-DATA", "HARN
 STRESS_MODES = ("safe", "nominal", "imaging", "downlink", "charging")
 
 
+# Invented geometry: unit id -> (centre-of-mass position in m, box dimensions in m or None for a
+# point mass). The box formula gives each unit a consistent, physically valid inertia tensor.
+CUBESAT_GEOMETRY: dict[str, Geometry] = {
+    "obc": ((0.0, 0.0, 0.050), (0.09, 0.09, 0.015)),
+    "eps": ((0.0, 0.0, 0.080), (0.09, 0.09, 0.030)),
+    "radio": ((0.0, 0.0, 0.120), (0.09, 0.09, 0.020)),
+    "adcs": ((0.0, 0.0, 0.160), (0.09, 0.09, 0.040)),
+    "camera": ((0.0, 0.0, 0.260), (0.08, 0.08, 0.140)),
+    "gnss": ((0.03, 0.0, 0.330), None),
+}
+
+MICROSAT_GEOMETRY: dict[str, Geometry] = {
+    "obc_a": ((0.20, 0.10, 0.40), (0.20, 0.15, 0.08)),
+    "obc_b": ((0.20, -0.10, 0.40), (0.20, 0.15, 0.08)),
+    "pcdu": ((-0.20, 0.00, 0.35), (0.30, 0.25, 0.12)),
+    "star_tracker": ((0.30, 0.25, 0.90), (0.10, 0.10, 0.15)),
+    "reaction_wheels": ((0.00, 0.00, 0.30), (0.40, 0.40, 0.15)),
+    "magnetorquers": ((0.00, 0.00, 0.60), (0.50, 0.50, 0.05)),
+    "gnss": ((-0.30, -0.25, 0.95), None),
+    "sband_trx": ((0.20, 0.00, 0.55), (0.18, 0.12, 0.06)),
+    "xband_tx": ((-0.25, 0.20, 0.55), (0.20, 0.15, 0.08)),
+    "camera": ((0.00, 0.00, 0.85), (0.30, 0.30, 0.50)),
+    "pdu_data": ((-0.20, -0.15, 0.50), (0.25, 0.20, 0.10)),
+    "heaters": ((0.00, 0.00, 0.50), None),
+    "sun_sensors": ((0.25, -0.25, 0.98), None),
+    "structure": ((0.00, 0.00, 0.50), (0.80, 0.80, 1.00)),
+    "solar_array": ((0.00, 0.00, 0.50), (1.60, 0.80, 0.05)),
+    "battery": ((-0.15, 0.10, 0.20), (0.30, 0.20, 0.15)),
+    "adapter": ((0.00, 0.00, -0.03), (0.90, 0.90, 0.06)),
+}
+
+# Extra unprojected-power structure units for the microsat (zero electrical power).
+MICROSAT_UNITS += [
+    (
+        "structure",
+        "Primary structure",
+        "STRUCT",
+        80.0,
+        "main_28v",
+        "class_a",
+        {"off": (0.0, 0.0, 1.0)},
+    ),
+    (
+        "solar_array",
+        "Solar array panels",
+        "EPS",
+        14.0,
+        "main_28v",
+        "class_b",
+        {"off": (0.0, 0.0, 1.0)},
+    ),
+    ("battery", "Battery pack", "EPS", 18.0, "main_28v", "class_b", {"off": (0.0, 0.0, 1.0)}),
+    (
+        "adapter",
+        "Separation adapter",
+        "STRUCT",
+        2.5,
+        "main_28v",
+        "class_a",
+        {"off": (0.0, 0.0, 1.0)},
+    ),
+]
+
+PHASES = ["launch", "bol", "eol"]
+
+
 def _cubesat() -> Project:
-    units = dict(_unit(r) for r in CUBESAT_UNITS)
+    units = dict(_unit(r, CUBESAT_GEOMETRY.get(r[0])) for r in CUBESAT_UNITS)
     return Project(
         root=Path("."),
         meta=ProjectMeta(name="Example 3U CubeSat", revision="1", description=SYNTHETIC),
-        spacecraft=Spacecraft(name="CubeSat 3U", buses=[Bus(name="main", nominal_voltage_v=5.0)]),
+        spacecraft=Spacecraft(
+            name="CubeSat 3U",
+            buses=[Bus(name="main", nominal_voltage_v=5.0)],
+            mission_phases=["launch", "eol"],
+            body_frame=BODY_FRAME,
+        ),
         units=units,
         modes=_mode_map(units, CUBESAT_MODES),
         config=_config(["main"]),
@@ -384,7 +498,17 @@ def _cubesat() -> Project:
 
 
 def _microsat() -> Project:
-    units = dict(_unit(r) for r in MICROSAT_UNITS)
+    units = dict(
+        _unit(r, MICROSAT_GEOMETRY.get(r[0]), ["launch"] if r[0] == "adapter" else None)
+        for r in MICROSAT_UNITS
+    )
+    propellant = Expendable(
+        name="Propellant",
+        subsystem="PROP",
+        maturity="class_c",
+        masses_kg={"launch": 9.0, "bol": 8.5, "eol": 0.8},
+        mass_properties=MassProperties(position_m=[0.0, 0.0, 0.35]),
+    )
     return Project(
         root=Path("."),
         meta=ProjectMeta(name="Example 150 kg microsatellite", revision="1", description=SYNTHETIC),
@@ -394,25 +518,30 @@ def _microsat() -> Project:
                 Bus(name="main_28v", nominal_voltage_v=28.0),
                 Bus(name="payload_12v", nominal_voltage_v=12.0),
             ],
+            mission_phases=PHASES,
+            body_frame=BODY_FRAME,
         ),
         units=units,
         modes=_mode_map(units, MICROSAT_MODES),
         config=_config(["main_28v", "payload_12v"]),
+        expendables={"propellant": propellant},
     )
 
 
 def _stress() -> Project:
-    """200 units with deterministic, invented power values (formulas of the index only)."""
+    """200 units with deterministic, invented values (formulas of the index only)."""
     rows: list[UnitRow] = []
+    geometry: dict[str, Geometry] = {}
     for i in range(200):
         base = 0.2 + (i % 17) * 0.15
         modes = {"off": (0.0, 0.0, 1.0)}
         for j, m in enumerate(STRESS_MODES):
             avg = round(base * (1.0 + 0.1 * ((i + j) % 5)), 3)
             modes[m] = (avg, round(avg * 1.5, 3), 1.0 if (i + j) % 3 else 0.5)
+        uid = f"unit_{i:03d}"
         rows.append(
             (
-                f"unit_{i:03d}",
+                uid,
                 f"Stress unit {i:03d}",
                 STRESS_SUBSYSTEMS[i % len(STRESS_SUBSYSTEMS)],
                 round(0.05 + (i % 11) * 0.07, 3),
@@ -421,7 +550,13 @@ def _stress() -> Project:
                 modes,
             )
         )
-    units = dict(_unit(r) for r in rows)
+        position = (
+            round(((i % 7) - 3) * 0.05, 3),
+            round((((i // 7) % 7) - 3) * 0.05, 3),
+            round(0.1 + (i % 13) * 0.04, 3),
+        )
+        geometry[uid] = (position, (0.04, 0.04, 0.04) if i % 5 else None)
+    units = dict(_unit(r, geometry[r[0]]) for r in rows)
     plan = {m: (m.capitalize(), "Stress-test mode.") for m in STRESS_MODES}
     return Project(
         root=Path("."),
@@ -434,6 +569,8 @@ def _stress() -> Project:
                 Bus(name="main", nominal_voltage_v=28.0),
                 Bus(name="aux", nominal_voltage_v=12.0),
             ],
+            mission_phases=["launch", "eol"],
+            body_frame=BODY_FRAME,
         ),
         units=units,
         modes=_mode_map(units, plan),

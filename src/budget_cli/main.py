@@ -12,10 +12,17 @@ from pathlib import Path
 from budget_core import APP_NAME, __version__
 from budget_core.examples import export_examples
 from budget_core.io.project_loader import load_project
+from budget_core.mass.static_mass import static_mass_budget
 from budget_core.power.static_budget import static_power_budget
 from budget_core.problems import Problem, Severity, sort_problems
 from budget_core.provenance import make_provenance
-from budget_core.reports.run import REPORT_KINDS, power_document, write_power_reports
+from budget_core.reports.run import (
+    REPORT_KINDS,
+    BudgetOutput,
+    mass_output,
+    power_output,
+    write_outputs,
+)
 from budget_core.schemas import export_schemas
 from budget_core.selftest import run_selftest
 
@@ -46,9 +53,9 @@ def build_parser() -> argparse.ArgumentParser:
     run.add_argument("project", type=Path, help="Project folder (contains project.yaml).")
     run.add_argument(
         "--budget",
-        choices=("power",),
-        default="power",
-        help="Budget to compute (static power in M2a).",
+        choices=("power", "mass", "all"),
+        default="all",
+        help="Budget to compute (default: all).",
     )
     run.add_argument(
         "--report",
@@ -118,23 +125,35 @@ def _run(args: argparse.Namespace) -> int:
         return 1
 
     project = loaded.project
-    power = static_power_budget(project)
     provenance = make_provenance(project, user=args.user, generated_at=args.date)
-    document = power_document(project, power, provenance, loaded.problems)
+    outputs: list[BudgetOutput] = []
+    problems: list[Problem] = list(loaded.problems)
+    if args.budget in ("power", "all"):
+        power = static_power_budget(project)
+        outputs.append(power_output(project, power, provenance, loaded.problems))
+        problems += power.problems
+    if args.budget in ("mass", "all"):
+        mass = static_mass_budget(project)
+        outputs.append(mass_output(project, mass, provenance, loaded.problems))
+        problems += mass.problems
+
     wanted = set(args.report or ["all"])
     if "all" in wanted:
         wanted = set(REPORTS)
     out_dir = args.out or (args.project / "results")
-    written = write_power_reports(document, power, provenance, out_dir, wanted)
+    written = write_outputs(outputs, out_dir, wanted)
 
-    problems = sort_problems([*loaded.problems, *power.problems])
+    problems = sort_problems(problems)
+    result_errors = [p for p in problems if p.severity is Severity.ERROR]
     warnings = _count(problems, Severity.WARNING)
     for path in written:
         print(f"Wrote {path}")
-    if document.banner:
-        print(document.banner)
-    print(f"{_plural(warnings, 'warning')}.")
-    return 1 if args.strict and warnings else 0
+    for problem in result_errors:  # findings such as an exceeded mass limit
+        print(problem.format())
+    if any(o.document.banner for o in outputs):
+        print(outputs[0].document.banner)
+    print(f"{_plural(len(result_errors), 'error')}, {_plural(warnings, 'warning')}.")
+    return 1 if result_errors or (args.strict and warnings) else 0
 
 
 def main(argv: Sequence[str] | None = None) -> int:

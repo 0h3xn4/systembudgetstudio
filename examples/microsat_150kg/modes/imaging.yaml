@@ -3,6 +3,8 @@ kind: spacecraft_mode
 name: Imaging
 description: Payload imaging over a target.
 assignments:
+  adapter: off
+  battery: off
   camera: imaging
   gnss: imaging
   heaters: imaging
@@ -13,6 +15,8 @@ assignments:
   pdu_data: imaging
   reaction_wheels: imaging
   sband_trx: imaging
+  solar_array: off
   star_tracker: imaging
+  structure: off
   sun_sensors: imaging
   xband_tx: off

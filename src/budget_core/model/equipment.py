@@ -8,6 +8,7 @@ from pydantic import Field, field_validator, model_validator
 from pydantic_core import PydanticCustomError
 
 from budget_core.model.base import BudgetModel, duplicate_names
+from budget_core.model.mass import MassProperties
 from budget_core.model.versions import CURRENT_VERSIONS
 
 
@@ -56,6 +57,15 @@ class Unit(BudgetModel):
     maturity: str = Field(min_length=1)
     catalogue_ref: str | None = None  # reserved for the shared catalogue (decision D-009)
     modes: list[PowerMode] = Field(min_length=1)
+    mass_properties: MassProperties | None = None
+    phases: list[str] | None = None  # mission phases the unit is present in (None: all)
+
+    @field_validator("phases")
+    @classmethod
+    def _unique_phases(cls, phases: list[str] | None) -> list[str] | None:
+        if phases is not None and duplicate_names(phases):
+            raise PydanticCustomError("duplicate_name", "phase names must be unique")
+        return phases
 
     @field_validator("modes")
     @classmethod
@@ -90,6 +100,15 @@ class Spacecraft(BudgetModel):
     kind: Literal["spacecraft"] = "spacecraft"
     name: str = Field(min_length=1)
     buses: list[Bus] = Field(min_length=1)
+    mission_phases: list[str] = Field(default_factory=list)  # ordered; empty means one phase "all"
+    body_frame: str = ""  # free-text definition of the mass-property frame (decision D-048)
+
+    @field_validator("mission_phases")
+    @classmethod
+    def _unique_phase_names(cls, phases: list[str]) -> list[str]:
+        if duplicate_names(phases):
+            raise PydanticCustomError("duplicate_name", "phase names must be unique")
+        return phases
 
     @field_validator("buses")
     @classmethod

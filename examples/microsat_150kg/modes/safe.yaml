@@ -3,6 +3,8 @@ kind: spacecraft_mode
 name: Safe
 description: Sun-pointing, minimum loads.
 assignments:
+  adapter: off
+  battery: off
   camera: off
   gnss: off
   heaters: safe
@@ -13,6 +15,8 @@ assignments:
   pdu_data: off
   reaction_wheels: safe
   sband_trx: safe
+  solar_array: off
   star_tracker: off
+  structure: off
   sun_sensors: safe
   xband_tx: off

@@ -251,3 +251,64 @@ def test_placeholder_values_are_not_range_checked(root: Path) -> None:
         "value: 0.0\n    source: TBD",
     )
     assert "CONFIG_VALUE_INVALID" not in codes(load_project(root).problems)
+
+
+def test_unit_phase_must_exist(root: Path) -> None:
+    edit(root, "units/obc.yaml", "mass_properties:", "phases:\n  - warp\nmass_properties:")
+    p = only(load_project(root).problems, "REF_UNKNOWN_PHASE")
+    assert p.file == "units/obc.yaml" and p.path == "phases[0]" and "launch" in p.hint
+
+
+def test_expendable_needs_a_mass_for_every_phase_and_only_known_phases(root: Path) -> None:
+    edit(root, "expendables/fuel.yaml", "  eol: 0.5\n", "  warp: 0.5\n")
+    problems = load_project(root).problems
+    assert only(problems, "PHASE_MASS_MISSING").file == "expendables/fuel.yaml"
+    assert only(problems, "REF_UNKNOWN_PHASE").path == "masses_kg.warp"
+
+
+def test_expendable_maturity_must_exist(root: Path) -> None:
+    edit(root, "expendables/fuel.yaml", "maturity: m1", "maturity: m9")
+    assert only(load_project(root).problems, "REF_UNKNOWN_MATURITY").file == "expendables/fuel.yaml"
+
+
+def test_mass_limit_phase_must_exist_and_value_must_be_positive(root: Path) -> None:
+    edit(root, "config/mass_limits.yaml", "phase: launch", "phase: warp")
+    edit(root, "config/mass_limits.yaml", "value: 100.0", "value: 0.0")
+    problems = load_project(root).problems
+    assert only(problems, "REF_UNKNOWN_PHASE").file == "config/mass_limits.yaml"
+    assert only(problems, "CONFIG_VALUE_INVALID").path == "limits[0].limit_kg.value"
+
+
+def test_positions_without_a_body_frame_warn(root: Path) -> None:
+    edit(root, "spacecraft.yaml", "body_frame: test frame\n", "")
+    p = only(load_project(root).problems, "MASS_FRAME_UNDEFINED")
+    assert p.file == "spacecraft.yaml" and p.severity.value == "warning"
+
+
+def test_empty_mass_limits_table_is_a_warning(root: Path) -> None:
+    (root / "config" / "mass_limits.yaml").write_text(
+        "schema_version: 1\nkind: mass_limits\nlimits: []\n", encoding="utf-8"
+    )
+    assert only(load_project(root).problems, "CONFIG_EMPTY_TABLE").file == "config/mass_limits.yaml"
+
+
+def test_schema_v1_margin_policy_migrates_with_placeholder_mass_margins(root: Path) -> None:
+    (root / "config" / "margin_policy.yaml").write_text(
+        "schema_version: 1\nkind: margin_policy\nclasses:\n  m1:\n    margin_ratio:\n"
+        "      value: 0.1\n      source: test fixture\n  m2:\n    margin_ratio:\n"
+        "      value: 0.2\n      source: test fixture\nsystem_margin_ratio:\n"
+        "  value: 0.05\n  source: test fixture\n",
+        encoding="utf-8",
+    )
+    result = load_project(root)
+    codes_ = codes(result.problems)
+    assert "FILE_MIGRATED" in codes_
+    assert not [p for p in result.problems if p.severity.value == "error"]
+    assert result.project is not None
+    policy = result.project.config.margin_policy
+    assert policy is not None
+    assert policy.classes["m1"].power_margin_ratio.value == 0.1
+    assert policy.classes["m1"].mass_margin_ratio.is_placeholder
+    assert policy.system_power_margin_ratio.value == 0.05
+    assert policy.system_mass_margin_ratio.is_placeholder
+    assert codes_.count("CONFIG_PLACEHOLDER") == 3  # m1, m2 and system mass margins

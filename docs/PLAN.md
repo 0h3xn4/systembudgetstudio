@@ -14,7 +14,7 @@ Acceptance: invalid/missing/newer-schema files give located, plain-language prob
 ## M2 Static budgets: power and mass (L, two PRs)
 Scope: shared margin handling; Problems panel (GUI, wired to validate and the budgets); table editors for units/modes; XLSX and PDF reports with provenance and assumptions list; reproducible-output mode; loader packaged in the GUI bundle (pint data, hidden imports).
 - **M2a Power (first PR, done):** static per-mode table with maturity margins, converter and distribution losses, effective average = `avg_power_w * duty_cycle_ratio` (D-024).
-- **M2b Mass (second PR, same milestone):**
+- **M2b Mass (second PR, same milestone; done):**
   - Model: unit `mass_properties` (position in the spacecraft frame, inertia tensor about the unit's own centre), optional `phases` on units, `expendables/*.yaml` (propellant and consumables per phase), `mission_phases` and the body-frame definition in `spacecraft.yaml`, `config/mass_limits.yaml` (limits with sources). `margin_policy` goes to schema v2 with a migration: `margin_ratio` becomes `power_margin_ratio`, and a placeholder `mass_margin_ratio` is added per class (first real use of the migration framework).
   - Solver (pure functions): roll-up by subsystem and total with margins; centre of gravity `r_cg = sum(m_i r_i) / sum(m_i)` on nominal masses; inertia about the CG with the parallel-axis (Huygens-Steiner) theorem; per-phase results; limit checks.
   - Problems: `MASS_LIMIT_EXCEEDED`, `MASS_PROPS_MISSING`, `PHASE_UNKNOWN`, plus placeholder warnings.

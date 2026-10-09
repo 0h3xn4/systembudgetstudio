@@ -115,7 +115,12 @@ def test_export_runs_in_a_worker_and_writes_files(
     with qtbot.waitSignal(window.export_finished, timeout=60000) as blocker:
         window.export_to(tmp_path / "out", {"xlsx", "json"})
     names = sorted(Path(p).name for p in blocker.args[0])
-    assert names == ["power_static.json", "power_static.xlsx"]
+    assert names == [
+        "mass_static.json",
+        "mass_static.xlsx",
+        "power_static.json",
+        "power_static.xlsx",
+    ]
     assert (tmp_path / "out" / "power_static.xlsx").stat().st_size > 1000
 
 
@@ -182,3 +187,68 @@ def test_reload_keeps_unsaved_edits(window: MainWindow, broken: Path) -> None:
     assert "bus: main" in editor.toPlainText() and editor.document().isModified()
     assert "1 error" in window.problems_panel.summary.text()
     editor.document().setModified(False)
+
+
+def test_mass_budget_tab_shows_phases_and_a_centre_of_gravity(window: MainWindow) -> None:
+    window.open_project(EXAMPLES / "microsat_150kg")
+    view = window.mass_view
+    window.editors.setCurrentWidget(view)  # a hidden tab is not visible
+    titles = [view.tabText(i) for i in range(view.count())]
+    assert titles == [
+        "Summary",
+        "Phase launch",
+        "Phase bol",
+        "Phase eol",
+        "Assumptions",
+        "Provenance",
+    ]
+    assert view.banner.isVisibleTo(window) and "INCOMPLETE" in view.banner.text()
+    model = view.table_model("Summary", 0)
+    assert model.data(model.index(0, 0)) == "launch"
+    assert model.data(model.index(0, 4)) != "n/a"  # CG x is computed from invented geometry
+    assert model.data(model.index(0, 2)) == "n/a"  # margined totals need placeholders
+
+
+def test_expendables_are_in_the_tree_and_can_be_opened(window: MainWindow) -> None:
+    window.open_project(EXAMPLES / "microsat_150kg")
+    window.tree.request_file("expendables/propellant.yaml")
+    editor = window.editors.current_editor()
+    assert editor is not None and "masses_kg" in editor.toPlainText()
+
+
+def test_removing_a_position_in_the_editor_produces_a_mass_warning(
+    window: MainWindow, tmp_path: Path
+) -> None:
+    import shutil
+
+    shutil.copytree(EXAMPLES / "cubesat_3u", tmp_path / "p")
+    window.open_project(tmp_path / "p")
+    window.tree.request_file("units/gnss.yaml")
+    editor = window.editors.current_editor()
+    assert editor is not None
+    text = editor.toPlainText()
+    start = text.index("mass_properties:")
+    replace_text(editor, text[start:], "")
+    assert window.save_current() is True
+    codes = {
+        window.problems_panel.table.item(r, 1).text()
+        for r in range(window.problems_panel.table.rowCount())
+    }
+    assert "MASS_PROPS_MISSING" in codes
+    assert "1 error" not in window.problems_panel.summary.text()
+
+
+def test_unit_editor_keeps_mass_properties(window: MainWindow, tmp_path: Path) -> None:
+    import shutil
+
+    from budget_core.io.project_loader import load_project
+
+    shutil.copytree(EXAMPLES / "cubesat_3u", tmp_path / "p")
+    window.open_project(tmp_path / "p")
+    editor = window.open_unit_editor("camera")
+    assert editor is not None
+    editor.table.item(1, 1).setText("2.6")
+    editor.table.item(1, 2).setText("3.5")
+    assert editor.save() is True
+    unit = load_project(tmp_path / "p").project.units["camera"]  # type: ignore[union-attr]
+    assert unit.mass_properties is not None and unit.mass_properties.position_m[2] == 0.26

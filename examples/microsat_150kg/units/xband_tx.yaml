@@ -14,3 +14,15 @@ modes:
     avg_power_w: 28.0
     peak_power_w: 40.0
     duty_cycle_ratio: 0.9
+mass_properties:
+  position_m:
+    - -0.25
+    - 0.2
+    - 0.55
+  inertia:
+    ixx_kgm2: 0.004335
+    iyy_kgm2: 0.00696
+    izz_kgm2: 0.009375
+    ixy_kgm2: 0.0
+    ixz_kgm2: 0.0
+    iyz_kgm2: 0.0

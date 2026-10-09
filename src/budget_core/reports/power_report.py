@@ -2,13 +2,11 @@
 
 from __future__ import annotations
 
-import re
-
-from budget_core.equations import EQUATIONS
 from budget_core.model import Project
 from budget_core.power.static_budget import Flow, ModePowerResult, StaticPowerResult
-from budget_core.problems import Problem, sort_problems
+from budget_core.problems import Problem
 from budget_core.provenance import Provenance
+from budget_core.reports.common import BANNER, closing_sections, sheet_name
 from budget_core.reports.document import Cell, Column, ReportDocument, Section, Table
 
 W = Column("", "number", 3, "W")
@@ -16,24 +14,6 @@ W = Column("", "number", 3, "W")
 
 def _w(header: str) -> Column:
     return Column(f"{header} (W)", "number", 3, "W")
-
-
-BANNER = (
-    "INCOMPLETE: some inputs are placeholders (source TBD or missing). Entries marked n/a depend "
-    "on them and are not computed. Do not use this report as evidence until the placeholders are "
-    "replaced with sourced values."
-)
-
-
-def _sheet_name(raw: str, used: set[str]) -> str:
-    base = re.sub(r"[\[\]:*?/\\]", "_", raw)[:31]
-    name, i = base, 2
-    while name in used:
-        suffix = f" {i}"
-        name = base[: 31 - len(suffix)] + suffix
-        i += 1
-    used.add(name)
-    return name
 
 
 def _summary(result: StaticPowerResult) -> Table:
@@ -175,68 +155,20 @@ def build_power_report(
 ) -> ReportDocument:
     used: set[str] = set()
     sections: list[Section] = [
-        Section("Summary", _sheet_name("Summary", used), tables=(_summary(result),))
+        Section("Summary", sheet_name("Summary", used), tables=(_summary(result),))
     ]
     for m in result.modes:
         sections.append(
             Section(
                 f"Mode: {m.mode_name}",
-                _sheet_name(f"Mode {m.mode_id}", used),
+                sheet_name(f"Mode {m.mode_id}", used),
                 tables=(_unit_table(m), _subsystem_table(m), _bus_table(m), _totals_table(m)),
             )
         )
 
-    assumption_table = Table(
-        "Configuration numbers used",
-        (
-            Column("Name"),
-            Column("Value", "number", 4),
-            Column("Unit"),
-            Column("Source"),
-            Column("Status"),
-        ),
-        tuple(
-            (a.name, a.value, a.unit, a.source, "PLACEHOLDER" if a.placeholder else "sourced")
-            for a in result.assumptions
-        ),
+    sections += closing_sections(
+        used, result.assumptions, "PWR-", [*load_problems, *result.problems], provenance
     )
-    equation_table = Table(
-        "Equations",
-        (Column("ID"), Column("Name"), Column("Formula"), Column("Source")),
-        tuple((e.id, e.name, e.formula, e.source_text) for e in EQUATIONS.values()),
-        note="SOURCE_MISSING: the formula is a project convention whose reference text is not "
-        "available to the tool yet (decision D-040).",
-    )
-    sections.append(
-        Section(
-            "Assumptions",
-            _sheet_name("Assumptions", used),
-            tables=(assumption_table, equation_table),
-        )
-    )
-
-    problems = sort_problems([*load_problems, *result.problems])
-    problem_table = Table(
-        "Problems and open items",
-        (Column("Severity"), Column("Code"), Column("Location"), Column("Message")),
-        tuple(
-            (
-                p.severity.value,
-                p.code,
-                (p.file or "") + (f":{p.line}" if p.line is not None else ""),
-                p.message,
-            )
-            for p in problems
-        ),
-    )
-    sections.append(Section("Problems", _sheet_name("Problems", used), tables=(problem_table,)))
-
-    prov_table = Table(
-        "Provenance",
-        (Column("Item"), Column("Value")),
-        tuple((k, v) for k, v in provenance.rows()),
-    )
-    sections.append(Section("Provenance", _sheet_name("Provenance", used), tables=(prov_table,)))
 
     incomplete = any(a.placeholder for a in result.assumptions)
     return ReportDocument(
