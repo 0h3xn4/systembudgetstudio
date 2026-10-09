@@ -312,3 +312,72 @@ def test_schema_v1_margin_policy_migrates_with_placeholder_mass_margins(root: Pa
     assert policy.system_power_margin_ratio.value == 0.05
     assert policy.system_mass_margin_ratio.is_placeholder
     assert codes_.count("CONFIG_PLACEHOLDER") == 3  # m1, m2 and system mass margins
+
+
+# ---- environment and scenarios ------------------------------------------------------------------
+
+
+def test_scenario_must_reference_an_existing_orbit_and_sites(root: Path) -> None:
+    edit(root, "scenarios/day.yaml", "orbit: leo", "orbit: nope")
+    edit(root, "scenarios/day.yaml", "- tgt1\n", "- ghost\n")
+    problems = load_project(root).problems
+    assert only(problems, "REF_UNKNOWN_ORBIT").file == "scenarios/day.yaml"
+    unknown = [p for p in problems if p.code == "REF_UNKNOWN_SITE"]
+    assert unknown and all(p.file == "scenarios/day.yaml" for p in unknown)
+
+
+def test_rule_site_must_be_listed_in_the_scenario(root: Path) -> None:
+    edit(root, "scenarios/day.yaml", "- gs1\n", "")
+    p = only(load_project(root).problems, "REF_UNKNOWN_SITE")
+    assert "rules" in p.path and "gs1" in p.message
+
+
+def test_scenario_modes_must_exist(root: Path) -> None:
+    edit(root, "scenarios/day.yaml", "default_mode: nominal", "default_mode: warp")
+    edit(root, "scenarios/day.yaml", "mode: downlink", "mode: hyperspace")
+    problems = [p for p in load_project(root).problems if p.code == "REF_UNKNOWN_MODE"]
+    assert {p.path for p in problems} == {"default_mode", "rules[0].mode"}
+
+
+def test_site_ids_are_unique_across_stations_and_targets(root: Path) -> None:
+    (root / "targets" / "gs1.yaml").write_text(
+        (root / "targets" / "tgt1.yaml").read_text(encoding="utf-8"), encoding="utf-8"
+    )
+    p = only(load_project(root).problems, "DUPLICATE_ID")
+    assert p.file == "targets/gs1.yaml"
+
+
+def test_a_missing_import_folder_is_reported(root: Path) -> None:
+    edit(
+        root,
+        "scenarios/day.yaml",
+        "environment_source: elements\norbit: leo",
+        "environment_source: spacemissionstudio\nimport_dir: imports/run1",
+    )
+    p = only(load_project(root).problems, "IMPORT_DIR_MISSING")
+    assert p.file == "scenarios/day.yaml"
+
+
+def test_an_orbit_that_cannot_be_propagated_is_reported(root: Path) -> None:
+    edit(root, "orbits/leo.yaml", "eccentricity_ratio: 0.001", "eccentricity_ratio: 0.6")
+    p = only(load_project(root).problems, "ORBIT_INVALID")
+    assert p.file == "orbits/leo.yaml"
+
+
+def test_scenario_file_errors_are_located(root: Path) -> None:
+    edit(root, "scenarios/day.yaml", "duration_s: 86400.0", "duration_s: 0.0")
+    assert only(load_project(root).problems, "FIELD_INVALID").file == "scenarios/day.yaml"
+    edit(root, "orbits/leo.yaml", "inclination_deg: 97.5", "inclination_deg: 200.0")
+    assert "FIELD_INVALID" in codes(load_project(root).problems)
+
+
+def test_unquoted_iso_times_in_files_are_accepted(root: Path) -> None:
+    edit(
+        root,
+        "scenarios/day.yaml",
+        "start_utc: '2026-01-01T00:00:00Z'",
+        "start_utc: 2026-01-01T00:00:00Z",
+    )
+    result = load_project(root)
+    assert result.problems == [] and result.project is not None
+    assert result.project.scenarios["day"].start_utc == "2026-01-01T00:00:00Z"

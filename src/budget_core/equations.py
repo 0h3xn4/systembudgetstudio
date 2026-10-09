@@ -91,6 +91,54 @@ EQUATIONS: dict[str, Equation] = {
             "position (DEVIATIONS DV-M1).",
         ),
         Equation(
+            "ENV-SUN",
+            "Sun direction and distance (low precision)",
+            "lambda = L + 1.915 sin g + 0.020 sin 2g; unit vector (cos lambda, cos eps sin lambda, "
+            "sin eps sin lambda); R = 1.00014 - 0.01671 cos g - 0.00014 cos 2g (AU)",
+            None,
+            "Astronomical Almanac low-precision Sun, reproduced from memory (text not available); "
+            "checked against the published 2000 equinox and solstice instants in the tests "
+            "(about 0.01 degree). Owner to verify against the Almanac.",
+        ),
+        Equation(
+            "ENV-GMST",
+            "Greenwich mean sidereal time (IAU-82)",
+            "theta = 67310.54841 + (876600 h + 8640184.812866) T + 0.093104 T^2 - 6.2e-6 T^3 s",
+            "sgp4 library, sgp4.propagation.gstime (IAU-82 GMST, Vallado)",
+            "Checked against the library function in the tests.",
+        ),
+        Equation(
+            "ENV-SHADOW-CYL",
+            "Cylindrical Earth shadow",
+            "in shadow when r.s < 0 and |r - (r.s) s| < R_Earth (s: unit vector to the Sun)",
+            None,
+            "Textbook geometry; no standards text cited.",
+        ),
+        Equation(
+            "ENV-SHADOW-CON",
+            "Conical Earth shadow (umbra, penumbra, annular)",
+            "apparent disk radii a (Sun), b (Earth), separation c; visible Sun fraction from the "
+            "overlap area of two discs",
+            None,
+            "Montenbruck and Gill, Satellite Orbits, 3.4.2, reproduced from memory (text not "
+            "available); checked by geometric tests (umbra, monotonic penumbra, annular limit).",
+        ),
+        Equation(
+            "ENV-GEODETIC",
+            "WGS-84 geodetic to Earth-fixed coordinates",
+            "N = a / sqrt(1 - e2 sin2 phi); x = (N + h) cos phi cos lam; "
+            "z = (N (1 - e2) + h) sin phi",
+            "WGS 84 (NIMA TR8350.2) ellipsoid definition",
+            "Constants in budget_core.environment.constants (decision D-054).",
+        ),
+        Equation(
+            "ENV-TOPO",
+            "Elevation, azimuth and range from a site",
+            "local east-north-up basis at the geodetic latitude and longitude of the site",
+            None,
+            "Textbook geometry; no refraction (DEVIATIONS DV-E1).",
+        ),
+        Equation(
             "MASS-PARALLEL",
             "Parallel-axis (Huygens-Steiner) theorem",
             "I = sum(I_i + m_i (|d_i|^2 E - d_i d_i^T)), d_i = r_i - r_ref",

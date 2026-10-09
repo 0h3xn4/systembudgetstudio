@@ -14,21 +14,28 @@ from budget_core.model import (
     AttenuationTable,
     Bus,
     Ebn0Table,
+    Elements,
     Expendable,
+    GroundStation,
     Inertia,
     MarginPolicy,
     MassLimit,
     MassLimits,
     MassProperties,
     MaturityClass,
+    Orbit,
     PowerConfig,
     PowerMode,
     Project,
     ProjectConfig,
     ProjectMeta,
+    Scenario,
+    ScenarioRule,
+    ScenarioSegment,
     Sourced,
     Spacecraft,
     SpacecraftMode,
+    Target,
     Unit,
 )
 
@@ -479,6 +486,45 @@ MICROSAT_UNITS += [
 
 PHASES = ["launch", "bol", "eol"]
 
+# Invented orbit and sites (round numbers; no real stations or customer targets).
+EXAMPLE_ORBIT = Orbit(
+    name="Example sun-synchronous-like orbit, about 550 km",
+    elements=Elements(
+        epoch_utc="2026-06-01T00:00:00Z",
+        semi_major_axis_m=6928137.0,
+        eccentricity_ratio=0.001,
+        inclination_deg=97.6,
+        raan_deg=100.0,
+        arg_perigee_deg=90.0,
+        mean_anomaly_deg=0.0,
+    ),
+)
+EXAMPLE_STATIONS = {
+    "gs_north": GroundStation(
+        name="Example station north",
+        latitude_deg=67.0,
+        longitude_deg=20.0,
+        altitude_m=100.0,
+        min_elevation_deg=5.0,
+    ),
+    "gs_south": GroundStation(
+        name="Example station south",
+        latitude_deg=-45.0,
+        longitude_deg=170.0,
+        altitude_m=50.0,
+        min_elevation_deg=10.0,
+    ),
+}
+EXAMPLE_TARGETS = {
+    "tgt_plains": Target(
+        name="Example imaging target",
+        latitude_deg=40.0,
+        longitude_deg=-100.0,
+        altitude_m=300.0,
+        min_elevation_deg=45.0,
+    ),
+}
+
 
 def _cubesat() -> Project:
     units = dict(_unit(r, CUBESAT_GEOMETRY.get(r[0])) for r in CUBESAT_UNITS)
@@ -494,6 +540,27 @@ def _cubesat() -> Project:
         units=units,
         modes=_mode_map(units, CUBESAT_MODES),
         config=_config(["main"]),
+        orbits={"leo": EXAMPLE_ORBIT},
+        ground_stations=EXAMPLE_STATIONS,
+        targets=EXAMPLE_TARGETS,
+        scenarios={
+            "one_day": Scenario(
+                name="One day: charging by default, imaging and downlink over passes",
+                orbit="leo",
+                start_utc="2026-06-01T00:00:00Z",
+                duration_s=86400.0,
+                step_s=10.0,
+                sites=["gs_north", "tgt_plains"],
+                default_mode="charging",
+                rules=[
+                    ScenarioRule(kind="in_eclipse", mode="nominal"),
+                    ScenarioRule(
+                        kind="during_pass", site="tgt_plains", mode="imaging", lead_s=30.0
+                    ),
+                    ScenarioRule(kind="during_pass", site="gs_north", mode="downlink"),
+                ],
+            )
+        },
     )
 
 
@@ -525,6 +592,29 @@ def _microsat() -> Project:
         modes=_mode_map(units, MICROSAT_MODES),
         config=_config(["main_28v", "payload_12v"]),
         expendables={"propellant": propellant},
+        orbits={"leo": EXAMPLE_ORBIT},
+        ground_stations=EXAMPLE_STATIONS,
+        targets=EXAMPLE_TARGETS,
+        scenarios={
+            "commissioning_day": Scenario(
+                name="One day with a safe-mode commissioning start",
+                orbit="leo",
+                start_utc="2026-06-01T00:00:00Z",
+                duration_s=86400.0,
+                step_s=10.0,
+                shadow_model="conical",
+                sites=["gs_north", "gs_south", "tgt_plains"],
+                default_mode="nominal",
+                rules=[
+                    ScenarioRule(
+                        kind="during_pass", site="tgt_plains", mode="imaging", lead_s=20.0
+                    ),
+                    ScenarioRule(kind="during_pass", site="gs_north", mode="downlink"),
+                    ScenarioRule(kind="during_pass", site="gs_south", mode="downlink"),
+                ],
+                segments=[ScenarioSegment(start_s=0.0, duration_s=1800.0, mode="safe")],
+            )
+        },
     )
 
 
@@ -575,6 +665,28 @@ def _stress() -> Project:
         units=units,
         modes=_mode_map(units, plan),
         config=_config(["main", "aux"]),
+        orbits={"leo": EXAMPLE_ORBIT},
+        ground_stations=EXAMPLE_STATIONS,
+        targets=EXAMPLE_TARGETS,
+        scenarios={
+            "stress_week": Scenario(
+                name="One week at 1 s resolution",
+                orbit="leo",
+                start_utc="2026-06-01T00:00:00Z",
+                duration_s=604800.0,
+                step_s=1.0,
+                shadow_model="conical",
+                sites=["gs_north", "gs_south", "tgt_plains"],
+                default_mode="nominal",
+                rules=[
+                    ScenarioRule(kind="in_eclipse", mode="safe"),
+                    ScenarioRule(kind="during_pass", site="tgt_plains", mode="imaging"),
+                    ScenarioRule(kind="during_pass", site="gs_north", mode="downlink"),
+                    ScenarioRule(kind="during_pass", site="gs_south", mode="downlink"),
+                    ScenarioRule(kind="in_sunlight", mode="charging"),
+                ],
+            )
+        },
     )
 
 

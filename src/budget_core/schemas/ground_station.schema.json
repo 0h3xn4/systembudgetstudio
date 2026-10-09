@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "altitude_m": {
+      "maximum": 100000,
+      "minimum": -1000,
+      "title": "Altitude M",
+      "type": "number"
+    },
+    "kind": {
+      "const": "ground_station",
+      "default": "ground_station",
+      "title": "Kind",
+      "type": "string"
+    },
+    "latitude_deg": {
+      "maximum": 90,
+      "minimum": -90,
+      "title": "Latitude Deg",
+      "type": "number"
+    },
+    "longitude_deg": {
+      "maximum": 180,
+      "minimum": -180,
+      "title": "Longitude Deg",
+      "type": "number"
+    },
+    "min_elevation_deg": {
+      "exclusiveMaximum": 90,
+      "minimum": 0,
+      "title": "Min Elevation Deg",
+      "type": "number"
+    },
+    "name": {
+      "minLength": 1,
+      "title": "Name",
+      "type": "string"
+    },
+    "schema_version": {
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "altitude_m",
+    "kind",
+    "latitude_deg",
+    "longitude_deg",
+    "min_elevation_deg",
+    "name",
+    "schema_version"
+  ],
+  "title": "System Budget Studio ground_station",
+  "type": "object"
+}

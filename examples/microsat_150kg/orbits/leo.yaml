@@ -1,0 +1,11 @@
+schema_version: 1
+kind: orbit
+name: Example sun-synchronous-like orbit, about 550 km
+elements:
+  epoch_utc: '2026-06-01T00:00:00Z'
+  semi_major_axis_m: 6928137.0
+  eccentricity_ratio: 0.001
+  inclination_deg: 97.6
+  raan_deg: 100.0
+  arg_perigee_deg: 90.0
+  mean_anomaly_deg: 0.0

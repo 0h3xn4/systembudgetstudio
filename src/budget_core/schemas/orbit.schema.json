@@ -1,0 +1,113 @@
+{
+  "$defs": {
+    "Elements": {
+      "additionalProperties": false,
+      "description": "Mean orbital elements, used as SGP4 mean elements without drag (DEVIATIONS DV-E2).",
+      "properties": {
+        "arg_perigee_deg": {
+          "exclusiveMaximum": 360,
+          "minimum": 0,
+          "title": "Arg Perigee Deg",
+          "type": "number"
+        },
+        "eccentricity_ratio": {
+          "exclusiveMaximum": 1,
+          "minimum": 0,
+          "title": "Eccentricity Ratio",
+          "type": "number"
+        },
+        "epoch_utc": {
+          "title": "Epoch Utc",
+          "type": "string"
+        },
+        "inclination_deg": {
+          "maximum": 180,
+          "minimum": 0,
+          "title": "Inclination Deg",
+          "type": "number"
+        },
+        "mean_anomaly_deg": {
+          "exclusiveMaximum": 360,
+          "minimum": 0,
+          "title": "Mean Anomaly Deg",
+          "type": "number"
+        },
+        "raan_deg": {
+          "exclusiveMaximum": 360,
+          "minimum": 0,
+          "title": "Raan Deg",
+          "type": "number"
+        },
+        "semi_major_axis_m": {
+          "exclusiveMinimum": 0,
+          "title": "Semi Major Axis M",
+          "type": "number"
+        }
+      },
+      "required": [
+        "epoch_utc",
+        "semi_major_axis_m",
+        "eccentricity_ratio",
+        "inclination_deg",
+        "raan_deg",
+        "arg_perigee_deg",
+        "mean_anomaly_deg"
+      ],
+      "title": "Elements",
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "elements": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Elements"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "kind": {
+      "const": "orbit",
+      "default": "orbit",
+      "title": "Kind",
+      "type": "string"
+    },
+    "name": {
+      "minLength": 1,
+      "title": "Name",
+      "type": "string"
+    },
+    "schema_version": {
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "tle": {
+      "anyOf": [
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Tle"
+    }
+  },
+  "required": [
+    "kind",
+    "name",
+    "schema_version"
+  ],
+  "title": "System Budget Studio orbit",
+  "type": "object"
+}

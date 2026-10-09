@@ -23,6 +23,8 @@ from budget_core.reports.run import (
     power_output,
     write_outputs,
 )
+from budget_core.scenario.export import write_scenario_outputs
+from budget_core.scenario.run import ScenarioRunError, run_scenario
 from budget_core.schemas import export_schemas
 from budget_core.selftest import run_selftest
 
@@ -73,6 +75,17 @@ def build_parser() -> argparse.ArgumentParser:
         help="Generation time, ISO 8601 (default: SOURCE_DATE_EPOCH or now).",
     )
     run.add_argument("--strict", action="store_true", help="Treat warnings as failures.")
+
+    scn = sub.add_parser(
+        "scenario", help="Compute a scenario's eclipses, passes and mode timeline."
+    )
+    scn.add_argument("project", type=Path, help="Project folder (contains project.yaml).")
+    scn.add_argument(
+        "--scenario", help="Scenario id (file name in scenarios/); optional if only one."
+    )
+    scn.add_argument("--out", type=Path, help="Output folder (default: <project>/results).")
+    scn.add_argument("--user", help="User name for the provenance block.")
+    scn.add_argument("--date", type=_iso_datetime, help="Generation time, ISO 8601.")
 
     sub.add_parser(
         "self-test", help="Check that this installation can compute and render a budget."
@@ -156,11 +169,48 @@ def _run(args: argparse.Namespace) -> int:
     return 1 if result_errors or (args.strict and warnings) else 0
 
 
+def _scenario(args: argparse.Namespace) -> int:
+    loaded = load_project(args.project)
+    errors = _count(loaded.problems, Severity.ERROR)
+    if loaded.project is None or errors:
+        for problem in loaded.problems:
+            print(problem.format())
+        print(f"{_plural(errors, 'error')}; nothing was written.")
+        return 1
+    project = loaded.project
+    scenario_id = args.scenario
+    if scenario_id is None and len(project.scenarios) == 1:
+        scenario_id = next(iter(project.scenarios))
+    try:
+        run = run_scenario(project, scenario_id or "")
+    except ScenarioRunError as exc:
+        print(exc.problem.format())
+        return 1
+    provenance = make_provenance(
+        project, scenario=run.scenario_id, user=args.user, generated_at=args.date
+    )
+    written = write_scenario_outputs(run, provenance, args.out or (args.project / "results"))
+    env = run.env
+    passes = ", ".join(f"{sid} {len(v.passes)}" for sid, v in sorted(env.sites.items()))
+    print(
+        f"Scenario {run.scenario_id} ({env.source}): {len(env.eclipses)} eclipse(s)"
+        + (f"; passes: {passes}" if passes else "")
+        + f"; {len(run.timeline)} timeline segment(s)."
+    )
+    for note in run.notes:
+        print(f"Note: {note}")
+    for path in written:
+        print(f"Wrote {path}")
+    return 0
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
     if args.command == "validate":
         return _validate(args)
+    if args.command == "scenario":
+        return _scenario(args)
     if args.command == "self-test":
         failures = run_selftest()
         for failure in failures:

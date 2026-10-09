@@ -129,6 +129,7 @@ def validate_references(project: Project, lines: dict[str, LineMap]) -> list[Pro
                 )
 
     out.extend(_mass_references(project, lines))
+    out.extend(_environment_references(project, lines))
     out.extend(_value_ranges(project, lines))
 
     for kind in ("margin_policy", "power_config", "ebn0_table", "attenuation_table", "mass_limits"):
@@ -355,4 +356,121 @@ def _mass_references(project: Project, lines: dict[str, LineMap]) -> list[Proble
                 "centre of the launch interface plane, +Z along the launch axis).",
             )
         )
+    return out
+
+
+def _environment_references(project: Project, lines: dict[str, LineMap]) -> list[Problem]:
+    from budget_core.environment.elements import check_orbit
+
+    out: list[Problem] = []
+    err = Severity.ERROR
+
+    for oid, orbit in project.orbits.items():
+        reason = check_orbit(orbit)
+        if reason:
+            out.append(
+                _p(
+                    err,
+                    "ORBIT_INVALID",
+                    f"{reason}.",
+                    f"orbits/{oid}.yaml",
+                    ("elements",) if orbit.elements else ("tle",),
+                    lines,
+                    "Check the elements (a perigee below the Earth's surface is not valid) "
+                    "or the TLE.",
+                )
+            )
+
+    for sid in sorted(set(project.ground_stations) & set(project.targets)):
+        out.append(
+            _p(
+                err,
+                "DUPLICATE_ID",
+                f"The id '{sid}' is used by a ground station and by a target.",
+                f"targets/{sid}.yaml",
+                (),
+                lines,
+                "Site ids must be unique across ground_stations/ and targets/.",
+            )
+        )
+    sites = set(project.ground_stations) | set(project.targets)
+
+    for scid, sc in project.scenarios.items():
+        file = f"scenarios/{scid}.yaml"
+        if sc.environment_source == "elements" and sc.orbit not in project.orbits:
+            out.append(
+                _p(
+                    err,
+                    "REF_UNKNOWN_ORBIT",
+                    "The orbit does not exist in orbits/.",
+                    file,
+                    ("orbit",),
+                    lines,
+                    "Defined orbits: " + ", ".join(sorted(project.orbits)) + ".",
+                )
+            )
+        missing_import = (
+            sc.environment_source == "spacemissionstudio"
+            and sc.import_dir is not None
+            and not (project.root / sc.import_dir).is_dir()
+        )
+        if missing_import:
+            out.append(
+                _p(
+                    err,
+                    "IMPORT_DIR_MISSING",
+                    "The SpaceMissionStudio import folder does not exist.",
+                    file,
+                    ("import_dir",),
+                    lines,
+                    "The path is relative to the project folder.",
+                )
+            )
+        for index, site in enumerate(sc.sites):
+            if site not in sites:
+                out.append(
+                    _p(
+                        err,
+                        "REF_UNKNOWN_SITE",
+                        f"Site '{site}' does not exist.",
+                        file,
+                        ("sites", index),
+                        lines,
+                        "Use the file name (without .yaml) of a ground station or target.",
+                    )
+                )
+        for index, rule in enumerate(sc.rules):
+            if rule.site is not None and rule.site not in sc.sites:
+                out.append(
+                    _p(
+                        err,
+                        "REF_UNKNOWN_SITE",
+                        f"The rule uses site '{rule.site}', which the scenario does not list.",
+                        file,
+                        ("rules", index, "site"),
+                        lines,
+                        "Add the site to 'sites' of the scenario.",
+                    )
+                )
+        known = ", ".join(sorted(project.modes))
+        wanted = [("default_mode", sc.default_mode)]
+        wanted += [(f"rules[{i}].mode", r.mode) for i, r in enumerate(sc.rules)]
+        wanted += [(f"segments[{i}].mode", s.mode) for i, s in enumerate(sc.segments)]
+        for path, mode in wanted:
+            if mode not in project.modes:
+                parts: tuple[str | int, ...] = tuple(
+                    int(x) if x.isdigit() else x
+                    for x in path.replace("]", "").replace("[", ".").split(".")
+                )
+                out.append(
+                    _p(
+                        err,
+                        "REF_UNKNOWN_MODE",
+                        f"'{mode}' is not a spacecraft mode in modes/.",
+                        file,
+                        parts,
+                        lines,
+                        f"Defined modes: {known}.",
+                    )
+                )
     return out

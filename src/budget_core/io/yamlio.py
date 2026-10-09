@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import io
 from dataclasses import dataclass, field
+from datetime import date, datetime
 from typing import Any
 
 from ruamel.yaml import YAML
@@ -87,6 +88,8 @@ def _convert(node: Any, path: Path, lines: dict[Path, int]) -> Any:
         return float(node)
     if isinstance(node, str):
         return str(node)
+    if isinstance(node, datetime | date):
+        return node.isoformat().replace("+00:00", "Z")  # unquoted ISO times load as datetimes
     return node
 
 

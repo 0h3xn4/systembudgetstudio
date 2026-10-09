@@ -7,6 +7,8 @@ PyInstaller bundle.
 
 from __future__ import annotations
 
+from budget_core.environment.data import TimeGrid
+from budget_core.environment.elements import ElementsPropagator
 from budget_core.examples import EXAMPLES
 from budget_core.mass.static_mass import static_mass_budget
 from budget_core.power.static_budget import static_power_budget
@@ -27,6 +29,17 @@ def run_selftest() -> list[str]:
         if abs(parse_quantity("2.2 GHz", "freq_hz") - 2.2e9) > 1.0:
             failures.append("unit parsing gave a wrong value")
         project = EXAMPLES["cubesat_3u"]()
+        orbit = next(iter(project.orbits.values()))
+        scenario = next(iter(project.scenarios.values()))
+        from budget_core.scenario.run import grid_for, sites_for
+
+        env = ElementsPropagator(orbit).compute(
+            TimeGrid(grid_for(scenario).start, 6000.0, 30.0),
+            sites_for(project, scenario),
+            "cylindrical",
+        )
+        if not env.eclipses:
+            failures.append("the orbit propagation found no eclipse in one orbit")
         power = static_power_budget(project)
         provenance = make_provenance(project, user="self-test")
         document = build_power_report(project, power, provenance)

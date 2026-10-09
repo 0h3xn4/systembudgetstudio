@@ -6,6 +6,10 @@ A project is a folder of YAML files (LF line endings). Every file starts with `s
 project.yaml            kind: project            name, revision, description
 spacecraft.yaml         kind: spacecraft         name, buses[{name, nominal_voltage_v}], mission_phases[], body_frame
 units/<id>.yaml         kind: unit               name, subsystem, mass_kg, bus, maturity, modes[], mass_properties?, phases[]?
+orbits/<id>.yaml         kind: orbit              name, tle[2] or elements{...}   (see ENVIRONMENT_FORMAT.md)
+ground_stations/<id>.yaml kind: ground_station   name, latitude_deg, longitude_deg, altitude_m, min_elevation_deg
+targets/<id>.yaml       kind: target             same fields as a ground station (imaging target)
+scenarios/<id>.yaml     kind: scenario           orbit, start_utc, duration_s, step_s, sites, default_mode, rules[], segments[]
 expendables/<id>.yaml   kind: expendable         name, subsystem, maturity, masses_kg{phase: kg}, mass_properties?
 modes/<id>.yaml         kind: spacecraft_mode    name, description, assignments{unit id: power mode name}
 config/margin_policy.yaml      kind: margin_policy (v2)  classes{name: {power_margin_ratio, mass_margin_ratio}}, system_power_margin_ratio, system_mass_margin_ratio
@@ -39,6 +43,7 @@ JSON Schemas for all kinds: `budget export-schemas <dir>` (also committed in `sr
 
 Errors: `FILE_NOT_FOUND`, `FILE_INVALID`, `YAML_SYNTAX`, `KIND_MISMATCH`, `SCHEMA_VERSION_MISSING`, `SCHEMA_TOO_NEW`, `SCHEMA_MIGRATION_MISSING`, `SCHEMA_MIGRATION_FAILED`, `FIELD_MISSING`, `FIELD_UNKNOWN`, `FIELD_INVALID`, `UNIT_INVALID`, `DUPLICATE_NAME`, `SOURCE_MISSING`, `REF_UNKNOWN_BUS`, `REF_UNKNOWN_MATURITY`, `REF_UNKNOWN_UNIT`, `REF_UNKNOWN_UNIT_MODE`, `UNIT_NOT_MAPPED`.
 Errors (config values): `CONFIG_VALUE_INVALID`, `REF_UNKNOWN_PHASE`, `PHASE_MASS_MISSING`.
+Environment: `REF_UNKNOWN_ORBIT`, `REF_UNKNOWN_SITE`, `REF_UNKNOWN_MODE`, `DUPLICATE_ID`, `IMPORT_DIR_MISSING`, `ORBIT_INVALID` (errors at load); `SCENARIO_UNKNOWN`, `ENV_INPUT_INVALID`, `ENV_PROPAGATION_FAILED` (errors when running a scenario).
 Result findings: `MASS_LIMIT_EXCEEDED` (error). Warnings: `MASS_PROPS_MISSING`, `MASS_FRAME_UNDEFINED`, `RESULT_INCOMPLETE` (a result needs a placeholder number, shown as n/a), `CONFIG_MISSING`, `CONFIG_PLACEHOLDER`, `CONFIG_EMPTY_TABLE`. Info: `FILE_MIGRATED`, `MASS_INERTIA_POINT_MASS`.
 
 ## Schema versions

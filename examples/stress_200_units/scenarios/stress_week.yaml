@@ -1,0 +1,39 @@
+schema_version: 1
+kind: scenario
+name: One week at 1 s resolution
+environment_source: elements
+orbit: leo
+start_utc: '2026-06-01T00:00:00Z'
+duration_s: 604800.0
+step_s: 1.0
+shadow_model: conical
+sites:
+  - gs_north
+  - gs_south
+  - tgt_plains
+default_mode: nominal
+rules:
+  - kind: in_eclipse
+    mode: safe
+    lead_s: 0.0
+    lag_s: 0.0
+  - kind: during_pass
+    mode: imaging
+    site: tgt_plains
+    lead_s: 0.0
+    lag_s: 0.0
+  - kind: during_pass
+    mode: downlink
+    site: gs_north
+    lead_s: 0.0
+    lag_s: 0.0
+  - kind: during_pass
+    mode: downlink
+    site: gs_south
+    lead_s: 0.0
+    lag_s: 0.0
+  - kind: in_sunlight
+    mode: charging
+    lead_s: 0.0
+    lag_s: 0.0
+segments: []
