@@ -1,0 +1,111 @@
+schema_version: 1
+kind: power_system
+design_life_yr:
+  value: 2.0
+  source: Synthetic example value; not from a data sheet or a standard.
+solar_array:
+  faces:
+    - name: plus_x
+      normal_body:
+        - 1.0
+        - 0.0
+        - 0.0
+      strings: 2
+      cells_per_string: 3
+    - name: minus_x
+      normal_body:
+        - -1.0
+        - 0.0
+        - 0.0
+      strings: 2
+      cells_per_string: 3
+    - name: plus_y
+      normal_body:
+        - 0.0
+        - 1.0
+        - 0.0
+      strings: 2
+      cells_per_string: 3
+    - name: minus_y
+      normal_body:
+        - 0.0
+        - -1.0
+        - 0.0
+      strings: 2
+      cells_per_string: 3
+    - name: minus_z
+      normal_body:
+        - 0.0
+        - 0.0
+        - -1.0
+      strings: 1
+      cells_per_string: 2
+  solar_irradiance_wm2:
+    value: 1360.0
+    source: Synthetic example value; not from a data sheet or a standard.
+  cell_area_m2:
+    value: 0.003
+    source: Synthetic example value; not from a data sheet or a standard.
+  cell_efficiency_ratio:
+    value: 0.28
+    source: Synthetic example value; not from a data sheet or a standard.
+  reference_temperature_k:
+    value: 301.0
+    source: Synthetic example value; not from a data sheet or a standard.
+  cell_temperature_k:
+    value: 318.0
+    source: Synthetic example value; not from a data sheet or a standard.
+  efficiency_temp_coeff_perk:
+    value: -0.002
+    source: Synthetic example value; not from a data sheet or a standard.
+  packing_loss_ratio:
+    value: 0.03
+    source: Synthetic example value; not from a data sheet or a standard.
+  harness_loss_ratio:
+    value: 0.02
+    source: Synthetic example value; not from a data sheet or a standard.
+  annual_degradation_ratio:
+    value: 0.03
+    source: Synthetic example value; not from a data sheet or a standard.
+battery:
+  cell_capacity_ah:
+    value: 2.6
+    source: Synthetic example value; not from a data sheet or a standard.
+  cell_nominal_voltage_v:
+    value: 3.6
+    source: Synthetic example value; not from a data sheet or a standard.
+  cells_in_series: 2
+  cells_in_parallel: 2
+  charge_efficiency_ratio:
+    value: 0.95
+    source: Synthetic example value; not from a data sheet or a standard.
+  discharge_efficiency_ratio:
+    value: 0.95
+    source: Synthetic example value; not from a data sheet or a standard.
+  annual_capacity_fade_ratio:
+    value: 0.04
+    source: Synthetic example value; not from a data sheet or a standard.
+  initial_soc_ratio:
+    value: 0.9
+    source: Synthetic example value; not from a data sheet or a standard.
+  max_dod_ratio:
+    eol:
+      value: 0.3
+      source: Synthetic example value; not from a data sheet or a standard.
+    launch:
+      value: 0.3
+      source: Synthetic example value; not from a data sheet or a standard.
+attitude:
+  default: sun
+  by_mode:
+    downlink: nadir
+    imaging: nadir
+    nominal: nadir
+  sun_direction_body:
+    - 1.0
+    - 0.0
+    - 0.0
+limits:
+  peak_power_w:
+    value: 7.5
+    source: Synthetic example value; not from a data sheet or a standard.

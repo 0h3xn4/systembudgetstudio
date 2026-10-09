@@ -27,6 +27,7 @@ def test_default_writes_all_reports_into_results(
     out = root / "results"
     names = sorted(p.name for p in out.iterdir())
     assert [n for n in names if n.startswith("power_")] == [
+        "power_static.docx",
         "power_static.json",
         "power_static.pdf",
         "power_static.xlsx",
@@ -34,6 +35,7 @@ def test_default_writes_all_reports_into_results(
         "power_static_nominal.csv",
     ]
     assert [n for n in names if n.startswith("mass_")] == [
+        "mass_static.docx",
         "mass_static.json",
         "mass_static.pdf",
         "mass_static.xlsx",

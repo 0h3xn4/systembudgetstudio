@@ -111,6 +111,14 @@ def margin_policy_v1_to_v2(data: dict[str, Any]) -> dict[str, Any]:
     return out
 
 
+def scenario_v1_to_v2(data: dict[str, Any]) -> dict[str, Any]:
+    """v2 adds the optional `mission_phase`; a v1 scenario is valid unchanged (decision D-062)."""
+    out = dict(data)
+    out["schema_version"] = 2
+    return out
+
+
 DEFAULT_REGISTRY = MigrationRegistry(
-    CURRENT_VERSIONS, {("margin_policy", 1): margin_policy_v1_to_v2}
+    CURRENT_VERSIONS,
+    {("margin_policy", 1): margin_policy_v1_to_v2, ("scenario", 1): scenario_v1_to_v2},
 )

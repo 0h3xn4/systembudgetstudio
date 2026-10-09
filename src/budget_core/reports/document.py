@@ -30,11 +30,21 @@ class Table:
 
 
 @dataclass(frozen=True)
+class Figure:
+    """A picture (PNG bytes) with a title; `alt` describes it for readers who cannot see it."""
+
+    title: str
+    png: bytes
+    alt: str = ""
+
+
+@dataclass(frozen=True)
 class Section:
     title: str
     sheet_name: str  # short unique name for spreadsheet tabs (max 31 characters)
     paragraphs: tuple[str, ...] = ()
     tables: tuple[Table, ...] = ()
+    figures: tuple[Figure, ...] = ()
 
 
 @dataclass(frozen=True)

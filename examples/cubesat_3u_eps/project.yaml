@@ -1,0 +1,5 @@
+schema_version: 1
+kind: project
+name: Example 3U CubeSat, complete power inputs
+revision: '1'
+description: Synthetic example data; not a real spacecraft. Array, battery and power configuration have invented values.

@@ -1,0 +1,11 @@
+schema_version: 1
+kind: spacecraft_mode
+name: Downlink
+description: Radio transmitting.
+assignments:
+  adcs: downlink
+  camera: off
+  eps: downlink
+  gnss: downlink
+  obc: downlink
+  radio: downlink

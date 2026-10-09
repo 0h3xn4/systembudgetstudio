@@ -25,6 +25,7 @@ from budget_core.model import (
     MassLimits,
     Orbit,
     PowerConfig,
+    PowerSystem,
     Project,
     ProjectConfig,
     ProjectMeta,
@@ -44,7 +45,11 @@ CONFIG_FILES: dict[str, type[BudgetModel]] = {
     "ebn0_table": Ebn0Table,
     "attenuation_table": AttenuationTable,
     "mass_limits": MassLimits,
+    "power_system": PowerSystem,
 }
+
+# Files a project may leave out without a warning (the static budgets do not need them).
+OPTIONAL_CONFIG = frozenset({"power_system"})
 
 
 @dataclass(frozen=True)
@@ -248,6 +253,8 @@ def load_project(root: FsPath, registry: MigrationRegistry = DEFAULT_REGISTRY) -
     for kind, cls in CONFIG_FILES.items():
         rel = f"config/{kind}.yaml"
         if not (root / rel).exists():
+            if kind in OPTIONAL_CONFIG:
+                continue
             loader.problems.append(
                 Problem(
                     Severity.WARNING,

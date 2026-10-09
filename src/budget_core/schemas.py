@@ -21,6 +21,7 @@ from budget_core.model import (
     MassLimits,
     Orbit,
     PowerConfig,
+    PowerSystem,
     ProjectMeta,
     Scenario,
     Spacecraft,
@@ -44,6 +45,7 @@ SCHEMA_MODELS: dict[str, type[BudgetModel]] = {
     "spacecraft_mode": SpacecraftMode,
     "margin_policy": MarginPolicy,
     "power_config": PowerConfig,
+    "power_system": PowerSystem,
     "ebn0_table": Ebn0Table,
     "attenuation_table": AttenuationTable,
 }

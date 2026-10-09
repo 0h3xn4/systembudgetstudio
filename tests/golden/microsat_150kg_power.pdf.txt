@@ -1,4 +1,4 @@
-pages=9
+pages=10
 ## page 1
 System Budget Studio 0.1.0 | Example 150 kg microsatellite rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
 Page 1
@@ -1819,6 +1819,93 @@ This number is a placeholder (no value or source 'TBD'); results that use it are
 warning
 CONFIG_PLACEHOLDER
 config/power_config.yaml:13
+This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:4
+This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:45
+This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:49
+This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:53
+This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:57
+This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:61
+This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:65
+This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:69
+This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:73
+This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:77
+This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:82
+This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:86
+This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:92
+This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+## page 10
+System Budget Studio 0.1.0 | Example 150 kg microsatellite rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 10
+Severity
+Code
+Location
+Message
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:96
+This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:100
+This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:104
+This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:109
+This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:113
+This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:117
+This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:129
 This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
 Provenance
 Provenance

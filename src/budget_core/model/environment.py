@@ -143,6 +143,7 @@ class Scenario(BudgetModel):
     step_s: float = Field(gt=0)
     shadow_model: Literal["cylindrical", "conical"] = "cylindrical"
     sites: list[str] = Field(default_factory=list)
+    mission_phase: str | None = None  # selects the allowed battery depth of discharge
     default_mode: str = Field(min_length=1)
     rules: list[ScenarioRule] = Field(default_factory=list)
     segments: list[ScenarioSegment] = Field(default_factory=list)

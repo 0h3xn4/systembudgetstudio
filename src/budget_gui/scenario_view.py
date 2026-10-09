@@ -410,7 +410,7 @@ class ScenarioEditor(QWidget):
         return True
 
 
-def _fill(table: QTableWidget, headers: list[str], rows: list[list[str]]) -> None:
+def fill_table(table: QTableWidget, headers: list[str], rows: list[list[str]]) -> None:
     table.setColumnCount(len(headers))
     table.setHorizontalHeaderLabels(headers)
     table.setRowCount(len(rows))
@@ -575,6 +575,17 @@ class ScenarioView(QWidget):
         if self._worker is not None:
             self._worker.wait(30000)
 
+    def reusable_run(self, scenario_id: str) -> ScenarioRun | None:
+        """The computed environment of this scenario with its current timeline, or None when the
+        environment is missing or out of date (the power timeline then computes its own)."""
+        run, project = self.last_run, self.project
+        if run is None or project is None or run.scenario_id != scenario_id or self.is_stale:
+            return None
+        scenario = project.scenarios.get(scenario_id)
+        if scenario is None or environment_key(project, scenario) != self._key:
+            return None
+        return run if run.scenario == scenario else rebuild_timeline(run, scenario)
+
     # ---- display -----------------------------------------------------------------------------
     def _show_run(self, run: ScenarioRun | None) -> None:
         modes = sorted(self.project.modes) if self.project else []
@@ -588,7 +599,7 @@ class ScenarioView(QWidget):
         def utc(seconds: float) -> str:
             return format_utc(start + timedelta(seconds=seconds))
 
-        _fill(
+        fill_table(
             self.eclipse_table,
             ["Start (s)", "End (s)", "Duration (s)", "Start (UTC)"],
             [
@@ -596,7 +607,7 @@ class ScenarioView(QWidget):
                 for e in run.env.eclipses
             ],
         )
-        _fill(
+        fill_table(
             self.passes_table,
             ["Site", "Kind", "AOS (s)", "LOS (s)", "Duration (s)", "Max elevation (deg)"],
             [
@@ -612,7 +623,7 @@ class ScenarioView(QWidget):
                 for p in vis.passes
             ],
         )
-        _fill(
+        fill_table(
             self.timeline_table,
             ["Start (s)", "End (s)", "Duration (s)", "Mode"],
             [

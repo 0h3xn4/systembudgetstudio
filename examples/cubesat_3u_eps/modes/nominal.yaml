@@ -1,0 +1,11 @@
+schema_version: 1
+kind: spacecraft_mode
+name: Nominal
+description: Housekeeping.
+assignments:
+  adcs: nominal
+  camera: off
+  eps: nominal
+  gnss: nominal
+  obc: nominal
+  radio: nominal

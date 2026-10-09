@@ -27,7 +27,7 @@ Scope: `Environment` interface; `ElementsPropagator` (TLE/Keplerian, shadow mode
 Acceptance: eclipse fraction and pass count/duration for textbook circular LEO cases match hand calculation within stated tolerance; adapters interchangeable behind the interface in solver tests; timeline editor creates/edits/validates scenarios.
 Needs from you: SpaceMissionStudio sample export files.
 
-## M4 Time-domain power budget (L)
+## M4 Time-domain power budget (L, done)
 Scope: array and battery models, converter/distribution losses, SoC integration, violations with timestamps, result plots with eclipse/pass shading and cursors, CSV/JSON export, worker-thread runs, DOCX report.
 Acceptance: ≥10 regression cases (e.g. orbit-average balance with known eclipse fraction); monotonic properties pass; 1-week/1 s stress case < 10 s; GUI responsive during run; violations jump to inputs.
 

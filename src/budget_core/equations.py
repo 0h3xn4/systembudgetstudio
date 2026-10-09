@@ -25,6 +25,101 @@ class Equation:
         return self.source or SOURCE_MISSING
 
 
+_TD_NOTE = (
+    "Textbook relation, project convention (decision D-061); the reference text is not "
+    "available to the tool, owner to confirm (for example the power chapter of a spacecraft "
+    "systems engineering handbook)."
+)
+
+
+def _time_domain_equations() -> tuple[Equation, ...]:
+    return (
+        Equation(
+            "TDP-ARRAY",
+            "Array output power per step",
+            "P_gen = E * (sum_faces N_cells * max(0, cos theta)) * A_cell * eta_ref * k_T "
+            "* (1 - l_pack) * (1 - l_harness) * k_age * f_lit",
+            None,
+            _TD_NOTE + " Constant irradiance E, no albedo (DEVIATIONS DV-P4).",
+        ),
+        Equation(
+            "TDP-TEMP",
+            "Cell efficiency at the operating temperature",
+            "k_T = max(0, 1 + alpha * (T_cell - T_ref))",
+            None,
+            _TD_NOTE,
+        ),
+        Equation(
+            "TDP-AGE",
+            "Array degradation over life",
+            "k_age = (1 - annual_degradation_ratio) ^ years",
+            None,
+            _TD_NOTE,
+        ),
+        Equation(
+            "TDP-COS",
+            "Sun incidence on a face",
+            "cos theta = n_face . s_body (unit vectors), zero on the back side",
+            None,
+            "Geometry. The Sun direction in the body frame follows the pointing of the mode "
+            "(decision D-064).",
+        ),
+        Equation(
+            "TDP-LIT",
+            "Sunlit share of a step",
+            "f_lit = 1 - (eclipse time inside the step) / step; trapezoid of the shadow ratio for "
+            "a soft shadow",
+            None,
+            "Exact overlap of the eclipse intervals with the step (decision D-063).",
+        ),
+        Equation(
+            "TDP-DEMAND",
+            "Demand per step",
+            "P_dem = sum over modes of overlap(mode segment, step) * P_source(mode) / step",
+            None,
+            "Source power per mode from the static budget (PWR-SOURCE, PWR-MARGIN).",
+        ),
+        Equation(
+            "TDP-CAP",
+            "Battery capacity",
+            "E_cap = C_cell * V_cell * N_series * N_parallel * (1 - annual_capacity_fade_ratio) "
+            "^ years",
+            None,
+            _TD_NOTE,
+        ),
+        Equation(
+            "TDP-SOC",
+            "Battery state of charge",
+            "surplus: E += eta_c * min(P*dt, (E_cap - E) / eta_c); deficit: E -= min(P*dt, E * "
+            "eta_d) / eta_d (P = generation - demand)",
+            None,
+            _TD_NOTE + " Energy model without voltage, current limit or temperature (DV-P4).",
+        ),
+        Equation(
+            "TDP-DOD",
+            "Depth of discharge",
+            "DoD = 1 - E / E_cap; violation when DoD > allowed depth of discharge of the phase",
+            None,
+            "Definition; the allowed values come from configuration.",
+        ),
+        Equation(
+            "TDP-BALANCE",
+            "Orbit energy balance",
+            "balance = integral(P_gen - P_dem) dt over one revolution; negative is a violation",
+            None,
+            "Revolutions are found from the position vectors (decision D-065).",
+        ),
+        Equation(
+            "TDP-PEAK",
+            "Peak power at the source",
+            "P_peak,source = sum of unit peaks through converter and distribution losses; "
+            "violation when above the power limit during the mode",
+            None,
+            _TD_NOTE,
+        ),
+    )
+
+
 _CONVENTION = (
     "Project convention (decision D-040). ECSS-E-ST-20C margin philosophy is the intended "
     "reference but its text is not available to the tool; owner to confirm."
@@ -145,5 +240,6 @@ EQUATIONS: dict[str, Equation] = {
             None,
             "Classical rigid-body mechanics; tensor entries convention in DECISIONS D-048.",
         ),
+        *_time_domain_equations(),
     )
 }

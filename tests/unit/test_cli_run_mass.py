@@ -24,6 +24,7 @@ def test_mass_only(root: Path, tmp_path: Path) -> None:
     out = tmp_path / "out"
     assert main(["run", str(root), "--budget", "mass", "--out", str(out), *FIXED]) == 0
     assert names(out) == [
+        "mass_static.docx",
         "mass_static.json",
         "mass_static.pdf",
         "mass_static.xlsx",

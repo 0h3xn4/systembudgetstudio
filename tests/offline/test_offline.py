@@ -162,3 +162,33 @@ def test_scenario_command_is_strictly_offline(tmp_path) -> None:  # type: ignore
         assert code == 0
     """)
     assert r.returncode == 0, r.stderr
+
+
+def test_docx_report_path_is_strictly_offline(tmp_path) -> None:  # type: ignore[no-untyped-def]
+    r = _run(f"""
+        import pathlib
+        from budget_cli.main import main
+        from budget_core.examples import export_examples
+        export_examples(pathlib.Path({str(tmp_path)!r}))
+        code = main(["run", {str(tmp_path / "cubesat_3u")!r}, "--report", "docx",
+                     "--out", {str(tmp_path / "out")!r}])
+        assert code == 0
+    """)
+    assert r.returncode == 0, r.stderr
+
+
+def test_power_timeline_with_plots_is_strictly_offline(tmp_path) -> None:  # type: ignore[no-untyped-def]
+    """Plots (Pillow), XLSX, DOCX, JSON and CSV: no networking module is imported. The findings of
+    the example (a peak power above its limit) make the exit code 1, which is not a failure here."""
+    r = _run(f"""
+        import pathlib
+        from budget_cli.main import main
+        from budget_core.examples import export_examples
+        export_examples(pathlib.Path({str(tmp_path)!r}))
+        code = main(["power-timeline", {str(tmp_path / "cubesat_3u_eps")!r}, "--report", "xlsx",
+                     "--report", "docx", "--report", "json", "--report", "csv",
+                     "--out", {str(tmp_path / "out")!r}])
+        assert code == 1
+        assert (pathlib.Path({str(tmp_path / "out")!r}) / "power_time_one_day.docx").exists()
+    """)
+    assert r.returncode == 0, r.stderr

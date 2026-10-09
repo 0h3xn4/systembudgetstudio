@@ -10,14 +10,22 @@ from typing import Any
 from budget_core.mass.static_mass import StaticMassResult
 from budget_core.model import Project
 from budget_core.power.static_budget import StaticPowerResult
+from budget_core.power.time_domain import TimeDomainResult
 from budget_core.problems import Problem
 from budget_core.provenance import Provenance
 from budget_core.reports.document import ReportDocument
 from budget_core.reports.export import mass_csv, result_csv, result_json
 from budget_core.reports.mass_report import build_mass_report
 from budget_core.reports.power_report import build_power_report
+from budget_core.reports.timeline_export import (
+    balance_csv,
+    series_csv,
+    timeline_json,
+    violations_csv,
+)
+from budget_core.reports.timeline_report import build_timeline_report
 
-REPORT_KINDS = ("xlsx", "pdf", "json", "csv")
+REPORT_KINDS = ("xlsx", "pdf", "docx", "json", "csv")
 
 
 @dataclass(frozen=True)
@@ -29,6 +37,7 @@ class BudgetOutput:
     result: Any
     provenance: Provenance
     csv_files: tuple[tuple[str, str], ...]  # (file name, text)
+    json_text: str | None = None  # when the result is not a plain dataclass tree
 
 
 def power_output(
@@ -53,6 +62,35 @@ def mass_output(
     return BudgetOutput("mass_static", document, mass, provenance, csvs)
 
 
+def timeline_output(
+    project: Project,
+    result: TimeDomainResult,
+    provenance: Provenance,
+    load_problems: Sequence[Problem] = (),
+    *,
+    plots: bool = True,
+    series_every: int = 1,
+) -> BudgetOutput:
+    """Time-domain power budget: report, JSON summary, and CSV files (series per case, the
+    violations and the orbit balances). `series_every` thins the series CSV (every n-th step)."""
+    document = build_timeline_report(project, result, provenance, list(load_problems), plots=plots)
+    scenario = result.run.scenario_id
+    csvs = [
+        (f"power_time_{scenario}_{c.case}.csv", series_csv(result, c.case, series_every))
+        for c in result.cases
+    ]
+    csvs.append((f"power_time_{scenario}_violations.csv", violations_csv(result)))
+    csvs.append((f"power_time_{scenario}_orbits.csv", balance_csv(result)))
+    return BudgetOutput(
+        f"power_time_{scenario}",
+        document,
+        result,
+        provenance,
+        tuple(csvs),
+        timeline_json(result, provenance),
+    )
+
+
 def write_outputs(
     outputs: Sequence[BudgetOutput], out_dir: Path, kinds: Collection[str] = REPORT_KINDS
 ) -> list[Path]:
@@ -75,8 +113,17 @@ def write_outputs(
             from budget_core.reports.pdf import render_pdf
 
             write(f"{out.prefix}.pdf", render_pdf(out.document))
+        if "docx" in kinds:
+            from budget_core.reports.docx import render_docx
+
+            write(f"{out.prefix}.docx", render_docx(out.document))
         if "json" in kinds:
-            write(f"{out.prefix}.json", result_json(out.result, out.provenance))
+            write(
+                f"{out.prefix}.json",
+                out.json_text
+                if out.json_text is not None
+                else result_json(out.result, out.provenance),
+            )
         if "csv" in kinds:
             for name, text in out.csv_files:
                 write(name, text)

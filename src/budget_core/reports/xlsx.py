@@ -7,6 +7,7 @@ import zipfile
 from datetime import datetime
 
 from openpyxl import Workbook
+from openpyxl.drawing.image import Image as SheetImage
 from openpyxl.styles import Alignment, Font, PatternFill
 from openpyxl.utils import get_column_letter
 from openpyxl.worksheet.worksheet import Worksheet
@@ -17,6 +18,8 @@ from budget_core.reports.zipnorm import normalise_zip
 
 FONT = "IBM Plex Sans"
 HEADER_FILL = PatternFill("solid", fgColor="E0E0E0")
+FIGURE_WIDTH_PX = 1100
+ROW_PX = 20  # default row height in pixels
 
 
 def _number_format(column: Column) -> str:
@@ -75,6 +78,17 @@ def _write_section(ws: Worksheet, section: Section, banner: str, first: bool, ti
     widths: dict[int, int] = {}
     for table in section.tables:
         row = _write_table(ws, table, row, widths)
+    for figure in section.figures:
+        ws.cell(row=row, column=1, value=figure.title).font = Font(name=FONT, bold=True, size=12)
+        row += 1
+        image = SheetImage(io.BytesIO(figure.png))
+        scale = FIGURE_WIDTH_PX / image.width
+        image.width, image.height = FIGURE_WIDTH_PX, round(image.height * scale)
+        ws.add_image(image, f"A{row}")
+        row += image.height // ROW_PX + 2
+        if figure.alt:
+            ws.cell(row=row, column=1, value=figure.alt).font = Font(name=FONT, italic=True)
+            row += 2
     for c, width in widths.items():
         ws.column_dimensions[get_column_letter(c)].width = max(width + 2, 10)
 

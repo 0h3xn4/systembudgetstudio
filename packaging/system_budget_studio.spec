@@ -8,8 +8,10 @@ root = Path(SPECPATH).parent
 a = Analysis(
     [str(root / "src" / "budget_gui" / "app.py")],
     pathex=[str(root / "src")],
-    datas=[(str(root / "assets"), "budget_core/assets")] + collect_data_files("pint"),
-    hiddenimports=["pint", "ruamel.yaml", "openpyxl", "reportlab.pdfbase._fontdata", "sgp4.vallado_cpp"],
+    datas=[(str(root / "assets"), "budget_core/assets")]
+    + collect_data_files("pint")
+    + collect_data_files("docx"),  # python-docx default template
+    hiddenimports=["pint", "ruamel.yaml", "openpyxl", "reportlab.pdfbase._fontdata", "sgp4.vallado_cpp", "docx", "PIL"],
     # ssl, http and urllib cannot be excluded: ReportLab imports them (and never uses them for
     # network access, see DECISIONS D-043). The Qt network module is not needed.
     excludes=["PySide6.QtNetwork", "tkinter"],

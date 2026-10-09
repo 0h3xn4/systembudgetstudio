@@ -29,13 +29,24 @@ from budget_core.model.mass import (
     MassProperties,
     inertia_is_physical,
 )
+from budget_core.model.power_system import (
+    ArrayFace,
+    Attitude,
+    Battery,
+    PowerLimits,
+    PowerSystem,
+    SolarArray,
+)
 from budget_core.model.project import Project, ProjectConfig, ProjectMeta
 from budget_core.model.versions import CURRENT_VERSIONS
 
 __all__ = [
     "CURRENT_VERSIONS",
     "AttenuationEntry",
+    "ArrayFace",
     "AttenuationTable",
+    "Attitude",
+    "Battery",
     "BudgetModel",
     "Bus",
     "Ebn0Entry",
@@ -56,10 +67,13 @@ __all__ = [
     "MarginPolicy",
     "MaturityClass",
     "PowerConfig",
+    "PowerLimits",
     "PowerMode",
+    "PowerSystem",
     "Project",
     "ProjectConfig",
     "ProjectMeta",
+    "SolarArray",
     "Sourced",
     "Spacecraft",
     "SpacecraftMode",

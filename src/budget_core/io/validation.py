@@ -130,9 +130,17 @@ def validate_references(project: Project, lines: dict[str, LineMap]) -> list[Pro
 
     out.extend(_mass_references(project, lines))
     out.extend(_environment_references(project, lines))
+    out.extend(_power_system_references(project, lines))
     out.extend(_value_ranges(project, lines))
 
-    for kind in ("margin_policy", "power_config", "ebn0_table", "attenuation_table", "mass_limits"):
+    for kind in (
+        "margin_policy",
+        "power_config",
+        "ebn0_table",
+        "attenuation_table",
+        "mass_limits",
+        "power_system",
+    ):
         model = getattr(project.config, kind)
         if model is None:
             continue
@@ -258,6 +266,219 @@ def _value_ranges(project: Project, lines: dict[str, LineMap]) -> list[Problem]:
                 0.0,
                 1.0,
                 lo_open=True,
+            )
+    system = project.config.power_system
+    if system is not None:
+        f = "config/power_system.yaml"
+        arr, bat = system.solar_array, system.battery
+        big = 1e12
+        ratio_checks: list[tuple[Path, Sourced, str, float, float, bool, bool]] = [
+            (("design_life_yr",), system.design_life_yr, "The design life", 0.0, 1e3, True, False),
+            (
+                ("solar_array", "solar_irradiance_wm2"),
+                arr.solar_irradiance_wm2,
+                "The solar irradiance",
+                0.0,
+                1e4,
+                True,
+                False,
+            ),
+            (
+                ("solar_array", "cell_area_m2"),
+                arr.cell_area_m2,
+                "The cell area",
+                0.0,
+                big,
+                True,
+                False,
+            ),
+            (
+                ("solar_array", "cell_efficiency_ratio"),
+                arr.cell_efficiency_ratio,
+                "The cell efficiency",
+                0.0,
+                1.0,
+                True,
+                False,
+            ),
+            (
+                ("solar_array", "reference_temperature_k"),
+                arr.reference_temperature_k,
+                "The reference temperature",
+                0.0,
+                1e4,
+                True,
+                False,
+            ),
+            (
+                ("solar_array", "cell_temperature_k"),
+                arr.cell_temperature_k,
+                "The cell temperature",
+                0.0,
+                1e4,
+                True,
+                False,
+            ),
+            (
+                ("solar_array", "efficiency_temp_coeff_perk"),
+                arr.efficiency_temp_coeff_perk,
+                "The temperature coefficient",
+                -1.0,
+                1.0,
+                True,
+                True,
+            ),
+            (
+                ("solar_array", "packing_loss_ratio"),
+                arr.packing_loss_ratio,
+                "The packing loss",
+                0.0,
+                1.0,
+                False,
+                True,
+            ),
+            (
+                ("solar_array", "harness_loss_ratio"),
+                arr.harness_loss_ratio,
+                "The harness loss",
+                0.0,
+                1.0,
+                False,
+                True,
+            ),
+            (
+                ("solar_array", "annual_degradation_ratio"),
+                arr.annual_degradation_ratio,
+                "The annual degradation",
+                0.0,
+                1.0,
+                False,
+                True,
+            ),
+            (
+                ("battery", "cell_capacity_ah"),
+                bat.cell_capacity_ah,
+                "The cell capacity",
+                0.0,
+                big,
+                True,
+                False,
+            ),
+            (
+                ("battery", "cell_nominal_voltage_v"),
+                bat.cell_nominal_voltage_v,
+                "The cell voltage",
+                0.0,
+                big,
+                True,
+                False,
+            ),
+            (
+                ("battery", "charge_efficiency_ratio"),
+                bat.charge_efficiency_ratio,
+                "The charge efficiency",
+                0.0,
+                1.0,
+                True,
+                False,
+            ),
+            (
+                ("battery", "discharge_efficiency_ratio"),
+                bat.discharge_efficiency_ratio,
+                "The discharge efficiency",
+                0.0,
+                1.0,
+                True,
+                False,
+            ),
+            (
+                ("battery", "annual_capacity_fade_ratio"),
+                bat.annual_capacity_fade_ratio,
+                "The annual capacity fade",
+                0.0,
+                1.0,
+                False,
+                True,
+            ),
+            (
+                ("battery", "initial_soc_ratio"),
+                bat.initial_soc_ratio,
+                "The initial state of charge",
+                0.0,
+                1.0,
+                False,
+                False,
+            ),
+            (
+                ("limits", "peak_power_w"),
+                system.limits.peak_power_w,
+                "The peak power limit",
+                0.0,
+                big,
+                True,
+                False,
+            ),
+        ]
+        for path, item, what, lo, hi, lo_open, hi_open in ratio_checks:
+            check(f, path, item, what, lo, hi, lo_open, hi_open)
+        for phase, item in bat.max_dod_ratio.items():
+            check(
+                f,
+                ("battery", "max_dod_ratio", phase),
+                item,
+                "An allowed depth of discharge",
+                0.0,
+                1.0,
+                lo_open=True,
+            )
+    return out
+
+
+def _power_system_references(project: Project, lines: dict[str, LineMap]) -> list[Problem]:
+    out: list[Problem] = []
+    system = project.config.power_system
+    file = "config/power_system.yaml"
+    phases = ", ".join(project.phases)
+    if system is not None:
+        for phase in system.battery.max_dod_ratio:
+            if phase not in project.phases:
+                out.append(
+                    _p(
+                        Severity.ERROR,
+                        "REF_UNKNOWN_PHASE",
+                        f"Phase '{phase}' is not a mission phase.",
+                        file,
+                        ("battery", "max_dod_ratio", phase),
+                        lines,
+                        f"Defined phases: {phases}.",
+                    )
+                )
+        known = ", ".join(sorted(project.modes))
+        for mode in system.attitude.by_mode:
+            if mode not in project.modes:
+                out.append(
+                    _p(
+                        Severity.ERROR,
+                        "REF_UNKNOWN_MODE",
+                        f"'{mode}' is not a spacecraft mode in modes/.",
+                        file,
+                        ("attitude", "by_mode", mode),
+                        lines,
+                        f"Defined modes: {known}.",
+                    )
+                )
+    for scid, sc in project.scenarios.items():
+        if sc.mission_phase is not None and sc.mission_phase not in project.phases:
+            out.append(
+                _p(
+                    Severity.ERROR,
+                    "REF_UNKNOWN_PHASE",
+                    f"Phase '{sc.mission_phase}' is not a mission phase.",
+                    f"scenarios/{scid}.yaml",
+                    ("mission_phase",),
+                    lines,
+                    f"Defined phases: {phases}.",
+                )
             )
     return out
 

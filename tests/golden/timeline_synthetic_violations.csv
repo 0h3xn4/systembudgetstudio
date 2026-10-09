@@ -1,0 +1,7 @@
+case,code,start_s,end_s,duration_s,start_utc,end_utc,worst_value,limit,unit,file,path
+,PEAK_POWER_EXCEEDED,3000.000,4800.000,1800.000,2026-01-01T00:50:00Z,2026-01-01T01:20:00Z,120.000000,110.000000,W,config/power_system.yaml,limits.peak_power_w
+eol,BATTERY_DOD_EXCEEDED,3513.535,7352.912,3839.377,2026-01-01T00:58:33.534627Z,2026-01-01T02:02:32.911849Z,0.525768,0.150000,ratio,config/power_system.yaml,battery.max_dod_ratio.eol
+bol,BATTERY_DOD_EXCEEDED,3540.000,6900.000,3360.000,2026-01-01T00:59:00Z,2026-01-01T01:55:00Z,0.500000,0.150000,ratio,config/power_system.yaml,battery.max_dod_ratio.eol
+,PEAK_POWER_EXCEEDED,9000.000,10800.000,1800.000,2026-01-01T02:30:00Z,2026-01-01T03:00:00Z,120.000000,110.000000,W,config/power_system.yaml,limits.peak_power_w
+eol,BATTERY_DOD_EXCEEDED,9513.535,12000.000,2486.465,2026-01-01T02:38:33.534627Z,2026-01-01T03:20:00Z,0.525768,0.150000,ratio,config/power_system.yaml,battery.max_dod_ratio.eol
+bol,BATTERY_DOD_EXCEEDED,9540.000,12000.000,2460.000,2026-01-01T02:39:00Z,2026-01-01T03:20:00Z,0.500000,0.150000,ratio,config/power_system.yaml,battery.max_dod_ratio.eol

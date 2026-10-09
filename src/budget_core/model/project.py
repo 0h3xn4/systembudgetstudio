@@ -13,6 +13,7 @@ from budget_core.model.config import AttenuationTable, Ebn0Table, MarginPolicy, 
 from budget_core.model.environment import GroundStation, Orbit, Scenario, Target
 from budget_core.model.equipment import Spacecraft, SpacecraftMode, Unit
 from budget_core.model.mass import Expendable, MassLimits
+from budget_core.model.power_system import PowerSystem
 from budget_core.model.versions import CURRENT_VERSIONS
 
 
@@ -31,6 +32,7 @@ class ProjectConfig:
     ebn0_table: Ebn0Table | None = None
     attenuation_table: AttenuationTable | None = None
     mass_limits: MassLimits | None = None
+    power_system: PowerSystem | None = None
 
 
 @dataclass(frozen=True)
