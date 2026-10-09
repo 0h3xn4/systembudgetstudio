@@ -10,6 +10,9 @@ readme = "README.md"
 requires-python = ">=3.11,<3.14"
 dependencies = [
     "PySide6-Essentials>=6.8,<6.9",
+    "pydantic>=2.9,<3",
+    "ruamel.yaml>=0.18,<0.20",
+    "pint>=0.24,<0.27",
 ]
 
 [project.optional-dependencies]
@@ -17,6 +20,7 @@ dev = [
     "pytest>=8",
     "pytest-qt>=4.4",
     "hypothesis>=6.100",
+    "jsonschema>=4.23",
     "mypy>=1.11",
     "ruff>=0.6",
     "pyinstaller>=6.10",
@@ -45,13 +49,16 @@ src = ["src", "tests"]
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "B", "UP", "SIM", "N"]
 
+[tool.ruff.lint.isort]
+known-first-party = ["budget_core", "budget_cli", "budget_gui", "tests"]
+
 [tool.mypy]
 strict = true
 mypy_path = "src"
 packages = ["budget_core", "budget_cli", "budget_gui"]
 
 [[tool.mypy.overrides]]
-module = ["PySide6.*"]
+module = ["PySide6.*", "ruamel.*", "pint.*", "jsonschema.*"]
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]

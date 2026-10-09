@@ -1,0 +1,18 @@
+schema_version: 1
+kind: spacecraft_mode
+name: Nominal
+description: Earth-pointing housekeeping.
+assignments:
+  camera: off
+  gnss: nominal
+  heaters: nominal
+  magnetorquers: nominal
+  obc_a: nominal
+  obc_b: off
+  pcdu: nominal
+  pdu_data: nominal
+  reaction_wheels: nominal
+  sband_trx: nominal
+  star_tracker: nominal
+  sun_sensors: nominal
+  xband_tx: off

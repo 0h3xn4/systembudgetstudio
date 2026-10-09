@@ -1,0 +1,61 @@
+{
+  "$defs": {
+    "Bus": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "nominal_voltage_v": {
+          "exclusiveMinimum": 0,
+          "title": "Nominal Voltage V",
+          "type": "number"
+        }
+      },
+      "required": [
+        "name",
+        "nominal_voltage_v"
+      ],
+      "title": "Bus",
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "buses": {
+      "items": {
+        "$ref": "#/$defs/Bus"
+      },
+      "minItems": 1,
+      "title": "Buses",
+      "type": "array"
+    },
+    "kind": {
+      "const": "spacecraft",
+      "default": "spacecraft",
+      "title": "Kind",
+      "type": "string"
+    },
+    "name": {
+      "minLength": 1,
+      "title": "Name",
+      "type": "string"
+    },
+    "schema_version": {
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "buses",
+    "kind",
+    "name",
+    "schema_version"
+  ],
+  "title": "System Budget Studio spacecraft",
+  "type": "object"
+}

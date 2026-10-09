@@ -1,0 +1,32 @@
+schema_version: 1
+kind: unit
+name: Stress unit 048
+subsystem: DH
+mass_kg: 0.33
+bus: aux
+maturity: class_a
+modes:
+  - name: off
+    avg_power_w: 0.0
+    peak_power_w: 0.0
+    duty_cycle_ratio: 1.0
+  - name: safe
+    avg_power_w: 2.99
+    peak_power_w: 4.485
+    duty_cycle_ratio: 0.5
+  - name: nominal
+    avg_power_w: 3.22
+    peak_power_w: 4.83
+    duty_cycle_ratio: 1.0
+  - name: imaging
+    avg_power_w: 2.3
+    peak_power_w: 3.45
+    duty_cycle_ratio: 1.0
+  - name: downlink
+    avg_power_w: 2.53
+    peak_power_w: 3.795
+    duty_cycle_ratio: 0.5
+  - name: charging
+    avg_power_w: 2.76
+    peak_power_w: 4.14
+    duty_cycle_ratio: 1.0

@@ -7,6 +7,7 @@ Spec: `docs/SPEC.md` (authoritative). Plan: `docs/PLAN.md`. Architecture: `docs/
 - Test: `QT_QPA_PLATFORM=offscreen pytest` (offline test: `pytest tests/offline`)
 - Lint/type: `ruff check . && ruff format --check . && mypy`
 - Lock: `packaging/lock.sh` (uv, hashes)
+- Regenerate generated files after model changes: `budget export-schemas src/budget_core/schemas` and `budget export-examples examples` (tests fail on drift)
 - Package: `pyinstaller packaging/system_budget_studio.spec`
 
 ## Conventions
@@ -17,3 +18,5 @@ Spec: `docs/SPEC.md` (authoritative). Plan: `docs/PLAN.md`. Architecture: `docs/
 - Tests first; no warnings on main. Work on a branch and open a PR; never push to `main`.
 - Runtime deps only in `[project.dependencies]`; all tooling in the `dev` extra.
 - Example projects: invented data only.
+- Problems/messages never contain values read from project files (field names, ids and units only).
+- File format: `docs/FILE_FORMAT.md`. Schema changes need a version bump and a migration.

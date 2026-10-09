@@ -51,6 +51,20 @@ def test_core_and_cli_do_not_import_network_modules() -> None:
     assert r.returncode == 0, r.stderr
 
 
+def test_loader_validation_and_unit_parsing_do_not_use_the_network() -> None:
+    r = _run("""
+        import tempfile, pathlib
+        from budget_core.examples import export_examples
+        from budget_core.io.project_loader import load_project
+        from budget_core.units.quantity import parse_quantity
+        assert parse_quantity("2.2 GHz", "freq_hz") == 2.2e9  # forces pint
+        with tempfile.TemporaryDirectory() as d:
+            export_examples(pathlib.Path(d))
+            assert load_project(pathlib.Path(d) / "cubesat_3u").project is not None
+    """)
+    assert r.returncode == 0, r.stderr
+
+
 def test_gui_starts_offline() -> None:
     r = _run("""
         import sys

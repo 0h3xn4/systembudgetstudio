@@ -1,0 +1,32 @@
+schema_version: 1
+kind: unit
+name: Stress unit 123
+subsystem: TTC
+mass_kg: 0.19
+bus: main
+maturity: class_a
+modes:
+  - name: off
+    avg_power_w: 0.0
+    peak_power_w: 0.0
+    duty_cycle_ratio: 1.0
+  - name: safe
+    avg_power_w: 1.04
+    peak_power_w: 1.56
+    duty_cycle_ratio: 0.5
+  - name: nominal
+    avg_power_w: 1.12
+    peak_power_w: 1.68
+    duty_cycle_ratio: 1.0
+  - name: imaging
+    avg_power_w: 0.8
+    peak_power_w: 1.2
+    duty_cycle_ratio: 1.0
+  - name: downlink
+    avg_power_w: 0.88
+    peak_power_w: 1.32
+    duty_cycle_ratio: 0.5
+  - name: charging
+    avg_power_w: 0.96
+    peak_power_w: 1.44
+    duty_cycle_ratio: 1.0

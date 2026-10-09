@@ -1,0 +1,137 @@
+{
+  "$defs": {
+    "PowerMode": {
+      "additionalProperties": false,
+      "description": "One power mode of a unit.\n\n`avg_power_w` is the average power drawn while the unit is in this mode and switched on;\nthe effective average is `avg_power_w * duty_cycle_ratio` (decision D-024).",
+      "properties": {
+        "avg_power_w": {
+          "minimum": 0,
+          "title": "Avg Power W",
+          "type": "number"
+        },
+        "duty_cycle_ratio": {
+          "default": 1.0,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Duty Cycle Ratio",
+          "type": "number"
+        },
+        "max_duration_s": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Duration S"
+        },
+        "min_duration_s": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Min Duration S"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "peak_power_w": {
+          "minimum": 0,
+          "title": "Peak Power W",
+          "type": "number"
+        }
+      },
+      "required": [
+        "name",
+        "avg_power_w",
+        "peak_power_w"
+      ],
+      "title": "PowerMode",
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "bus": {
+      "minLength": 1,
+      "title": "Bus",
+      "type": "string"
+    },
+    "catalogue_ref": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Catalogue Ref"
+    },
+    "kind": {
+      "const": "unit",
+      "default": "unit",
+      "title": "Kind",
+      "type": "string"
+    },
+    "mass_kg": {
+      "minimum": 0,
+      "title": "Mass Kg",
+      "type": "number"
+    },
+    "maturity": {
+      "minLength": 1,
+      "title": "Maturity",
+      "type": "string"
+    },
+    "modes": {
+      "items": {
+        "$ref": "#/$defs/PowerMode"
+      },
+      "minItems": 1,
+      "title": "Modes",
+      "type": "array"
+    },
+    "name": {
+      "minLength": 1,
+      "title": "Name",
+      "type": "string"
+    },
+    "schema_version": {
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "subsystem": {
+      "minLength": 1,
+      "title": "Subsystem",
+      "type": "string"
+    }
+  },
+  "required": [
+    "bus",
+    "kind",
+    "mass_kg",
+    "maturity",
+    "modes",
+    "name",
+    "schema_version",
+    "subsystem"
+  ],
+  "title": "System Budget Studio unit",
+  "type": "object"
+}

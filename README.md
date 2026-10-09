@@ -2,7 +2,7 @@
 
 Offline desktop tool for satellite power budgets and RF link budgets: one spacecraft model, versioned YAML inputs, sourced equations, reproducible reports. No cloud, no telemetry, no background network access.
 
-Status: **M0 Foundation** (empty Carbon-styled window, CLI stub, CI, packaging). See `docs/SPEC.md`, `docs/ARCHITECTURE.md` and `docs/PLAN.md`.
+Status: **M1 Model and units** (project model, unit-aware YAML files, `budget validate`). The GUI is still an empty window. See `docs/SPEC.md`, `docs/ARCHITECTURE.md` and `docs/PLAN.md`.
 
 ## Install (Python 3.11 to 3.13)
 
@@ -10,6 +10,8 @@ Status: **M0 Foundation** (empty Carbon-styled window, CLI stub, CI, packaging).
 pip install -e .            # runtime only; yields a runnable GUI
 system-budget-studio        # launch the GUI
 budget --version            # CLI
+budget export-examples demo # three synthetic example projects
+budget validate demo/cubesat_3u
 ```
 
 Developers: `pip install -e ".[dev]"` then `pytest`, `ruff check .`, `mypy`.
@@ -27,3 +29,5 @@ The only permitted network use is a user-started reference-data download (later 
 ## Fonts
 
 IBM Plex (SIL Open Font License 1.1), bundled in `assets/fonts/` with its licence.
+
+File format: `docs/FILE_FORMAT.md`.

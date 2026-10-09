@@ -1,0 +1,18 @@
+schema_version: 1
+kind: spacecraft_mode
+name: Downlink
+description: Payload data downlink over a ground-station pass.
+assignments:
+  camera: off
+  gnss: downlink
+  heaters: downlink
+  magnetorquers: off
+  obc_a: downlink
+  obc_b: off
+  pcdu: downlink
+  pdu_data: downlink
+  reaction_wheels: downlink
+  sband_trx: downlink
+  star_tracker: downlink
+  sun_sensors: downlink
+  xband_tx: downlink

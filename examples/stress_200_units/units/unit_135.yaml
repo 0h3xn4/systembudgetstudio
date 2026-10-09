@@ -1,0 +1,32 @@
+schema_version: 1
+kind: unit
+name: Stress unit 135
+subsystem: HARNESS
+mass_kg: 0.26
+bus: main
+maturity: class_a
+modes:
+  - name: off
+    avg_power_w: 0.0
+    peak_power_w: 0.0
+    duty_cycle_ratio: 1.0
+  - name: safe
+    avg_power_w: 2.6
+    peak_power_w: 3.9
+    duty_cycle_ratio: 0.5
+  - name: nominal
+    avg_power_w: 2.86
+    peak_power_w: 4.29
+    duty_cycle_ratio: 1.0
+  - name: imaging
+    avg_power_w: 3.12
+    peak_power_w: 4.68
+    duty_cycle_ratio: 1.0
+  - name: downlink
+    avg_power_w: 3.38
+    peak_power_w: 5.07
+    duty_cycle_ratio: 0.5
+  - name: charging
+    avg_power_w: 3.64
+    peak_power_w: 5.46
+    duty_cycle_ratio: 1.0

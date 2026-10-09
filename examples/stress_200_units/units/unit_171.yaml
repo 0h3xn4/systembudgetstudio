@@ -1,0 +1,32 @@
+schema_version: 1
+kind: unit
+name: Stress unit 171
+subsystem: TTC
+mass_kg: 0.47
+bus: main
+maturity: class_a
+modes:
+  - name: off
+    avg_power_w: 0.0
+    peak_power_w: 0.0
+    duty_cycle_ratio: 1.0
+  - name: safe
+    avg_power_w: 0.385
+    peak_power_w: 0.578
+    duty_cycle_ratio: 0.5
+  - name: nominal
+    avg_power_w: 0.42
+    peak_power_w: 0.63
+    duty_cycle_ratio: 1.0
+  - name: imaging
+    avg_power_w: 0.455
+    peak_power_w: 0.682
+    duty_cycle_ratio: 1.0
+  - name: downlink
+    avg_power_w: 0.49
+    peak_power_w: 0.735
+    duty_cycle_ratio: 0.5
+  - name: charging
+    avg_power_w: 0.35
+    peak_power_w: 0.525
+    duty_cycle_ratio: 1.0

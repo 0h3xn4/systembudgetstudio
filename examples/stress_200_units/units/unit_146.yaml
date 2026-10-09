@@ -1,0 +1,32 @@
+schema_version: 1
+kind: unit
+name: Stress unit 146
+subsystem: AOCS
+mass_kg: 0.26
+bus: main
+maturity: class_c
+modes:
+  - name: off
+    avg_power_w: 0.0
+    peak_power_w: 0.0
+    duty_cycle_ratio: 1.0
+  - name: safe
+    avg_power_w: 1.87
+    peak_power_w: 2.805
+    duty_cycle_ratio: 1.0
+  - name: nominal
+    avg_power_w: 2.04
+    peak_power_w: 3.06
+    duty_cycle_ratio: 0.5
+  - name: imaging
+    avg_power_w: 2.21
+    peak_power_w: 3.315
+    duty_cycle_ratio: 1.0
+  - name: downlink
+    avg_power_w: 2.38
+    peak_power_w: 3.57
+    duty_cycle_ratio: 1.0
+  - name: charging
+    avg_power_w: 1.7
+    peak_power_w: 2.55
+    duty_cycle_ratio: 0.5

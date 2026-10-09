@@ -1,0 +1,15 @@
+schema_version: 1
+kind: power_config
+distribution_loss_ratio:
+  value: null
+  source: TBD
+  note: "Placeholder: supply the project's value."
+converter_efficiency_ratio:
+  main_28v:
+    value: null
+    source: TBD
+    note: "Placeholder: supply the project's value."
+  payload_12v:
+    value: null
+    source: TBD
+    note: "Placeholder: supply the project's value."

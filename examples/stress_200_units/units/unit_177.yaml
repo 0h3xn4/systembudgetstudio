@@ -1,0 +1,32 @@
+schema_version: 1
+kind: unit
+name: Stress unit 177
+subsystem: EPS
+mass_kg: 0.12
+bus: main
+maturity: class_a
+modes:
+  - name: off
+    avg_power_w: 0.0
+    peak_power_w: 0.0
+    duty_cycle_ratio: 1.0
+  - name: safe
+    avg_power_w: 1.5
+    peak_power_w: 2.25
+    duty_cycle_ratio: 0.5
+  - name: nominal
+    avg_power_w: 1.625
+    peak_power_w: 2.438
+    duty_cycle_ratio: 1.0
+  - name: imaging
+    avg_power_w: 1.75
+    peak_power_w: 2.625
+    duty_cycle_ratio: 1.0
+  - name: downlink
+    avg_power_w: 1.25
+    peak_power_w: 1.875
+    duty_cycle_ratio: 0.5
+  - name: charging
+    avg_power_w: 1.375
+    peak_power_w: 2.062
+    duty_cycle_ratio: 1.0

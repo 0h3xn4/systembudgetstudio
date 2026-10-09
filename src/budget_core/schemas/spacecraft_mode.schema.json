@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "A spacecraft mode maps unit ids (file names in units/) to one of their power modes.",
+  "properties": {
+    "assignments": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "minProperties": 1,
+      "title": "Assignments",
+      "type": "object"
+    },
+    "description": {
+      "default": "",
+      "title": "Description",
+      "type": "string"
+    },
+    "kind": {
+      "const": "spacecraft_mode",
+      "default": "spacecraft_mode",
+      "title": "Kind",
+      "type": "string"
+    },
+    "name": {
+      "minLength": 1,
+      "title": "Name",
+      "type": "string"
+    },
+    "schema_version": {
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "assignments",
+    "kind",
+    "name",
+    "schema_version"
+  ],
+  "title": "System Budget Studio spacecraft_mode",
+  "type": "object"
+}

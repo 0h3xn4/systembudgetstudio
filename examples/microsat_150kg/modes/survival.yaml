@@ -1,0 +1,18 @@
+schema_version: 1
+kind: spacecraft_mode
+name: Survival
+description: Battery survival, heaters only.
+assignments:
+  camera: off
+  gnss: off
+  heaters: survival
+  magnetorquers: survival
+  obc_a: survival
+  obc_b: off
+  pcdu: survival
+  pdu_data: off
+  reaction_wheels: off
+  sband_trx: survival
+  star_tracker: off
+  sun_sensors: survival
+  xband_tx: off

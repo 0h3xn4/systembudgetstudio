@@ -11,9 +11,16 @@ Needs from you: confirm repo is private; apply branch protection (list provided)
 Scope: pydantic models, YAML IO, schema versions + migration framework (with a v1→v2 test migration), unit parsing/dB helpers, config files with `source` + JSON Schemas (margin policy, Eb/N0, attenuation, array, battery, converters — all placeholders), `Problem` type, `budget validate`, three reference projects' skeletons.
 Acceptance: invalid/missing/newer-schema files give located, plain-language problems; placeholders raise `CONFIG_PLACEHOLDER`; round-trip load→save is byte-identical; Hypothesis unit round-trips pass.
 
-## M2 Static power budget (M)
-Scope: static per-mode table with maturity margins and converter losses; Problems panel (GUI, wired to validate); table editors for units/modes; XLSX and PDF reports with provenance and assumptions list; reproducible-output mode.
-Acceptance: ≥10 hand-calculated cases pass; XLSX/PDF golden tests byte-identical on re-run; GUI flow: open example → edit unit → Problems update → export.
+## M2 Static budgets: power and mass (L, two PRs)
+Scope: shared margin handling; Problems panel (GUI, wired to validate and the budgets); table editors for units/modes; XLSX and PDF reports with provenance and assumptions list; reproducible-output mode; loader packaged in the GUI bundle (pint data, hidden imports).
+- **M2a Power (first PR):** static per-mode table with maturity margins, converter and distribution losses, effective average = `avg_power_w * duty_cycle_ratio` (D-024).
+- **M2b Mass (second PR, same milestone):**
+  - Model: unit `mass_properties` (position in the spacecraft frame, inertia tensor about the unit's own centre), optional `phases` on units, `expendables/*.yaml` (propellant and consumables per phase), `mission_phases` and the body-frame definition in `spacecraft.yaml`, `config/mass_limits.yaml` (limits with sources). `margin_policy` goes to schema v2 with a migration: `margin_ratio` becomes `power_margin_ratio`, and a placeholder `mass_margin_ratio` is added per class (first real use of the migration framework).
+  - Solver (pure functions): roll-up by subsystem and total with margins; centre of gravity `r_cg = sum(m_i r_i) / sum(m_i)` on nominal masses; inertia about the CG with the parallel-axis (Huygens-Steiner) theorem; per-phase results; limit checks.
+  - Problems: `MASS_LIMIT_EXCEEDED`, `MASS_PROPS_MISSING`, `PHASE_UNKNOWN`, plus placeholder warnings.
+  - Reports: mass table by subsystem, unit list, CG and inertia per phase.
+Acceptance: at least 10 hand-calculated cases per solver (power table; mass roll-up; CG of point masses; inertia by parallel axis, e.g. two equal masses on an axis; phase changes) with stated tolerances; Hypothesis properties (adding mass never lowers the total, CG lies inside the bounding box of the unit positions, inertia tensor symmetric and positive semi-definite); XLSX/PDF golden tests byte-identical on re-run; GUI flow: open example, edit a unit, Problems update, export; `pip install` of the bundle still starts and can validate a project.
+Needs from you: margin policy and mass margin values (placeholders otherwise), mass limits with sources, confirmation of the body-frame convention (axes and origin) when M2b starts.
 
 ## M3 Environment (L)
 Scope: `Environment` interface; `ElementsPropagator` (TLE/Keplerian, shadow model, passes); `SpaceMissionStudioImport` (needs sample files); scenario model, rule-based generation (downlink on pass); timeline editor.
@@ -24,6 +31,15 @@ Needs from you: SpaceMissionStudio sample export files.
 Scope: array and battery models, converter/distribution losses, SoC integration, violations with timestamps, result plots with eclipse/pass shading and cursors, CSV/JSON export, worker-thread runs, DOCX report.
 Acceptance: ≥10 regression cases (e.g. orbit-average balance with known eclipse fraction); monotonic properties pass; 1-week/1 s stress case < 10 s; GUI responsive during run; violations jump to inputs.
 
+## M4b Thermal budget (L)
+Scope: after M4 because it reuses the power modes, spacecraft modes and (for hot and cold case definitions) the environment work.
+- **Model:** per power mode `heat_dissipation_ratio` (fraction of electrical power dissipated as heat, 1.0 unless the unit radiates or exports power; explicit, never silently assumed); per unit operating and survival limits (`operating_min_k`, `operating_max_k`, `survival_min_k`, `survival_max_k`) and the thermal node it is mounted on; `thermal/model.yaml` (nodes, conductances `conductance_w_per_k`, radiators with `area_m2`, `emissivity_ratio`, `absorptivity_ratio`, links to space); `config/thermal_environment.yaml` (solar flux, albedo, Earth infrared, hot/cold case definitions, every number `Sourced` with placeholders).
+- **Solvers (pure functions):** dissipation roll-up by unit, subsystem, spacecraft mode; steady-state nodal heat balance `sum(G_ij (T_j - T_i)) + sigma eps A (T_space^4 - T_i^4) + Q_i = 0` solved with SciPy (Stefan-Boltzmann law, textbook source flagged `SOURCE_MISSING` until cited); margin against limits with a configurable thermal margin from config.
+- **Problems:** `THERMAL_LIMIT_EXCEEDED`, `THERMAL_NODE_UNKNOWN`, `THERMAL_NO_LIMITS`, `THERMAL_SOLVE_FAILED`, plus placeholder warnings.
+- **Reports:** dissipation table, node temperatures per case, unit limit margins.
+Acceptance: at least 10 hand-calculated cases (single node radiating to space, two nodes in series, radiator sizing, one node with constant dissipation, ...) with stated tolerances; properties (more dissipation never lowers a node temperature, more radiator area never raises it, energy balance residual below a tolerance); golden reports; solve time for the 200-unit stress case with realistic node counts well under a second.
+Needs from you: environment flux values, optical properties and hot/cold case definitions with sources; the node-network convention (how units map to nodes) when M4b starts.
+
 ## M5 Link budget (L)
 Scope: link models (uplink/downlink, multiple links), static table at chosen elevation/range, pass time series, margin-constrained data rate and data volume per pass/day, attenuation tables from config (empty until supplied), link reports.
 Acceptance: textbook S-band 2 GHz/1000 km case within tolerance, ≥10 cases; margin monotonic in range; golden reports for micro-sat with two links.
@@ -33,4 +49,5 @@ Scope: comparison view (scenarios/revisions), guided wizard (orbit → first bud
 Acceptance: all three reference projects produce golden reports; wizard timed test; clean-machine install checklist signed off.
 
 ## Critical path / external inputs
+Scope changes: mass, CG, inertia and phases are in v1 and sit in M2b (D-033); thermal dissipation, limits and the steady-state node model are in v1 as M4b (D-036).
 SpaceMissionStudio sample exports (M3); margin policy and Eb/N0/attenuation sources (before M2/M5 reports are meaningful, not blocking development); confirmation of repository privacy and branch protection (M0).

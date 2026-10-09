@@ -1,0 +1,90 @@
+{
+  "$defs": {
+    "Ebn0Entry": {
+      "additionalProperties": false,
+      "properties": {
+        "coding": {
+          "minLength": 1,
+          "title": "Coding",
+          "type": "string"
+        },
+        "modulation": {
+          "minLength": 1,
+          "title": "Modulation",
+          "type": "string"
+        },
+        "required_ebn0_db": {
+          "$ref": "#/$defs/Sourced"
+        }
+      },
+      "required": [
+        "modulation",
+        "coding",
+        "required_ebn0_db"
+      ],
+      "title": "Ebn0Entry",
+      "type": "object"
+    },
+    "Sourced": {
+      "additionalProperties": false,
+      "description": "A number from a standard, policy or data sheet. `source: TBD` or a null value marks a\nplaceholder that must be replaced before results are trusted (spec constraint 15).",
+      "properties": {
+        "note": {
+          "default": "",
+          "title": "Note",
+          "type": "string"
+        },
+        "source": {
+          "minLength": 1,
+          "title": "Source",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "value",
+        "source"
+      ],
+      "title": "Sourced",
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "entries": {
+      "items": {
+        "$ref": "#/$defs/Ebn0Entry"
+      },
+      "title": "Entries",
+      "type": "array"
+    },
+    "kind": {
+      "const": "ebn0_table",
+      "default": "ebn0_table",
+      "title": "Kind",
+      "type": "string"
+    },
+    "schema_version": {
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "kind",
+    "schema_version"
+  ],
+  "title": "System Budget Studio ebn0_table",
+  "type": "object"
+}
