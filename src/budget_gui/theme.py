@@ -3,10 +3,11 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from pathlib import Path
 
 from PySide6.QtGui import QFont, QFontDatabase
 from PySide6.QtWidgets import QApplication
+
+from budget_core.assets import assets_dir
 
 
 @dataclass(frozen=True)
@@ -33,15 +34,6 @@ _FONT_FILES = (
 )
 
 
-def assets_dir() -> Path:
-    """Locate bundled assets: installed wheel, source checkout or PyInstaller bundle."""
-    here = Path(__file__).resolve().parent
-    for candidate in (here / "assets", here.parent.parent / "assets"):
-        if (candidate / "fonts").is_dir():
-            return candidate
-    raise FileNotFoundError("Bundled assets folder not found; the installation is incomplete.")
-
-
 def load_fonts() -> list[str]:
     """Register the bundled IBM Plex fonts; return the family names that loaded."""
     fonts = assets_dir() / "fonts"
@@ -63,6 +55,18 @@ def stylesheet(t: CarbonTokens) -> str:
     QTableView, QTreeView, QLineEdit {{ background: {t.layer}; border: 1px solid {t.border}; }}
     QHeaderView::section {{ background: {t.layer}; border: none;
                             border-bottom: 1px solid {t.border}; padding: 6px; }}
+    QTabBar::tab {{ background: {t.layer}; color: {t.text_secondary}; padding: 8px 16px;
+                    border-bottom: 2px solid transparent; }}
+    QTabBar::tab:selected {{ background: {t.background}; color: {t.text};
+                             border-bottom: 2px solid {t.interactive}; }}
+    QTabWidget::pane {{ border-top: 1px solid {t.border}; }}
+    QDockWidget {{ font-weight: 600; }}
+    QDockWidget::title {{ padding: 6px; }}
+    QMenuBar, QMenu {{ background: {t.layer}; }}
+    QMenu::item:selected {{ background: {t.border}; }}
+    QTableView, QTableWidget {{ gridline-color: {t.border};
+                                alternate-background-color: {t.layer}; }}
+    QPlainTextEdit {{ background: {t.background}; border: 1px solid {t.border}; }}
     """
 
 

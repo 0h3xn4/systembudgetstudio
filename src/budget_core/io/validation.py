@@ -128,6 +128,8 @@ def validate_references(project: Project, lines: dict[str, LineMap]) -> list[Pro
                     )
                 )
 
+    out.extend(_value_ranges(project, lines))
+
     for kind in ("margin_policy", "power_config", "ebn0_table", "attenuation_table"):
         model = getattr(project.config, kind)
         if model is None:
@@ -159,5 +161,78 @@ def validate_references(project: Project, lines: dict[str, LineMap]) -> list[Pro
                     lines,
                     "Add entries from a cited source, or import them from a file.",
                 )
+            )
+    return out
+
+
+def _range_problem(
+    file: str, path: Path, lines: dict[str, LineMap], what: str, allowed: str
+) -> Problem:
+    line = lines[file].lookup(path + ("value",)) if file in lines else None
+    return Problem(
+        Severity.ERROR,
+        "CONFIG_VALUE_INVALID",
+        f"{what} is outside the allowed range {allowed}.",
+        file=file,
+        path=format_path(path + ("value",)),
+        line=line,
+        hint="Check the value and its unit; ratios are written as fractions (0.1 means 10 %).",
+    )
+
+
+def _value_ranges(project: Project, lines: dict[str, LineMap]) -> list[Problem]:
+    """Placeholders are skipped; real values must be physically meaningful."""
+    out: list[Problem] = []
+
+    def check(
+        file: str,
+        path: Path,
+        item: Sourced,
+        what: str,
+        lo: float,
+        hi: float,
+        lo_open: bool = False,
+        hi_open: bool = False,
+    ) -> None:
+        v = item.value
+        if v is None or item.is_placeholder:
+            return
+        below = v <= lo if lo_open else v < lo
+        above = v >= hi if hi_open else v > hi
+        if below or above:
+            allowed = ("(" if lo_open else "[") + f"{lo:g}, {hi:g}" + (")" if hi_open else "]")
+            out.append(_range_problem(file, path, lines, what, allowed))
+
+    policy = project.config.margin_policy
+    if policy is not None:
+        f = "config/margin_policy.yaml"
+        for name, cls in policy.classes.items():
+            check(
+                f, ("classes", name, "margin_ratio"), cls.margin_ratio, "A margin ratio", 0.0, 10.0
+            )
+        check(
+            f, ("system_margin_ratio",), policy.system_margin_ratio, "The system margin", 0.0, 10.0
+        )
+    power = project.config.power_config
+    if power is not None:
+        f = "config/power_config.yaml"
+        check(
+            f,
+            ("distribution_loss_ratio",),
+            power.distribution_loss_ratio,
+            "The distribution loss",
+            0.0,
+            1.0,
+            hi_open=True,
+        )
+        for bus, item in power.converter_efficiency_ratio.items():
+            check(
+                f,
+                ("converter_efficiency_ratio", bus),
+                item,
+                "A converter efficiency",
+                0.0,
+                1.0,
+                lo_open=True,
             )
     return out

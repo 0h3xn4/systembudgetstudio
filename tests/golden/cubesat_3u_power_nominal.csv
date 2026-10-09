@@ -1,0 +1,7 @@
+unit_id,unit_name,subsystem,bus,power_mode,avg_power_w,duty_cycle_ratio,effective_power_w,peak_power_w,margin_ratio,margined_power_w,margined_peak_w
+adcs,ADCS module,ADCS,main,downlink,0.9,1.0,0.9,1.4,,,
+camera,Camera payload,PL,main,off,0.0,1.0,0.0,0.0,,,
+eps,Power board,EPS,main,downlink,0.15,1.0,0.15,0.25,,,
+gnss,GNSS receiver,ADCS,main,downlink,0.25,1.0,0.25,0.4,,,
+obc,On-board computer,DH,main,downlink,0.6,1.0,0.6,0.9,,,
+radio,UHF/VHF radio,TTC,main,downlink,1.8,0.5,0.9,4.0,,,

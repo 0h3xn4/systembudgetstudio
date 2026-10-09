@@ -1,0 +1,186 @@
+## sheet Summary rows=11 cols=8
+1: 'Power budget (static): Example 3U CubeSat' |  |  |  |  |  |  | 
+2: 'INCOMPLETE: some inputs are placeholders (source TBD or missing). Entries marked n/a depend on them and are not computed. Do not use this report as evidence until the placeholders are replaced with sourced values.' |  |  |  |  |  |  | 
+4: 'Power by spacecraft mode' |  |  |  |  |  |  | 
+5: 'Mode' | 'Average load (W)' | 'Average, unit margins (W)' | 'Average, system margin (W)' | 'Average at source (W)' | 'Average at source, with margins (W)' | 'Peak load (W)' | 'Peak at source, with margins (W)'
+6: 'Charging' | 1.5 | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 2.45 | 'n/a'
+7: 'Downlink' | 2.8 | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 6.95 | 'n/a'
+8: 'Imaging' | 3.84 | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 6.95 | 'n/a'
+9: 'Nominal' | 2 | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 3.15 | 'n/a'
+10: 'Safe' | 1 | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 1.6 | 'n/a'
+11: 'Average = sum of unit power x duty cycle. Peak = sum of unit peak powers. Source = after converter and distribution losses.' |  |  |  |  |  |  | 
+## sheet Mode charging rows=28 cols=11
+1: 'Units in mode Charging' |  |  |  |  |  |  |  |  |  | 
+2: 'Unit' | 'Name' | 'Subsystem' | 'Bus' | 'Power mode' | 'Average (W)' | 'Duty' | 'Effective (W)' | 'Margin' | 'With margin (W)' | 'Peak (W)'
+3: 'adcs' | 'ADCS module' | 'ADCS' | 'main' | 'charging' | 0.6 | 1 | 0.6 | 'n/a' | 'n/a' | 1
+4: 'camera' | 'Camera payload' | 'PL' | 'main' | 'off' | 0 | 1 | 0 | 'n/a' | 'n/a' | 0
+5: 'eps' | 'Power board' | 'EPS' | 'main' | 'charging' | 0.15 | 1 | 0.15 | 'n/a' | 'n/a' | 0.25
+6: 'gnss' | 'GNSS receiver' | 'ADCS' | 'main' | 'charging' | 0.25 | 1 | 0.25 | 'n/a' | 'n/a' | 0.4
+7: 'obc' | 'On-board computer' | 'DH' | 'main' | 'charging' | 0.3 | 1 | 0.3 | 'n/a' | 'n/a' | 0.5
+8: 'radio' | 'UHF/VHF radio' | 'TTC' | 'main' | 'charging' | 0.2 | 1 | 0.2 | 'n/a' | 'n/a' | 0.3
+10: 'By subsystem' |  |  |  |  |  |  |  |  |  | 
+11: 'Subsystem' | 'Effective (W)' | 'With margin (W)' | 'Peak (W)' | 'Peak with margin (W)' |  |  |  |  |  | 
+12: 'ADCS' | 0.85 | 'n/a' | 1.4 | 'n/a' |  |  |  |  |  | 
+13: 'DH' | 0.3 | 'n/a' | 0.5 | 'n/a' |  |  |  |  |  | 
+14: 'EPS' | 0.15 | 'n/a' | 0.25 | 'n/a' |  |  |  |  |  | 
+15: 'PL' | 0 | 'n/a' | 0 | 'n/a' |  |  |  |  |  | 
+16: 'TTC' | 0.2 | 'n/a' | 0.3 | 'n/a' |  |  |  |  |  | 
+18: 'By supply bus' |  |  |  |  |  |  |  |  |  | 
+19: 'Bus' | 'Converter efficiency' | 'Average load (W)' | 'Average load, with margins (W)' | 'Average at source (W)' | 'Average at source, with margins (W)' | 'Peak load (W)' | 'Peak at source, with margins (W)' |  |  | 
+20: 'main' | 'n/a' | 1.5 | 'n/a' | 'n/a' | 'n/a' | 2.45 | 'n/a' |  |  | 
+22: 'Totals' |  |  |  |  |  |  |  |  |  | 
+23: 'Quantity' | 'Average (W)' | 'Peak (W)' |  |  |  |  |  |  |  | 
+24: 'Load, nominal' | 1.5 | 2.45 |  |  |  |  |  |  |  | 
+25: 'Load, with unit margins' | 'n/a' | 'n/a' |  |  |  |  |  |  |  | 
+26: 'Load, with system margin' | 'n/a' | 'n/a' |  |  |  |  |  |  |  | 
+27: 'Source, nominal' | 'n/a' | 'n/a' |  |  |  |  |  |  |  | 
+28: 'Source, with margins' | 'n/a' | 'n/a' |  |  |  |  |  |  |  | 
+## sheet Mode downlink rows=28 cols=11
+1: 'Units in mode Downlink' |  |  |  |  |  |  |  |  |  | 
+2: 'Unit' | 'Name' | 'Subsystem' | 'Bus' | 'Power mode' | 'Average (W)' | 'Duty' | 'Effective (W)' | 'Margin' | 'With margin (W)' | 'Peak (W)'
+3: 'adcs' | 'ADCS module' | 'ADCS' | 'main' | 'downlink' | 0.9 | 1 | 0.9 | 'n/a' | 'n/a' | 1.4
+4: 'camera' | 'Camera payload' | 'PL' | 'main' | 'off' | 0 | 1 | 0 | 'n/a' | 'n/a' | 0
+5: 'eps' | 'Power board' | 'EPS' | 'main' | 'downlink' | 0.15 | 1 | 0.15 | 'n/a' | 'n/a' | 0.25
+6: 'gnss' | 'GNSS receiver' | 'ADCS' | 'main' | 'downlink' | 0.25 | 1 | 0.25 | 'n/a' | 'n/a' | 0.4
+7: 'obc' | 'On-board computer' | 'DH' | 'main' | 'downlink' | 0.6 | 1 | 0.6 | 'n/a' | 'n/a' | 0.9
+8: 'radio' | 'UHF/VHF radio' | 'TTC' | 'main' | 'downlink' | 1.8 | 0.5 | 0.9 | 'n/a' | 'n/a' | 4
+10: 'By subsystem' |  |  |  |  |  |  |  |  |  | 
+11: 'Subsystem' | 'Effective (W)' | 'With margin (W)' | 'Peak (W)' | 'Peak with margin (W)' |  |  |  |  |  | 
+12: 'ADCS' | 1.15 | 'n/a' | 1.8 | 'n/a' |  |  |  |  |  | 
+13: 'DH' | 0.6 | 'n/a' | 0.9 | 'n/a' |  |  |  |  |  | 
+14: 'EPS' | 0.15 | 'n/a' | 0.25 | 'n/a' |  |  |  |  |  | 
+15: 'PL' | 0 | 'n/a' | 0 | 'n/a' |  |  |  |  |  | 
+16: 'TTC' | 0.9 | 'n/a' | 4 | 'n/a' |  |  |  |  |  | 
+18: 'By supply bus' |  |  |  |  |  |  |  |  |  | 
+19: 'Bus' | 'Converter efficiency' | 'Average load (W)' | 'Average load, with margins (W)' | 'Average at source (W)' | 'Average at source, with margins (W)' | 'Peak load (W)' | 'Peak at source, with margins (W)' |  |  | 
+20: 'main' | 'n/a' | 2.8 | 'n/a' | 'n/a' | 'n/a' | 6.95 | 'n/a' |  |  | 
+22: 'Totals' |  |  |  |  |  |  |  |  |  | 
+23: 'Quantity' | 'Average (W)' | 'Peak (W)' |  |  |  |  |  |  |  | 
+24: 'Load, nominal' | 2.8 | 6.95 |  |  |  |  |  |  |  | 
+25: 'Load, with unit margins' | 'n/a' | 'n/a' |  |  |  |  |  |  |  | 
+26: 'Load, with system margin' | 'n/a' | 'n/a' |  |  |  |  |  |  |  | 
+27: 'Source, nominal' | 'n/a' | 'n/a' |  |  |  |  |  |  |  | 
+28: 'Source, with margins' | 'n/a' | 'n/a' |  |  |  |  |  |  |  | 
+## sheet Mode imaging rows=28 cols=11
+1: 'Units in mode Imaging' |  |  |  |  |  |  |  |  |  | 
+2: 'Unit' | 'Name' | 'Subsystem' | 'Bus' | 'Power mode' | 'Average (W)' | 'Duty' | 'Effective (W)' | 'Margin' | 'With margin (W)' | 'Peak (W)'
+3: 'adcs' | 'ADCS module' | 'ADCS' | 'main' | 'imaging' | 1.1 | 1 | 1.1 | 'n/a' | 'n/a' | 1.8
+4: 'camera' | 'Camera payload' | 'PL' | 'main' | 'imaging' | 2.4 | 0.6 | 1.44 | 'n/a' | 'n/a' | 3.2
+5: 'eps' | 'Power board' | 'EPS' | 'main' | 'imaging' | 0.15 | 1 | 0.15 | 'n/a' | 'n/a' | 0.25
+6: 'gnss' | 'GNSS receiver' | 'ADCS' | 'main' | 'imaging' | 0.25 | 1 | 0.25 | 'n/a' | 'n/a' | 0.4
+7: 'obc' | 'On-board computer' | 'DH' | 'main' | 'imaging' | 0.7 | 1 | 0.7 | 'n/a' | 'n/a' | 1
+8: 'radio' | 'UHF/VHF radio' | 'TTC' | 'main' | 'imaging' | 0.2 | 1 | 0.2 | 'n/a' | 'n/a' | 0.3
+10: 'By subsystem' |  |  |  |  |  |  |  |  |  | 
+11: 'Subsystem' | 'Effective (W)' | 'With margin (W)' | 'Peak (W)' | 'Peak with margin (W)' |  |  |  |  |  | 
+12: 'ADCS' | 1.35 | 'n/a' | 2.2 | 'n/a' |  |  |  |  |  | 
+13: 'DH' | 0.7 | 'n/a' | 1 | 'n/a' |  |  |  |  |  | 
+14: 'EPS' | 0.15 | 'n/a' | 0.25 | 'n/a' |  |  |  |  |  | 
+15: 'PL' | 1.44 | 'n/a' | 3.2 | 'n/a' |  |  |  |  |  | 
+16: 'TTC' | 0.2 | 'n/a' | 0.3 | 'n/a' |  |  |  |  |  | 
+18: 'By supply bus' |  |  |  |  |  |  |  |  |  | 
+19: 'Bus' | 'Converter efficiency' | 'Average load (W)' | 'Average load, with margins (W)' | 'Average at source (W)' | 'Average at source, with margins (W)' | 'Peak load (W)' | 'Peak at source, with margins (W)' |  |  | 
+20: 'main' | 'n/a' | 3.84 | 'n/a' | 'n/a' | 'n/a' | 6.95 | 'n/a' |  |  | 
+22: 'Totals' |  |  |  |  |  |  |  |  |  | 
+23: 'Quantity' | 'Average (W)' | 'Peak (W)' |  |  |  |  |  |  |  | 
+24: 'Load, nominal' | 3.84 | 6.95 |  |  |  |  |  |  |  | 
+25: 'Load, with unit margins' | 'n/a' | 'n/a' |  |  |  |  |  |  |  | 
+26: 'Load, with system margin' | 'n/a' | 'n/a' |  |  |  |  |  |  |  | 
+27: 'Source, nominal' | 'n/a' | 'n/a' |  |  |  |  |  |  |  | 
+28: 'Source, with margins' | 'n/a' | 'n/a' |  |  |  |  |  |  |  | 
+## sheet Mode nominal rows=28 cols=11
+1: 'Units in mode Nominal' |  |  |  |  |  |  |  |  |  | 
+2: 'Unit' | 'Name' | 'Subsystem' | 'Bus' | 'Power mode' | 'Average (W)' | 'Duty' | 'Effective (W)' | 'Margin' | 'With margin (W)' | 'Peak (W)'
+3: 'adcs' | 'ADCS module' | 'ADCS' | 'main' | 'nominal' | 0.9 | 1 | 0.9 | 'n/a' | 'n/a' | 1.4
+4: 'camera' | 'Camera payload' | 'PL' | 'main' | 'off' | 0 | 1 | 0 | 'n/a' | 'n/a' | 0
+5: 'eps' | 'Power board' | 'EPS' | 'main' | 'nominal' | 0.15 | 1 | 0.15 | 'n/a' | 'n/a' | 0.25
+6: 'gnss' | 'GNSS receiver' | 'ADCS' | 'main' | 'nominal' | 0.25 | 1 | 0.25 | 'n/a' | 'n/a' | 0.4
+7: 'obc' | 'On-board computer' | 'DH' | 'main' | 'nominal' | 0.5 | 1 | 0.5 | 'n/a' | 'n/a' | 0.8
+8: 'radio' | 'UHF/VHF radio' | 'TTC' | 'main' | 'nominal' | 0.2 | 1 | 0.2 | 'n/a' | 'n/a' | 0.3
+10: 'By subsystem' |  |  |  |  |  |  |  |  |  | 
+11: 'Subsystem' | 'Effective (W)' | 'With margin (W)' | 'Peak (W)' | 'Peak with margin (W)' |  |  |  |  |  | 
+12: 'ADCS' | 1.15 | 'n/a' | 1.8 | 'n/a' |  |  |  |  |  | 
+13: 'DH' | 0.5 | 'n/a' | 0.8 | 'n/a' |  |  |  |  |  | 
+14: 'EPS' | 0.15 | 'n/a' | 0.25 | 'n/a' |  |  |  |  |  | 
+15: 'PL' | 0 | 'n/a' | 0 | 'n/a' |  |  |  |  |  | 
+16: 'TTC' | 0.2 | 'n/a' | 0.3 | 'n/a' |  |  |  |  |  | 
+18: 'By supply bus' |  |  |  |  |  |  |  |  |  | 
+19: 'Bus' | 'Converter efficiency' | 'Average load (W)' | 'Average load, with margins (W)' | 'Average at source (W)' | 'Average at source, with margins (W)' | 'Peak load (W)' | 'Peak at source, with margins (W)' |  |  | 
+20: 'main' | 'n/a' | 2 | 'n/a' | 'n/a' | 'n/a' | 3.15 | 'n/a' |  |  | 
+22: 'Totals' |  |  |  |  |  |  |  |  |  | 
+23: 'Quantity' | 'Average (W)' | 'Peak (W)' |  |  |  |  |  |  |  | 
+24: 'Load, nominal' | 2 | 3.15 |  |  |  |  |  |  |  | 
+25: 'Load, with unit margins' | 'n/a' | 'n/a' |  |  |  |  |  |  |  | 
+26: 'Load, with system margin' | 'n/a' | 'n/a' |  |  |  |  |  |  |  | 
+27: 'Source, nominal' | 'n/a' | 'n/a' |  |  |  |  |  |  |  | 
+28: 'Source, with margins' | 'n/a' | 'n/a' |  |  |  |  |  |  |  | 
+## sheet Mode safe rows=28 cols=11
+1: 'Units in mode Safe' |  |  |  |  |  |  |  |  |  | 
+2: 'Unit' | 'Name' | 'Subsystem' | 'Bus' | 'Power mode' | 'Average (W)' | 'Duty' | 'Effective (W)' | 'Margin' | 'With margin (W)' | 'Peak (W)'
+3: 'adcs' | 'ADCS module' | 'ADCS' | 'main' | 'safe' | 0.4 | 1 | 0.4 | 'n/a' | 'n/a' | 0.6
+4: 'camera' | 'Camera payload' | 'PL' | 'main' | 'off' | 0 | 1 | 0 | 'n/a' | 'n/a' | 0
+5: 'eps' | 'Power board' | 'EPS' | 'main' | 'safe' | 0.1 | 1 | 0.1 | 'n/a' | 'n/a' | 0.2
+6: 'gnss' | 'GNSS receiver' | 'ADCS' | 'main' | 'off' | 0 | 1 | 0 | 'n/a' | 'n/a' | 0
+7: 'obc' | 'On-board computer' | 'DH' | 'main' | 'safe' | 0.3 | 1 | 0.3 | 'n/a' | 'n/a' | 0.5
+8: 'radio' | 'UHF/VHF radio' | 'TTC' | 'main' | 'safe' | 0.2 | 1 | 0.2 | 'n/a' | 'n/a' | 0.3
+10: 'By subsystem' |  |  |  |  |  |  |  |  |  | 
+11: 'Subsystem' | 'Effective (W)' | 'With margin (W)' | 'Peak (W)' | 'Peak with margin (W)' |  |  |  |  |  | 
+12: 'ADCS' | 0.4 | 'n/a' | 0.6 | 'n/a' |  |  |  |  |  | 
+13: 'DH' | 0.3 | 'n/a' | 0.5 | 'n/a' |  |  |  |  |  | 
+14: 'EPS' | 0.1 | 'n/a' | 0.2 | 'n/a' |  |  |  |  |  | 
+15: 'PL' | 0 | 'n/a' | 0 | 'n/a' |  |  |  |  |  | 
+16: 'TTC' | 0.2 | 'n/a' | 0.3 | 'n/a' |  |  |  |  |  | 
+18: 'By supply bus' |  |  |  |  |  |  |  |  |  | 
+19: 'Bus' | 'Converter efficiency' | 'Average load (W)' | 'Average load, with margins (W)' | 'Average at source (W)' | 'Average at source, with margins (W)' | 'Peak load (W)' | 'Peak at source, with margins (W)' |  |  | 
+20: 'main' | 'n/a' | 1 | 'n/a' | 'n/a' | 'n/a' | 1.6 | 'n/a' |  |  | 
+22: 'Totals' |  |  |  |  |  |  |  |  |  | 
+23: 'Quantity' | 'Average (W)' | 'Peak (W)' |  |  |  |  |  |  |  | 
+24: 'Load, nominal' | 1 | 1.6 |  |  |  |  |  |  |  | 
+25: 'Load, with unit margins' | 'n/a' | 'n/a' |  |  |  |  |  |  |  | 
+26: 'Load, with system margin' | 'n/a' | 'n/a' |  |  |  |  |  |  |  | 
+27: 'Source, nominal' | 'n/a' | 'n/a' |  |  |  |  |  |  |  | 
+28: 'Source, with margins' | 'n/a' | 'n/a' |  |  |  |  |  |  |  | 
+## sheet Assumptions rows=17 cols=5
+1: 'Configuration numbers used' |  |  |  | 
+2: 'Name' | 'Value' | 'Unit' | 'Source' | 'Status'
+3: 'Margin, maturity class class_a' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+4: 'Margin, maturity class class_b' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+5: 'Margin, maturity class class_c' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+6: 'System margin' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+7: 'Distribution loss' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+8: 'Converter efficiency, bus main' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+10: 'Equations' |  |  |  | 
+11: 'ID' | 'Name' | 'Formula' | 'Source' | 
+12: 'PWR-EFF' | 'Effective unit power' | 'P_eff = P_avg * duty_cycle_ratio' | 'SOURCE_MISSING' | 
+13: 'PWR-MARGIN' | 'Unit power with maturity margin' | 'P_m = P_eff * (1 + margin_ratio(maturity))' | 'SOURCE_MISSING' | 
+14: 'PWR-SYSMARGIN' | 'System margin on the sum of margined loads' | 'P_sys = (sum P_m) * (1 + system_margin_ratio)' | 'SOURCE_MISSING' | 
+15: 'PWR-SOURCE' | 'Source power through converter and distribution' | 'P_source = P_load / (eta_converter(bus) * (1 - distribution_loss_ratio))' | 'SOURCE_MISSING' | 
+16: 'PWR-PEAK' | 'Peak power' | 'P_peak = sum of unit peak_power_w (all units at peak at once, conservative)' | 'SOURCE_MISSING' | 
+17: 'SOURCE_MISSING: the formula is a project convention whose reference text is not available to the tool yet (decision D-040).' |  |  |  | 
+## sheet Problems rows=16 cols=4
+1: 'Problems and open items' |  |  | 
+2: 'Severity' | 'Code' | 'Location' | 'Message'
+3: 'warning' | 'CONFIG_EMPTY_TABLE' | 'config/attenuation_table.yaml:3' | 'The table has no entries.'
+4: 'warning' | 'CONFIG_EMPTY_TABLE' | 'config/ebn0_table.yaml:3' | 'The table has no entries.'
+5: 'warning' | 'RESULT_INCOMPLETE' | 'config/margin_policy.yaml' | "The margin of maturity class 'class_a' is a placeholder."
+6: 'warning' | 'RESULT_INCOMPLETE' | 'config/margin_policy.yaml' | "The margin of maturity class 'class_b' is a placeholder."
+7: 'warning' | 'RESULT_INCOMPLETE' | 'config/margin_policy.yaml' | "The margin of maturity class 'class_c' is a placeholder."
+8: 'warning' | 'RESULT_INCOMPLETE' | 'config/margin_policy.yaml' | 'The system margin is a placeholder.'
+9: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:6' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+10: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:11' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+11: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:16' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+12: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:20' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+13: 'warning' | 'RESULT_INCOMPLETE' | 'config/power_config.yaml' | "The converter efficiency of bus 'main' is a placeholder."
+14: 'warning' | 'RESULT_INCOMPLETE' | 'config/power_config.yaml' | 'The distribution loss is a placeholder.'
+15: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_config.yaml:4' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+16: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_config.yaml:9' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+## sheet Provenance rows=10 cols=2
+1: 'Provenance' | 
+2: 'Item' | 'Value'
+3: 'Tool' | 'System Budget Studio 0.1.0'
+4: 'Python' | '3.x'
+5: 'Libraries' | 'pinned for-golden-tests'
+6: 'Project' | 'Example 3U CubeSat'
+7: 'Project revision' | '1'
+8: 'Scenario' | 'static (no scenario)'
+9: 'Generated (UTC)' | '2026-01-02T03:04:05Z'
+10: 'User' | 'Golden User'

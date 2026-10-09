@@ -1,0 +1,644 @@
+pages=36
+## page 1
+System Budget Studio 0.1.0 | Example stress case (200 units) rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 1
+Power budget (static): Example stress case (200 units)
+INCOMPLETE: some inputs are placeholders (source TBD or missing). Entries marked n/a depend on them and are not computed. Do not use this report as evidence until the
+placeholders are replaced with sourced values.
+Summary
+Power by spacecraft mode
+Mode
+Average load
+(W)
+Average, unit margins
+(W)
+Average, system margin
+(W)
+Average at source
+(W)
+Average at source, with margins
+(W)
+Peak load
+(W)
+Peak at source, with margins (W)
+Charging
+ 277.262
+ n/a
+ n/a
+ n/a
+ n/a
+ 496.979
+ n/a
+Downlink
+ 275.978
+ n/a
+ n/a
+ n/a
+ n/a
+ 497.455
+ n/a
+Imaging
+ 275.812
+ n/a
+ n/a
+ n/a
+ n/a
+ 496.686
+ n/a
+Nominal
+ 277.025
+ n/a
+ n/a
+ n/a
+ n/a
+ 496.598
+ n/a
+Safe
+ 275.957
+ n/a
+ n/a
+ n/a
+ n/a
+ 497.183
+ n/a
+Average = sum of unit power x duty cycle. Peak = sum of unit peak powers. Source = after converter and distribution losses.
+Mode: Charging
+Units in mode Charging
+Unit
+Name
+Subsystem
+Bus
+Power mode
+Average
+(W)
+Duty
+Effective (W)
+Margin
+With margin (W)
+Peak (W)
+unit_000
+Stress unit 000
+DH
+aux
+charging
+ 0.280
+ 1.00
+ 0.280
+ n/a
+ n/a
+ 0.420
+unit_001
+Stress unit 001
+EPS
+main
+charging
+ 0.350
+ 1.00
+ 0.350
+ n/a
+ n/a
+ 0.525
+unit_002
+Stress unit 002
+AOCS
+main
+charging
+ 0.550
+ 0.50
+ 0.275
+ n/a
+ n/a
+ 0.825
+unit_003
+Stress unit 003
+TTC
+main
+charging
+ 0.780
+ 1.00
+ 0.780
+ n/a
+ n/a
+ 1.170
+unit_004
+Stress unit 004
+PL
+aux
+charging
+ 1.040
+ 1.00
+ 1.040
+ n/a
+ n/a
+ 1.560
+unit_005
+Stress unit 005
+THERM
+main
+charging
+ 1.330
+ 0.50
+ 0.665
+ n/a
+ n/a
+ 1.995
+unit_006
+Stress unit 006
+PL-DATA
+main
+charging
+ 1.100
+ 1.00
+ 1.100
+ n/a
+ n/a
+ 1.650
+unit_007
+Stress unit 007
+HARNESS
+main
+charging
+ 1.375
+ 1.00
+ 1.375
+ n/a
+ n/a
+ 2.062
+unit_008
+Stress unit 008
+DH
+aux
+charging
+ 1.680
+ 0.50
+ 0.840
+ n/a
+ n/a
+ 2.520
+unit_009
+Stress unit 009
+EPS
+main
+charging
+ 2.015
+ 1.00
+ 2.015
+ n/a
+ n/a
+ 3.022
+unit_010
+Stress unit 010
+AOCS
+main
+charging
+ 2.380
+ 1.00
+ 2.380
+ n/a
+ n/a
+ 3.570
+unit_011
+Stress unit 011
+TTC
+main
+charging
+ 1.850
+ 0.50
+ 0.925
+ n/a
+ n/a
+ 2.775
+unit_012
+Stress unit 012
+PL
+aux
+charging
+ 2.200
+ 1.00
+ 2.200
+ n/a
+ n/a
+ 3.300
+unit_013
+Stress unit 013
+THERM
+main
+charging
+ 2.580
+ 1.00
+ 2.580
+ n/a
+ n/a
+ 3.870
+unit_014
+Stress unit 014
+PL-DATA
+main
+charging
+ 2.990
+ 0.50
+ 1.495
+ n/a
+ n/a
+ 4.485
+unit_015
+Stress unit 015
+HARNESS
+main
+charging
+ 3.430
+ 1.00
+ 3.430
+ n/a
+ n/a
+ 5.145
+## page 2
+System Budget Studio 0.1.0 | Example stress case (200 units) rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 2
+Unit
+Name
+Subsystem
+Bus
+Power mode
+Average
+(W)
+Duty
+Effective (W)
+Margin
+With margin (W)
+Peak (W)
+unit_016
+Stress unit 016
+DH
+aux
+charging
+ 2.600
+ 1.00
+ 2.600
+ n/a
+ n/a
+ 3.900
+unit_017
+Stress unit 017
+EPS
+main
+charging
+ 0.220
+ 0.50
+ 0.110
+ n/a
+ n/a
+ 0.330
+unit_018
+Stress unit 018
+AOCS
+main
+charging
+ 0.420
+ 1.00
+ 0.420
+ n/a
+ n/a
+ 0.630
+unit_019
+Stress unit 019
+TTC
+main
+charging
+ 0.650
+ 1.00
+ 0.650
+ n/a
+ n/a
+ 0.975
+unit_020
+Stress unit 020
+PL
+aux
+charging
+ 0.910
+ 0.50
+ 0.455
+ n/a
+ n/a
+ 1.365
+unit_021
+Stress unit 021
+THERM
+main
+charging
+ 0.800
+ 1.00
+ 0.800
+ n/a
+ n/a
+ 1.200
+unit_022
+Stress unit 022
+PL-DATA
+main
+charging
+ 1.045
+ 1.00
+ 1.045
+ n/a
+ n/a
+ 1.567
+unit_023
+Stress unit 023
+HARNESS
+main
+charging
+ 1.320
+ 0.50
+ 0.660
+ n/a
+ n/a
+ 1.980
+unit_024
+Stress unit 024
+DH
+aux
+charging
+ 1.625
+ 1.00
+ 1.625
+ n/a
+ n/a
+ 2.438
+unit_025
+Stress unit 025
+EPS
+main
+charging
+ 1.960
+ 1.00
+ 1.960
+ n/a
+ n/a
+ 2.940
+unit_026
+Stress unit 026
+AOCS
+main
+charging
+ 1.550
+ 0.50
+ 0.775
+ n/a
+ n/a
+ 2.325
+unit_027
+Stress unit 027
+TTC
+main
+charging
+ 1.870
+ 1.00
+ 1.870
+ n/a
+ n/a
+ 2.805
+unit_028
+Stress unit 028
+PL
+aux
+charging
+ 2.220
+ 1.00
+ 2.220
+ n/a
+ n/a
+ 3.330
+unit_029
+Stress unit 029
+THERM
+main
+charging
+ 2.600
+ 0.50
+ 1.300
+ n/a
+ n/a
+ 3.900
+unit_030
+Stress unit 030
+PL-DATA
+main
+charging
+ 3.010
+ 1.00
+ 3.010
+ n/a
+ n/a
+ 4.515
+unit_031
+Stress unit 031
+HARNESS
+main
+charging
+ 2.300
+ 1.00
+ 2.300
+ n/a
+ n/a
+ 3.450
+unit_032
+Stress unit 032
+DH
+aux
+charging
+ 2.695
+ 0.50
+ 1.347
+ n/a
+ n/a
+ 4.042
+unit_033
+Stress unit 033
+EPS
+main
+charging
+ 3.120
+ 1.00
+ 3.120
+ n/a
+ n/a
+ 4.680
+unit_034
+Stress unit 034
+AOCS
+main
+charging
+ 0.260
+ 1.00
+ 0.260
+ n/a
+ n/a
+ 0.390
+unit_035
+Stress unit 035
+TTC
+main
+charging
+ 0.490
+ 0.50
+ 0.245
+ n/a
+ n/a
+ 0.735
+unit_036
+Stress unit 036
+PL
+aux
+charging
+ 0.500
+ 1.00
+ 0.500
+ n/a
+ n/a
+ 0.750
+unit_037
+Stress unit 037
+THERM
+main
+charging
+ 0.715
+ 1.00
+ 0.715
+ n/a
+ n/a
+ 1.073
+unit_038
+Stress unit 038
+PL-DATA
+main
+charging
+ 0.960
+ 0.50
+ 0.480
+ n/a
+ n/a
+ 1.440
+unit_039
+Stress unit 039
+HARNESS
+main
+charging
+ 1.235
+ 1.00
+ 1.235
+ n/a
+ n/a
+ 1.853
+unit_040
+Stress unit 040
+DH
+aux
+charging
+ 1.540
+ 1.00
+ 1.540
+ n/a
+ n/a
+ 2.310
+unit_041
+Stress unit 041
+EPS
+main
+charging
+ 1.250
+ 0.50
+ 0.625
+ n/a
+ n/a
+ 1.875
+unit_042
+Stress unit 042
+AOCS
+main
+charging
+ 1.540
+ 1.00
+ 1.540
+ n/a
+ n/a
+ 2.310
+unit_043
+Stress unit 043
+TTC
+main
+charging
+ 1.860
+ 1.00
+ 1.860
+ n/a
+ n/a
+ 2.790
+unit_044
+Stress unit 044
+PL
+aux
+charging
+ 2.210
+ 0.50
+ 1.105
+ n/a
+ n/a
+ 3.315
+unit_045
+Stress unit 045
+THERM
+main
+charging
+ 2.590
+ 1.00
+ 2.590
+ n/a
+ n/a
+ 3.885
+unit_046
+Stress unit 046
+PL-DATA
+main
+charging
+ 2.000
+ 1.00
+ 2.000
+ n/a
+ n/a
+ 3.000
+unit_047
+Stress unit 047
+HARNESS
+main
+charging
+ 2.365
+ 0.50
+ 1.183
+ n/a
+ n/a
+ 3.548
+unit_048
+Stress unit 048
+DH
+aux
+charging
+ 2.760
+ 1.00
+ 2.760
+ n/a
+ n/a
+ 4.140
+unit_049
+Stress unit 049
+EPS
+main
+charging
+ 3.185
+ 1.00
+ 3.185
+ n/a
+ n/a
+ 4.777
+...

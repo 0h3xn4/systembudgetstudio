@@ -38,8 +38,12 @@ assert not bad, f"networking modules imported: {{bad}}"
 """
 
 
-def _run(body: str) -> subprocess.CompletedProcess[str]:
-    code = PRELUDE + textwrap.dedent(body) + CHECK
+def _run(body: str, allowed: tuple[str, ...] = ()) -> subprocess.CompletedProcess[str]:
+    check = CHECK.replace(
+        "for m in " + repr(FORBIDDEN),
+        "for m in " + repr(tuple(m for m in FORBIDDEN if m not in allowed)),
+    )
+    code = PRELUDE + textwrap.dedent(body) + check
     env = {"QT_QPA_PLATFORM": "offscreen", "PATH": ""}
     return subprocess.run(
         [sys.executable, "-I", "-c", code], capture_output=True, text=True, env=env, check=False
@@ -81,3 +85,67 @@ def test_guard_detects_network_use() -> None:
     assert r.returncode != 0
     r = _run("import http.client")
     assert r.returncode != 0
+
+
+# ReportLab imports these at module level only to fetch images from URLs, which this tool never
+# does (it restricts ReportLab to local files). Only the PDF renderer may bring them in (D-043).
+REPORTLAB_IMPORTS = ("urllib.request", "http.client", "ssl")
+
+
+def test_xlsx_and_json_report_path_is_strictly_offline(tmp_path) -> None:  # type: ignore[no-untyped-def]
+    r = _run(f"""
+        import pathlib
+        from budget_cli.main import main
+        from budget_core.examples import export_examples
+        export_examples(pathlib.Path({str(tmp_path)!r}))
+        project = {str(tmp_path / "cubesat_3u")!r}
+        code = main(["run", project, "--report", "xlsx", "--report", "json",
+                     "--report", "csv", "--out", {str(tmp_path / "out")!r}])
+        assert code == 0
+    """)
+    assert r.returncode == 0, r.stderr
+
+
+def test_pdf_path_imports_only_the_allowed_reportlab_modules_and_never_uses_the_network(
+    tmp_path,
+) -> None:  # type: ignore[no-untyped-def]
+    r = _run(
+        f"""
+        import pathlib, urllib.request
+        called = []
+        orig = urllib.request.urlopen
+        urllib.request.urlopen = lambda *a, **k: called.append(a) or orig(*a, **k)
+        from budget_cli.main import main
+        from budget_core.examples import export_examples
+        export_examples(pathlib.Path({str(tmp_path)!r}))
+        code = main(["run", {str(tmp_path / "cubesat_3u")!r}, "--report", "pdf",
+                     "--out", {str(tmp_path / "out")!r}])
+        assert code == 0 and not called
+        from reportlab import rl_config
+        assert set(rl_config.trustedSchemes) == {{"file", "data"}}
+        assert rl_config.trustedHosts == ["localhost.invalid"]
+    """,
+        allowed=REPORTLAB_IMPORTS,
+    )
+    assert r.returncode == 0, r.stderr
+
+
+def test_reportlab_refuses_remote_resources() -> None:
+    r = _run(
+        """
+        import urllib.request
+        called = []
+        urllib.request.urlopen = lambda *a, **k: called.append(a)
+        import budget_core.reports.pdf
+        from reportlab.lib.utils import open_for_read
+        try:
+            open_for_read("https://example.com/logo.png")
+        except OSError:
+            pass
+        else:
+            raise SystemExit("remote resource was opened")
+        assert not called, "a network fetch was attempted"
+    """,
+        allowed=REPORTLAB_IMPORTS,
+    )
+    assert r.returncode == 0, r.stderr

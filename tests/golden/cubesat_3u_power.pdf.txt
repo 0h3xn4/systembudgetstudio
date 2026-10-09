@@ -1,0 +1,978 @@
+pages=7
+## page 1
+System Budget Studio 0.1.0 | Example 3U CubeSat rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 1
+Power budget (static): Example 3U CubeSat
+INCOMPLETE: some inputs are placeholders (source TBD or missing). Entries marked n/a depend on them and are not computed. Do not use this report as evidence until the
+placeholders are replaced with sourced values.
+Summary
+Power by spacecraft mode
+Mode
+Average load
+(W)
+Average, unit margins
+(W)
+Average, system margin
+(W)
+Average at source
+(W)
+Average at source, with margins
+(W)
+Peak load
+(W)
+Peak at source, with margins (W)
+Charging
+ 1.500
+ n/a
+ n/a
+ n/a
+ n/a
+ 2.450
+ n/a
+Downlink
+ 2.800
+ n/a
+ n/a
+ n/a
+ n/a
+ 6.950
+ n/a
+Imaging
+ 3.840
+ n/a
+ n/a
+ n/a
+ n/a
+ 6.950
+ n/a
+Nominal
+ 2.000
+ n/a
+ n/a
+ n/a
+ n/a
+ 3.150
+ n/a
+Safe
+ 1.000
+ n/a
+ n/a
+ n/a
+ n/a
+ 1.600
+ n/a
+Average = sum of unit power x duty cycle. Peak = sum of unit peak powers. Source = after converter and distribution losses.
+Mode: Charging
+Units in mode Charging
+Unit
+Name
+Subsystem
+Bus
+Power mode
+Average
+(W)
+Duty
+Effective (W)
+Margin
+With margin (W)
+Peak (W)
+adcs
+ADCS module
+ADCS
+main
+charging
+ 0.600
+ 1.00
+ 0.600
+ n/a
+ n/a
+ 1.000
+camera
+Camera payload
+PL
+main
+off
+ 0.000
+ 1.00
+ 0.000
+ n/a
+ n/a
+ 0.000
+eps
+Power board
+EPS
+main
+charging
+ 0.150
+ 1.00
+ 0.150
+ n/a
+ n/a
+ 0.250
+gnss
+GNSS receiver
+ADCS
+main
+charging
+ 0.250
+ 1.00
+ 0.250
+ n/a
+ n/a
+ 0.400
+obc
+On-board computer
+DH
+main
+charging
+ 0.300
+ 1.00
+ 0.300
+ n/a
+ n/a
+ 0.500
+radio
+UHF/VHF radio
+TTC
+main
+charging
+ 0.200
+ 1.00
+ 0.200
+ n/a
+ n/a
+ 0.300
+By subsystem
+Subsystem
+Effective (W)
+With margin (W)
+Peak (W)
+Peak with margin (W)
+ADCS
+ 0.850
+ n/a
+ 1.400
+ n/a
+DH
+ 0.300
+ n/a
+ 0.500
+ n/a
+EPS
+ 0.150
+ n/a
+ 0.250
+ n/a
+PL
+ 0.000
+ n/a
+ 0.000
+ n/a
+TTC
+ 0.200
+ n/a
+ 0.300
+ n/a
+By supply bus
+## page 2
+System Budget Studio 0.1.0 | Example 3U CubeSat rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 2
+Bus
+Converter efficiency
+Average load
+(W)
+Average load, with margins (W)
+Average at source
+(W)
+Average at source, with margins (W)
+Peak load
+(W)
+Peak at source, with margins (W)
+main
+ n/a
+ 1.500
+ n/a
+ n/a
+ n/a
+ 2.450
+ n/a
+Totals
+Quantity
+Average (W)
+Peak (W)
+Load, nominal
+ 1.500
+ 2.450
+Load, with unit margins
+ n/a
+ n/a
+Load, with system margin
+ n/a
+ n/a
+Source, nominal
+ n/a
+ n/a
+Source, with margins
+ n/a
+ n/a
+Mode: Downlink
+Units in mode Downlink
+Unit
+Name
+Subsystem
+Bus
+Power mode
+Average
+(W)
+Duty
+Effective (W)
+Margin
+With margin (W)
+Peak (W)
+adcs
+ADCS module
+ADCS
+main
+downlink
+ 0.900
+ 1.00
+ 0.900
+ n/a
+ n/a
+ 1.400
+camera
+Camera payload
+PL
+main
+off
+ 0.000
+ 1.00
+ 0.000
+ n/a
+ n/a
+ 0.000
+eps
+Power board
+EPS
+main
+downlink
+ 0.150
+ 1.00
+ 0.150
+ n/a
+ n/a
+ 0.250
+gnss
+GNSS receiver
+ADCS
+main
+downlink
+ 0.250
+ 1.00
+ 0.250
+ n/a
+ n/a
+ 0.400
+obc
+On-board computer
+DH
+main
+downlink
+ 0.600
+ 1.00
+ 0.600
+ n/a
+ n/a
+ 0.900
+radio
+UHF/VHF radio
+TTC
+main
+downlink
+ 1.800
+ 0.50
+ 0.900
+ n/a
+ n/a
+ 4.000
+By subsystem
+Subsystem
+Effective (W)
+With margin (W)
+Peak (W)
+Peak with margin (W)
+ADCS
+ 1.150
+ n/a
+ 1.800
+ n/a
+DH
+ 0.600
+ n/a
+ 0.900
+ n/a
+EPS
+ 0.150
+ n/a
+ 0.250
+ n/a
+PL
+ 0.000
+ n/a
+ 0.000
+ n/a
+TTC
+ 0.900
+ n/a
+ 4.000
+ n/a
+By supply bus
+Bus
+Converter efficiency
+Average load
+(W)
+Average load, with margins (W)
+Average at source
+(W)
+Average at source, with margins (W)
+Peak load
+(W)
+Peak at source, with margins (W)
+main
+ n/a
+ 2.800
+ n/a
+ n/a
+ n/a
+ 6.950
+ n/a
+## page 3
+System Budget Studio 0.1.0 | Example 3U CubeSat rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 3
+Totals
+Quantity
+Average (W)
+Peak (W)
+Load, nominal
+ 2.800
+ 6.950
+Load, with unit margins
+ n/a
+ n/a
+Load, with system margin
+ n/a
+ n/a
+Source, nominal
+ n/a
+ n/a
+Source, with margins
+ n/a
+ n/a
+Mode: Imaging
+Units in mode Imaging
+Unit
+Name
+Subsystem
+Bus
+Power mode
+Average (W)
+Duty
+Effective (W)
+Margin
+With margin (W)
+Peak (W)
+adcs
+ADCS module
+ADCS
+main
+imaging
+ 1.100
+ 1.00
+ 1.100
+ n/a
+ n/a
+ 1.800
+camera
+Camera payload
+PL
+main
+imaging
+ 2.400
+ 0.60
+ 1.440
+ n/a
+ n/a
+ 3.200
+eps
+Power board
+EPS
+main
+imaging
+ 0.150
+ 1.00
+ 0.150
+ n/a
+ n/a
+ 0.250
+gnss
+GNSS receiver
+ADCS
+main
+imaging
+ 0.250
+ 1.00
+ 0.250
+ n/a
+ n/a
+ 0.400
+obc
+On-board computer
+DH
+main
+imaging
+ 0.700
+ 1.00
+ 0.700
+ n/a
+ n/a
+ 1.000
+radio
+UHF/VHF radio
+TTC
+main
+imaging
+ 0.200
+ 1.00
+ 0.200
+ n/a
+ n/a
+ 0.300
+By subsystem
+Subsystem
+Effective (W)
+With margin (W)
+Peak (W)
+Peak with margin (W)
+ADCS
+ 1.350
+ n/a
+ 2.200
+ n/a
+DH
+ 0.700
+ n/a
+ 1.000
+ n/a
+EPS
+ 0.150
+ n/a
+ 0.250
+ n/a
+PL
+ 1.440
+ n/a
+ 3.200
+ n/a
+TTC
+ 0.200
+ n/a
+ 0.300
+ n/a
+By supply bus
+Bus
+Converter efficiency
+Average load
+(W)
+Average load, with margins (W)
+Average at source
+(W)
+Average at source, with margins (W)
+Peak load
+(W)
+Peak at source, with margins (W)
+main
+ n/a
+ 3.840
+ n/a
+ n/a
+ n/a
+ 6.950
+ n/a
+Totals
+Quantity
+Average (W)
+Peak (W)
+Load, nominal
+ 3.840
+ 6.950
+Load, with unit margins
+ n/a
+ n/a
+## page 4
+System Budget Studio 0.1.0 | Example 3U CubeSat rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 4
+Quantity
+Average (W)
+Peak (W)
+Load, with system margin
+ n/a
+ n/a
+Source, nominal
+ n/a
+ n/a
+Source, with margins
+ n/a
+ n/a
+Mode: Nominal
+Units in mode Nominal
+Unit
+Name
+Subsystem
+Bus
+Power mode
+Average (W)
+Duty
+Effective (W)
+Margin
+With margin (W)
+Peak (W)
+adcs
+ADCS module
+ADCS
+main
+nominal
+ 0.900
+ 1.00
+ 0.900
+ n/a
+ n/a
+ 1.400
+camera
+Camera payload
+PL
+main
+off
+ 0.000
+ 1.00
+ 0.000
+ n/a
+ n/a
+ 0.000
+eps
+Power board
+EPS
+main
+nominal
+ 0.150
+ 1.00
+ 0.150
+ n/a
+ n/a
+ 0.250
+gnss
+GNSS receiver
+ADCS
+main
+nominal
+ 0.250
+ 1.00
+ 0.250
+ n/a
+ n/a
+ 0.400
+obc
+On-board computer
+DH
+main
+nominal
+ 0.500
+ 1.00
+ 0.500
+ n/a
+ n/a
+ 0.800
+radio
+UHF/VHF radio
+TTC
+main
+nominal
+ 0.200
+ 1.00
+ 0.200
+ n/a
+ n/a
+ 0.300
+By subsystem
+Subsystem
+Effective (W)
+With margin (W)
+Peak (W)
+Peak with margin (W)
+ADCS
+ 1.150
+ n/a
+ 1.800
+ n/a
+DH
+ 0.500
+ n/a
+ 0.800
+ n/a
+EPS
+ 0.150
+ n/a
+ 0.250
+ n/a
+PL
+ 0.000
+ n/a
+ 0.000
+ n/a
+TTC
+ 0.200
+ n/a
+ 0.300
+ n/a
+By supply bus
+Bus
+Converter efficiency
+Average load
+(W)
+Average load, with margins (W)
+Average at source
+(W)
+Average at source, with margins (W)
+Peak load
+(W)
+Peak at source, with margins (W)
+main
+ n/a
+ 2.000
+ n/a
+ n/a
+ n/a
+ 3.150
+ n/a
+Totals
+Quantity
+Average (W)
+Peak (W)
+Load, nominal
+ 2.000
+ 3.150
+Load, with unit margins
+ n/a
+ n/a
+Load, with system margin
+ n/a
+ n/a
+Source, nominal
+ n/a
+ n/a
+Source, with margins
+ n/a
+ n/a
+## page 5
+System Budget Studio 0.1.0 | Example 3U CubeSat rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 5
+Mode: Safe
+Units in mode Safe
+Unit
+Name
+Subsystem
+Bus
+Power
+mode
+Average (W)
+Duty
+Effective (W)
+Margin
+With margin (W)
+Peak (W)
+adcs
+ADCS module
+ADCS
+main
+safe
+ 0.400
+ 1.00
+ 0.400
+ n/a
+ n/a
+ 0.600
+camera
+Camera payload
+PL
+main
+off
+ 0.000
+ 1.00
+ 0.000
+ n/a
+ n/a
+ 0.000
+eps
+Power board
+EPS
+main
+safe
+ 0.100
+ 1.00
+ 0.100
+ n/a
+ n/a
+ 0.200
+gnss
+GNSS receiver
+ADCS
+main
+off
+ 0.000
+ 1.00
+ 0.000
+ n/a
+ n/a
+ 0.000
+obc
+On-board computer
+DH
+main
+safe
+ 0.300
+ 1.00
+ 0.300
+ n/a
+ n/a
+ 0.500
+radio
+UHF/VHF radio
+TTC
+main
+safe
+ 0.200
+ 1.00
+ 0.200
+ n/a
+ n/a
+ 0.300
+By subsystem
+Subsystem
+Effective (W)
+With margin (W)
+Peak (W)
+Peak with margin (W)
+ADCS
+ 0.400
+ n/a
+ 0.600
+ n/a
+DH
+ 0.300
+ n/a
+ 0.500
+ n/a
+EPS
+ 0.100
+ n/a
+ 0.200
+ n/a
+PL
+ 0.000
+ n/a
+ 0.000
+ n/a
+TTC
+ 0.200
+ n/a
+ 0.300
+ n/a
+By supply bus
+Bus
+Converter efficiency
+Average load
+(W)
+Average load, with margins (W)
+Average at source
+(W)
+Average at source, with margins (W)
+Peak load
+(W)
+Peak at source, with margins (W)
+main
+ n/a
+ 1.000
+ n/a
+ n/a
+ n/a
+ 1.600
+ n/a
+Totals
+Quantity
+Average (W)
+Peak (W)
+Load, nominal
+ 1.000
+ 1.600
+Load, with unit margins
+ n/a
+ n/a
+Load, with system margin
+ n/a
+ n/a
+Source, nominal
+ n/a
+ n/a
+Source, with margins
+ n/a
+ n/a
+Assumptions
+## page 6
+System Budget Studio 0.1.0 | Example 3U CubeSat rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 6
+Configuration numbers used
+Name
+Value
+Unit
+Source
+Status
+Margin, maturity class class_a
+ n/a
+ratio
+TBD
+PLACEHOLDER
+Margin, maturity class class_b
+ n/a
+ratio
+TBD
+PLACEHOLDER
+Margin, maturity class class_c
+ n/a
+ratio
+TBD
+PLACEHOLDER
+System margin
+ n/a
+ratio
+TBD
+PLACEHOLDER
+Distribution loss
+ n/a
+ratio
+TBD
+PLACEHOLDER
+Converter efficiency, bus main
+ n/a
+ratio
+TBD
+PLACEHOLDER
+Equations
+ID
+Name
+Formula
+Source
+PWR-EFF
+Effective unit power
+P_eff = P_avg * duty_cycle_ratio
+SOURCE_MISSING
+PWR-MARGIN
+Unit power with maturity margin
+P_m = P_eff * (1 + margin_ratio(maturity))
+SOURCE_MISSING
+PWR-SYSMARGIN
+System margin on the sum of margined loads
+P_sys = (sum P_m) * (1 + system_margin_ratio)
+SOURCE_MISSING
+PWR-SOURCE
+Source power through converter and distribution
+P_source = P_load / (eta_converter(bus) * (1 - distribution_loss_ratio))
+SOURCE_MISSING
+PWR-PEAK
+Peak power
+P_peak = sum of unit peak_power_w (all units at peak at once, conservative)
+SOURCE_MISSING
+SOURCE_MISSING: the formula is a project convention whose reference text is not available to the tool yet (decision D-040).
+Problems
+Problems and open items
+Severity
+Code
+Location
+Message
+warning
+CONFIG_EMPTY_TABLE
+config/attenuation_table.yaml:3
+The table has no entries.
+warning
+CONFIG_EMPTY_TABLE
+config/ebn0_table.yaml:3
+The table has no entries.
+warning
+RESULT_INCOMPLETE
+config/margin_policy.yaml
+The margin of maturity class 'class_a' is a placeholder.
+warning
+RESULT_INCOMPLETE
+config/margin_policy.yaml
+The margin of maturity class 'class_b' is a placeholder.
+warning
+RESULT_INCOMPLETE
+config/margin_policy.yaml
+The margin of maturity class 'class_c' is a placeholder.
+warning
+RESULT_INCOMPLETE
+config/margin_policy.yaml
+The system margin is a placeholder.
+warning
+CONFIG_PLACEHOLDER
+config/margin_policy.yaml:6
+This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/margin_policy.yaml:11
+This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/margin_policy.yaml:16
+This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/margin_policy.yaml:20
+This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning
+RESULT_INCOMPLETE
+config/power_config.yaml
+The converter efficiency of bus 'main' is a placeholder.
+warning
+RESULT_INCOMPLETE
+config/power_config.yaml
+The distribution loss is a placeholder.
+warning
+CONFIG_PLACEHOLDER
+config/power_config.yaml:4
+This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_config.yaml:9
+This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy.
+## page 7
+System Budget Studio 0.1.0 | Example 3U CubeSat rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 7
+Provenance
+Provenance
+Item
+Value
+Tool
+System Budget Studio 0.1.0
+Python
+3.x
+Libraries
+pinned for-golden-tests
+Project
+Example 3U CubeSat
+Project revision
+1
+Scenario
+static (no scenario)
+Generated (UTC)
+2026-01-02T03:04:05Z
+User
+Golden User
