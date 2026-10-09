@@ -60,6 +60,8 @@ def test_examples_contain_no_numbers_from_standards() -> None:
                 project.config.margin_policy,
                 project.config.power_config,
                 project.config.power_system,
+                project.config.thermal_model,
+                project.config.thermal_environment,
             ]
         for model in models:
             for _, sourced in iter_sourced(model):
@@ -75,6 +77,8 @@ def test_complete_power_example_has_synthetic_sources_only() -> None:
         project.config.power_config,
         project.config.power_system,
         project.config.margin_policy,
+        project.config.thermal_model,
+        project.config.thermal_environment,
     )
     for model in power_models:
         for path, sourced in iter_sourced(model):

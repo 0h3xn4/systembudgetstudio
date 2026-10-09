@@ -37,6 +37,8 @@ _SUFFIXES: dict[str, _Suffix] = {
     "s": _Suffix("s", "time", "second"),
     "k": _Suffix("K", "temperature", "kelvin"),
     "perk": _Suffix("1/K", "temperature coefficient", "1 / kelvin"),
+    "wk": _Suffix("W/K", "thermal conductance", "watt / kelvin"),
+    "jperk": _Suffix("J/K", "heat capacity", "joule / kelvin"),
     "m2": _Suffix("m2", "area", "meter ** 2"),
     "wm2": _Suffix("W/m2", "irradiance", "watt / meter ** 2"),
     "ah": _Suffix("Ah", "electric charge", "ampere_hour"),

@@ -1,0 +1,43 @@
+schema_version: 1
+kind: thermal_environment
+space_temperature_k:
+  value: null
+  source: TBD
+  note: "Placeholder: supply the project's value."
+temperature_margin_k:
+  value: null
+  source: TBD
+  note: "Placeholder: supply the project's value."
+cases:
+  cold:
+    description: Eclipse with the lowest-power mode.
+    spacecraft_mode: survival
+    limit_set: operating
+    solar_flux_wm2:
+      value: null
+      source: TBD
+      note: "Placeholder: supply the project's value."
+    albedo_ratio:
+      value: null
+      source: TBD
+      note: "Placeholder: supply the project's value."
+    earth_ir_wm2:
+      value: null
+      source: TBD
+      note: "Placeholder: supply the project's value."
+  hot:
+    description: Sunlight with the highest-power mode.
+    spacecraft_mode: imaging
+    limit_set: operating
+    solar_flux_wm2:
+      value: null
+      source: TBD
+      note: "Placeholder: supply the project's value."
+    albedo_ratio:
+      value: null
+      source: TBD
+      note: "Placeholder: supply the project's value."
+    earth_ir_wm2:
+      value: null
+      source: TBD
+      note: "Placeholder: supply the project's value."

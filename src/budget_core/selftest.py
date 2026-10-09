@@ -2,7 +2,8 @@
 
 Builds an example project in memory, parses a unit string with pint, propagates one orbit,
 computes the static power and mass budgets and the time-domain power budget, and renders XLSX,
-PDF and DOCX (with a plot) using the bundled fonts. Used to verify the PyInstaller bundle.
+PDF and DOCX (with a plot) using the bundled fonts, and the thermal budget. Used to verify the
+PyInstaller bundle.
 """
 
 from __future__ import annotations
@@ -55,8 +56,26 @@ def run_selftest() -> list[str]:
         if not render_docx(document).startswith(b"PK"):
             failures.append("DOCX output is not a ZIP file")
         failures += _time_domain_check()
+        failures += _thermal_check()
     except Exception as exc:  # report the kind of failure, never file content
         failures.append(f"{type(exc).__name__} during the self-test")
+    return failures
+
+
+def _thermal_check() -> list[str]:
+    """Node temperatures of the complete-inputs example and a rendered thermal report."""
+    from budget_core.reports.docx import render_docx
+    from budget_core.reports.thermal_report import build_thermal_report
+    from budget_core.thermal.static_thermal import static_thermal_budget
+
+    project = EXAMPLES["cubesat_3u_eps"]()
+    result = static_thermal_budget(project)
+    failures: list[str] = []
+    if not result.cases or not all(c.complete and c.nodes for c in result.cases):
+        failures.append("the thermal budget gave no node temperatures")
+    document = build_thermal_report(project, result, make_provenance(project, user="self-test"))
+    if not render_docx(document).startswith(b"PK"):
+        failures.append("thermal DOCX output is not a ZIP file")
     return failures
 
 

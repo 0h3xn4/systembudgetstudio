@@ -1,4 +1,4 @@
-schema_version: 1
+schema_version: 2
 kind: unit
 name: Stress unit 002
 subsystem: AOCS
@@ -10,26 +10,32 @@ modes:
     avg_power_w: 0.0
     peak_power_w: 0.0
     duty_cycle_ratio: 1.0
+    heat_dissipation_ratio: 1.0
   - name: safe
     avg_power_w: 0.6
     peak_power_w: 0.9
     duty_cycle_ratio: 1.0
+    heat_dissipation_ratio: 1.0
   - name: nominal
     avg_power_w: 0.65
     peak_power_w: 0.975
     duty_cycle_ratio: 0.5
+    heat_dissipation_ratio: 1.0
   - name: imaging
     avg_power_w: 0.7
     peak_power_w: 1.05
     duty_cycle_ratio: 1.0
+    heat_dissipation_ratio: 1.0
   - name: downlink
     avg_power_w: 0.5
     peak_power_w: 0.75
     duty_cycle_ratio: 1.0
+    heat_dissipation_ratio: 1.0
   - name: charging
     avg_power_w: 0.55
     peak_power_w: 0.825
     duty_cycle_ratio: 0.5
+    heat_dissipation_ratio: 1.0
 mass_properties:
   position_m:
     - -0.05

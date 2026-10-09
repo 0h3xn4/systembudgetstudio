@@ -33,6 +33,8 @@ from budget_core.model import (
     Spacecraft,
     SpacecraftMode,
     Target,
+    ThermalEnvironment,
+    ThermalModel,
     Unit,
 )
 from budget_core.problems import Problem, Severity, sort_problems
@@ -46,10 +48,12 @@ CONFIG_FILES: dict[str, type[BudgetModel]] = {
     "attenuation_table": AttenuationTable,
     "mass_limits": MassLimits,
     "power_system": PowerSystem,
+    "thermal_model": ThermalModel,
+    "thermal_environment": ThermalEnvironment,
 }
 
 # Files a project may leave out without a warning (the static budgets do not need them).
-OPTIONAL_CONFIG = frozenset({"power_system"})
+OPTIONAL_CONFIG = frozenset({"power_system", "thermal_model", "thermal_environment"})
 
 
 @dataclass(frozen=True)

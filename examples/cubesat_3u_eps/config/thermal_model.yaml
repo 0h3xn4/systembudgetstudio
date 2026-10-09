@@ -1,0 +1,155 @@
+schema_version: 1
+kind: thermal_model
+nodes:
+  ADCS:
+    name: ADCS
+  DH:
+    name: DH
+  EPS:
+    name: EPS
+  PL:
+    name: PL
+  TTC:
+    name: TTC
+conductances:
+  - first_node: ADCS
+    second_node: DH
+    conductance_wk:
+      value: 0.5
+      source: Synthetic example value; not from a data sheet or a standard.
+  - first_node: DH
+    second_node: EPS
+    conductance_wk:
+      value: 0.5
+      source: Synthetic example value; not from a data sheet or a standard.
+  - first_node: EPS
+    second_node: PL
+    conductance_wk:
+      value: 0.5
+      source: Synthetic example value; not from a data sheet or a standard.
+  - first_node: PL
+    second_node: TTC
+    conductance_wk:
+      value: 0.5
+      source: Synthetic example value; not from a data sheet or a standard.
+surfaces:
+  - name: ADCS panel
+    node: ADCS
+    area_m2: 0.02
+    emissivity_ratio:
+      value: 0.85
+      source: Synthetic example value; not from a data sheet or a standard.
+    absorptivity_ratio:
+      value: 0.6
+      source: Synthetic example value; not from a data sheet or a standard.
+    exposure:
+      cold:
+        solar_view_ratio:
+          value: 0.0
+          source: Synthetic example value; not from a data sheet or a standard.
+        earth_view_ratio:
+          value: 0.8
+          source: Synthetic example value; not from a data sheet or a standard.
+      hot:
+        solar_view_ratio:
+          value: 0.5
+          source: Synthetic example value; not from a data sheet or a standard.
+        earth_view_ratio:
+          value: 0.3
+          source: Synthetic example value; not from a data sheet or a standard.
+  - name: DH panel
+    node: DH
+    area_m2: 0.02
+    emissivity_ratio:
+      value: 0.85
+      source: Synthetic example value; not from a data sheet or a standard.
+    absorptivity_ratio:
+      value: 0.6
+      source: Synthetic example value; not from a data sheet or a standard.
+    exposure:
+      cold:
+        solar_view_ratio:
+          value: 0.0
+          source: Synthetic example value; not from a data sheet or a standard.
+        earth_view_ratio:
+          value: 0.8
+          source: Synthetic example value; not from a data sheet or a standard.
+      hot:
+        solar_view_ratio:
+          value: 0.5
+          source: Synthetic example value; not from a data sheet or a standard.
+        earth_view_ratio:
+          value: 0.3
+          source: Synthetic example value; not from a data sheet or a standard.
+  - name: EPS panel
+    node: EPS
+    area_m2: 0.02
+    emissivity_ratio:
+      value: 0.85
+      source: Synthetic example value; not from a data sheet or a standard.
+    absorptivity_ratio:
+      value: 0.6
+      source: Synthetic example value; not from a data sheet or a standard.
+    exposure:
+      cold:
+        solar_view_ratio:
+          value: 0.0
+          source: Synthetic example value; not from a data sheet or a standard.
+        earth_view_ratio:
+          value: 0.8
+          source: Synthetic example value; not from a data sheet or a standard.
+      hot:
+        solar_view_ratio:
+          value: 0.5
+          source: Synthetic example value; not from a data sheet or a standard.
+        earth_view_ratio:
+          value: 0.3
+          source: Synthetic example value; not from a data sheet or a standard.
+  - name: PL panel
+    node: PL
+    area_m2: 0.02
+    emissivity_ratio:
+      value: 0.85
+      source: Synthetic example value; not from a data sheet or a standard.
+    absorptivity_ratio:
+      value: 0.6
+      source: Synthetic example value; not from a data sheet or a standard.
+    exposure:
+      cold:
+        solar_view_ratio:
+          value: 0.0
+          source: Synthetic example value; not from a data sheet or a standard.
+        earth_view_ratio:
+          value: 0.8
+          source: Synthetic example value; not from a data sheet or a standard.
+      hot:
+        solar_view_ratio:
+          value: 0.5
+          source: Synthetic example value; not from a data sheet or a standard.
+        earth_view_ratio:
+          value: 0.3
+          source: Synthetic example value; not from a data sheet or a standard.
+  - name: TTC panel
+    node: TTC
+    area_m2: 0.02
+    emissivity_ratio:
+      value: 0.85
+      source: Synthetic example value; not from a data sheet or a standard.
+    absorptivity_ratio:
+      value: 0.6
+      source: Synthetic example value; not from a data sheet or a standard.
+    exposure:
+      cold:
+        solar_view_ratio:
+          value: 0.0
+          source: Synthetic example value; not from a data sheet or a standard.
+        earth_view_ratio:
+          value: 0.8
+          source: Synthetic example value; not from a data sheet or a standard.
+      hot:
+        solar_view_ratio:
+          value: 0.5
+          source: Synthetic example value; not from a data sheet or a standard.
+        earth_view_ratio:
+          value: 0.3
+          source: Synthetic example value; not from a data sheet or a standard.

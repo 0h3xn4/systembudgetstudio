@@ -1,0 +1,189 @@
+schema_version: 1
+kind: thermal_model
+nodes:
+  ADCS:
+    name: ADCS
+  DH:
+    name: DH
+  EPS:
+    name: EPS
+  PL:
+    name: PL
+  TTC:
+    name: TTC
+conductances:
+  - first_node: ADCS
+    second_node: DH
+    conductance_wk:
+      value: null
+      source: TBD
+      note: "Placeholder: supply the project's value."
+  - first_node: DH
+    second_node: EPS
+    conductance_wk:
+      value: null
+      source: TBD
+      note: "Placeholder: supply the project's value."
+  - first_node: EPS
+    second_node: PL
+    conductance_wk:
+      value: null
+      source: TBD
+      note: "Placeholder: supply the project's value."
+  - first_node: PL
+    second_node: TTC
+    conductance_wk:
+      value: null
+      source: TBD
+      note: "Placeholder: supply the project's value."
+surfaces:
+  - name: ADCS panel
+    node: ADCS
+    area_m2: 0.02
+    emissivity_ratio:
+      value: null
+      source: TBD
+      note: "Placeholder: supply the project's value."
+    absorptivity_ratio:
+      value: null
+      source: TBD
+      note: "Placeholder: supply the project's value."
+    exposure:
+      cold:
+        solar_view_ratio:
+          value: null
+          source: TBD
+          note: "Placeholder: supply the project's value."
+        earth_view_ratio:
+          value: null
+          source: TBD
+          note: "Placeholder: supply the project's value."
+      hot:
+        solar_view_ratio:
+          value: null
+          source: TBD
+          note: "Placeholder: supply the project's value."
+        earth_view_ratio:
+          value: null
+          source: TBD
+          note: "Placeholder: supply the project's value."
+  - name: DH panel
+    node: DH
+    area_m2: 0.02
+    emissivity_ratio:
+      value: null
+      source: TBD
+      note: "Placeholder: supply the project's value."
+    absorptivity_ratio:
+      value: null
+      source: TBD
+      note: "Placeholder: supply the project's value."
+    exposure:
+      cold:
+        solar_view_ratio:
+          value: null
+          source: TBD
+          note: "Placeholder: supply the project's value."
+        earth_view_ratio:
+          value: null
+          source: TBD
+          note: "Placeholder: supply the project's value."
+      hot:
+        solar_view_ratio:
+          value: null
+          source: TBD
+          note: "Placeholder: supply the project's value."
+        earth_view_ratio:
+          value: null
+          source: TBD
+          note: "Placeholder: supply the project's value."
+  - name: EPS panel
+    node: EPS
+    area_m2: 0.02
+    emissivity_ratio:
+      value: null
+      source: TBD
+      note: "Placeholder: supply the project's value."
+    absorptivity_ratio:
+      value: null
+      source: TBD
+      note: "Placeholder: supply the project's value."
+    exposure:
+      cold:
+        solar_view_ratio:
+          value: null
+          source: TBD
+          note: "Placeholder: supply the project's value."
+        earth_view_ratio:
+          value: null
+          source: TBD
+          note: "Placeholder: supply the project's value."
+      hot:
+        solar_view_ratio:
+          value: null
+          source: TBD
+          note: "Placeholder: supply the project's value."
+        earth_view_ratio:
+          value: null
+          source: TBD
+          note: "Placeholder: supply the project's value."
+  - name: PL panel
+    node: PL
+    area_m2: 0.02
+    emissivity_ratio:
+      value: null
+      source: TBD
+      note: "Placeholder: supply the project's value."
+    absorptivity_ratio:
+      value: null
+      source: TBD
+      note: "Placeholder: supply the project's value."
+    exposure:
+      cold:
+        solar_view_ratio:
+          value: null
+          source: TBD
+          note: "Placeholder: supply the project's value."
+        earth_view_ratio:
+          value: null
+          source: TBD
+          note: "Placeholder: supply the project's value."
+      hot:
+        solar_view_ratio:
+          value: null
+          source: TBD
+          note: "Placeholder: supply the project's value."
+        earth_view_ratio:
+          value: null
+          source: TBD
+          note: "Placeholder: supply the project's value."
+  - name: TTC panel
+    node: TTC
+    area_m2: 0.02
+    emissivity_ratio:
+      value: null
+      source: TBD
+      note: "Placeholder: supply the project's value."
+    absorptivity_ratio:
+      value: null
+      source: TBD
+      note: "Placeholder: supply the project's value."
+    exposure:
+      cold:
+        solar_view_ratio:
+          value: null
+          source: TBD
+          note: "Placeholder: supply the project's value."
+        earth_view_ratio:
+          value: null
+          source: TBD
+          note: "Placeholder: supply the project's value."
+      hot:
+        solar_view_ratio:
+          value: null
+          source: TBD
+          note: "Placeholder: supply the project's value."
+        earth_view_ratio:
+          value: null
+          source: TBD
+          note: "Placeholder: supply the project's value."

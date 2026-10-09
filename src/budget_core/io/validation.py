@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from collections.abc import Iterator
+from collections.abc import Callable, Iterator
 from typing import Any
 
 from budget_core.io.yamlio import LineMap, Path, format_path
@@ -131,6 +131,7 @@ def validate_references(project: Project, lines: dict[str, LineMap]) -> list[Pro
     out.extend(_mass_references(project, lines))
     out.extend(_environment_references(project, lines))
     out.extend(_power_system_references(project, lines))
+    out.extend(_thermal_references(project, lines))
     out.extend(_value_ranges(project, lines))
 
     for kind in (
@@ -140,6 +141,8 @@ def validate_references(project: Project, lines: dict[str, LineMap]) -> list[Pro
         "attenuation_table",
         "mass_limits",
         "power_system",
+        "thermal_model",
+        "thermal_environment",
     ):
         model = getattr(project.config, kind)
         if model is None:
@@ -431,6 +434,165 @@ def _value_ranges(project: Project, lines: dict[str, LineMap]) -> list[Problem]:
                 1.0,
                 lo_open=True,
             )
+    out.extend(_thermal_ranges(project, check))
+    return out
+
+
+def _thermal_ranges(project: Project, check: Callable[..., None]) -> list[Problem]:
+    """Range checks of the thermal files (placeholders are skipped by `check`)."""
+    env, model = project.config.thermal_environment, project.config.thermal_model
+    f = "config/thermal_environment.yaml"
+    big = 1e12
+    if env is not None:
+        check(
+            f,
+            ("space_temperature_k",),
+            env.space_temperature_k,
+            "The space temperature",
+            0.0,
+            1e4,
+            True,
+        )
+        check(
+            f,
+            ("temperature_margin_k",),
+            env.temperature_margin_k,
+            "The temperature margin",
+            0.0,
+            1e4,
+        )
+        for name, case in env.cases.items():
+            base: tuple[str | int, ...] = ("cases", name)
+            check(f, (*base, "solar_flux_wm2"), case.solar_flux_wm2, "The solar flux", 0.0, 1e5)
+            check(f, (*base, "albedo_ratio"), case.albedo_ratio, "The albedo", 0.0, 1.0)
+            check(
+                f, (*base, "earth_ir_wm2"), case.earth_ir_wm2, "The Earth infrared flux", 0.0, 1e5
+            )
+    if model is not None:
+        f = "config/thermal_model.yaml"
+        for i, link in enumerate(model.conductances):
+            check(
+                f,
+                ("conductances", i, "conductance_wk"),
+                link.conductance_wk,
+                "A conductance",
+                0.0,
+                big,
+                True,
+            )
+        for i, surface in enumerate(model.surfaces):
+            base = ("surfaces", i)
+            check(
+                f,
+                (*base, "emissivity_ratio"),
+                surface.emissivity_ratio,
+                "An emissivity",
+                0.0,
+                1.0,
+                True,
+            )
+            check(
+                f,
+                (*base, "absorptivity_ratio"),
+                surface.absorptivity_ratio,
+                "An absorptivity",
+                0.0,
+                1.0,
+            )
+            for case_name, exposure in surface.exposure.items():
+                for field in ("solar_view_ratio", "earth_view_ratio"):
+                    check(
+                        f,
+                        (*base, "exposure", case_name, field),
+                        getattr(exposure, field),
+                        "A view ratio",
+                        0.0,
+                        1.0,
+                    )
+    return []
+
+
+def _thermal_references(project: Project, lines: dict[str, LineMap]) -> list[Problem]:
+    out: list[Problem] = []
+    err = Severity.ERROR
+    model, env = project.config.thermal_model, project.config.thermal_environment
+    nodes = ", ".join(model.nodes) if model else ""
+    mfile = "config/thermal_model.yaml"
+    if model is not None:
+        for i, link in enumerate(model.conductances):
+            for field in ("first_node", "second_node"):
+                if getattr(link, field) not in model.nodes:
+                    out.append(
+                        _p(
+                            err,
+                            "THERMAL_NODE_UNKNOWN",
+                            "The conductance names a node that is not defined.",
+                            mfile,
+                            ("conductances", i, field),
+                            lines,
+                            f"Defined nodes: {nodes}.",
+                        )
+                    )
+        for i, surface in enumerate(model.surfaces):
+            if surface.node not in model.nodes:
+                out.append(
+                    _p(
+                        err,
+                        "THERMAL_NODE_UNKNOWN",
+                        "The surface names a node that is not defined.",
+                        mfile,
+                        ("surfaces", i, "node"),
+                        lines,
+                        f"Defined nodes: {nodes}.",
+                    )
+                )
+            if env is not None:
+                for case_name in surface.exposure:
+                    if case_name not in env.cases:
+                        out.append(
+                            _p(
+                                err,
+                                "REF_UNKNOWN_CASE",
+                                f"Case '{case_name}' is not defined in the thermal environment.",
+                                mfile,
+                                ("surfaces", i, "exposure", case_name),
+                                lines,
+                                "Defined cases: " + ", ".join(env.cases) + ".",
+                            )
+                        )
+        for uid, unit in project.units.items():
+            node = unit.thermal_node or unit.subsystem
+            if node not in model.nodes:
+                hint = (
+                    f"Defined nodes: {nodes}. Add a node named like the subsystem, or give the "
+                    "unit a 'thermal_node'."
+                )
+                out.append(
+                    _p(
+                        err,
+                        "THERMAL_NODE_UNKNOWN",
+                        "The unit's thermal node is not defined in config/thermal_model.yaml.",
+                        f"units/{uid}.yaml",
+                        ("thermal_node",) if unit.thermal_node else ("subsystem",),
+                        lines,
+                        hint,
+                    )
+                )
+    if env is not None:
+        known = ", ".join(sorted(project.modes))
+        for name, case in env.cases.items():
+            if case.spacecraft_mode not in project.modes:
+                out.append(
+                    _p(
+                        err,
+                        "REF_UNKNOWN_MODE",
+                        f"'{case.spacecraft_mode}' is not a spacecraft mode in modes/.",
+                        "config/thermal_environment.yaml",
+                        ("cases", name, "spacecraft_mode"),
+                        lines,
+                        f"Defined modes: {known}.",
+                    )
+                )
     return out
 
 

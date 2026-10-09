@@ -1,0 +1,115 @@
+{
+  "$defs": {
+    "Sourced": {
+      "additionalProperties": false,
+      "description": "A number from a standard, policy or data sheet. `source: TBD` or a null value marks a\nplaceholder that must be replaced before results are trusted (spec constraint 15).",
+      "properties": {
+        "note": {
+          "default": "",
+          "title": "Note",
+          "type": "string"
+        },
+        "source": {
+          "minLength": 1,
+          "title": "Source",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "value",
+        "source"
+      ],
+      "title": "Sourced",
+      "type": "object"
+    },
+    "ThermalCase": {
+      "additionalProperties": false,
+      "description": "A named load case (for example hot or cold): which spacecraft mode dissipates, and the\nenvironment. `limit_set` chooses the unit temperature limits the result is checked against.",
+      "properties": {
+        "albedo_ratio": {
+          "$ref": "#/$defs/Sourced"
+        },
+        "description": {
+          "default": "",
+          "title": "Description",
+          "type": "string"
+        },
+        "earth_ir_wm2": {
+          "$ref": "#/$defs/Sourced"
+        },
+        "limit_set": {
+          "default": "operating",
+          "enum": [
+            "operating",
+            "survival"
+          ],
+          "title": "Limit Set",
+          "type": "string"
+        },
+        "solar_flux_wm2": {
+          "$ref": "#/$defs/Sourced"
+        },
+        "spacecraft_mode": {
+          "minLength": 1,
+          "title": "Spacecraft Mode",
+          "type": "string"
+        }
+      },
+      "required": [
+        "spacecraft_mode",
+        "solar_flux_wm2",
+        "albedo_ratio",
+        "earth_ir_wm2"
+      ],
+      "title": "ThermalCase",
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "cases": {
+      "additionalProperties": {
+        "$ref": "#/$defs/ThermalCase"
+      },
+      "title": "Cases",
+      "type": "object"
+    },
+    "kind": {
+      "const": "thermal_environment",
+      "default": "thermal_environment",
+      "title": "Kind",
+      "type": "string"
+    },
+    "schema_version": {
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "space_temperature_k": {
+      "$ref": "#/$defs/Sourced"
+    },
+    "temperature_margin_k": {
+      "$ref": "#/$defs/Sourced"
+    }
+  },
+  "required": [
+    "kind",
+    "schema_version",
+    "space_temperature_k",
+    "temperature_margin_k"
+  ],
+  "title": "System Budget Studio thermal_environment",
+  "type": "object"
+}

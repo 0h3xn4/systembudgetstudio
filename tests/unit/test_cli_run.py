@@ -42,6 +42,14 @@ def test_default_writes_all_reports_into_results(
         "mass_static_eol.csv",
         "mass_static_launch.csv",
     ]
+    assert [n for n in names if n.startswith("thermal_")] == [
+        "thermal_static.docx",
+        "thermal_static.json",
+        "thermal_static.pdf",
+        "thermal_static.xlsx",
+        "thermal_static_downlink.csv",
+        "thermal_static_nominal.csv",
+    ]
     text = capsys.readouterr().out
     assert "Wrote" in text and "Traceback" not in text
     data = json.loads((out / "power_static.json").read_text(encoding="utf-8"))

@@ -1,0 +1,196 @@
+{
+  "$defs": {
+    "Conductance": {
+      "additionalProperties": false,
+      "description": "Linear conduction between two nodes: heat flow = conductance * (T_a - T_b).",
+      "properties": {
+        "conductance_wk": {
+          "$ref": "#/$defs/Sourced"
+        },
+        "first_node": {
+          "minLength": 1,
+          "title": "First Node",
+          "type": "string"
+        },
+        "second_node": {
+          "minLength": 1,
+          "title": "Second Node",
+          "type": "string"
+        }
+      },
+      "required": [
+        "first_node",
+        "second_node",
+        "conductance_wk"
+      ],
+      "title": "Conductance",
+      "type": "object"
+    },
+    "Exposure": {
+      "additionalProperties": false,
+      "description": "The share of a surface that sees the Sun, and the share that sees the Earth, in one case.",
+      "properties": {
+        "earth_view_ratio": {
+          "$ref": "#/$defs/Sourced"
+        },
+        "solar_view_ratio": {
+          "$ref": "#/$defs/Sourced"
+        }
+      },
+      "required": [
+        "solar_view_ratio",
+        "earth_view_ratio"
+      ],
+      "title": "Exposure",
+      "type": "object"
+    },
+    "Sourced": {
+      "additionalProperties": false,
+      "description": "A number from a standard, policy or data sheet. `source: TBD` or a null value marks a\nplaceholder that must be replaced before results are trusted (spec constraint 15).",
+      "properties": {
+        "note": {
+          "default": "",
+          "title": "Note",
+          "type": "string"
+        },
+        "source": {
+          "minLength": 1,
+          "title": "Source",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "value",
+        "source"
+      ],
+      "title": "Sourced",
+      "type": "object"
+    },
+    "Surface": {
+      "additionalProperties": false,
+      "description": "An outer surface of a node: radiates to space, absorbs sunlight, albedo, Earth infrared.",
+      "properties": {
+        "absorptivity_ratio": {
+          "$ref": "#/$defs/Sourced"
+        },
+        "area_m2": {
+          "exclusiveMinimum": 0,
+          "title": "Area M2",
+          "type": "number"
+        },
+        "emissivity_ratio": {
+          "$ref": "#/$defs/Sourced"
+        },
+        "exposure": {
+          "additionalProperties": {
+            "$ref": "#/$defs/Exposure"
+          },
+          "title": "Exposure",
+          "type": "object"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "node": {
+          "minLength": 1,
+          "title": "Node",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "node",
+        "area_m2",
+        "emissivity_ratio",
+        "absorptivity_ratio"
+      ],
+      "title": "Surface",
+      "type": "object"
+    },
+    "ThermalNode": {
+      "additionalProperties": false,
+      "properties": {
+        "heat_capacity_jperk": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Heat Capacity Jperk"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "ThermalNode",
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "conductances": {
+      "items": {
+        "$ref": "#/$defs/Conductance"
+      },
+      "title": "Conductances",
+      "type": "array"
+    },
+    "kind": {
+      "const": "thermal_model",
+      "default": "thermal_model",
+      "title": "Kind",
+      "type": "string"
+    },
+    "nodes": {
+      "additionalProperties": {
+        "$ref": "#/$defs/ThermalNode"
+      },
+      "minProperties": 1,
+      "title": "Nodes",
+      "type": "object"
+    },
+    "schema_version": {
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "surfaces": {
+      "items": {
+        "$ref": "#/$defs/Surface"
+      },
+      "title": "Surfaces",
+      "type": "array"
+    }
+  },
+  "required": [
+    "kind",
+    "nodes",
+    "schema_version"
+  ],
+  "title": "System Budget Studio thermal_model",
+  "type": "object"
+}

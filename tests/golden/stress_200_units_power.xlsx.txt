@@ -104,7 +104,7 @@
 13: 'PWR-EFF' | 'Effective unit power' | 'P_eff = P_avg * duty_cycle_ratio' | 'SOURCE_MISSING' | 
 14: 'PWR-MARGIN' | 'Unit power with maturity margin' | 'P_m = P_eff * (1 + margin_ratio(maturity))' | 'SOURCE_MISSING' | 
 ...
-## sheet Problems rows=42 cols=4
+## sheet Problems rows=105 cols=4
 1: 'Problems and open items' |  |  | 
 2: 'Severity' | 'Code' | 'Location' | 'Message'
 3: 'warning' | 'CONFIG_EMPTY_TABLE' | 'config/attenuation_table.yaml:3' | 'The table has no entries.'

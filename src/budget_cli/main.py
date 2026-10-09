@@ -22,6 +22,7 @@ from budget_core.reports.run import (
     BudgetOutput,
     mass_output,
     power_output,
+    thermal_output,
     timeline_output,
     write_outputs,
 )
@@ -29,6 +30,7 @@ from budget_core.scenario.export import write_scenario_outputs
 from budget_core.scenario.run import ScenarioRunError, run_scenario
 from budget_core.schemas import export_schemas
 from budget_core.selftest import run_selftest
+from budget_core.thermal.static_thermal import static_thermal_budget
 
 REPORTS = REPORT_KINDS
 
@@ -57,7 +59,7 @@ def build_parser() -> argparse.ArgumentParser:
     run.add_argument("project", type=Path, help="Project folder (contains project.yaml).")
     run.add_argument(
         "--budget",
-        choices=("power", "mass", "all"),
+        choices=("power", "mass", "thermal", "all"),
         default="all",
         help="Budget to compute (default: all).",
     )
@@ -191,6 +193,11 @@ def _run(args: argparse.Namespace) -> int:
         mass = static_mass_budget(project)
         outputs.append(mass_output(project, mass, provenance, loaded.problems))
         problems += mass.problems
+
+    if args.budget in ("thermal", "all"):
+        thermal = static_thermal_budget(project)
+        outputs.append(thermal_output(project, thermal, provenance, loaded.problems))
+        problems += thermal.problems
 
     wanted = set(args.report or ["all"])
     if "all" in wanted:

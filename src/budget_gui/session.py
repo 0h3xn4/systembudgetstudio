@@ -13,7 +13,8 @@ from budget_core.power.static_budget import StaticPowerResult, static_power_budg
 from budget_core.problems import Problem, Severity, sort_problems
 from budget_core.provenance import Provenance, make_provenance
 from budget_core.reports.document import ReportDocument
-from budget_core.reports.run import BudgetOutput, mass_output, power_output
+from budget_core.reports.run import BudgetOutput, mass_output, power_output, thermal_output
+from budget_core.thermal.static_thermal import StaticThermalResult, static_thermal_budget
 
 
 class ProjectSession(QObject):
@@ -27,9 +28,11 @@ class ProjectSession(QObject):
         self.load_result: LoadResult | None = None
         self.power: StaticPowerResult | None = None
         self.mass: StaticMassResult | None = None
+        self.thermal: StaticThermalResult | None = None
         self.provenance: Provenance | None = None
         self.document: ReportDocument | None = None  # power budget report
         self.mass_document: ReportDocument | None = None
+        self.thermal_document: ReportDocument | None = None
         self.outputs: list[BudgetOutput] = []
         self.problems: list[Problem] = []
 
@@ -38,7 +41,8 @@ class ProjectSession(QObject):
         return self.load_result.project if self.load_result else None
 
     def _clear(self) -> None:
-        self.power = self.mass = self.provenance = self.document = self.mass_document = None
+        self.power = self.mass = self.thermal = self.provenance = None
+        self.document = self.mass_document = self.thermal_document = None
         self.outputs = []
 
     def open(self, path: Path) -> None:
@@ -56,14 +60,22 @@ class ProjectSession(QObject):
             if project is not None:
                 self.power = static_power_budget(project)
                 self.mass = static_mass_budget(project)
+                self.thermal = static_thermal_budget(project)
                 self.provenance = make_provenance(project)
                 load_problems = self.load_result.problems
                 power_out = power_output(project, self.power, self.provenance, load_problems)
                 mass_out = mass_output(project, self.mass, self.provenance, load_problems)
-                self.outputs = [power_out, mass_out]
+                thermal_out = thermal_output(project, self.thermal, self.provenance, load_problems)
+                self.outputs = [power_out, mass_out, thermal_out]
                 self.document, self.mass_document = power_out.document, mass_out.document
+                self.thermal_document = thermal_out.document
                 self.problems = sort_problems(
-                    [*self.problems, *self.power.problems, *self.mass.problems]
+                    [
+                        *self.problems,
+                        *self.power.problems,
+                        *self.mass.problems,
+                        *self.thermal.problems,
+                    ]
                 )
         except Exception as exc:  # never show a traceback; say what happened in plain words
             self.load_result = None

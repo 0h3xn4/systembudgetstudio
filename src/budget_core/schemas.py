@@ -27,6 +27,8 @@ from budget_core.model import (
     Spacecraft,
     SpacecraftMode,
     Target,
+    ThermalEnvironment,
+    ThermalModel,
     Unit,
 )
 
@@ -46,6 +48,8 @@ SCHEMA_MODELS: dict[str, type[BudgetModel]] = {
     "margin_policy": MarginPolicy,
     "power_config": PowerConfig,
     "power_system": PowerSystem,
+    "thermal_model": ThermalModel,
+    "thermal_environment": ThermalEnvironment,
     "ebn0_table": Ebn0Table,
     "attenuation_table": AttenuationTable,
 }

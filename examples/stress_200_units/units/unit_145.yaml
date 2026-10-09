@@ -1,4 +1,4 @@
-schema_version: 1
+schema_version: 2
 kind: unit
 name: Stress unit 145
 subsystem: EPS
@@ -10,26 +10,32 @@ modes:
     avg_power_w: 0.0
     peak_power_w: 0.0
     duty_cycle_ratio: 1.0
+    heat_dissipation_ratio: 1.0
   - name: safe
     avg_power_w: 1.55
     peak_power_w: 2.325
     duty_cycle_ratio: 1.0
+    heat_dissipation_ratio: 1.0
   - name: nominal
     avg_power_w: 1.705
     peak_power_w: 2.558
     duty_cycle_ratio: 1.0
+    heat_dissipation_ratio: 1.0
   - name: imaging
     avg_power_w: 1.86
     peak_power_w: 2.79
     duty_cycle_ratio: 0.5
+    heat_dissipation_ratio: 1.0
   - name: downlink
     avg_power_w: 2.015
     peak_power_w: 3.022
     duty_cycle_ratio: 1.0
+    heat_dissipation_ratio: 1.0
   - name: charging
     avg_power_w: 2.17
     peak_power_w: 3.255
     duty_cycle_ratio: 1.0
+    heat_dissipation_ratio: 1.0
 mass_properties:
   position_m:
     - 0.1

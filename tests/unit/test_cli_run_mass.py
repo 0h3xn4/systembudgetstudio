@@ -42,7 +42,7 @@ def test_power_only(root: Path, tmp_path: Path) -> None:
 def test_default_is_all_budgets(root: Path, tmp_path: Path) -> None:
     out = tmp_path / "out"
     assert main(["run", str(root), "--report", "json", "--out", str(out), *FIXED]) == 0
-    assert names(out) == ["mass_static.json", "power_static.json"]
+    assert names(out) == ["mass_static.json", "power_static.json", "thermal_static.json"]
 
 
 def test_mass_outputs_are_byte_identical_on_rerun(root: Path, tmp_path: Path) -> None:

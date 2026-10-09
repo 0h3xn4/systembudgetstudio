@@ -192,3 +192,17 @@ def test_power_timeline_with_plots_is_strictly_offline(tmp_path) -> None:  # typ
         assert (pathlib.Path({str(tmp_path / "out")!r}) / "power_time_one_day.docx").exists()
     """)
     assert r.returncode == 0, r.stderr
+
+
+def test_thermal_budget_path_is_strictly_offline(tmp_path) -> None:  # type: ignore[no-untyped-def]
+    r = _run(f"""
+        import pathlib
+        from budget_cli.main import main
+        from budget_core.examples import export_examples
+        export_examples(pathlib.Path({str(tmp_path)!r}))
+        code = main(["run", {str(tmp_path / "cubesat_3u_eps")!r}, "--budget", "thermal",
+                     "--report", "xlsx", "--report", "docx", "--report", "json",
+                     "--report", "csv", "--out", {str(tmp_path / "out")!r}])
+        assert code == 1  # the example has a margin finding: not a failure of the guard
+    """)
+    assert r.returncode == 0, r.stderr

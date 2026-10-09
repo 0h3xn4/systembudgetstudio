@@ -18,9 +18,11 @@ from budget_core.model import (
     Attitude,
     Battery,
     Bus,
+    Conductance,
     Ebn0Table,
     Elements,
     Expendable,
+    Exposure,
     GroundStation,
     Inertia,
     MarginPolicy,
@@ -43,7 +45,13 @@ from budget_core.model import (
     Sourced,
     Spacecraft,
     SpacecraftMode,
+    Surface,
     Target,
+    TemperatureLimits,
+    ThermalCase,
+    ThermalEnvironment,
+    ThermalModel,
+    ThermalNode,
     Unit,
 )
 from budget_core.model.power_system import Pointing
@@ -115,7 +123,10 @@ def _power_system(
 
 
 def _config(
-    buses: list[str], power_system: PowerSystem | None = None, filled_power: bool = False
+    buses: list[str],
+    power_system: PowerSystem | None = None,
+    filled_power: bool = False,
+    thermal: tuple[ThermalModel, ThermalEnvironment] | None = None,
 ) -> ProjectConfig:
     """Margin policy and power configuration: placeholders, or (for the complete power example)
     invented round values. Mass numbers and tables stay placeholders in every example."""
@@ -126,6 +137,8 @@ def _config(
     margins = {"class_a": 0.05, "class_b": 0.10, "class_c": 0.20}
     return ProjectConfig(
         power_system=power_system,
+        thermal_model=thermal[0] if thermal else None,
+        thermal_environment=thermal[1] if thermal else None,
         margin_policy=MarginPolicy(
             classes={
                 c: MaturityClass(power_margin_ratio=p(margins[c]), mass_margin_ratio=_tbd())
@@ -177,8 +190,28 @@ def _props(mass: float, geometry: Geometry | None) -> MassProperties | None:
     )
 
 
+# Heat dissipation ratio per (unit id, power mode): every power mode dissipates all of its
+# electrical power except these (invented values; a transmitter radiates part of it as RF).
+RF_RADIATING = {
+    ("radio", "downlink"): 0.7,
+    ("sband_trx", "downlink"): 0.7,
+    ("xband_tx", "downlink"): 0.5,
+}
+# Invented operating and survival limits of the complete-inputs example, in kelvin.
+EXAMPLE_LIMITS = TemperatureLimits(
+    operating_min_k=233.15, operating_max_k=343.15, survival_min_k=218.15, survival_max_k=358.15
+)
+# The radio is the one unit with a tighter upper limit, so the example shows a margin finding.
+RADIO_LIMITS = TemperatureLimits(
+    operating_min_k=233.15, operating_max_k=335.15, survival_min_k=218.15, survival_max_k=358.15
+)
+
+
 def _unit(
-    row: UnitRow, geometry: Geometry | None = None, phases: list[str] | None = None
+    row: UnitRow,
+    geometry: Geometry | None = None,
+    phases: list[str] | None = None,
+    limits: TemperatureLimits | None = None,
 ) -> tuple[str, Unit]:
     uid, name, subsystem, mass, bus, maturity, modes = row
     return uid, Unit(
@@ -188,11 +221,18 @@ def _unit(
         bus=bus,
         maturity=maturity,
         modes=[
-            PowerMode(name=m, avg_power_w=a, peak_power_w=p, duty_cycle_ratio=d)
+            PowerMode(
+                name=m,
+                avg_power_w=a,
+                peak_power_w=p,
+                duty_cycle_ratio=d,
+                heat_dissipation_ratio=RF_RADIATING.get((uid, m), 1.0),
+            )
             for m, (a, p, d) in modes.items()
         ],
         mass_properties=_props(mass, geometry),
         phases=phases,
+        temperature_limits=limits,
     )
 
 
@@ -616,7 +656,11 @@ def _cubesat() -> Project:
         ),
         units=units,
         modes=_mode_map(units, CUBESAT_MODES),
-        config=_config(["main"], _power_system(False, ["launch", "eol"], CUBESAT_POINTING)),
+        config=_config(
+            ["main"],
+            _power_system(False, ["launch", "eol"], CUBESAT_POINTING),
+            thermal=_thermal(units, "imaging", "safe", 0.02, False),
+        ),
         orbits={"leo": EXAMPLE_ORBIT},
         ground_stations=EXAMPLE_STATIONS,
         targets=EXAMPLE_TARGETS,
@@ -641,6 +685,62 @@ def _cubesat() -> Project:
     )
 
 
+def _thermal(
+    units: dict[str, Unit], hot_mode: str, cold_mode: str, area_m2: float, filled: bool
+) -> tuple[ThermalModel, ThermalEnvironment]:
+    """One node per subsystem in a chain, one radiating surface per node, a hot and a cold case.
+    The design (nodes, links, areas, which mode is hot or cold) is always given; the numbers are
+    placeholders unless `filled` (then invented round values, labelled as such)."""
+
+    def n(value: float) -> Sourced:
+        return _val(value) if filled else _tbd()
+
+    names = sorted({u.subsystem for u in units.values()})
+    sun = {"hot": (0.5, 0.3), "cold": (0.0, 0.8)}
+    model = ThermalModel(
+        nodes={name: ThermalNode(name=name) for name in names},
+        conductances=[
+            Conductance(first_node=a, second_node=b, conductance_wk=n(0.5))
+            for a, b in zip(names[:-1], names[1:], strict=True)
+        ],
+        surfaces=[
+            Surface(
+                name=f"{name} panel",
+                node=name,
+                area_m2=area_m2,
+                emissivity_ratio=n(0.85),
+                absorptivity_ratio=n(0.6),
+                exposure={
+                    case: Exposure(solar_view_ratio=n(s_), earth_view_ratio=n(e_))
+                    for case, (s_, e_) in sun.items()
+                },
+            )
+            for name in names
+        ],
+    )
+    environment = ThermalEnvironment(
+        space_temperature_k=n(3.0),
+        temperature_margin_k=n(5.0),
+        cases={
+            "cold": ThermalCase(
+                description="Eclipse with the lowest-power mode.",
+                spacecraft_mode=cold_mode,
+                solar_flux_wm2=n(0.0),
+                albedo_ratio=n(0.0),
+                earth_ir_wm2=n(240.0),
+            ),
+            "hot": ThermalCase(
+                description="Sunlight with the highest-power mode.",
+                spacecraft_mode=hot_mode,
+                solar_flux_wm2=n(1400.0),
+                albedo_ratio=n(0.3),
+                earth_ir_wm2=n(240.0),
+            ),
+        },
+    )
+    return model, environment
+
+
 CUBESAT_POINTING: dict[str, Pointing] = {
     "downlink": "nadir",
     "imaging": "nadir",
@@ -649,24 +749,34 @@ CUBESAT_POINTING: dict[str, Pointing] = {
 
 
 def _cubesat_eps() -> Project:
-    """The 3U CubeSat with complete power inputs (invented values), to show the time-domain
-    budget with results instead of n/a."""
+    """The 3U CubeSat with complete power and thermal inputs (invented values), to show the
+    time-domain and thermal budgets with results instead of n/a."""
     base = _cubesat()
+    units = dict(
+        _unit(
+            r, CUBESAT_GEOMETRY.get(r[0]), None, RADIO_LIMITS if r[0] == "radio" else EXAMPLE_LIMITS
+        )
+        for r in CUBESAT_UNITS
+    )
     scenario = base.scenarios["one_day"].model_copy(
         update={"name": "One day with complete power inputs", "mission_phase": "eol"}
     )
     return Project(
         root=base.root,
         meta=ProjectMeta(
-            name="Example 3U CubeSat, complete power inputs",
+            name="Example 3U CubeSat, complete power and thermal inputs",
             revision="1",
-            description=SYNTHETIC + " Array, battery and power configuration have invented values.",
+            description=SYNTHETIC
+            + " Array, battery, power and thermal configuration have invented values.",
         ),
         spacecraft=base.spacecraft,
-        units=base.units,
+        units=units,
         modes=base.modes,
         config=_config(
-            ["main"], _power_system(True, ["launch", "eol"], CUBESAT_POINTING), filled_power=True
+            ["main"],
+            _power_system(True, ["launch", "eol"], CUBESAT_POINTING),
+            filled_power=True,
+            thermal=_thermal(units, "imaging", "safe", 0.02, True),
         ),
         orbits=base.orbits,
         ground_stations=base.ground_stations,
@@ -701,7 +811,11 @@ def _microsat() -> Project:
         ),
         units=units,
         modes=_mode_map(units, MICROSAT_MODES),
-        config=_config(["main_28v", "payload_12v"], _power_system(False, PHASES)),
+        config=_config(
+            ["main_28v", "payload_12v"],
+            _power_system(False, PHASES),
+            thermal=_thermal(units, "imaging", "survival", 0.3, False),
+        ),
         expendables={"propellant": propellant},
         orbits={"leo": EXAMPLE_ORBIT},
         ground_stations=EXAMPLE_STATIONS,
@@ -775,7 +889,11 @@ def _stress() -> Project:
         ),
         units=units,
         modes=_mode_map(units, plan),
-        config=_config(["main", "aux"], _power_system(False, ["launch", "eol"])),
+        config=_config(
+            ["main", "aux"],
+            _power_system(False, ["launch", "eol"]),
+            thermal=_thermal(units, "imaging", "safe", 0.2, False),
+        ),
         orbits={"leo": EXAMPLE_ORBIT},
         ground_stations=EXAMPLE_STATIONS,
         targets=EXAMPLE_TARGETS,

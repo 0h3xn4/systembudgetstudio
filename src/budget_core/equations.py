@@ -120,6 +120,56 @@ def _time_domain_equations() -> tuple[Equation, ...]:
     )
 
 
+_TH_NOTE = (
+    "Textbook relation, project convention (decision D-071); the reference text is not "
+    "available to the tool, owner to confirm (for example ECSS-E-ST-31C and the ECSS thermal "
+    "design handbook, or the thermal chapter of a spacecraft systems engineering handbook)."
+)
+
+
+def _thermal_equations() -> tuple[Equation, ...]:
+    return (
+        Equation(
+            "TH-DISS",
+            "Heat dissipated by a unit",
+            "Q = P_avg * duty_cycle_ratio * heat_dissipation_ratio (peak: P_peak * ratio)",
+            None,
+            "The ratio is 1.0 unless the unit radiates RF or exports power; it is given per power "
+            "mode and never assumed (decision D-037).",
+        ),
+        Equation(
+            "TH-ABS",
+            "Heat absorbed by a surface",
+            "Q = A * (alpha * f_sun * S + alpha * f_earth * a * S + eps * f_earth * E_IR)",
+            None,
+            _TH_NOTE + " Constant view ratios per case, no view factors (DEVIATIONS DV-T2).",
+        ),
+        Equation(
+            "TH-BAL",
+            "Steady-state node heat balance",
+            "sum_j G_ij (T_j - T_i) + sum_surfaces eps sigma A (T_space^4 - T_i^4) + Q_i = 0",
+            None,
+            _TH_NOTE + " Isothermal nodes, linear conduction, radiation to space only (DV-T1).",
+        ),
+        Equation(
+            "TH-SB",
+            "Stefan-Boltzmann constant",
+            "sigma = 5.670374419e-8 W m^-2 K^-4",
+            "CODATA 2018 / SI 2019 (exact from h, k, c)",
+            "Definitional constant shipped with its source (decision D-072).",
+        ),
+        Equation(
+            "TH-LIMIT",
+            "Unit temperature limit check",
+            "exceeded when T < T_min or T > T_max; margin check when T - T_min or T_max - T < "
+            "temperature_margin_k",
+            None,
+            "Operating or survival limits of the unit, chosen by the case (decision D-074); the "
+            "margin comes from configuration.",
+        ),
+    )
+
+
 _CONVENTION = (
     "Project convention (decision D-040). ECSS-E-ST-20C margin philosophy is the intended "
     "reference but its text is not available to the tool; owner to confirm."
@@ -241,5 +291,6 @@ EQUATIONS: dict[str, Equation] = {
             "Classical rigid-body mechanics; tensor entries convention in DECISIONS D-048.",
         ),
         *_time_domain_equations(),
+        *_thermal_equations(),
     )
 }

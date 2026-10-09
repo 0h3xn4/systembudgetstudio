@@ -93,7 +93,7 @@
 13: 'MASS-COG' | 'Centre of gravity' | 'r_cg = sum(m_i r_i) / sum(m_i), nominal masses of items with a position' | 'SOURCE_MISSING' | 
 14: 'MASS-PARALLEL' | 'Parallel-axis (Huygens-Steiner) theorem' | 'I = sum(I_i + m_i (|d_i|^2 E - d_i d_i^T)), d_i = r_i - r_ref' | 'SOURCE_MISSING' | 
 15: 'SOURCE_MISSING: the formula is a project convention or textbook definition whose reference text is not available to the tool yet (see docs/DECISIONS.md).' |  |  |  | 
-## sheet Problems rows=40 cols=4
+## sheet Problems rows=82 cols=4
 1: 'Problems and open items' |  |  | 
 2: 'Severity' | 'Code' | 'Location' | 'Message'
 3: 'warning' | 'CONFIG_EMPTY_TABLE' | 'config/attenuation_table.yaml:3' | 'The table has no entries.'
@@ -133,7 +133,49 @@
 37: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:109' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
 38: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:113' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
 39: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:128' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
-40: 'info' | 'MASS_INERTIA_POINT_MASS' | 'units/gnss.yaml' | "'gnss' has no own inertia; it is treated as a point mass."
+40: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_environment.yaml:4' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+41: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_environment.yaml:8' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+42: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_environment.yaml:17' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+43: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_environment.yaml:21' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+44: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_environment.yaml:25' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+45: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_environment.yaml:33' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+46: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_environment.yaml:37' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+47: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_environment.yaml:41' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+48: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:18' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+49: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:24' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+50: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:30' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+51: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:36' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+52: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:44' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+53: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:48' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+54: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:54' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+55: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:58' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+56: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:63' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+57: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:67' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+58: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:74' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+59: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:78' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+60: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:84' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+61: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:88' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+62: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:93' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+63: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:97' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+64: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:104' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+65: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:108' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+66: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:114' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+67: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:118' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+68: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:123' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+69: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:127' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+70: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:134' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+71: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:138' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+72: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:144' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+73: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:148' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+74: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:153' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+75: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:157' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+76: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:164' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+77: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:168' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+78: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:174' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+79: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:178' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+80: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:183' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+81: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_model.yaml:187' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+82: 'info' | 'MASS_INERTIA_POINT_MASS' | 'units/gnss.yaml' | "'gnss' has no own inertia; it is treated as a point mass."
 ## sheet Provenance rows=10 cols=2
 1: 'Provenance' | 
 2: 'Item' | 'Value'

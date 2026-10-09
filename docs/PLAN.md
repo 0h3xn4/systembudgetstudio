@@ -31,7 +31,7 @@ Needs from you: SpaceMissionStudio sample export files.
 Scope: array and battery models, converter/distribution losses, SoC integration, violations with timestamps, result plots with eclipse/pass shading and cursors, CSV/JSON export, worker-thread runs, DOCX report.
 Acceptance: ≥10 regression cases (e.g. orbit-average balance with known eclipse fraction); monotonic properties pass; 1-week/1 s stress case < 10 s; GUI responsive during run; violations jump to inputs.
 
-## M4b Thermal budget (L)
+## M4b Thermal budget (L, done)
 Scope: after M4 because it reuses the power modes, spacecraft modes and (for hot and cold case definitions) the environment work.
 - **Model:** per power mode `heat_dissipation_ratio` (fraction of electrical power dissipated as heat, 1.0 unless the unit radiates or exports power; explicit, never silently assumed); per unit operating and survival limits (`operating_min_k`, `operating_max_k`, `survival_min_k`, `survival_max_k`) and the thermal node it is mounted on; `thermal/model.yaml` (nodes, conductances `conductance_w_per_k`, radiators with `area_m2`, `emissivity_ratio`, `absorptivity_ratio`, links to space); `config/thermal_environment.yaml` (solar flux, albedo, Earth infrared, hot/cold case definitions, every number `Sourced` with placeholders).
 - **Solvers (pure functions):** dissipation roll-up by unit, subsystem, spacecraft mode; steady-state nodal heat balance `sum(G_ij (T_j - T_i)) + sigma eps A (T_space^4 - T_i^4) + Q_i = 0` solved with SciPy (Stefan-Boltzmann law, textbook source flagged `SOURCE_MISSING` until cited); margin against limits with a configurable thermal margin from config.

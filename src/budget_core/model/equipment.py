@@ -23,6 +23,9 @@ class PowerMode(BudgetModel):
     avg_power_w: float = Field(ge=0)
     peak_power_w: float = Field(ge=0)
     duty_cycle_ratio: float = Field(default=1.0, ge=0, le=1)
+    # Share of the electrical power that ends up as heat in the unit (1.0 unless the unit radiates
+    # RF or exports power). None: not given, thermal results that need it are n/a (D-037).
+    heat_dissipation_ratio: float | None = Field(default=None, ge=0, le=1)
     min_duration_s: float | None = Field(default=None, gt=0)
     max_duration_s: float | None = Field(default=None, gt=0)
 
@@ -47,6 +50,30 @@ class PowerMode(BudgetModel):
         return self
 
 
+class TemperatureLimits(BudgetModel):
+    """Operating and survival limits of a unit; a limit that is not given is not checked."""
+
+    operating_min_k: float | None = Field(default=None, gt=0)
+    operating_max_k: float | None = Field(default=None, gt=0)
+    survival_min_k: float | None = Field(default=None, gt=0)
+    survival_max_k: float | None = Field(default=None, gt=0)
+
+    @model_validator(mode="after")
+    def _ordered(self) -> TemperatureLimits:
+        pairs = (
+            (self.operating_min_k, self.operating_max_k, "operating_min_k"),
+            (self.survival_min_k, self.survival_max_k, "survival_min_k"),
+        )
+        for low, high, field in pairs:
+            if low is not None and high is not None and low >= high:
+                raise PydanticCustomError(
+                    "limits_order",
+                    "a minimum temperature must be below the maximum",
+                    {"field": field},
+                )
+        return self
+
+
 class Unit(BudgetModel):
     schema_version: int = CURRENT_VERSIONS["unit"]
     kind: Literal["unit"] = "unit"
@@ -59,6 +86,8 @@ class Unit(BudgetModel):
     modes: list[PowerMode] = Field(min_length=1)
     mass_properties: MassProperties | None = None
     phases: list[str] | None = None  # mission phases the unit is present in (None: all)
+    thermal_node: str | None = None  # None: the node named like the subsystem (D-039)
+    temperature_limits: TemperatureLimits | None = None
 
     @field_validator("phases")
     @classmethod
