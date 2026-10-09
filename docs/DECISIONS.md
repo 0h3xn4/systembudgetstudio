@@ -21,3 +21,9 @@ One line each: decision, rationale.
 | D-015 | Project layout: `project.yaml`, `units/`, `modes/`, `scenarios/`, `ground_stations/`, `links/`, `config/` (each with JSON Schema), `results/` (git-ignored by default). | Constraint 12: parallel team work, clean diffs. |
 | D-016 | Results: summary as JSON, time series as CSV with fixed float format and sorted keys. No HDF5/Parquet. | Byte-identical output (constraint 14), no binary deps. |
 | D-017 | Repo visibility is verified private before any push beyond docs; example projects use invented data only. | Constraints 10, 11. |
+| D-018 | Repo stayed **public** during M0 at the owner's explicit instruction ("Proceed while public"); M0 contains no project data. Owner to make it private before real data or examples with sensitive-looking values are added. | Spec step 2 asked to stop; owner answered. |
+| D-019 | `main` did not exist (default branch was the working branch); `main` was created from the docs commit, owner to set it as default and protect it. M0 goes in by PR from `claude/blissful-maxwell-46xhwj`. | A PR cannot target its own head branch. |
+| D-020 | Build backend hatchling; runtime dependency in M0 is only `PySide6-Essentials` (no QtNetwork use; `PySide6.QtNetwork` excluded in the PyInstaller spec). | Smaller bundle, no networking stack. |
+| D-021 | Lock files via `uv pip compile --universal --generate-hashes` (`requirements.lock`, `requirements-dev.lock`); CI installs dev tooling from the hashed lock. | Spec: reproducible, hashed pins. |
+| D-022 | Actions pinned to commit SHAs resolved with `git ls-remote` (checkout v7.0.1, setup-python v7.0.0, upload-artifact v7.0.2). | Spec: pin to SHA. |
+| D-023 | IBM Plex Sans (Light/Regular/SemiBold) and Mono (Regular/SemiBold) TTFs bundled with the OFL licence. Carbon colour tokens (white, g100) are a minimal hand-written QSS; a full Carbon component set is deferred to M2. | M0 only needs an empty styled window. |

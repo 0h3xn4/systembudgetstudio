@@ -1,0 +1,24 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.hypothesis/
+.coverage
+htmlcov/
+build/
+dist/
+*.spec.bak
+# Qt
+*.qm
+# IDE
+.idea/
+.vscode/
+*.swp
+# local project folders and results
+/projects/
+/local/
+results/
