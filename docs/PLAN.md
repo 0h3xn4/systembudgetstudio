@@ -31,6 +31,15 @@ Needs from you: SpaceMissionStudio sample export files.
 Scope: array and battery models, converter/distribution losses, SoC integration, violations with timestamps, result plots with eclipse/pass shading and cursors, CSV/JSON export, worker-thread runs, DOCX report.
 Acceptance: ≥10 regression cases (e.g. orbit-average balance with known eclipse fraction); monotonic properties pass; 1-week/1 s stress case < 10 s; GUI responsive during run; violations jump to inputs.
 
+## M4b Thermal budget (L)
+Scope: after M4 because it reuses the power modes, spacecraft modes and (for hot and cold case definitions) the environment work.
+- **Model:** per power mode `heat_dissipation_ratio` (fraction of electrical power dissipated as heat, 1.0 unless the unit radiates or exports power; explicit, never silently assumed); per unit operating and survival limits (`operating_min_k`, `operating_max_k`, `survival_min_k`, `survival_max_k`) and the thermal node it is mounted on; `thermal/model.yaml` (nodes, conductances `conductance_w_per_k`, radiators with `area_m2`, `emissivity_ratio`, `absorptivity_ratio`, links to space); `config/thermal_environment.yaml` (solar flux, albedo, Earth infrared, hot/cold case definitions, every number `Sourced` with placeholders).
+- **Solvers (pure functions):** dissipation roll-up by unit, subsystem, spacecraft mode; steady-state nodal heat balance `sum(G_ij (T_j - T_i)) + sigma eps A (T_space^4 - T_i^4) + Q_i = 0` solved with SciPy (Stefan-Boltzmann law, textbook source flagged `SOURCE_MISSING` until cited); margin against limits with a configurable thermal margin from config.
+- **Problems:** `THERMAL_LIMIT_EXCEEDED`, `THERMAL_NODE_UNKNOWN`, `THERMAL_NO_LIMITS`, `THERMAL_SOLVE_FAILED`, plus placeholder warnings.
+- **Reports:** dissipation table, node temperatures per case, unit limit margins.
+Acceptance: at least 10 hand-calculated cases (single node radiating to space, two nodes in series, radiator sizing, one node with constant dissipation, ...) with stated tolerances; properties (more dissipation never lowers a node temperature, more radiator area never raises it, energy balance residual below a tolerance); golden reports; solve time for the 200-unit stress case with realistic node counts well under a second.
+Needs from you: environment flux values, optical properties and hot/cold case definitions with sources; the node-network convention (how units map to nodes) when M4b starts.
+
 ## M5 Link budget (L)
 Scope: link models (uplink/downlink, multiple links), static table at chosen elevation/range, pass time series, margin-constrained data rate and data volume per pass/day, attenuation tables from config (empty until supplied), link reports.
 Acceptance: textbook S-band 2 GHz/1000 km case within tolerance, ≥10 cases; margin monotonic in range; golden reports for micro-sat with two links.
@@ -40,5 +49,5 @@ Scope: comparison view (scenarios/revisions), guided wizard (orbit → first bud
 Acceptance: all three reference projects produce golden reports; wizard timed test; clean-machine install checklist signed off.
 
 ## Critical path / external inputs
-Mass budget scope change (D-033, owner request): mass, CG, inertia and phases are in v1 and sit in M2b.
+Scope changes: mass, CG, inertia and phases are in v1 and sit in M2b (D-033); thermal dissipation, limits and the steady-state node model are in v1 as M4b (D-036).
 SpaceMissionStudio sample exports (M3); margin policy and Eb/N0/attenuation sources (before M2/M5 reports are meaningful, not blocking development); confirmation of repository privacy and branch protection (M0).

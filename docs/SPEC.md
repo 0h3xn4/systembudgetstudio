@@ -1,12 +1,12 @@
 # System Budget Studio — Specification
 
-> **Scope change (owner request, D-033):** mass budgets are in version 1 (see "Mass budget" below); they were out of scope in the original text. Thermal and data storage budgets remain out of scope.
+> **Scope changes (owner requests, D-033, D-036):** mass budgets and thermal budgets (dissipation and limits, steady-state node model) are in version 1 (see "Mass budget" and "Thermal budget" below); they were out of scope in the original text. Data storage budgets remain out of scope. Transient thermal simulation is not in v1.
 >
 > Renamed from "Budget Studio" (see DECISIONS.md D-001). Technical identifiers (`budget_core`, `budget_cli`, `budget_gui`, the `budget` console script) are unchanged.
 
 ## Role and context
 
-You are a senior software engineer building **System Budget Studio**, an offline desktop application for satellite power budgets, mass budgets and RF link budgets at a small satellite company. Treat this file as the specification. Before writing code, read it completely, ask your clarifying questions in one batch, and propose an architecture and milestone plan. Where the spec is silent, choose the simplest option, record it in `docs/DECISIONS.md` with a one-line rationale, and continue. Where the spec is ambiguous in a way that affects the data model or file format, stop and ask.
+You are a senior software engineer building **System Budget Studio**, an offline desktop application for satellite power, mass, thermal and RF link budgets at a small satellite company. Treat this file as the specification. Before writing code, read it completely, ask your clarifying questions in one batch, and propose an architecture and milestone plan. Where the spec is silent, choose the simplest option, record it in `docs/DECISIONS.md` with a one-line rationale, and continue. Where the spec is ambiguous in a way that affects the data model or file format, stop and ask.
 
 ### Product goal
 
@@ -118,6 +118,12 @@ These rules come from two earlier tools built the same way (SpaceMissionStudio o
 - Mission phases (e.g. launch, beginning of life, end of life): expendables such as propellant and jettisoned equipment make mass, centre of gravity and inertia differ per phase.
 - Same reports (XLSX, PDF, DOCX), CSV/JSON export, comparison and provenance rules as the other budgets.
 
+### Thermal budget
+
+- **Dissipation and limits:** heat dissipated per unit and power mode (electrical power minus power radiated as RF or otherwise leaving the unit, from the power data), rolled up by subsystem and spacecraft mode; operating and survival temperature limits per unit; findings in the Problems list.
+- **Steady-state node model:** a small lumped network of thermal nodes (conductances, radiators with area, emissivity and absorptivity, environment heat loads) solved for equilibrium temperatures in hot and cold cases, compared with the unit limits. Environment heat flux values, optical properties and case definitions come from configuration with sources (placeholders until supplied).
+- Same reports, exports, comparison and provenance rules as the other budgets. Transient (time-domain) thermal analysis is not in v1.
+
 ### Link budget
 
 - Transmitter: RF power, line losses, antenna gain pattern (constant, table by angle, or pattern file), polarisation, frequency, modulation, coding, data rate, required Eb/N0 from a configurable table with sources.
@@ -140,7 +146,7 @@ These rules come from two earlier tools built the same way (SpaceMissionStudio o
 
 ### Out of scope for version 1
 
-- Thermal budgets and data storage budgets (reserve the model for them later). Mass budgets moved into scope (D-033).
+- Data storage budgets (reserve the model for them later), transient thermal simulation, detailed thermal modelling (finite elements, radiative view factors by ray tracing). Mass budgets (D-033) and thermal dissipation/steady-state budgets (D-036) are in scope.
 - Detailed solar cell IV-curve simulation and MPPT electronics modelling.
 - Interference analysis and regulatory filing support.
 
@@ -172,8 +178,9 @@ Propose a detailed plan in `docs/PLAN.md` roughly in this order. Each milestone 
 3. **M2 Static budgets (power and mass):** per-mode power table with margins, mass roll-up with centre of gravity, inertia and phases, Problems panel, first XLSX and PDF reports.
 4. **M3 Environment:** SpaceMissionStudio import, propagator fallback, eclipse and pass computation, scenario timeline editor.
 5. **M4 Time-domain power budget:** array and battery models, state of charge, violations, plots.
-6. **M5 Link budget:** static table, pass time series, data volume, both directions, reports.
-7. **M6 Polish:** comparison view, guided mode, user guide, installer hardening, performance pass.
+6. **M4b Thermal budget:** dissipation and limits roll-up, steady-state node model with hot and cold cases, reports.
+7. **M5 Link budget:** static table, pass time series, data volume, both directions, reports.
+8. **M6 Polish:** comparison view, guided mode, user guide, installer hardening, performance pass.
 
 ## Open decisions
 

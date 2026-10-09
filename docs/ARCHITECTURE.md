@@ -27,6 +27,7 @@ src/budget_core/      no GUI, no network imports (enforced by import-linter test
   environment/        Environment interface; SpaceMissionStudioImport; ElementsPropagator (sgp4)
   power/              static_budget.py, array.py, battery.py, timeline_solver.py (pure functions)
   mass/               static_mass.py (roll-up, margins, limits), mass_properties.py (CG, inertia, phases)
+  thermal/            dissipation.py (heat by unit/mode, limits), steady_state.py (nodal heat balance)
   link/               link_budget.py, propagation.py, passes.py, data_volume.py (pure functions)
   scenario/           timeline model, rule-based generation (downlink-on-pass, ...)
   problems/           Problem(severity, code, message, location) — shared by validate/solvers
@@ -90,6 +91,11 @@ class Environment(Protocol):
 Inputs: unit `mass_kg`, `subsystem`, `maturity`; per unit optional `mass_properties` (position of the unit's centre of mass in the spacecraft body frame, `position_m`, and inertia tensor about that centre, `inertia_kgm2`: ixx, iyy, izz, ixy, ixz, iyz); expendables per phase; mass margins and limits from config (`source` on every number).
 Equations (named in the registry, flagged `SOURCE_MISSING` until a text is cited): mass roll-up with margin `m_i (1 + margin(maturity_i))`; centre of gravity as the mass-weighted mean of positions; parallel-axis (Huygens-Steiner) theorem `I = sum(I_i + m_i (|d_i|^2 E - d_i d_i^T))` with `d_i = r_i - r_cg`.
 Solvers are pure functions over NumPy arrays and return per-phase results. CG and inertia use nominal masses; margin mass has no position, see DEVIATIONS DV-M1. Missing positions or inertias give `MASS_PROPS_MISSING` warnings and exclude the unit from CG/inertia (never a silent zero).
+
+## 6b. Thermal budget (added by D-036)
+
+Inputs: power modes (electrical power, `duty_cycle_ratio`) with a per-mode `heat_dissipation_ratio`; unit temperature limits and node assignment; `thermal/model.yaml` (nodes, conductances, radiators); `config/thermal_environment.yaml` (fluxes, optical properties, hot/cold cases) with `source` on every number.
+Solvers are pure functions: dissipation roll-up, then a steady-state nodal heat balance (conduction between nodes plus radiation to space and absorbed environment loads) solved as a nonlinear system with SciPy; results per case with margins against unit limits. Linear conduction and radiation only; no view factors beyond the user-given radiator-to-space coupling (DEVIATIONS DV-T1). Transient analysis is out of v1; the model reserves node heat capacity (`heat_capacity_j_per_k`, optional) so it can be added without a breaking change.
 
 ## 7. GUI
 

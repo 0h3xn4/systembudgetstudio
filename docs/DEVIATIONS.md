@@ -9,4 +9,6 @@ _None yet. Planned (to be confirmed when implemented):_
 - **DV-P3 (M5):** rain and gas attenuation come only from user-supplied tables; no built-in ITU-R P.618 implementation until a source is approved.
 - **DV-M1 (M2b):** margin mass is not given a position, so the centre of gravity and inertia use nominal (unmargined) masses; the margin appears only in the mass totals. Inertia margins are not applied.
 - **DV-M2 (M2b):** units are rigid bodies described by a mass, a position and an inertia tensor; flexible appendages, deployed configurations and moving parts (reaction wheel angular momentum) are not modelled; deployed and stowed states are handled only as separate phases.
+- **DV-T1 (M4b):** lumped, steady-state thermal model: isothermal nodes, linear conductances, radiation to space with user-given radiator areas and optical properties; no radiative view factors between nodes, no orbital transient, no internal convection or fluid loops.
+- **DV-T2 (M4b):** environment heat loads are user-supplied constants per case, not computed from orbit geometry (a later milestone may derive them from the M3 environment).
 
