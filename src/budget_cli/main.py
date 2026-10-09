@@ -15,11 +15,11 @@ from budget_core.io.project_loader import load_project
 from budget_core.power.static_budget import static_power_budget
 from budget_core.problems import Problem, Severity, sort_problems
 from budget_core.provenance import make_provenance
-from budget_core.reports.export import result_csv, result_json
-from budget_core.reports.power_report import build_power_report
+from budget_core.reports.run import REPORT_KINDS, power_document, write_power_reports
 from budget_core.schemas import export_schemas
+from budget_core.selftest import run_selftest
 
-REPORTS = ("xlsx", "pdf", "json", "csv")
+REPORTS = REPORT_KINDS
 
 
 def _iso_datetime(text: str) -> datetime:
@@ -66,6 +66,10 @@ def build_parser() -> argparse.ArgumentParser:
         help="Generation time, ISO 8601 (default: SOURCE_DATE_EPOCH or now).",
     )
     run.add_argument("--strict", action="store_true", help="Treat warnings as failures.")
+
+    sub.add_parser(
+        "self-test", help="Check that this installation can compute and render a budget."
+    )
 
     sch = sub.add_parser("export-schemas", help="Write the JSON Schema of every file kind.")
     sch.add_argument("out_dir", type=Path)
@@ -116,34 +120,12 @@ def _run(args: argparse.Namespace) -> int:
     project = loaded.project
     power = static_power_budget(project)
     provenance = make_provenance(project, user=args.user, generated_at=args.date)
-    document = build_power_report(project, power, provenance, loaded.problems)
+    document = power_document(project, power, provenance, loaded.problems)
     wanted = set(args.report or ["all"])
     if "all" in wanted:
         wanted = set(REPORTS)
-
     out_dir = args.out or (args.project / "results")
-    out_dir.mkdir(parents=True, exist_ok=True)
-    written: list[Path] = []
-
-    def write(name: str, data: bytes | str) -> None:
-        path = out_dir / name
-        path.write_bytes(data if isinstance(data, bytes) else data.encode("utf-8"))
-        written.append(path)
-
-    # Renderers are imported only when needed: ReportLab pulls in networking modules (never used).
-    if "xlsx" in wanted:
-        from budget_core.reports.xlsx import render_xlsx
-
-        write("power_static.xlsx", render_xlsx(document))
-    if "pdf" in wanted:
-        from budget_core.reports.pdf import render_pdf
-
-        write("power_static.pdf", render_pdf(document))
-    if "json" in wanted:
-        write("power_static.json", result_json(power, provenance))
-    if "csv" in wanted:
-        for mode in power.modes:
-            write(f"power_static_{mode.mode_id}.csv", result_csv(mode))
+    written = write_power_reports(document, power, provenance, out_dir, wanted)
 
     problems = sort_problems([*loaded.problems, *power.problems])
     warnings = _count(problems, Severity.WARNING)
@@ -160,6 +142,12 @@ def main(argv: Sequence[str] | None = None) -> int:
     args = parser.parse_args(argv)
     if args.command == "validate":
         return _validate(args)
+    if args.command == "self-test":
+        failures = run_selftest()
+        for failure in failures:
+            print(f"FAILED: {failure}")
+        print("Self-test passed." if not failures else f"{len(failures)} check(s) failed.")
+        return 1 if failures else 0
     if args.command == "run":
         return _run(args)
     if args.command == "export-schemas":

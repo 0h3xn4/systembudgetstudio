@@ -55,6 +55,18 @@ def stylesheet(t: CarbonTokens) -> str:
     QTableView, QTreeView, QLineEdit {{ background: {t.layer}; border: 1px solid {t.border}; }}
     QHeaderView::section {{ background: {t.layer}; border: none;
                             border-bottom: 1px solid {t.border}; padding: 6px; }}
+    QTabBar::tab {{ background: {t.layer}; color: {t.text_secondary}; padding: 8px 16px;
+                    border-bottom: 2px solid transparent; }}
+    QTabBar::tab:selected {{ background: {t.background}; color: {t.text};
+                             border-bottom: 2px solid {t.interactive}; }}
+    QTabWidget::pane {{ border-top: 1px solid {t.border}; }}
+    QDockWidget {{ font-weight: 600; }}
+    QDockWidget::title {{ padding: 6px; }}
+    QMenuBar, QMenu {{ background: {t.layer}; }}
+    QMenu::item:selected {{ background: {t.border}; }}
+    QTableView, QTableWidget {{ gridline-color: {t.border};
+                                alternate-background-color: {t.layer}; }}
+    QPlainTextEdit {{ background: {t.background}; border: 1px solid {t.border}; }}
     """
 
 

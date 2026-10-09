@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import sys
 from collections.abc import Sequence
+from pathlib import Path
 
 from PySide6.QtWidgets import QApplication
 
@@ -21,9 +22,18 @@ def create_app(argv: Sequence[str]) -> QApplication:
 
 
 def main() -> int:
+    args = sys.argv[1:]
+    if args == ["--self-test"]:  # Qt-free check of a packaged build
+        from budget_core.selftest import run_selftest
+
+        failures = run_selftest()
+        print("Self-test passed." if not failures else "FAILED: " + "; ".join(failures))
+        return 1 if failures else 0
     app = create_app(sys.argv)
     window = MainWindow()
     window.show()
+    if args and not args[0].startswith("-"):
+        window.open_project(Path(args[0]))
     return app.exec()
 
 
