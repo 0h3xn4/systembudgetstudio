@@ -11,9 +11,16 @@ Needs from you: confirm repo is private; apply branch protection (list provided)
 Scope: pydantic models, YAML IO, schema versions + migration framework (with a v1→v2 test migration), unit parsing/dB helpers, config files with `source` + JSON Schemas (margin policy, Eb/N0, attenuation, array, battery, converters — all placeholders), `Problem` type, `budget validate`, three reference projects' skeletons.
 Acceptance: invalid/missing/newer-schema files give located, plain-language problems; placeholders raise `CONFIG_PLACEHOLDER`; round-trip load→save is byte-identical; Hypothesis unit round-trips pass.
 
-## M2 Static power budget (M)
-Scope: static per-mode table with maturity margins and converter losses; Problems panel (GUI, wired to validate); table editors for units/modes; XLSX and PDF reports with provenance and assumptions list; reproducible-output mode.
-Acceptance: ≥10 hand-calculated cases pass; XLSX/PDF golden tests byte-identical on re-run; GUI flow: open example → edit unit → Problems update → export.
+## M2 Static budgets: power and mass (L, two PRs)
+Scope: shared margin handling; Problems panel (GUI, wired to validate and the budgets); table editors for units/modes; XLSX and PDF reports with provenance and assumptions list; reproducible-output mode; loader packaged in the GUI bundle (pint data, hidden imports).
+- **M2a Power (first PR):** static per-mode table with maturity margins, converter and distribution losses, effective average = `avg_power_w * duty_cycle_ratio` (D-024).
+- **M2b Mass (second PR, same milestone):**
+  - Model: unit `mass_properties` (position in the spacecraft frame, inertia tensor about the unit's own centre), optional `phases` on units, `expendables/*.yaml` (propellant and consumables per phase), `mission_phases` and the body-frame definition in `spacecraft.yaml`, `config/mass_limits.yaml` (limits with sources). `margin_policy` goes to schema v2 with a migration: `margin_ratio` becomes `power_margin_ratio`, and a placeholder `mass_margin_ratio` is added per class (first real use of the migration framework).
+  - Solver (pure functions): roll-up by subsystem and total with margins; centre of gravity `r_cg = sum(m_i r_i) / sum(m_i)` on nominal masses; inertia about the CG with the parallel-axis (Huygens-Steiner) theorem; per-phase results; limit checks.
+  - Problems: `MASS_LIMIT_EXCEEDED`, `MASS_PROPS_MISSING`, `PHASE_UNKNOWN`, plus placeholder warnings.
+  - Reports: mass table by subsystem, unit list, CG and inertia per phase.
+Acceptance: at least 10 hand-calculated cases per solver (power table; mass roll-up; CG of point masses; inertia by parallel axis, e.g. two equal masses on an axis; phase changes) with stated tolerances; Hypothesis properties (adding mass never lowers the total, CG lies inside the bounding box of the unit positions, inertia tensor symmetric and positive semi-definite); XLSX/PDF golden tests byte-identical on re-run; GUI flow: open example, edit a unit, Problems update, export; `pip install` of the bundle still starts and can validate a project.
+Needs from you: margin policy and mass margin values (placeholders otherwise), mass limits with sources, confirmation of the body-frame convention (axes and origin) when M2b starts.
 
 ## M3 Environment (L)
 Scope: `Environment` interface; `ElementsPropagator` (TLE/Keplerian, shadow model, passes); `SpaceMissionStudioImport` (needs sample files); scenario model, rule-based generation (downlink on pass); timeline editor.
@@ -33,4 +40,5 @@ Scope: comparison view (scenarios/revisions), guided wizard (orbit → first bud
 Acceptance: all three reference projects produce golden reports; wizard timed test; clean-machine install checklist signed off.
 
 ## Critical path / external inputs
+Mass budget scope change (D-033, owner request): mass, CG, inertia and phases are in v1 and sit in M2b.
 SpaceMissionStudio sample exports (M3); margin policy and Eb/N0/attenuation sources (before M2/M5 reports are meaningful, not blocking development); confirmation of repository privacy and branch protection (M0).

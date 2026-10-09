@@ -26,6 +26,7 @@ src/budget_core/      no GUI, no network imports (enforced by import-linter test
   config/             schemas (*.schema.json) and loaders; every number carries `source`
   environment/        Environment interface; SpaceMissionStudioImport; ElementsPropagator (sgp4)
   power/              static_budget.py, array.py, battery.py, timeline_solver.py (pure functions)
+  mass/               static_mass.py (roll-up, margins, limits), mass_properties.py (CG, inertia, phases)
   link/               link_budget.py, propagation.py, passes.py, data_volume.py (pure functions)
   scenario/           timeline model, rule-based generation (downlink-on-pass, ...)
   problems/           Problem(severity, code, message, location) — shared by validate/solvers
@@ -83,6 +84,12 @@ class Environment(Protocol):
 ## 6. Solvers (summary)
 
 **Power static**: per-mode sum over units of `avg_power_w * (1+margin(maturity))` → converter-efficiency-adjusted bus load → totals, peak. **Power time domain**: scenario timeline → per-step load; array output `= n_cells · A_cell · η · G · cosθ · (1 + α(T−T_ref)) · (1−L_degr) · (1−L_pack) · (1−L_harness)` (constants from config, sourced); battery energy integration with charge/discharge efficiency, DoD limit per phase; violations as intervals with timestamps. Vectorised over steps; eclipse/mode changes handled by segment arithmetic so a 604,800-step week stays < 10 s. **Link**: `Eb/N0 = EIRP − L_path − L_other + G/T − 10log10(k) − 10log10(R_b)` (Friis; ECSS-E-ST-50-05C usage flagged), margin vs table value (from config), per-time-step over passes, data volume from margin-constrained rate selection. All formulae named in the registry with sources or `SOURCE_MISSING`.
+
+## 6a. Mass budget (added by D-033)
+
+Inputs: unit `mass_kg`, `subsystem`, `maturity`; per unit optional `mass_properties` (position of the unit's centre of mass in the spacecraft body frame, `position_m`, and inertia tensor about that centre, `inertia_kgm2`: ixx, iyy, izz, ixy, ixz, iyz); expendables per phase; mass margins and limits from config (`source` on every number).
+Equations (named in the registry, flagged `SOURCE_MISSING` until a text is cited): mass roll-up with margin `m_i (1 + margin(maturity_i))`; centre of gravity as the mass-weighted mean of positions; parallel-axis (Huygens-Steiner) theorem `I = sum(I_i + m_i (|d_i|^2 E - d_i d_i^T))` with `d_i = r_i - r_cg`.
+Solvers are pure functions over NumPy arrays and return per-phase results. CG and inertia use nominal masses; margin mass has no position, see DEVIATIONS DV-M1. Missing positions or inertias give `MASS_PROPS_MISSING` warnings and exclude the unit from CG/inertia (never a silent zero).
 
 ## 7. GUI
 

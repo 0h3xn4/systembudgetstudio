@@ -1,10 +1,12 @@
 # System Budget Studio — Specification
 
+> **Scope change (owner request, D-033):** mass budgets are in version 1 (see "Mass budget" below); they were out of scope in the original text. Thermal and data storage budgets remain out of scope.
+>
 > Renamed from "Budget Studio" (see DECISIONS.md D-001). Technical identifiers (`budget_core`, `budget_cli`, `budget_gui`, the `budget` console script) are unchanged.
 
 ## Role and context
 
-You are a senior software engineer building **System Budget Studio**, an offline desktop application for satellite power budgets and RF link budgets at a small satellite company. Treat this file as the specification. Before writing code, read it completely, ask your clarifying questions in one batch, and propose an architecture and milestone plan. Where the spec is silent, choose the simplest option, record it in `docs/DECISIONS.md` with a one-line rationale, and continue. Where the spec is ambiguous in a way that affects the data model or file format, stop and ask.
+You are a senior software engineer building **System Budget Studio**, an offline desktop application for satellite power budgets, mass budgets and RF link budgets at a small satellite company. Treat this file as the specification. Before writing code, read it completely, ask your clarifying questions in one batch, and propose an architecture and milestone plan. Where the spec is silent, choose the simplest option, record it in `docs/DECISIONS.md` with a one-line rationale, and continue. Where the spec is ambiguous in a way that affects the data model or file format, stop and ask.
 
 ### Product goal
 
@@ -108,6 +110,14 @@ These rules come from two earlier tools built the same way (SpaceMissionStudio o
 - Results: time series of generation, consumption, battery state of charge and bus margins; summary tables of average and peak power per mode with margins; a list of violations (depth of discharge exceeded, negative energy balance over an orbit, peak power above limit) with time stamps and jump links.
 - Static table mode: a classic per-mode power budget with margins for early phase work, without any orbit.
 
+### Mass budget
+
+- Unit masses (`mass_kg` per unit, already in the unit files) rolled up by subsystem and for the spacecraft, with maturity-based mass margins and a system margin read from configuration (placeholders until supplied).
+- Mass limits (e.g. launch mass, per requirement) in configuration with sources; violations in the Problems list.
+- Centre of gravity from unit positions in the spacecraft body frame; moments and products of inertia from unit inertia tensors with the parallel-axis theorem.
+- Mission phases (e.g. launch, beginning of life, end of life): expendables such as propellant and jettisoned equipment make mass, centre of gravity and inertia differ per phase.
+- Same reports (XLSX, PDF, DOCX), CSV/JSON export, comparison and provenance rules as the other budgets.
+
 ### Link budget
 
 - Transmitter: RF power, line losses, antenna gain pattern (constant, table by angle, or pattern file), polarisation, frequency, modulation, coding, data rate, required Eb/N0 from a configurable table with sources.
@@ -130,7 +140,7 @@ These rules come from two earlier tools built the same way (SpaceMissionStudio o
 
 ### Out of scope for version 1
 
-- Thermal budgets, mass budgets, data storage budgets (reserve the model for them later).
+- Thermal budgets and data storage budgets (reserve the model for them later). Mass budgets moved into scope (D-033).
 - Detailed solar cell IV-curve simulation and MPPT electronics modelling.
 - Interference analysis and regulatory filing support.
 
@@ -159,7 +169,7 @@ Propose a detailed plan in `docs/PLAN.md` roughly in this order. Each milestone 
 
 1. **M0 Foundation:** repository (see Repository setup), build, CI, packaging of an empty Carbon-styled app into an offline installer, offline test, SBOM in the dev extra only.
 2. **M1 Model and units:** spacecraft, unit and mode files, unit-aware fields, schema version, config files with sources, `budget validate`.
-3. **M2 Static power budget:** per-mode table with margins, Problems panel, first XLSX and PDF report.
+3. **M2 Static budgets (power and mass):** per-mode power table with margins, mass roll-up with centre of gravity, inertia and phases, Problems panel, first XLSX and PDF reports.
 4. **M3 Environment:** SpaceMissionStudio import, propagator fallback, eclipse and pass computation, scenario timeline editor.
 5. **M4 Time-domain power budget:** array and battery models, state of charge, violations, plots.
 6. **M5 Link budget:** static table, pass time series, data volume, both directions, reports.
