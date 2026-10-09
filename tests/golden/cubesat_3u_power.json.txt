@@ -1,0 +1,967 @@
+{
+  "assumptions": [
+    {
+      "file": "config/margin_policy.yaml",
+      "name": "Margin, maturity class class_a",
+      "path": "classes.class_a.margin_ratio",
+      "placeholder": true,
+      "source": "TBD",
+      "unit": "ratio",
+      "value": null
+    },
+    {
+      "file": "config/margin_policy.yaml",
+      "name": "Margin, maturity class class_b",
+      "path": "classes.class_b.margin_ratio",
+      "placeholder": true,
+      "source": "TBD",
+      "unit": "ratio",
+      "value": null
+    },
+    {
+      "file": "config/margin_policy.yaml",
+      "name": "Margin, maturity class class_c",
+      "path": "classes.class_c.margin_ratio",
+      "placeholder": true,
+      "source": "TBD",
+      "unit": "ratio",
+      "value": null
+    },
+    {
+      "file": "config/margin_policy.yaml",
+      "name": "System margin",
+      "path": "system_margin_ratio",
+      "placeholder": true,
+      "source": "TBD",
+      "unit": "ratio",
+      "value": null
+    },
+    {
+      "file": "config/power_config.yaml",
+      "name": "Distribution loss",
+      "path": "distribution_loss_ratio",
+      "placeholder": true,
+      "source": "TBD",
+      "unit": "ratio",
+      "value": null
+    },
+    {
+      "file": "config/power_config.yaml",
+      "name": "Converter efficiency, bus main",
+      "path": "converter_efficiency_ratio.main",
+      "placeholder": true,
+      "source": "TBD",
+      "unit": "ratio",
+      "value": null
+    }
+  ],
+  "modes": [
+    {
+      "average": {
+        "load_w": 1.5,
+        "source_margined_w": null,
+        "source_w": null,
+        "system_margined_w": null,
+        "unit_margined_w": null
+      },
+      "buses": [
+        {
+          "average": {
+            "load_w": 1.5,
+            "source_margined_w": null,
+            "source_w": null,
+            "system_margined_w": null,
+            "unit_margined_w": null
+          },
+          "bus": "main",
+          "converter_efficiency_ratio": null,
+          "peak": {
+            "load_w": 2.45,
+            "source_margined_w": null,
+            "source_w": null,
+            "system_margined_w": null,
+            "unit_margined_w": null
+          }
+        }
+      ],
+      "mode_id": "charging",
+      "mode_name": "Charging",
+      "peak": {
+        "load_w": 2.45,
+        "source_margined_w": null,
+        "source_w": null,
+        "system_margined_w": null,
+        "unit_margined_w": null
+      },
+      "rows": [
+        {
+          "avg_power_w": 0.6,
+          "bus": "main",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.6,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 1.0,
+          "power_mode": "charging",
+          "subsystem": "ADCS",
+          "unit_id": "adcs",
+          "unit_name": "ADCS module"
+        },
+        {
+          "avg_power_w": 0.0,
+          "bus": "main",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_c",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "PL",
+          "unit_id": "camera",
+          "unit_name": "Camera payload"
+        },
+        {
+          "avg_power_w": 0.15,
+          "bus": "main",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.15,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_a",
+          "peak_power_w": 0.25,
+          "power_mode": "charging",
+          "subsystem": "EPS",
+          "unit_id": "eps",
+          "unit_name": "Power board"
+        },
+        {
+          "avg_power_w": 0.25,
+          "bus": "main",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.25,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 0.4,
+          "power_mode": "charging",
+          "subsystem": "ADCS",
+          "unit_id": "gnss",
+          "unit_name": "GNSS receiver"
+        },
+        {
+          "avg_power_w": 0.3,
+          "bus": "main",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.3,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_a",
+          "peak_power_w": 0.5,
+          "power_mode": "charging",
+          "subsystem": "DH",
+          "unit_id": "obc",
+          "unit_name": "On-board computer"
+        },
+        {
+          "avg_power_w": 0.2,
+          "bus": "main",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.2,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 0.3,
+          "power_mode": "charging",
+          "subsystem": "TTC",
+          "unit_id": "radio",
+          "unit_name": "UHF/VHF radio"
+        }
+      ],
+      "subsystems": [
+        {
+          "effective_w": 0.85,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 1.4,
+          "subsystem": "ADCS"
+        },
+        {
+          "effective_w": 0.3,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 0.5,
+          "subsystem": "DH"
+        },
+        {
+          "effective_w": 0.15,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 0.25,
+          "subsystem": "EPS"
+        },
+        {
+          "effective_w": 0.0,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 0.0,
+          "subsystem": "PL"
+        },
+        {
+          "effective_w": 0.2,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 0.3,
+          "subsystem": "TTC"
+        }
+      ]
+    },
+    {
+      "average": {
+        "load_w": 2.8,
+        "source_margined_w": null,
+        "source_w": null,
+        "system_margined_w": null,
+        "unit_margined_w": null
+      },
+      "buses": [
+        {
+          "average": {
+            "load_w": 2.8,
+            "source_margined_w": null,
+            "source_w": null,
+            "system_margined_w": null,
+            "unit_margined_w": null
+          },
+          "bus": "main",
+          "converter_efficiency_ratio": null,
+          "peak": {
+            "load_w": 6.95,
+            "source_margined_w": null,
+            "source_w": null,
+            "system_margined_w": null,
+            "unit_margined_w": null
+          }
+        }
+      ],
+      "mode_id": "downlink",
+      "mode_name": "Downlink",
+      "peak": {
+        "load_w": 6.95,
+        "source_margined_w": null,
+        "source_w": null,
+        "system_margined_w": null,
+        "unit_margined_w": null
+      },
+      "rows": [
+        {
+          "avg_power_w": 0.9,
+          "bus": "main",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.9,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 1.4,
+          "power_mode": "downlink",
+          "subsystem": "ADCS",
+          "unit_id": "adcs",
+          "unit_name": "ADCS module"
+        },
+        {
+          "avg_power_w": 0.0,
+          "bus": "main",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_c",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "PL",
+          "unit_id": "camera",
+          "unit_name": "Camera payload"
+        },
+        {
+          "avg_power_w": 0.15,
+          "bus": "main",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.15,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_a",
+          "peak_power_w": 0.25,
+          "power_mode": "downlink",
+          "subsystem": "EPS",
+          "unit_id": "eps",
+          "unit_name": "Power board"
+        },
+        {
+          "avg_power_w": 0.25,
+          "bus": "main",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.25,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 0.4,
+          "power_mode": "downlink",
+          "subsystem": "ADCS",
+          "unit_id": "gnss",
+          "unit_name": "GNSS receiver"
+        },
+        {
+          "avg_power_w": 0.6,
+          "bus": "main",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.6,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_a",
+          "peak_power_w": 0.9,
+          "power_mode": "downlink",
+          "subsystem": "DH",
+          "unit_id": "obc",
+          "unit_name": "On-board computer"
+        },
+        {
+          "avg_power_w": 1.8,
+          "bus": "main",
+          "duty_cycle_ratio": 0.5,
+          "effective_power_w": 0.9,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 4.0,
+          "power_mode": "downlink",
+          "subsystem": "TTC",
+          "unit_id": "radio",
+          "unit_name": "UHF/VHF radio"
+        }
+      ],
+      "subsystems": [
+        {
+          "effective_w": 1.15,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 1.7999999999999998,
+          "subsystem": "ADCS"
+        },
+        {
+          "effective_w": 0.6,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 0.9,
+          "subsystem": "DH"
+        },
+        {
+          "effective_w": 0.15,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 0.25,
+          "subsystem": "EPS"
+        },
+        {
+          "effective_w": 0.0,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 0.0,
+          "subsystem": "PL"
+        },
+        {
+          "effective_w": 0.9,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 4.0,
+          "subsystem": "TTC"
+        }
+      ]
+    },
+    {
+      "average": {
+        "load_w": 3.84,
+        "source_margined_w": null,
+        "source_w": null,
+        "system_margined_w": null,
+        "unit_margined_w": null
+      },
+      "buses": [
+        {
+          "average": {
+            "load_w": 3.84,
+            "source_margined_w": null,
+            "source_w": null,
+            "system_margined_w": null,
+            "unit_margined_w": null
+          },
+          "bus": "main",
+          "converter_efficiency_ratio": null,
+          "peak": {
+            "load_w": 6.95,
+            "source_margined_w": null,
+            "source_w": null,
+            "system_margined_w": null,
+            "unit_margined_w": null
+          }
+        }
+      ],
+      "mode_id": "imaging",
+      "mode_name": "Imaging",
+      "peak": {
+        "load_w": 6.95,
+        "source_margined_w": null,
+        "source_w": null,
+        "system_margined_w": null,
+        "unit_margined_w": null
+      },
+      "rows": [
+        {
+          "avg_power_w": 1.1,
+          "bus": "main",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 1.1,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 1.8,
+          "power_mode": "imaging",
+          "subsystem": "ADCS",
+          "unit_id": "adcs",
+          "unit_name": "ADCS module"
+        },
+        {
+          "avg_power_w": 2.4,
+          "bus": "main",
+          "duty_cycle_ratio": 0.6,
+          "effective_power_w": 1.44,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_c",
+          "peak_power_w": 3.2,
+          "power_mode": "imaging",
+          "subsystem": "PL",
+          "unit_id": "camera",
+          "unit_name": "Camera payload"
+        },
+        {
+          "avg_power_w": 0.15,
+          "bus": "main",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.15,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_a",
+          "peak_power_w": 0.25,
+          "power_mode": "imaging",
+          "subsystem": "EPS",
+          "unit_id": "eps",
+          "unit_name": "Power board"
+        },
+        {
+          "avg_power_w": 0.25,
+          "bus": "main",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.25,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 0.4,
+          "power_mode": "imaging",
+          "subsystem": "ADCS",
+          "unit_id": "gnss",
+          "unit_name": "GNSS receiver"
+        },
+        {
+          "avg_power_w": 0.7,
+          "bus": "main",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.7,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_a",
+          "peak_power_w": 1.0,
+          "power_mode": "imaging",
+          "subsystem": "DH",
+          "unit_id": "obc",
+          "unit_name": "On-board computer"
+        },
+        {
+          "avg_power_w": 0.2,
+          "bus": "main",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.2,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 0.3,
+          "power_mode": "imaging",
+          "subsystem": "TTC",
+          "unit_id": "radio",
+          "unit_name": "UHF/VHF radio"
+        }
+      ],
+      "subsystems": [
+        {
+          "effective_w": 1.35,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 2.2,
+          "subsystem": "ADCS"
+        },
+        {
+          "effective_w": 0.7,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 1.0,
+          "subsystem": "DH"
+        },
+        {
+          "effective_w": 0.15,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 0.25,
+          "subsystem": "EPS"
+        },
+        {
+          "effective_w": 1.44,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 3.2,
+          "subsystem": "PL"
+        },
+        {
+          "effective_w": 0.2,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 0.3,
+          "subsystem": "TTC"
+        }
+      ]
+    },
+    {
+      "average": {
+        "load_w": 2.0,
+        "source_margined_w": null,
+        "source_w": null,
+        "system_margined_w": null,
+        "unit_margined_w": null
+      },
+      "buses": [
+        {
+          "average": {
+            "load_w": 2.0,
+            "source_margined_w": null,
+            "source_w": null,
+            "system_margined_w": null,
+            "unit_margined_w": null
+          },
+          "bus": "main",
+          "converter_efficiency_ratio": null,
+          "peak": {
+            "load_w": 3.15,
+            "source_margined_w": null,
+            "source_w": null,
+            "system_margined_w": null,
+            "unit_margined_w": null
+          }
+        }
+      ],
+      "mode_id": "nominal",
+      "mode_name": "Nominal",
+      "peak": {
+        "load_w": 3.15,
+        "source_margined_w": null,
+        "source_w": null,
+        "system_margined_w": null,
+        "unit_margined_w": null
+      },
+      "rows": [
+        {
+          "avg_power_w": 0.9,
+          "bus": "main",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.9,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 1.4,
+          "power_mode": "nominal",
+          "subsystem": "ADCS",
+          "unit_id": "adcs",
+          "unit_name": "ADCS module"
+        },
+        {
+          "avg_power_w": 0.0,
+          "bus": "main",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_c",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "PL",
+          "unit_id": "camera",
+          "unit_name": "Camera payload"
+        },
+        {
+          "avg_power_w": 0.15,
+          "bus": "main",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.15,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_a",
+          "peak_power_w": 0.25,
+          "power_mode": "nominal",
+          "subsystem": "EPS",
+          "unit_id": "eps",
+          "unit_name": "Power board"
+        },
+        {
+          "avg_power_w": 0.25,
+          "bus": "main",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.25,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 0.4,
+          "power_mode": "nominal",
+          "subsystem": "ADCS",
+          "unit_id": "gnss",
+          "unit_name": "GNSS receiver"
+        },
+        {
+          "avg_power_w": 0.5,
+          "bus": "main",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.5,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_a",
+          "peak_power_w": 0.8,
+          "power_mode": "nominal",
+          "subsystem": "DH",
+          "unit_id": "obc",
+          "unit_name": "On-board computer"
+        },
+        {
+          "avg_power_w": 0.2,
+          "bus": "main",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.2,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 0.3,
+          "power_mode": "nominal",
+          "subsystem": "TTC",
+          "unit_id": "radio",
+          "unit_name": "UHF/VHF radio"
+        }
+      ],
+      "subsystems": [
+        {
+          "effective_w": 1.15,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 1.7999999999999998,
+          "subsystem": "ADCS"
+        },
+        {
+          "effective_w": 0.5,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 0.8,
+          "subsystem": "DH"
+        },
+        {
+          "effective_w": 0.15,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 0.25,
+          "subsystem": "EPS"
+        },
+        {
+          "effective_w": 0.0,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 0.0,
+          "subsystem": "PL"
+        },
+        {
+          "effective_w": 0.2,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 0.3,
+          "subsystem": "TTC"
+        }
+      ]
+    },
+    {
+      "average": {
+        "load_w": 1.0,
+        "source_margined_w": null,
+        "source_w": null,
+        "system_margined_w": null,
+        "unit_margined_w": null
+      },
+      "buses": [
+        {
+          "average": {
+            "load_w": 1.0,
+            "source_margined_w": null,
+            "source_w": null,
+            "system_margined_w": null,
+            "unit_margined_w": null
+          },
+          "bus": "main",
+          "converter_efficiency_ratio": null,
+          "peak": {
+            "load_w": 1.6,
+            "source_margined_w": null,
+            "source_w": null,
+            "system_margined_w": null,
+            "unit_margined_w": null
+          }
+        }
+      ],
+      "mode_id": "safe",
+      "mode_name": "Safe",
+      "peak": {
+        "load_w": 1.6,
+        "source_margined_w": null,
+        "source_w": null,
+        "system_margined_w": null,
+        "unit_margined_w": null
+      },
+      "rows": [
+        {
+          "avg_power_w": 0.4,
+          "bus": "main",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.4,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 0.6,
+          "power_mode": "safe",
+          "subsystem": "ADCS",
+          "unit_id": "adcs",
+          "unit_name": "ADCS module"
+        },
+        {
+          "avg_power_w": 0.0,
+          "bus": "main",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_c",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "PL",
+          "unit_id": "camera",
+          "unit_name": "Camera payload"
+        },
+        {
+          "avg_power_w": 0.1,
+          "bus": "main",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.1,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_a",
+          "peak_power_w": 0.2,
+          "power_mode": "safe",
+          "subsystem": "EPS",
+          "unit_id": "eps",
+          "unit_name": "Power board"
+        },
+        {
+          "avg_power_w": 0.0,
+          "bus": "main",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "ADCS",
+          "unit_id": "gnss",
+          "unit_name": "GNSS receiver"
+        },
+        {
+          "avg_power_w": 0.3,
+          "bus": "main",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.3,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_a",
+          "peak_power_w": 0.5,
+          "power_mode": "safe",
+          "subsystem": "DH",
+          "unit_id": "obc",
+          "unit_name": "On-board computer"
+        },
+        {
+          "avg_power_w": 0.2,
+          "bus": "main",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.2,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 0.3,
+          "power_mode": "safe",
+          "subsystem": "TTC",
+          "unit_id": "radio",
+          "unit_name": "UHF/VHF radio"
+        }
+      ],
+      "subsystems": [
+        {
+          "effective_w": 0.4,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 0.6,
+          "subsystem": "ADCS"
+        },
+        {
+          "effective_w": 0.3,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 0.5,
+          "subsystem": "DH"
+        },
+        {
+          "effective_w": 0.1,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 0.2,
+          "subsystem": "EPS"
+        },
+        {
+          "effective_w": 0.0,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 0.0,
+          "subsystem": "PL"
+        },
+        {
+          "effective_w": 0.2,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 0.3,
+          "subsystem": "TTC"
+        }
+      ]
+    }
+  ],
+  "problems": [
+    {
+      "code": "RESULT_INCOMPLETE",
+      "file": "config/margin_policy.yaml",
+      "hint": "Replace the placeholder with a sourced value; results that need it show n/a.",
+      "line": null,
+      "message": "The margin of maturity class 'class_a' is a placeholder.",
+      "path": "classes.class_a.margin_ratio",
+      "severity": "warning"
+    },
+    {
+      "code": "RESULT_INCOMPLETE",
+      "file": "config/margin_policy.yaml",
+      "hint": "Replace the placeholder with a sourced value; results that need it show n/a.",
+      "line": null,
+      "message": "The margin of maturity class 'class_b' is a placeholder.",
+      "path": "classes.class_b.margin_ratio",
+      "severity": "warning"
+    },
+    {
+      "code": "RESULT_INCOMPLETE",
+      "file": "config/margin_policy.yaml",
+      "hint": "Replace the placeholder with a sourced value; results that need it show n/a.",
+      "line": null,
+      "message": "The margin of maturity class 'class_c' is a placeholder.",
+      "path": "classes.class_c.margin_ratio",
+      "severity": "warning"
+    },
+    {
+      "code": "RESULT_INCOMPLETE",
+      "file": "config/margin_policy.yaml",
+      "hint": "Replace the placeholder with a sourced value; results that need it show n/a.",
+      "line": null,
+      "message": "The system margin is a placeholder.",
+      "path": "system_margin_ratio",
+      "severity": "warning"
+    },
+    {
+      "code": "RESULT_INCOMPLETE",
+      "file": "config/power_config.yaml",
+      "hint": "Replace the placeholder with a sourced value; results that need it show n/a.",
+      "line": null,
+      "message": "The distribution loss is a placeholder.",
+      "path": "distribution_loss_ratio",
+      "severity": "warning"
+    },
+    {
+      "code": "RESULT_INCOMPLETE",
+      "file": "config/power_config.yaml",
+      "hint": "Replace the placeholder with a sourced value; results that need it show n/a.",
+      "line": null,
+      "message": "The converter efficiency of bus 'main' is a placeholder.",
+      "path": "converter_efficiency_ratio.main",
+      "severity": "warning"
+    }
+  ],
+  "provenance": {
+    "generated": "2026-01-02T03:04:05Z",
+    "libraries": [
+      [
+        "pinned",
+        "for-golden-tests"
+      ]
+    ],
+    "project_name": "Example 3U CubeSat",
+    "project_revision": "1",
+    "python_version": "3.x",
+    "scenario": "static (no scenario)",
+    "tool": "System Budget Studio",
+    "tool_version": "0.1.0",
+    "user": "Golden User"
+  }
+}

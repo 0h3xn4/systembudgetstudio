@@ -3,10 +3,11 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from pathlib import Path
 
 from PySide6.QtGui import QFont, QFontDatabase
 from PySide6.QtWidgets import QApplication
+
+from budget_core.assets import assets_dir
 
 
 @dataclass(frozen=True)
@@ -31,15 +32,6 @@ _FONT_FILES = (
     "IBMPlexMono-Regular.ttf",
     "IBMPlexMono-SemiBold.ttf",
 )
-
-
-def assets_dir() -> Path:
-    """Locate bundled assets: installed wheel, source checkout or PyInstaller bundle."""
-    here = Path(__file__).resolve().parent
-    for candidate in (here / "assets", here.parent.parent / "assets"):
-        if (candidate / "fonts").is_dir():
-            return candidate
-    raise FileNotFoundError("Bundled assets folder not found; the installation is incomplete.")
 
 
 def load_fonts() -> list[str]:

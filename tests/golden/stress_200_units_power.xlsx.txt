@@ -1,0 +1,133 @@
+## sheet Summary rows=11 cols=8
+1: 'Power budget (static): Example stress case (200 units)' |  |  |  |  |  |  | 
+2: 'INCOMPLETE: some inputs are placeholders (source TBD or missing). Entries marked n/a depend on them and are not computed. Do not use this report as evidence until the placeholders are replaced with sourced values.' |  |  |  |  |  |  | 
+4: 'Power by spacecraft mode' |  |  |  |  |  |  | 
+5: 'Mode' | 'Average load (W)' | 'Average, unit margins (W)' | 'Average, system margin (W)' | 'Average at source (W)' | 'Average at source, with margins (W)' | 'Peak load (W)' | 'Peak at source, with margins (W)'
+6: 'Charging' | 277.2625 | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 496.979 | 'n/a'
+7: 'Downlink' | 275.9775 | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 497.455 | 'n/a'
+8: 'Imaging' | 275.8125 | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 496.686 | 'n/a'
+9: 'Nominal' | 277.025 | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 496.598 | 'n/a'
+10: 'Safe' | 275.9575 | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 497.183 | 'n/a'
+11: 'Average = sum of unit power x duty cycle. Peak = sum of unit peak powers. Source = after converter and distribution losses.' |  |  |  |  |  |  | 
+## sheet Mode charging rows=226 cols=11
+1: 'Units in mode Charging' |  |  |  |  |  |  |  |  |  | 
+2: 'Unit' | 'Name' | 'Subsystem' | 'Bus' | 'Power mode' | 'Average (W)' | 'Duty' | 'Effective (W)' | 'Margin' | 'With margin (W)' | 'Peak (W)'
+3: 'unit_000' | 'Stress unit 000' | 'DH' | 'aux' | 'charging' | 0.28 | 1 | 0.28 | 'n/a' | 'n/a' | 0.42
+4: 'unit_001' | 'Stress unit 001' | 'EPS' | 'main' | 'charging' | 0.35 | 1 | 0.35 | 'n/a' | 'n/a' | 0.525
+5: 'unit_002' | 'Stress unit 002' | 'AOCS' | 'main' | 'charging' | 0.55 | 0.5 | 0.275 | 'n/a' | 'n/a' | 0.825
+6: 'unit_003' | 'Stress unit 003' | 'TTC' | 'main' | 'charging' | 0.78 | 1 | 0.78 | 'n/a' | 'n/a' | 1.17
+7: 'unit_004' | 'Stress unit 004' | 'PL' | 'aux' | 'charging' | 1.04 | 1 | 1.04 | 'n/a' | 'n/a' | 1.56
+8: 'unit_005' | 'Stress unit 005' | 'THERM' | 'main' | 'charging' | 1.33 | 0.5 | 0.665 | 'n/a' | 'n/a' | 1.995
+9: 'unit_006' | 'Stress unit 006' | 'PL-DATA' | 'main' | 'charging' | 1.1 | 1 | 1.1 | 'n/a' | 'n/a' | 1.65
+10: 'unit_007' | 'Stress unit 007' | 'HARNESS' | 'main' | 'charging' | 1.375 | 1 | 1.375 | 'n/a' | 'n/a' | 2.062
+11: 'unit_008' | 'Stress unit 008' | 'DH' | 'aux' | 'charging' | 1.68 | 0.5 | 0.84 | 'n/a' | 'n/a' | 2.52
+12: 'unit_009' | 'Stress unit 009' | 'EPS' | 'main' | 'charging' | 2.015 | 1 | 2.015 | 'n/a' | 'n/a' | 3.022
+13: 'unit_010' | 'Stress unit 010' | 'AOCS' | 'main' | 'charging' | 2.38 | 1 | 2.38 | 'n/a' | 'n/a' | 3.57
+14: 'unit_011' | 'Stress unit 011' | 'TTC' | 'main' | 'charging' | 1.85 | 0.5 | 0.925 | 'n/a' | 'n/a' | 2.775
+...
+## sheet Mode downlink rows=226 cols=11
+1: 'Units in mode Downlink' |  |  |  |  |  |  |  |  |  | 
+2: 'Unit' | 'Name' | 'Subsystem' | 'Bus' | 'Power mode' | 'Average (W)' | 'Duty' | 'Effective (W)' | 'Margin' | 'With margin (W)' | 'Peak (W)'
+3: 'unit_000' | 'Stress unit 000' | 'DH' | 'aux' | 'downlink' | 0.26 | 0.5 | 0.13 | 'n/a' | 'n/a' | 0.39
+4: 'unit_001' | 'Stress unit 001' | 'EPS' | 'main' | 'downlink' | 0.49 | 1 | 0.49 | 'n/a' | 'n/a' | 0.735
+5: 'unit_002' | 'Stress unit 002' | 'AOCS' | 'main' | 'downlink' | 0.5 | 1 | 0.5 | 'n/a' | 'n/a' | 0.75
+6: 'unit_003' | 'Stress unit 003' | 'TTC' | 'main' | 'downlink' | 0.715 | 0.5 | 0.3575 | 'n/a' | 'n/a' | 1.073
+7: 'unit_004' | 'Stress unit 004' | 'PL' | 'aux' | 'downlink' | 0.96 | 1 | 0.96 | 'n/a' | 'n/a' | 1.44
+8: 'unit_005' | 'Stress unit 005' | 'THERM' | 'main' | 'downlink' | 1.235 | 1 | 1.235 | 'n/a' | 'n/a' | 1.853
+9: 'unit_006' | 'Stress unit 006' | 'PL-DATA' | 'main' | 'downlink' | 1.54 | 0.5 | 0.77 | 'n/a' | 'n/a' | 2.31
+10: 'unit_007' | 'Stress unit 007' | 'HARNESS' | 'main' | 'downlink' | 1.25 | 1 | 1.25 | 'n/a' | 'n/a' | 1.875
+11: 'unit_008' | 'Stress unit 008' | 'DH' | 'aux' | 'downlink' | 1.54 | 1 | 1.54 | 'n/a' | 'n/a' | 2.31
+12: 'unit_009' | 'Stress unit 009' | 'EPS' | 'main' | 'downlink' | 1.86 | 0.5 | 0.93 | 'n/a' | 'n/a' | 2.79
+13: 'unit_010' | 'Stress unit 010' | 'AOCS' | 'main' | 'downlink' | 2.21 | 1 | 2.21 | 'n/a' | 'n/a' | 3.315
+14: 'unit_011' | 'Stress unit 011' | 'TTC' | 'main' | 'downlink' | 2.59 | 1 | 2.59 | 'n/a' | 'n/a' | 3.885
+...
+## sheet Mode imaging rows=226 cols=11
+1: 'Units in mode Imaging' |  |  |  |  |  |  |  |  |  | 
+2: 'Unit' | 'Name' | 'Subsystem' | 'Bus' | 'Power mode' | 'Average (W)' | 'Duty' | 'Effective (W)' | 'Margin' | 'With margin (W)' | 'Peak (W)'
+3: 'unit_000' | 'Stress unit 000' | 'DH' | 'aux' | 'imaging' | 0.24 | 1 | 0.24 | 'n/a' | 'n/a' | 0.36
+4: 'unit_001' | 'Stress unit 001' | 'EPS' | 'main' | 'imaging' | 0.455 | 0.5 | 0.2275 | 'n/a' | 'n/a' | 0.682
+5: 'unit_002' | 'Stress unit 002' | 'AOCS' | 'main' | 'imaging' | 0.7 | 1 | 0.7 | 'n/a' | 'n/a' | 1.05
+6: 'unit_003' | 'Stress unit 003' | 'TTC' | 'main' | 'imaging' | 0.65 | 1 | 0.65 | 'n/a' | 'n/a' | 0.975
+7: 'unit_004' | 'Stress unit 004' | 'PL' | 'aux' | 'imaging' | 0.88 | 0.5 | 0.44 | 'n/a' | 'n/a' | 1.32
+8: 'unit_005' | 'Stress unit 005' | 'THERM' | 'main' | 'imaging' | 1.14 | 1 | 1.14 | 'n/a' | 'n/a' | 1.71
+9: 'unit_006' | 'Stress unit 006' | 'PL-DATA' | 'main' | 'imaging' | 1.43 | 1 | 1.43 | 'n/a' | 'n/a' | 2.145
+10: 'unit_007' | 'Stress unit 007' | 'HARNESS' | 'main' | 'imaging' | 1.75 | 0.5 | 0.875 | 'n/a' | 'n/a' | 2.625
+11: 'unit_008' | 'Stress unit 008' | 'DH' | 'aux' | 'imaging' | 1.4 | 1 | 1.4 | 'n/a' | 'n/a' | 2.1
+12: 'unit_009' | 'Stress unit 009' | 'EPS' | 'main' | 'imaging' | 1.705 | 1 | 1.705 | 'n/a' | 'n/a' | 2.558
+13: 'unit_010' | 'Stress unit 010' | 'AOCS' | 'main' | 'imaging' | 2.04 | 0.5 | 1.02 | 'n/a' | 'n/a' | 3.06
+14: 'unit_011' | 'Stress unit 011' | 'TTC' | 'main' | 'imaging' | 2.405 | 1 | 2.405 | 'n/a' | 'n/a' | 3.607
+...
+## sheet Mode nominal rows=226 cols=11
+1: 'Units in mode Nominal' |  |  |  |  |  |  |  |  |  | 
+2: 'Unit' | 'Name' | 'Subsystem' | 'Bus' | 'Power mode' | 'Average (W)' | 'Duty' | 'Effective (W)' | 'Margin' | 'With margin (W)' | 'Peak (W)'
+3: 'unit_000' | 'Stress unit 000' | 'DH' | 'aux' | 'nominal' | 0.22 | 1 | 0.22 | 'n/a' | 'n/a' | 0.33
+4: 'unit_001' | 'Stress unit 001' | 'EPS' | 'main' | 'nominal' | 0.42 | 1 | 0.42 | 'n/a' | 'n/a' | 0.63
+5: 'unit_002' | 'Stress unit 002' | 'AOCS' | 'main' | 'nominal' | 0.65 | 0.5 | 0.325 | 'n/a' | 'n/a' | 0.975
+6: 'unit_003' | 'Stress unit 003' | 'TTC' | 'main' | 'nominal' | 0.91 | 1 | 0.91 | 'n/a' | 'n/a' | 1.365
+7: 'unit_004' | 'Stress unit 004' | 'PL' | 'aux' | 'nominal' | 0.8 | 1 | 0.8 | 'n/a' | 'n/a' | 1.2
+8: 'unit_005' | 'Stress unit 005' | 'THERM' | 'main' | 'nominal' | 1.045 | 0.5 | 0.5225 | 'n/a' | 'n/a' | 1.567
+9: 'unit_006' | 'Stress unit 006' | 'PL-DATA' | 'main' | 'nominal' | 1.32 | 1 | 1.32 | 'n/a' | 'n/a' | 1.98
+10: 'unit_007' | 'Stress unit 007' | 'HARNESS' | 'main' | 'nominal' | 1.625 | 1 | 1.625 | 'n/a' | 'n/a' | 2.438
+11: 'unit_008' | 'Stress unit 008' | 'DH' | 'aux' | 'nominal' | 1.96 | 0.5 | 0.98 | 'n/a' | 'n/a' | 2.94
+12: 'unit_009' | 'Stress unit 009' | 'EPS' | 'main' | 'nominal' | 1.55 | 1 | 1.55 | 'n/a' | 'n/a' | 2.325
+13: 'unit_010' | 'Stress unit 010' | 'AOCS' | 'main' | 'nominal' | 1.87 | 1 | 1.87 | 'n/a' | 'n/a' | 2.805
+14: 'unit_011' | 'Stress unit 011' | 'TTC' | 'main' | 'nominal' | 2.22 | 0.5 | 1.11 | 'n/a' | 'n/a' | 3.33
+...
+## sheet Mode safe rows=226 cols=11
+1: 'Units in mode Safe' |  |  |  |  |  |  |  |  |  | 
+2: 'Unit' | 'Name' | 'Subsystem' | 'Bus' | 'Power mode' | 'Average (W)' | 'Duty' | 'Effective (W)' | 'Margin' | 'With margin (W)' | 'Peak (W)'
+3: 'unit_000' | 'Stress unit 000' | 'DH' | 'aux' | 'safe' | 0.2 | 0.5 | 0.1 | 'n/a' | 'n/a' | 0.3
+4: 'unit_001' | 'Stress unit 001' | 'EPS' | 'main' | 'safe' | 0.385 | 1 | 0.385 | 'n/a' | 'n/a' | 0.578
+5: 'unit_002' | 'Stress unit 002' | 'AOCS' | 'main' | 'safe' | 0.6 | 1 | 0.6 | 'n/a' | 'n/a' | 0.9
+6: 'unit_003' | 'Stress unit 003' | 'TTC' | 'main' | 'safe' | 0.845 | 0.5 | 0.4225 | 'n/a' | 'n/a' | 1.268
+7: 'unit_004' | 'Stress unit 004' | 'PL' | 'aux' | 'safe' | 1.12 | 1 | 1.12 | 'n/a' | 'n/a' | 1.68
+8: 'unit_005' | 'Stress unit 005' | 'THERM' | 'main' | 'safe' | 0.95 | 1 | 0.95 | 'n/a' | 'n/a' | 1.425
+9: 'unit_006' | 'Stress unit 006' | 'PL-DATA' | 'main' | 'safe' | 1.21 | 0.5 | 0.605 | 'n/a' | 'n/a' | 1.815
+10: 'unit_007' | 'Stress unit 007' | 'HARNESS' | 'main' | 'safe' | 1.5 | 1 | 1.5 | 'n/a' | 'n/a' | 2.25
+11: 'unit_008' | 'Stress unit 008' | 'DH' | 'aux' | 'safe' | 1.82 | 1 | 1.82 | 'n/a' | 'n/a' | 2.73
+12: 'unit_009' | 'Stress unit 009' | 'EPS' | 'main' | 'safe' | 2.17 | 0.5 | 1.085 | 'n/a' | 'n/a' | 3.255
+13: 'unit_010' | 'Stress unit 010' | 'AOCS' | 'main' | 'safe' | 1.7 | 1 | 1.7 | 'n/a' | 'n/a' | 2.55
+14: 'unit_011' | 'Stress unit 011' | 'TTC' | 'main' | 'safe' | 2.035 | 1 | 2.035 | 'n/a' | 'n/a' | 3.053
+...
+## sheet Assumptions rows=18 cols=5
+1: 'Configuration numbers used' |  |  |  | 
+2: 'Name' | 'Value' | 'Unit' | 'Source' | 'Status'
+3: 'Margin, maturity class class_a' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+4: 'Margin, maturity class class_b' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+5: 'Margin, maturity class class_c' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+6: 'System margin' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+7: 'Distribution loss' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+8: 'Converter efficiency, bus aux' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+9: 'Converter efficiency, bus main' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+11: 'Equations' |  |  |  | 
+12: 'ID' | 'Name' | 'Formula' | 'Source' | 
+13: 'PWR-EFF' | 'Effective unit power' | 'P_eff = P_avg * duty_cycle_ratio' | 'SOURCE_MISSING' | 
+14: 'PWR-MARGIN' | 'Unit power with maturity margin' | 'P_m = P_eff * (1 + margin_ratio(maturity))' | 'SOURCE_MISSING' | 
+...
+## sheet Problems rows=18 cols=4
+1: 'Problems and open items' |  |  | 
+2: 'Severity' | 'Code' | 'Location' | 'Message'
+3: 'warning' | 'CONFIG_EMPTY_TABLE' | 'config/attenuation_table.yaml:3' | 'The table has no entries.'
+4: 'warning' | 'CONFIG_EMPTY_TABLE' | 'config/ebn0_table.yaml:3' | 'The table has no entries.'
+5: 'warning' | 'RESULT_INCOMPLETE' | 'config/margin_policy.yaml' | "The margin of maturity class 'class_a' is a placeholder."
+6: 'warning' | 'RESULT_INCOMPLETE' | 'config/margin_policy.yaml' | "The margin of maturity class 'class_b' is a placeholder."
+7: 'warning' | 'RESULT_INCOMPLETE' | 'config/margin_policy.yaml' | "The margin of maturity class 'class_c' is a placeholder."
+8: 'warning' | 'RESULT_INCOMPLETE' | 'config/margin_policy.yaml' | 'The system margin is a placeholder.'
+9: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:6' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+10: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:11' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+11: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:16' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+12: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:20' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+13: 'warning' | 'RESULT_INCOMPLETE' | 'config/power_config.yaml' | "The converter efficiency of bus 'aux' is a placeholder."
+14: 'warning' | 'RESULT_INCOMPLETE' | 'config/power_config.yaml' | "The converter efficiency of bus 'main' is a placeholder."
+...
+## sheet Provenance rows=10 cols=2
+1: 'Provenance' | 
+2: 'Item' | 'Value'
+3: 'Tool' | 'System Budget Studio 0.1.0'
+4: 'Python' | '3.x'
+5: 'Libraries' | 'pinned for-golden-tests'
+6: 'Project' | 'Example stress case (200 units)'
+7: 'Project revision' | '1'
+8: 'Scenario' | 'static (no scenario)'
+9: 'Generated (UTC)' | '2026-01-02T03:04:05Z'
+10: 'User' | 'Golden User'

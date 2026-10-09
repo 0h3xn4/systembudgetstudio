@@ -13,6 +13,8 @@ dependencies = [
     "pydantic>=2.9,<3",
     "ruamel.yaml>=0.18,<0.20",
     "pint>=0.24,<0.27",
+    "openpyxl>=3.1,<4",
+    "reportlab>=4.2,<5",
 ]
 
 [project.optional-dependencies]
@@ -20,6 +22,7 @@ dev = [
     "pytest>=8",
     "pytest-qt>=4.4",
     "hypothesis>=6.100",
+    "pypdf>=5",
     "jsonschema>=4.23",
     "mypy>=1.11",
     "ruff>=0.6",
@@ -40,7 +43,7 @@ system-budget-studio = "budget_gui.app:main"
 packages = ["src/budget_core", "src/budget_cli", "src/budget_gui"]
 
 [tool.hatch.build.targets.wheel.force-include]
-"assets" = "budget_gui/assets"
+"assets" = "budget_core/assets"
 
 [tool.ruff]
 line-length = 100
@@ -58,7 +61,7 @@ mypy_path = "src"
 packages = ["budget_core", "budget_cli", "budget_gui"]
 
 [[tool.mypy.overrides]]
-module = ["PySide6.*", "ruamel.*", "pint.*", "jsonschema.*"]
+module = ["PySide6.*", "ruamel.*", "pint.*", "jsonschema.*", "openpyxl.*", "reportlab.*", "pypdf.*"]
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]

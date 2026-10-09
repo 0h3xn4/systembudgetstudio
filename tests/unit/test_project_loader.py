@@ -223,3 +223,31 @@ def test_build_project_helper_matches_loader(root: Path) -> None:
     assert loaded is not None
     expected = build_project(root)
     assert loaded.units == expected.units and loaded.config == expected.config
+
+
+@pytest.mark.parametrize(
+    ("file", "old", "new"),
+    [
+        ("config/power_config.yaml", "value: 0.9", "value: 0.0"),  # efficiency must be > 0
+        ("config/power_config.yaml", "value: 0.9", "value: 1.5"),  # efficiency must be <= 1
+        ("config/power_config.yaml", "value: 0.02", "value: 1.0"),  # loss must be < 1
+        ("config/power_config.yaml", "value: 0.02", "value: -0.1"),
+        ("config/margin_policy.yaml", "value: 0.05", "value: -0.5"),  # margin must be >= 0
+    ],
+)
+def test_config_values_must_be_physically_meaningful(
+    root: Path, file: str, old: str, new: str
+) -> None:
+    edit(root, file, old, new)
+    p = only(load_project(root).problems, "CONFIG_VALUE_INVALID")
+    assert p.file == file and p.severity.value == "error" and p.line is not None
+
+
+def test_placeholder_values_are_not_range_checked(root: Path) -> None:
+    edit(
+        root,
+        "config/power_config.yaml",
+        "value: 0.9\n    source: test fixture",
+        "value: 0.0\n    source: TBD",
+    )
+    assert "CONFIG_VALUE_INVALID" not in codes(load_project(root).problems)

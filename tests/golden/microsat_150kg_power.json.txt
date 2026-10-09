@@ -1,0 +1,1670 @@
+{
+  "assumptions": [
+    {
+      "file": "config/margin_policy.yaml",
+      "name": "Margin, maturity class class_a",
+      "path": "classes.class_a.margin_ratio",
+      "placeholder": true,
+      "source": "TBD",
+      "unit": "ratio",
+      "value": null
+    },
+    {
+      "file": "config/margin_policy.yaml",
+      "name": "Margin, maturity class class_b",
+      "path": "classes.class_b.margin_ratio",
+      "placeholder": true,
+      "source": "TBD",
+      "unit": "ratio",
+      "value": null
+    },
+    {
+      "file": "config/margin_policy.yaml",
+      "name": "Margin, maturity class class_c",
+      "path": "classes.class_c.margin_ratio",
+      "placeholder": true,
+      "source": "TBD",
+      "unit": "ratio",
+      "value": null
+    },
+    {
+      "file": "config/margin_policy.yaml",
+      "name": "System margin",
+      "path": "system_margin_ratio",
+      "placeholder": true,
+      "source": "TBD",
+      "unit": "ratio",
+      "value": null
+    },
+    {
+      "file": "config/power_config.yaml",
+      "name": "Distribution loss",
+      "path": "distribution_loss_ratio",
+      "placeholder": true,
+      "source": "TBD",
+      "unit": "ratio",
+      "value": null
+    },
+    {
+      "file": "config/power_config.yaml",
+      "name": "Converter efficiency, bus main_28v",
+      "path": "converter_efficiency_ratio.main_28v",
+      "placeholder": true,
+      "source": "TBD",
+      "unit": "ratio",
+      "value": null
+    },
+    {
+      "file": "config/power_config.yaml",
+      "name": "Converter efficiency, bus payload_12v",
+      "path": "converter_efficiency_ratio.payload_12v",
+      "placeholder": true,
+      "source": "TBD",
+      "unit": "ratio",
+      "value": null
+    }
+  ],
+  "modes": [
+    {
+      "average": {
+        "load_w": 74.9,
+        "source_margined_w": null,
+        "source_w": null,
+        "system_margined_w": null,
+        "unit_margined_w": null
+      },
+      "buses": [
+        {
+          "average": {
+            "load_w": 39.7,
+            "source_margined_w": null,
+            "source_w": null,
+            "system_margined_w": null,
+            "unit_margined_w": null
+          },
+          "bus": "main_28v",
+          "converter_efficiency_ratio": null,
+          "peak": {
+            "load_w": 95.3,
+            "source_margined_w": null,
+            "source_w": null,
+            "system_margined_w": null,
+            "unit_margined_w": null
+          }
+        },
+        {
+          "average": {
+            "load_w": 35.2,
+            "source_margined_w": null,
+            "source_w": null,
+            "system_margined_w": null,
+            "unit_margined_w": null
+          },
+          "bus": "payload_12v",
+          "converter_efficiency_ratio": null,
+          "peak": {
+            "load_w": 54.0,
+            "source_margined_w": null,
+            "source_w": null,
+            "system_margined_w": null,
+            "unit_margined_w": null
+          }
+        }
+      ],
+      "mode_id": "downlink",
+      "mode_name": "Downlink",
+      "peak": {
+        "load_w": 149.3,
+        "source_margined_w": null,
+        "source_w": null,
+        "system_margined_w": null,
+        "unit_margined_w": null
+      },
+      "rows": [
+        {
+          "avg_power_w": 0.0,
+          "bus": "payload_12v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_c",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "PL",
+          "unit_id": "camera",
+          "unit_name": "Imager"
+        },
+        {
+          "avg_power_w": 1.2,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 1.2,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 1.8,
+          "power_mode": "downlink",
+          "subsystem": "AOCS",
+          "unit_id": "gnss",
+          "unit_name": "GNSS receiver"
+        },
+        {
+          "avg_power_w": 6.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 0.3,
+          "effective_power_w": 1.7999999999999998,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_a",
+          "peak_power_w": 16.0,
+          "power_mode": "downlink",
+          "subsystem": "THERM",
+          "unit_id": "heaters",
+          "unit_name": "Thermal heaters"
+        },
+        {
+          "avg_power_w": 0.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "AOCS",
+          "unit_id": "magnetorquers",
+          "unit_name": "Magnetorquers"
+        },
+        {
+          "avg_power_w": 7.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 7.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_a",
+          "peak_power_w": 10.0,
+          "power_mode": "downlink",
+          "subsystem": "DH",
+          "unit_id": "obc_a",
+          "unit_name": "OBC A"
+        },
+        {
+          "avg_power_w": 0.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_a",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "DH",
+          "unit_id": "obc_b",
+          "unit_name": "OBC B (cold redundant)"
+        },
+        {
+          "avg_power_w": 9.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 9.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_a",
+          "peak_power_w": 12.0,
+          "power_mode": "downlink",
+          "subsystem": "EPS",
+          "unit_id": "pcdu",
+          "unit_name": "Power conditioning unit"
+        },
+        {
+          "avg_power_w": 10.0,
+          "bus": "payload_12v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 10.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_c",
+          "peak_power_w": 14.0,
+          "power_mode": "downlink",
+          "subsystem": "PL-DATA",
+          "unit_id": "pdu_data",
+          "unit_name": "Payload data unit"
+        },
+        {
+          "avg_power_w": 12.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 0.6,
+          "effective_power_w": 7.199999999999999,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 30.0,
+          "power_mode": "downlink",
+          "subsystem": "AOCS",
+          "unit_id": "reaction_wheels",
+          "unit_name": "Reaction wheels"
+        },
+        {
+          "avg_power_w": 12.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 0.8,
+          "effective_power_w": 9.600000000000001,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 20.0,
+          "power_mode": "downlink",
+          "subsystem": "TTC",
+          "unit_id": "sband_trx",
+          "unit_name": "S-band transceiver"
+        },
+        {
+          "avg_power_w": 3.5,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 3.5,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 5.0,
+          "power_mode": "downlink",
+          "subsystem": "AOCS",
+          "unit_id": "star_tracker",
+          "unit_name": "Star tracker"
+        },
+        {
+          "avg_power_w": 0.4,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.4,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_a",
+          "peak_power_w": 0.5,
+          "power_mode": "downlink",
+          "subsystem": "AOCS",
+          "unit_id": "sun_sensors",
+          "unit_name": "Coarse sun sensors"
+        },
+        {
+          "avg_power_w": 28.0,
+          "bus": "payload_12v",
+          "duty_cycle_ratio": 0.9,
+          "effective_power_w": 25.2,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_c",
+          "peak_power_w": 40.0,
+          "power_mode": "downlink",
+          "subsystem": "PL-DATA",
+          "unit_id": "xband_tx",
+          "unit_name": "X-band transmitter"
+        }
+      ],
+      "subsystems": [
+        {
+          "effective_w": 12.299999999999999,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 37.3,
+          "subsystem": "AOCS"
+        },
+        {
+          "effective_w": 7.0,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 10.0,
+          "subsystem": "DH"
+        },
+        {
+          "effective_w": 9.0,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 12.0,
+          "subsystem": "EPS"
+        },
+        {
+          "effective_w": 0.0,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 0.0,
+          "subsystem": "PL"
+        },
+        {
+          "effective_w": 35.2,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 54.0,
+          "subsystem": "PL-DATA"
+        },
+        {
+          "effective_w": 1.7999999999999998,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 16.0,
+          "subsystem": "THERM"
+        },
+        {
+          "effective_w": 9.600000000000001,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 20.0,
+          "subsystem": "TTC"
+        }
+      ]
+    },
+    {
+      "average": {
+        "load_w": 70.1,
+        "source_margined_w": null,
+        "source_w": null,
+        "system_margined_w": null,
+        "unit_margined_w": null
+      },
+      "buses": [
+        {
+          "average": {
+            "load_w": 38.5,
+            "source_margined_w": null,
+            "source_w": null,
+            "system_margined_w": null,
+            "unit_margined_w": null
+          },
+          "bus": "main_28v",
+          "converter_efficiency_ratio": null,
+          "peak": {
+            "load_w": 88.3,
+            "source_margined_w": null,
+            "source_w": null,
+            "system_margined_w": null,
+            "unit_margined_w": null
+          }
+        },
+        {
+          "average": {
+            "load_w": 31.6,
+            "source_margined_w": null,
+            "source_w": null,
+            "system_margined_w": null,
+            "unit_margined_w": null
+          },
+          "bus": "payload_12v",
+          "converter_efficiency_ratio": null,
+          "peak": {
+            "load_w": 48.0,
+            "source_margined_w": null,
+            "source_w": null,
+            "system_margined_w": null,
+            "unit_margined_w": null
+          }
+        }
+      ],
+      "mode_id": "imaging",
+      "mode_name": "Imaging",
+      "peak": {
+        "load_w": 136.3,
+        "source_margined_w": null,
+        "source_w": null,
+        "system_margined_w": null,
+        "unit_margined_w": null
+      },
+      "rows": [
+        {
+          "avg_power_w": 22.0,
+          "bus": "payload_12v",
+          "duty_cycle_ratio": 0.8,
+          "effective_power_w": 17.6,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_c",
+          "peak_power_w": 30.0,
+          "power_mode": "imaging",
+          "subsystem": "PL",
+          "unit_id": "camera",
+          "unit_name": "Imager"
+        },
+        {
+          "avg_power_w": 1.2,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 1.2,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 1.8,
+          "power_mode": "imaging",
+          "subsystem": "AOCS",
+          "unit_id": "gnss",
+          "unit_name": "GNSS receiver"
+        },
+        {
+          "avg_power_w": 6.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 0.3,
+          "effective_power_w": 1.7999999999999998,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_a",
+          "peak_power_w": 16.0,
+          "power_mode": "imaging",
+          "subsystem": "THERM",
+          "unit_id": "heaters",
+          "unit_name": "Thermal heaters"
+        },
+        {
+          "avg_power_w": 0.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "AOCS",
+          "unit_id": "magnetorquers",
+          "unit_name": "Magnetorquers"
+        },
+        {
+          "avg_power_w": 7.5,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 7.5,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_a",
+          "peak_power_w": 10.0,
+          "power_mode": "imaging",
+          "subsystem": "DH",
+          "unit_id": "obc_a",
+          "unit_name": "OBC A"
+        },
+        {
+          "avg_power_w": 0.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_a",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "DH",
+          "unit_id": "obc_b",
+          "unit_name": "OBC B (cold redundant)"
+        },
+        {
+          "avg_power_w": 9.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 9.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_a",
+          "peak_power_w": 12.0,
+          "power_mode": "imaging",
+          "subsystem": "EPS",
+          "unit_id": "pcdu",
+          "unit_name": "Power conditioning unit"
+        },
+        {
+          "avg_power_w": 14.0,
+          "bus": "payload_12v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 14.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_c",
+          "peak_power_w": 18.0,
+          "power_mode": "imaging",
+          "subsystem": "PL-DATA",
+          "unit_id": "pdu_data",
+          "unit_name": "Payload data unit"
+        },
+        {
+          "avg_power_w": 18.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 0.7,
+          "effective_power_w": 12.6,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 40.0,
+          "power_mode": "imaging",
+          "subsystem": "AOCS",
+          "unit_id": "reaction_wheels",
+          "unit_name": "Reaction wheels"
+        },
+        {
+          "avg_power_w": 2.5,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 2.5,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 3.0,
+          "power_mode": "imaging",
+          "subsystem": "TTC",
+          "unit_id": "sband_trx",
+          "unit_name": "S-band transceiver"
+        },
+        {
+          "avg_power_w": 3.5,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 3.5,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 5.0,
+          "power_mode": "imaging",
+          "subsystem": "AOCS",
+          "unit_id": "star_tracker",
+          "unit_name": "Star tracker"
+        },
+        {
+          "avg_power_w": 0.4,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.4,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_a",
+          "peak_power_w": 0.5,
+          "power_mode": "imaging",
+          "subsystem": "AOCS",
+          "unit_id": "sun_sensors",
+          "unit_name": "Coarse sun sensors"
+        },
+        {
+          "avg_power_w": 0.0,
+          "bus": "payload_12v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_c",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "PL-DATA",
+          "unit_id": "xband_tx",
+          "unit_name": "X-band transmitter"
+        }
+      ],
+      "subsystems": [
+        {
+          "effective_w": 17.7,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 47.3,
+          "subsystem": "AOCS"
+        },
+        {
+          "effective_w": 7.5,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 10.0,
+          "subsystem": "DH"
+        },
+        {
+          "effective_w": 9.0,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 12.0,
+          "subsystem": "EPS"
+        },
+        {
+          "effective_w": 17.6,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 30.0,
+          "subsystem": "PL"
+        },
+        {
+          "effective_w": 14.0,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 18.0,
+          "subsystem": "PL-DATA"
+        },
+        {
+          "effective_w": 1.7999999999999998,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 16.0,
+          "subsystem": "THERM"
+        },
+        {
+          "effective_w": 2.5,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 3.0,
+          "subsystem": "TTC"
+        }
+      ]
+    },
+    {
+      "average": {
+        "load_w": 35.8,
+        "source_margined_w": null,
+        "source_w": null,
+        "system_margined_w": null,
+        "unit_margined_w": null
+      },
+      "buses": [
+        {
+          "average": {
+            "load_w": 31.8,
+            "source_margined_w": null,
+            "source_w": null,
+            "system_margined_w": null,
+            "unit_margined_w": null
+          },
+          "bus": "main_28v",
+          "converter_efficiency_ratio": null,
+          "peak": {
+            "load_w": 80.3,
+            "source_margined_w": null,
+            "source_w": null,
+            "system_margined_w": null,
+            "unit_margined_w": null
+          }
+        },
+        {
+          "average": {
+            "load_w": 4.0,
+            "source_margined_w": null,
+            "source_w": null,
+            "system_margined_w": null,
+            "unit_margined_w": null
+          },
+          "bus": "payload_12v",
+          "converter_efficiency_ratio": null,
+          "peak": {
+            "load_w": 6.0,
+            "source_margined_w": null,
+            "source_w": null,
+            "system_margined_w": null,
+            "unit_margined_w": null
+          }
+        }
+      ],
+      "mode_id": "nominal",
+      "mode_name": "Nominal",
+      "peak": {
+        "load_w": 86.3,
+        "source_margined_w": null,
+        "source_w": null,
+        "system_margined_w": null,
+        "unit_margined_w": null
+      },
+      "rows": [
+        {
+          "avg_power_w": 0.0,
+          "bus": "payload_12v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_c",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "PL",
+          "unit_id": "camera",
+          "unit_name": "Imager"
+        },
+        {
+          "avg_power_w": 1.2,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 1.2,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 1.8,
+          "power_mode": "nominal",
+          "subsystem": "AOCS",
+          "unit_id": "gnss",
+          "unit_name": "GNSS receiver"
+        },
+        {
+          "avg_power_w": 6.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 0.3,
+          "effective_power_w": 1.7999999999999998,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_a",
+          "peak_power_w": 16.0,
+          "power_mode": "nominal",
+          "subsystem": "THERM",
+          "unit_id": "heaters",
+          "unit_name": "Thermal heaters"
+        },
+        {
+          "avg_power_w": 1.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 0.2,
+          "effective_power_w": 0.2,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 3.0,
+          "power_mode": "nominal",
+          "subsystem": "AOCS",
+          "unit_id": "magnetorquers",
+          "unit_name": "Magnetorquers"
+        },
+        {
+          "avg_power_w": 6.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 6.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_a",
+          "peak_power_w": 9.0,
+          "power_mode": "nominal",
+          "subsystem": "DH",
+          "unit_id": "obc_a",
+          "unit_name": "OBC A"
+        },
+        {
+          "avg_power_w": 0.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_a",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "DH",
+          "unit_id": "obc_b",
+          "unit_name": "OBC B (cold redundant)"
+        },
+        {
+          "avg_power_w": 9.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 9.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_a",
+          "peak_power_w": 12.0,
+          "power_mode": "nominal",
+          "subsystem": "EPS",
+          "unit_id": "pcdu",
+          "unit_name": "Power conditioning unit"
+        },
+        {
+          "avg_power_w": 4.0,
+          "bus": "payload_12v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 4.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_c",
+          "peak_power_w": 6.0,
+          "power_mode": "nominal",
+          "subsystem": "PL-DATA",
+          "unit_id": "pdu_data",
+          "unit_name": "Payload data unit"
+        },
+        {
+          "avg_power_w": 12.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 0.6,
+          "effective_power_w": 7.199999999999999,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 30.0,
+          "power_mode": "nominal",
+          "subsystem": "AOCS",
+          "unit_id": "reaction_wheels",
+          "unit_name": "Reaction wheels"
+        },
+        {
+          "avg_power_w": 2.5,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 2.5,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 3.0,
+          "power_mode": "nominal",
+          "subsystem": "TTC",
+          "unit_id": "sband_trx",
+          "unit_name": "S-band transceiver"
+        },
+        {
+          "avg_power_w": 3.5,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 3.5,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 5.0,
+          "power_mode": "nominal",
+          "subsystem": "AOCS",
+          "unit_id": "star_tracker",
+          "unit_name": "Star tracker"
+        },
+        {
+          "avg_power_w": 0.4,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.4,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_a",
+          "peak_power_w": 0.5,
+          "power_mode": "nominal",
+          "subsystem": "AOCS",
+          "unit_id": "sun_sensors",
+          "unit_name": "Coarse sun sensors"
+        },
+        {
+          "avg_power_w": 0.0,
+          "bus": "payload_12v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_c",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "PL-DATA",
+          "unit_id": "xband_tx",
+          "unit_name": "X-band transmitter"
+        }
+      ],
+      "subsystems": [
+        {
+          "effective_w": 12.5,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 40.3,
+          "subsystem": "AOCS"
+        },
+        {
+          "effective_w": 6.0,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 9.0,
+          "subsystem": "DH"
+        },
+        {
+          "effective_w": 9.0,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 12.0,
+          "subsystem": "EPS"
+        },
+        {
+          "effective_w": 0.0,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 0.0,
+          "subsystem": "PL"
+        },
+        {
+          "effective_w": 4.0,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 6.0,
+          "subsystem": "PL-DATA"
+        },
+        {
+          "effective_w": 1.7999999999999998,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 16.0,
+          "subsystem": "THERM"
+        },
+        {
+          "effective_w": 2.5,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 3.0,
+          "subsystem": "TTC"
+        }
+      ]
+    },
+    {
+      "average": {
+        "load_w": 17.55,
+        "source_margined_w": null,
+        "source_w": null,
+        "system_margined_w": null,
+        "unit_margined_w": null
+      },
+      "buses": [
+        {
+          "average": {
+            "load_w": 17.55,
+            "source_margined_w": null,
+            "source_w": null,
+            "system_margined_w": null,
+            "unit_margined_w": null
+          },
+          "bus": "main_28v",
+          "converter_efficiency_ratio": null,
+          "peak": {
+            "load_w": 48.5,
+            "source_margined_w": null,
+            "source_w": null,
+            "system_margined_w": null,
+            "unit_margined_w": null
+          }
+        },
+        {
+          "average": {
+            "load_w": 0.0,
+            "source_margined_w": null,
+            "source_w": null,
+            "system_margined_w": null,
+            "unit_margined_w": null
+          },
+          "bus": "payload_12v",
+          "converter_efficiency_ratio": null,
+          "peak": {
+            "load_w": 0.0,
+            "source_margined_w": null,
+            "source_w": null,
+            "system_margined_w": null,
+            "unit_margined_w": null
+          }
+        }
+      ],
+      "mode_id": "safe",
+      "mode_name": "Safe",
+      "peak": {
+        "load_w": 48.5,
+        "source_margined_w": null,
+        "source_w": null,
+        "system_margined_w": null,
+        "unit_margined_w": null
+      },
+      "rows": [
+        {
+          "avg_power_w": 0.0,
+          "bus": "payload_12v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_c",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "PL",
+          "unit_id": "camera",
+          "unit_name": "Imager"
+        },
+        {
+          "avg_power_w": 0.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "AOCS",
+          "unit_id": "gnss",
+          "unit_name": "GNSS receiver"
+        },
+        {
+          "avg_power_w": 8.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 0.4,
+          "effective_power_w": 3.2,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_a",
+          "peak_power_w": 16.0,
+          "power_mode": "safe",
+          "subsystem": "THERM",
+          "unit_id": "heaters",
+          "unit_name": "Thermal heaters"
+        },
+        {
+          "avg_power_w": 1.5,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 0.3,
+          "effective_power_w": 0.44999999999999996,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 3.0,
+          "power_mode": "safe",
+          "subsystem": "AOCS",
+          "unit_id": "magnetorquers",
+          "unit_name": "Magnetorquers"
+        },
+        {
+          "avg_power_w": 4.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 4.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_a",
+          "peak_power_w": 6.0,
+          "power_mode": "safe",
+          "subsystem": "DH",
+          "unit_id": "obc_a",
+          "unit_name": "OBC A"
+        },
+        {
+          "avg_power_w": 0.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_a",
+          "peak_power_w": 0.0,
+          "power_mode": "safe",
+          "subsystem": "DH",
+          "unit_id": "obc_b",
+          "unit_name": "OBC B (cold redundant)"
+        },
+        {
+          "avg_power_w": 6.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 6.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_a",
+          "peak_power_w": 8.0,
+          "power_mode": "safe",
+          "subsystem": "EPS",
+          "unit_id": "pcdu",
+          "unit_name": "Power conditioning unit"
+        },
+        {
+          "avg_power_w": 0.0,
+          "bus": "payload_12v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_c",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "PL-DATA",
+          "unit_id": "pdu_data",
+          "unit_name": "Payload data unit"
+        },
+        {
+          "avg_power_w": 2.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 0.5,
+          "effective_power_w": 1.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 12.0,
+          "power_mode": "safe",
+          "subsystem": "AOCS",
+          "unit_id": "reaction_wheels",
+          "unit_name": "Reaction wheels"
+        },
+        {
+          "avg_power_w": 2.5,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 2.5,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 3.0,
+          "power_mode": "safe",
+          "subsystem": "TTC",
+          "unit_id": "sband_trx",
+          "unit_name": "S-band transceiver"
+        },
+        {
+          "avg_power_w": 0.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "AOCS",
+          "unit_id": "star_tracker",
+          "unit_name": "Star tracker"
+        },
+        {
+          "avg_power_w": 0.4,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.4,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_a",
+          "peak_power_w": 0.5,
+          "power_mode": "safe",
+          "subsystem": "AOCS",
+          "unit_id": "sun_sensors",
+          "unit_name": "Coarse sun sensors"
+        },
+        {
+          "avg_power_w": 0.0,
+          "bus": "payload_12v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_c",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "PL-DATA",
+          "unit_id": "xband_tx",
+          "unit_name": "X-band transmitter"
+        }
+      ],
+      "subsystems": [
+        {
+          "effective_w": 1.85,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 15.5,
+          "subsystem": "AOCS"
+        },
+        {
+          "effective_w": 4.0,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 6.0,
+          "subsystem": "DH"
+        },
+        {
+          "effective_w": 6.0,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 8.0,
+          "subsystem": "EPS"
+        },
+        {
+          "effective_w": 0.0,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 0.0,
+          "subsystem": "PL"
+        },
+        {
+          "effective_w": 0.0,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 0.0,
+          "subsystem": "PL-DATA"
+        },
+        {
+          "effective_w": 3.2,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 16.0,
+          "subsystem": "THERM"
+        },
+        {
+          "effective_w": 2.5,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 3.0,
+          "subsystem": "TTC"
+        }
+      ]
+    },
+    {
+      "average": {
+        "load_w": 19.75,
+        "source_margined_w": null,
+        "source_w": null,
+        "system_margined_w": null,
+        "unit_margined_w": null
+      },
+      "buses": [
+        {
+          "average": {
+            "load_w": 19.75,
+            "source_margined_w": null,
+            "source_w": null,
+            "system_margined_w": null,
+            "unit_margined_w": null
+          },
+          "bus": "main_28v",
+          "converter_efficiency_ratio": null,
+          "peak": {
+            "load_w": 32.5,
+            "source_margined_w": null,
+            "source_w": null,
+            "system_margined_w": null,
+            "unit_margined_w": null
+          }
+        },
+        {
+          "average": {
+            "load_w": 0.0,
+            "source_margined_w": null,
+            "source_w": null,
+            "system_margined_w": null,
+            "unit_margined_w": null
+          },
+          "bus": "payload_12v",
+          "converter_efficiency_ratio": null,
+          "peak": {
+            "load_w": 0.0,
+            "source_margined_w": null,
+            "source_w": null,
+            "system_margined_w": null,
+            "unit_margined_w": null
+          }
+        }
+      ],
+      "mode_id": "survival",
+      "mode_name": "Survival",
+      "peak": {
+        "load_w": 32.5,
+        "source_margined_w": null,
+        "source_w": null,
+        "system_margined_w": null,
+        "unit_margined_w": null
+      },
+      "rows": [
+        {
+          "avg_power_w": 0.0,
+          "bus": "payload_12v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_c",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "PL",
+          "unit_id": "camera",
+          "unit_name": "Imager"
+        },
+        {
+          "avg_power_w": 0.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "AOCS",
+          "unit_id": "gnss",
+          "unit_name": "GNSS receiver"
+        },
+        {
+          "avg_power_w": 14.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 0.6,
+          "effective_power_w": 8.4,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_a",
+          "peak_power_w": 16.0,
+          "power_mode": "survival",
+          "subsystem": "THERM",
+          "unit_id": "heaters",
+          "unit_name": "Thermal heaters"
+        },
+        {
+          "avg_power_w": 1.5,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 0.3,
+          "effective_power_w": 0.44999999999999996,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 3.0,
+          "power_mode": "survival",
+          "subsystem": "AOCS",
+          "unit_id": "magnetorquers",
+          "unit_name": "Magnetorquers"
+        },
+        {
+          "avg_power_w": 3.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 3.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_a",
+          "peak_power_w": 4.0,
+          "power_mode": "survival",
+          "subsystem": "DH",
+          "unit_id": "obc_a",
+          "unit_name": "OBC A"
+        },
+        {
+          "avg_power_w": 0.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_a",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "DH",
+          "unit_id": "obc_b",
+          "unit_name": "OBC B (cold redundant)"
+        },
+        {
+          "avg_power_w": 5.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 5.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_a",
+          "peak_power_w": 6.0,
+          "power_mode": "survival",
+          "subsystem": "EPS",
+          "unit_id": "pcdu",
+          "unit_name": "Power conditioning unit"
+        },
+        {
+          "avg_power_w": 0.0,
+          "bus": "payload_12v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_c",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "PL-DATA",
+          "unit_id": "pdu_data",
+          "unit_name": "Payload data unit"
+        },
+        {
+          "avg_power_w": 0.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "AOCS",
+          "unit_id": "reaction_wheels",
+          "unit_name": "Reaction wheels"
+        },
+        {
+          "avg_power_w": 2.5,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 2.5,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 3.0,
+          "power_mode": "survival",
+          "subsystem": "TTC",
+          "unit_id": "sband_trx",
+          "unit_name": "S-band transceiver"
+        },
+        {
+          "avg_power_w": 0.0,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_b",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "AOCS",
+          "unit_id": "star_tracker",
+          "unit_name": "Star tracker"
+        },
+        {
+          "avg_power_w": 0.4,
+          "bus": "main_28v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.4,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_a",
+          "peak_power_w": 0.5,
+          "power_mode": "survival",
+          "subsystem": "AOCS",
+          "unit_id": "sun_sensors",
+          "unit_name": "Coarse sun sensors"
+        },
+        {
+          "avg_power_w": 0.0,
+          "bus": "payload_12v",
+          "duty_cycle_ratio": 1.0,
+          "effective_power_w": 0.0,
+          "margin_ratio": null,
+          "margined_peak_w": null,
+          "margined_power_w": null,
+          "maturity": "class_c",
+          "peak_power_w": 0.0,
+          "power_mode": "off",
+          "subsystem": "PL-DATA",
+          "unit_id": "xband_tx",
+          "unit_name": "X-band transmitter"
+        }
+      ],
+      "subsystems": [
+        {
+          "effective_w": 0.85,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 3.5,
+          "subsystem": "AOCS"
+        },
+        {
+          "effective_w": 3.0,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 4.0,
+          "subsystem": "DH"
+        },
+        {
+          "effective_w": 5.0,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 6.0,
+          "subsystem": "EPS"
+        },
+        {
+          "effective_w": 0.0,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 0.0,
+          "subsystem": "PL"
+        },
+        {
+          "effective_w": 0.0,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 0.0,
+          "subsystem": "PL-DATA"
+        },
+        {
+          "effective_w": 8.4,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 16.0,
+          "subsystem": "THERM"
+        },
+        {
+          "effective_w": 2.5,
+          "margined_peak_w": null,
+          "margined_w": null,
+          "peak_w": 3.0,
+          "subsystem": "TTC"
+        }
+      ]
+    }
+  ],
+  "problems": [
+    {
+      "code": "RESULT_INCOMPLETE",
+      "file": "config/margin_policy.yaml",
+      "hint": "Replace the placeholder with a sourced value; results that need it show n/a.",
+      "line": null,
+      "message": "The margin of maturity class 'class_a' is a placeholder.",
+      "path": "classes.class_a.margin_ratio",
+      "severity": "warning"
+    },
+    {
+      "code": "RESULT_INCOMPLETE",
+      "file": "config/margin_policy.yaml",
+      "hint": "Replace the placeholder with a sourced value; results that need it show n/a.",
+      "line": null,
+      "message": "The margin of maturity class 'class_b' is a placeholder.",
+      "path": "classes.class_b.margin_ratio",
+      "severity": "warning"
+    },
+    {
+      "code": "RESULT_INCOMPLETE",
+      "file": "config/margin_policy.yaml",
+      "hint": "Replace the placeholder with a sourced value; results that need it show n/a.",
+      "line": null,
+      "message": "The margin of maturity class 'class_c' is a placeholder.",
+      "path": "classes.class_c.margin_ratio",
+      "severity": "warning"
+    },
+    {
+      "code": "RESULT_INCOMPLETE",
+      "file": "config/margin_policy.yaml",
+      "hint": "Replace the placeholder with a sourced value; results that need it show n/a.",
+      "line": null,
+      "message": "The system margin is a placeholder.",
+      "path": "system_margin_ratio",
+      "severity": "warning"
+    },
+    {
+      "code": "RESULT_INCOMPLETE",
+      "file": "config/power_config.yaml",
+      "hint": "Replace the placeholder with a sourced value; results that need it show n/a.",
+      "line": null,
+      "message": "The distribution loss is a placeholder.",
+      "path": "distribution_loss_ratio",
+      "severity": "warning"
+    },
+    {
+      "code": "RESULT_INCOMPLETE",
+      "file": "config/power_config.yaml",
+      "hint": "Replace the placeholder with a sourced value; results that need it show n/a.",
+      "line": null,
+      "message": "The converter efficiency of bus 'main_28v' is a placeholder.",
+      "path": "converter_efficiency_ratio.main_28v",
+      "severity": "warning"
+    },
+    {
+      "code": "RESULT_INCOMPLETE",
+      "file": "config/power_config.yaml",
+      "hint": "Replace the placeholder with a sourced value; results that need it show n/a.",
+      "line": null,
+      "message": "The converter efficiency of bus 'payload_12v' is a placeholder.",
+      "path": "converter_efficiency_ratio.payload_12v",
+      "severity": "warning"
+    }
+  ],
+  "provenance": {
+    "generated": "2026-01-02T03:04:05Z",
+    "libraries": [
+      [
+        "pinned",
+        "for-golden-tests"
+      ]
+    ],
+    "project_name": "Example 150 kg microsatellite",
+    "project_revision": "1",
+    "python_version": "3.x",
+    "scenario": "static (no scenario)",
+    "tool": "System Budget Studio",
+    "tool_version": "0.1.0",
+    "user": "Golden User"
+  }
+}
