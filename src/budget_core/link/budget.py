@@ -85,7 +85,8 @@ def spacecraft_range_for(elevation_deg: Number, range_m: Number) -> Number:
     (spherical Earth): r^2 = R^2 + d^2 + 2 R d sin(el)."""
     el = np.radians(np.asarray(elevation_deg))
     d = np.asarray(range_m)
-    return np.sqrt(EARTH_RADIUS_M**2 + d**2 + 2.0 * EARTH_RADIUS_M * d * np.sin(el))
+    root = np.sqrt(EARTH_RADIUS_M**2 + d**2 + 2.0 * EARTH_RADIUS_M * d * np.sin(el))
+    return np.asarray(root, dtype=np.float64)
 
 
 def nadir_angle_deg(elevation_deg: Number, range_m: Number) -> Number:
@@ -93,7 +94,7 @@ def nadir_angle_deg(elevation_deg: Number, range_m: Number) -> Number:
     sin(eta) = R cos(el) / r (law of sines in the centre-site-spacecraft triangle)."""
     r = spacecraft_range_for(elevation_deg, range_m)
     ratio = EARTH_RADIUS_M * np.cos(np.radians(np.asarray(elevation_deg))) / r
-    return np.degrees(np.arcsin(np.clip(ratio, -1.0, 1.0)))
+    return np.asarray(np.degrees(np.arcsin(np.clip(ratio, -1.0, 1.0))), dtype=np.float64)
 
 
 def interpolate_gain_dbi(
