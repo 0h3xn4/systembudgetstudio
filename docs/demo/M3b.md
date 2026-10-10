@@ -2,7 +2,7 @@
 
 ```
 budget export-examples demo
-system-budget-studio demo/microsat_150kg      # then open the Scenario tab and press Compute (Ctrl+R)
+system-budget-studio demo/microsat_150kg      # then open the Scenario tab and press the Compute button
 ```
 
 What you see: a timeline with a Sunlight row (eclipse in grey, umbra in black when the conical shadow is chosen), one row per ground station or target with its passes, and the Mode row built from the scenario's layers. Mouse wheel zooms around the pointer, drag pans, double-click shows the whole scenario, hovering shows the time, mode, eclipse state and the passes at that moment, and **Shift+drag adds a manual segment**.
