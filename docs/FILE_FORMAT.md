@@ -2,6 +2,8 @@
 
 A project is a folder of YAML files (LF line endings). Every file starts with `schema_version` and `kind`. All kinds are at schema version 1 except `margin_policy`, `scenario` and `unit` (version 2, see below).
 
+**Contents:** [Mass properties (decisions D-048 to D-050)](#mass-properties-decisions-d-048-to-d-050) · [Power system (decisions D-061 to D-066)](#power-system-decisions-d-061-to-d-066) · [Thermal (decisions D-071 to D-076)](#thermal-decisions-d-071-to-d-076) · [Links (decisions D-077 to D-083)](#links-decisions-d-077-to-d-083) · [Unit schema 2](#unit-schema-2) · [Scenario schema 2](#scenario-schema-2) · [Margin policy schema 2](#margin-policy-schema-2) · [Problem codes (budget validate)](#problem-codes-budget-validate) · [Schema versions](#schema-versions)
+
 ```
 project.yaml            kind: project            name, revision, description
 spacecraft.yaml         kind: spacecraft         name, buses[{name, nominal_voltage_v}], mission_phases[], body_frame
@@ -183,3 +185,5 @@ Result findings (errors): `MASS_LIMIT_EXCEEDED`; thermal: `THERMAL_LIMIT_EXCEEDE
 ## Schema versions
 
 Older files are migrated in memory (`budget_core/io/migrations.py`, one function per version step); newer files fail with `SCHEMA_TOO_NEW`. `margin_policy`, `scenario` and `unit` are at version 2; all other kinds are at version 1.
+
+Next: [Environment inputs](ENVIRONMENT_FORMAT.md) · [User manual: create a project](user-manual/create-a-project.md) · [Docs index](README.md).

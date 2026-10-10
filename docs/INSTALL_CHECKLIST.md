@@ -38,3 +38,5 @@ Run this on a machine (or a fresh user account) that has never had System Budget
 | Machine | OS version | Date | Tester | Result |
 |---|---|---|---|---|
 | | | | | |
+
+Next: [Developer docs: cut a release](developer/README.md#cut-a-release) · [Docs index](README.md).

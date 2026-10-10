@@ -2,6 +2,8 @@
 
 Status: built (milestones M0 to M6). This document began as the architecture proposal and has been corrected to match the code; where a decision changed it, the decision number (`D-0xx`, see [DECISIONS.md](DECISIONS.md)) is given. For using the tool see the [user manual](user-manual/README.md); for the file format see [FILE_FORMAT.md](FILE_FORMAT.md), which is authoritative.
 
+**Contents:** [1. Technology stack](#1-technology-stack) · [2. Package structure](#2-package-structure) · [3. Core design rules](#3-core-design-rules) · [4. Data model and files](#4-data-model-and-files) · [5. Environment adapters](#5-environment-adapters) · [6. Solvers (summary)](#6-solvers-summary) · [6a. Mass budget (added by D-033)](#6a-mass-budget-added-by-d-033) · [6b. Thermal budget (added by D-036; implemented in M4b, D-071 to D-076)](#6b-thermal-budget-added-by-d-036-implemented-in-m4b-d-071-to-d-076) · [7. GUI](#7-gui) · [8. Packaging, CI, supply chain](#8-packaging-ci-supply-chain) · [9. Testing strategy](#9-testing-strategy) · [10. Risks](#10-risks)
+
 ## 1. Technology stack
 
 | Concern | Option A (chosen) | Option B | Option C | Rationale |
@@ -127,3 +129,5 @@ Tests first per milestone. Per solver ≥ 10 hand-calculated regression cases wi
 3. PySide6 + PyInstaller size and RHEL 8 glibc compatibility — validate in M0 with an empty app.
 4. Byte-identical PDF/DOCX/XLSX — need to neutralise embedded timestamps/IDs (ReportLab `invariant=1`, zip entry dates fixed in docx/xlsx); proven in M2.
 5. Python 3.13 wheels for all runtime deps — checked in M0 CI.
+
+Next: [File format](FILE_FORMAT.md) · [Decisions](DECISIONS.md) · [Developer docs](developer/README.md) · [Docs index](README.md).

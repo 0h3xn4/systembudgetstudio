@@ -1,5 +1,7 @@
 # Environment inputs and the interim SpaceMissionStudio format
 
+This page describes the files that define a scenario's orbit, ground stations and timeline, and the interim CSV format for importing orbit data from SpaceMissionStudio.
+
 ## Scenario files (`scenarios/<id>.yaml`, kind `scenario`)
 
 ```
@@ -50,3 +52,5 @@ Times are UTC (`2026-06-01T00:00:00Z`, fractional seconds allowed). Errors name 
 budget scenario PROJECT [--scenario ID] [--out DIR]
 ```
 writes `<id>_environment.json`, `<id>_eclipses.csv`, `<id>_passes.csv`, `<id>_timeline.csv` and `<id>_provenance.csv`.
+
+Next: [Scenarios (user manual)](user-manual/scenarios.md) · [Project file format](FILE_FORMAT.md) · [Docs index](README.md).

@@ -2,6 +2,8 @@
 
 Status: milestones M0 to M6 are done (see the [changelog](../CHANGELOG.md)); this file keeps the plan as it was agreed, with each milestone marked. For using the tool see the [user manual](user-manual/README.md).
 
+**Contents:** [M0 Foundation (M)](#m0-foundation-m) · [M1 Model and units (M)](#m1-model-and-units-m) · [M2 Static budgets: power and mass (L, two PRs)](#m2-static-budgets-power-and-mass-l-two-prs) · [M3 Environment (L, two PRs: M3a core and CLI, done; M3b GUI timeline editor, done)](#m3-environment-l-two-prs-m3a-core-and-cli-done-m3b-gui-timeline-editor-done) · [M4 Time-domain power budget (L, done)](#m4-time-domain-power-budget-l-done) · [M4b Thermal budget (L, done)](#m4b-thermal-budget-l-done) · [M5 Link budget (L, done)](#m5-link-budget-l-done) · [M6 Polish (M, done)](#m6-polish-m-done) · [Critical path / external inputs](#critical-path--external-inputs)
+
 Rules for every milestone: tests first; ruff + mypy strict clean; no network; each ends with a demo note in `docs/demo/Mx.md`. Estimates are relative (S/M/L).
 
 ## M0 Foundation (M)
@@ -53,3 +55,5 @@ Acceptance: all three reference projects produce golden reports (`tests/golden/t
 ## Critical path / external inputs
 Scope changes: mass, CG, inertia and phases are in v1 and sit in M2b (D-033); thermal dissipation, limits and the steady-state node model are in v1 as M4b (D-036).
 SpaceMissionStudio sample exports (M3); margin policy and Eb/N0/attenuation sources (before M2/M5 reports are meaningful, not blocking development); confirmation of repository privacy and branch protection (M0).
+
+Next: [Changelog](../CHANGELOG.md) · [Architecture](ARCHITECTURE.md) · [Docs index](README.md).
