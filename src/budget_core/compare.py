@@ -10,7 +10,6 @@ display limit are counted and stated.
 
 from __future__ import annotations
 
-import csv
 import io
 import json
 from collections.abc import Sequence
@@ -19,6 +18,7 @@ from typing import Literal
 
 from budget_core.provenance import Provenance
 from budget_core.reports.common import BANNER, sheet_name
+from budget_core.reports.csvutil import csv_writer
 from budget_core.reports.document import (
     Cell,
     Column,
@@ -258,7 +258,7 @@ CSV_HEADER = [
 
 def _csv(results: Sequence[ComparisonResult]) -> str:
     buffer = io.StringIO()
-    writer = csv.writer(buffer, lineterminator="\n")
+    writer = csv_writer(buffer)
     writer.writerow(CSV_HEADER)
     for r in results:
         for d in r.differences:

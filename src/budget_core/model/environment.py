@@ -11,7 +11,8 @@ from budget_core.model.base import BudgetModel, duplicate_names
 from budget_core.model.versions import CURRENT_VERSIONS
 from budget_core.timeutil import normalise_utc
 
-MAX_SAMPLES = 10_000_000
+MAX_SAMPLES = 1_000_000  # about 11 days at 1 s; a week at 1 s (604,801) is the design case
+MAX_RULES = 10_000  # rules and segments per scenario
 
 
 def _utc(value: str) -> str:
@@ -145,8 +146,8 @@ class Scenario(BudgetModel):
     sites: list[str] = Field(default_factory=list)
     mission_phase: str | None = None  # selects the allowed battery depth of discharge
     default_mode: str = Field(min_length=1)
-    rules: list[ScenarioRule] = Field(default_factory=list)
-    segments: list[ScenarioSegment] = Field(default_factory=list)
+    rules: list[ScenarioRule] = Field(default_factory=list, max_length=MAX_RULES)
+    segments: list[ScenarioSegment] = Field(default_factory=list, max_length=MAX_RULES)
 
     @field_validator("start_utc")
     @classmethod

@@ -4,7 +4,6 @@ Unavailable values (placeholders) are empty cells in CSV and null in JSON."""
 
 from __future__ import annotations
 
-import csv
 import io
 import json
 from dataclasses import asdict
@@ -15,12 +14,13 @@ import numpy as np
 
 from budget_core.link.evaluate import LinkSeries, LinkSeriesResult, StaticLinkResult
 from budget_core.provenance import Provenance
+from budget_core.reports.csvutil import csv_writer
 from budget_core.timeutil import format_utc
 
 
 def _csv(header: list[str], rows: list[list[str]]) -> str:
     buffer = io.StringIO()
-    writer = csv.writer(buffer, lineterminator="\n")
+    writer = csv_writer(buffer)
     writer.writerow(header)
     writer.writerows(rows)
     return buffer.getvalue()

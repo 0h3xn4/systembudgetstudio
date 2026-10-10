@@ -14,6 +14,7 @@ from openpyxl.worksheet.worksheet import Worksheet
 from openpyxl.writer.excel import ExcelWriter
 
 from budget_core.reports.document import NA, Column, ReportDocument, Section, Table
+from budget_core.reports.textsafe import clean_document
 from budget_core.reports.zipnorm import normalise_zip
 
 FONT = "IBM Plex Sans"
@@ -94,11 +95,17 @@ def _write_section(ws: Worksheet, section: Section, banner: str, first: bool, ti
 
 
 def render_xlsx(doc: ReportDocument) -> bytes:
+    doc = clean_document(doc)
     wb = Workbook()
     wb.remove(wb.active)
     for i, section in enumerate(doc.sections):
         ws = wb.create_sheet(section.sheet_name)
         _write_section(ws, section, doc.banner, i == 0, doc.title)
+    for ws in wb.worksheets:  # project text such as "=HYPERLINK(...)" must stay text
+        for sheet_row in ws.iter_rows():
+            for cell in sheet_row:
+                if cell.data_type == "f":
+                    cell.data_type = "s"
     stamp = datetime.strptime(doc.provenance.generated, "%Y-%m-%dT%H:%M:%SZ")
     props = wb.properties
     props.creator = doc.provenance.tool

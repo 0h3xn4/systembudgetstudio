@@ -7,6 +7,7 @@ makes every result that needs it `None` (n/a); it is never replaced by zero.
 from __future__ import annotations
 
 import csv
+import math
 from collections.abc import Callable
 from dataclasses import dataclass
 from datetime import timedelta
@@ -15,6 +16,7 @@ from typing import Any
 import numpy as np
 
 from budget_core.assumptions import Assumption, incomplete
+from budget_core.io.paths import resolve_inside
 from budget_core.link import budget as lb
 from budget_core.model import Antenna, Link, Project, Sourced
 from budget_core.problems import Problem, Severity
@@ -229,7 +231,19 @@ class Resolved:
 def _read_pattern(
     project: Project, link_file: str, rel: str, notes: _Notes
 ) -> tuple[list[float], list[float]] | None:
-    path = project.root / rel
+    path = resolve_inside(project.root, rel)
+    if path is None:
+        notes.add_problem(
+            Problem(
+                Severity.ERROR,
+                "LINK_INPUT_INVALID",
+                "The antenna pattern file must be inside the project folder.",
+                file=rel,
+                hint="Use a relative path below the project folder; '..', absolute paths and "
+                "links that lead out are not followed.",
+            )
+        )
+        return None
     try:
         with path.open(encoding="utf-8", newline="") as handle:
             rows = list(csv.reader(handle))
@@ -239,7 +253,8 @@ def _read_pattern(
         gains = [float(r[g]) for r in rows[1:] if r]
         ok = len(angles) >= 2 and all(y > x for x, y in zip(angles, angles[1:], strict=False))
         ok = ok and angles[0] >= 0.0 and angles[-1] <= 180.0
-    except (OSError, ValueError, IndexError, UnicodeDecodeError):
+        ok = ok and all(math.isfinite(v) for v in (*angles, *gains))
+    except (OSError, ValueError, IndexError, UnicodeDecodeError, csv.Error):
         ok = False
     if not ok:
         notes.add_problem(

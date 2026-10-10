@@ -19,6 +19,7 @@ from docx.text.paragraph import Paragraph
 from budget_core.plots.render import image_size
 from budget_core.reports.document import NA, Column, Figure, ReportDocument, Section, Table
 from budget_core.reports.document import format_cell as _format_cell
+from budget_core.reports.textsafe import clean_document
 from budget_core.reports.zipnorm import normalise_zip
 
 FONT = "IBM Plex Sans"
@@ -142,6 +143,7 @@ def _section(doc: object, section: Section) -> None:
 
 
 def render_docx(doc: ReportDocument) -> bytes:
+    doc = clean_document(doc)
     document = Document()
     page = document.sections[0]
     page.orientation = WD_ORIENT.LANDSCAPE

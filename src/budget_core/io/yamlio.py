@@ -58,6 +58,11 @@ def format_path(path: Path) -> str:
     return out
 
 
+MAX_YAML_BYTES = 2_000_000  # a project file is a few kB; this stops memory and time exhaustion
+MAX_YAML_DEPTH = 64
+MAX_YAML_NODES = 200_000
+
+
 def _yaml() -> YAML:
     yaml = YAML(typ="rt")
     yaml.allow_duplicate_keys = False
@@ -65,6 +70,10 @@ def _yaml() -> YAML:
 
 
 def _convert(node: Any, path: Path, lines: dict[Path, int]) -> Any:
+    if len(path) > MAX_YAML_DEPTH:
+        raise YamlSyntaxError("the file is nested too deeply", None)
+    if len(lines) > MAX_YAML_NODES:
+        raise YamlSyntaxError("the file has too many entries", None)
     if isinstance(node, CommentedMap):
         lines[path] = node.lc.line + 1
         out: dict[Any, Any] = {}
@@ -93,7 +102,29 @@ def _convert(node: Any, path: Path, lines: dict[Path, int]) -> Any:
     return node
 
 
+def _reject_aliases(text: str) -> None:
+    """Aliases (*name) can expand a few hundred bytes into gigabytes; no project file needs them."""
+    from ruamel.yaml.tokens import AliasToken
+
+    try:
+        for token in _yaml().scan(text):
+            if isinstance(token, AliasToken):
+                line = token.start_mark.line + 1 if token.start_mark is not None else None
+                raise YamlSyntaxError(
+                    "anchors and aliases (&name, *name, <<) are not supported; "
+                    "write the values out",
+                    line,
+                )
+    except YamlSyntaxError:
+        raise
+    except Exception:  # a scanner error: the loader below reports it with its own message
+        return
+
+
 def load_yaml_text(text: str) -> LoadedYaml:
+    if len(text) > MAX_YAML_BYTES:
+        raise YamlSyntaxError("the file is too large", None)
+    _reject_aliases(text)
     try:
         raw = _yaml().load(text)
     except DuplicateKeyError as exc:
@@ -106,8 +137,14 @@ def load_yaml_text(text: str) -> LoadedYaml:
         raise YamlSyntaxError(
             "the file is not valid YAML", mark.line + 1 if mark is not None else None
         ) from None
+    except (RecursionError, ValueError, TypeError, OverflowError, MemoryError):
+        # nesting too deep, an impossible date, an integer with thousands of digits, ...
+        raise YamlSyntaxError("the file cannot be read as YAML", None) from None
     lines: dict[Path, int] = {}
-    data = _convert(raw, (), lines)
+    try:
+        data = _convert(raw, (), lines)
+    except RecursionError:
+        raise YamlSyntaxError("the file is nested too deeply", None) from None
     return LoadedYaml(data, LineMap(lines))
 
 

@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import csv
 import io
 import json
 from dataclasses import asdict
@@ -11,6 +10,7 @@ from typing import Any
 from budget_core.mass.static_mass import PhaseMass
 from budget_core.power.static_budget import ModePowerResult
 from budget_core.provenance import Provenance
+from budget_core.reports.csvutil import csv_writer
 from budget_core.thermal.static_thermal import CaseThermal, ModeHeat
 
 CSV_COLUMNS = (
@@ -49,7 +49,7 @@ def result_json(result: Any, provenance: Provenance) -> str:
 def result_csv(mode: ModePowerResult) -> str:
     """One mode's unit table. Unavailable values (placeholders) are empty cells."""
     buffer = io.StringIO()
-    writer = csv.writer(buffer, lineterminator="\n")
+    writer = csv_writer(buffer)
     writer.writerow(CSV_COLUMNS)
     for row in mode.rows:
         values = asdict(row)
@@ -75,7 +75,7 @@ MASS_CSV_COLUMNS = (
 def mass_csv(phase: PhaseMass) -> str:
     """One phase's item table. Unavailable values (placeholders, no position) are empty cells."""
     buffer = io.StringIO()
-    writer = csv.writer(buffer, lineterminator="\n")
+    writer = csv_writer(buffer)
     writer.writerow(MASS_CSV_COLUMNS)
     for row in phase.rows:
         x, y, z = row.position_m if row.position_m else (None, None, None)
@@ -116,7 +116,7 @@ THERMAL_CSV_COLUMNS = (
 def thermal_mode_csv(mode: ModeHeat) -> str:
     """One mode's dissipation by unit. Unavailable values are empty cells."""
     buffer = io.StringIO()
-    writer = csv.writer(buffer, lineterminator="\n")
+    writer = csv_writer(buffer)
     writer.writerow(THERMAL_CSV_COLUMNS)
     for row in mode.rows:
         values = asdict(row)
@@ -137,7 +137,7 @@ def thermal_case_csv(case: CaseThermal) -> str:
         "conducted_out_w",
     )
     buffer = io.StringIO()
-    writer = csv.writer(buffer, lineterminator="\n")
+    writer = csv_writer(buffer)
     writer.writerow(columns)
     for node in case.nodes:
         values = asdict(node)

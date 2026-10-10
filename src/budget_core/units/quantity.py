@@ -66,6 +66,24 @@ _LOG_TOKENS: dict[str, dict[str, float]] = {
 }
 _ALL_LOG_TOKENS = {"db", "dbi", "dbw", "dbm", "dbhz", "dbk", "db/k", "dbc"}
 
+# Largest magnitude accepted in any unit-suffixed field (in the canonical unit). Far beyond every
+# physical quantity this tool handles, but small enough that squares and products cannot overflow.
+MAX_MAGNITUDE = 1.0e20
+
+# A unit token is handed to pint's expression parser, which evaluates arithmetic: "(9**9**9)" would
+# never finish. Only plain unit names with simple exponents are passed on.
+_TOKEN_CHARS = re.compile(r"^[A-Za-z0-9_\u00b0\u00b5\u03bc\u03a9%/ ^*.\u00b7\-]{1,32}$")
+_EXPONENT = re.compile(r"(?:\*\*|\^)\s*-?\d{1,2}(?!\d)")
+_CHAINED = re.compile(r"(?:\*\*|\^)\s*-?\d+\s*(?:\*\*|\^)")
+
+
+def _token_ok(token: str) -> bool:
+    if not _TOKEN_CHARS.match(token) or _CHAINED.search(token):
+        return False
+    rest = _EXPONENT.sub("", token)
+    return "**" not in rest and "^" not in rest
+
+
 _NUMBER = re.compile(
     r"^\s*([+-]?(?:nan|inf(?:inity)?|\d+\.?\d*(?:[eE][+-]?\d+)?|\.\d+(?:[eE][+-]?\d+)?))\s*(.*?)\s*$",
     re.IGNORECASE,
@@ -113,12 +131,18 @@ def parse_quantity(text: str, field: str) -> float:
     if not math.isfinite(number):
         raise UnitError("the value must be a finite number")
     token = match.group(2)
+    if token and not _token_ok(token):
+        raise UnitError("the unit is not recognised; write a plain unit name such as 'kW' or 'm^2'")
 
     if key in _LOG_TOKENS:
-        return number + _log_offset(key, info, token)
-    if key == "ratio":
-        return _ratio(number, token)
-    return _linear(number, token, key, info)
+        result = number + _log_offset(key, info, token)
+    elif key == "ratio":
+        result = _ratio(number, token)
+    else:
+        result = _linear(number, token, key, info)
+    if abs(result) > MAX_MAGNITUDE:
+        raise UnitError("the value is far outside any physical range")
+    return result
 
 
 def _example(key: str) -> str:
@@ -164,14 +188,14 @@ def _linear(number: float, token: str, key: str, info: _Suffix) -> float:
     try:
         quantity = ureg.Quantity(number, token)
     except pint.errors.PintError as exc:
-        raise UnitError(f"the unit '{token}' is not recognised") from exc
+        raise UnitError("the unit is not recognised") from exc
     except Exception as exc:  # pint can raise AttributeError/TypeError for odd tokens
-        raise UnitError(f"the unit '{token}' is not recognised") from exc
+        raise UnitError("the unit is not recognised") from exc
     try:
         value = float(quantity.to(info.pint_unit).magnitude)
     except pint.errors.PintError as exc:
         raise UnitError(
-            f"'{token}' is not a {info.dimension} unit; this field is a {info.dimension} "
+            f"the unit is not a {info.dimension} unit; this field is a {info.dimension} "
             f"in {info.label}"
         ) from exc
     if not math.isfinite(value):

@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import csv
 import io
 import json
 from datetime import timedelta
@@ -10,6 +9,8 @@ from pathlib import Path
 from typing import Any
 
 from budget_core.provenance import Provenance
+from budget_core.reports.csvutil import csv_writer
+from budget_core.reports.files import write_file
 from budget_core.scenario.run import ScenarioRun
 from budget_core.timeutil import format_utc
 
@@ -24,7 +25,7 @@ def _s(value: float) -> str:
 
 def _csv(header: list[str], rows: list[list[str]]) -> str:
     buffer = io.StringIO()
-    writer = csv.writer(buffer, lineterminator="\n")
+    writer = csv_writer(buffer)
     writer.writerow(header)
     writer.writerows(rows)
     return buffer.getvalue()
@@ -160,7 +161,6 @@ def environment_json(run: ScenarioRun, provenance: Provenance) -> str:
 
 
 def write_scenario_outputs(run: ScenarioRun, provenance: Provenance, out_dir: Path) -> list[Path]:
-    out_dir.mkdir(parents=True, exist_ok=True)
     sid = run.scenario_id
     files = {
         f"{sid}_environment.json": environment_json(run, provenance),
@@ -168,9 +168,4 @@ def write_scenario_outputs(run: ScenarioRun, provenance: Provenance, out_dir: Pa
         f"{sid}_passes.csv": passes_csv(run),
         f"{sid}_timeline.csv": timeline_csv(run),
     }
-    written = []
-    for name, text in files.items():
-        path = out_dir / name
-        path.write_bytes(text.encode("utf-8"))
-        written.append(path)
-    return written
+    return [write_file(out_dir, name, text) for name, text in files.items()]

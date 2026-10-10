@@ -14,7 +14,14 @@ from pydantic import ValidationError
 
 from budget_core.io.errors import explain
 from budget_core.io.migrations import DEFAULT_REGISTRY, MigrationRegistry
-from budget_core.io.yamlio import LineMap, YamlSyntaxError, dump_yaml, load_yaml_text
+from budget_core.io.paths import resolve_inside
+from budget_core.io.yamlio import (
+    MAX_YAML_BYTES,
+    LineMap,
+    YamlSyntaxError,
+    dump_yaml,
+    load_yaml_text,
+)
 from budget_core.model import (
     AttenuationTable,
     BudgetModel,
@@ -134,7 +141,23 @@ class _Loader:
 
     def load(self, rel: str, model_cls: type[M], kind: str) -> M | None:
         path = self.root / rel
+        if resolve_inside(self.root, rel) is None:
+            self.error(
+                "FILE_INVALID",
+                "The file must be inside the project folder (links that lead out are not "
+                "followed).",
+                rel,
+            )
+            return None
         try:
+            if path.stat().st_size > MAX_YAML_BYTES:
+                self.error(
+                    "FILE_INVALID",
+                    "The file is too large to be a project file.",
+                    rel,
+                    "Project files are small text files; check that this is the right file.",
+                )
+                return None
             text = path.read_bytes().decode("utf-8")
         except UnicodeDecodeError:
             self.error(
@@ -192,6 +215,15 @@ class _Loader:
             return model_cls.model_validate(data)
         except ValidationError as exc:
             self.problems.extend(explain(exc, model_cls, rel, loaded.lines))
+            return None
+        except (ArithmeticError, ValueError, TypeError, RecursionError):
+            # a validator hit an impossible number (overflow and the like): report the file
+            self.error(
+                "FILE_INVALID",
+                "The file contains a value that cannot be processed.",
+                rel,
+                "Check the numbers in this file; values must be finite and of a sensible size.",
+            )
             return None
 
 

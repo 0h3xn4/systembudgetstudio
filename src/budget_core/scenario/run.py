@@ -18,6 +18,7 @@ from budget_core.environment.spacemissionstudio import (
     EnvironmentInputError,
     SpaceMissionStudioImport,
 )
+from budget_core.io.paths import resolve_inside
 from budget_core.io.project_loader import model_to_data
 from budget_core.model import Project, Scenario
 from budget_core.problems import Problem, Severity
@@ -79,7 +80,17 @@ def sites_for(project: Project, scenario: Scenario) -> list[SiteDef]:
 def environment_for(project: Project, scenario: Scenario) -> Environment:
     if scenario.environment_source == "spacemissionstudio":
         assert scenario.import_dir is not None
-        return SpaceMissionStudioImport(project.root / scenario.import_dir)
+        folder = resolve_inside(project.root, scenario.import_dir)
+        if folder is None:
+            raise ScenarioRunError(
+                Problem(
+                    Severity.ERROR,
+                    "IMPORT_DIR_MISSING",
+                    "The import folder must be inside the project folder.",
+                    hint="Use a relative path below the project folder.",
+                )
+            )
+        return SpaceMissionStudioImport(folder)
     assert scenario.orbit is not None
     return ElementsPropagator(project.orbits[scenario.orbit])
 
@@ -147,8 +158,8 @@ def environment_key(project: Project, scenario: Scenario) -> str:
     if scenario.environment_source == "elements" and scenario.orbit in project.orbits:
         parts["orbit"] = model_to_data(project.orbits[scenario.orbit])
     if scenario.environment_source == "spacemissionstudio" and scenario.import_dir:
-        folder = project.root / scenario.import_dir
-        files = sorted(folder.glob("*.csv")) if folder.is_dir() else []
+        folder = resolve_inside(project.root, scenario.import_dir)
+        files = sorted(folder.glob("*.csv")) if folder is not None and folder.is_dir() else []
         parts["import"] = [[p.name, p.stat().st_size, p.stat().st_mtime_ns] for p in files]
     text = json.dumps(parts, sort_keys=True, default=str)
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
