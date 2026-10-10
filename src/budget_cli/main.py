@@ -189,6 +189,17 @@ def build_parser() -> argparse.ArgumentParser:
     cmp.add_argument("--user", help="User name for the provenance block.")
     cmp.add_argument("--date", type=_iso_datetime, help="Generation time, ISO 8601.")
 
+    gde = sub.add_parser(
+        "guide", help="Write the user guide (offline HTML and PDF) with the Equations and sources."
+    )
+    gde.add_argument("--out", type=Path, required=True, help="Output folder.")
+    gde.add_argument("--format", choices=("html", "pdf", "all"), default="all")
+    gde.add_argument(
+        "--project",
+        type=Path,
+        help="Also list the numbers and sources of this project's configuration.",
+    )
+
     sub.add_parser(
         "self-test", help="Check that this installation can compute and render a budget."
     )
@@ -486,6 +497,37 @@ def _compare(args: argparse.Namespace) -> int:
     return 0
 
 
+def _guide(args: argparse.Namespace) -> int:
+    from budget_core.guide.build import build_guide
+
+    project = None
+    if args.project is not None:
+        loaded = load_project(args.project)
+        errors = _count(loaded.problems, Severity.ERROR)
+        if loaded.project is None or errors:
+            for problem in loaded.problems:
+                print(problem.format())
+            print(f"{_plural(errors, 'error')}; nothing was written.")
+            return 1
+        project = loaded.project
+    guide = build_guide(project)
+    args.out.mkdir(parents=True, exist_ok=True)
+    stem = "system-budget-studio-guide"
+    if args.format in ("html", "all"):
+        from budget_core.guide.html import render_html
+
+        path = args.out / f"{stem}.html"
+        path.write_text(render_html(guide), encoding="utf-8", newline="\n")
+        print(f"Wrote {path}")
+    if args.format in ("pdf", "all"):
+        from budget_core.guide.pdf import render_pdf
+
+        path = args.out / f"{stem}.pdf"
+        path.write_bytes(render_pdf(guide))
+        print(f"Wrote {path}")
+    return 0
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
@@ -495,6 +537,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         return _scenario(args)
     if args.command == "link-passes":
         return _link_passes(args)
+    if args.command == "guide":
+        return _guide(args)
     if args.command == "compare":
         return _compare(args)
     if args.command == "power-timeline":

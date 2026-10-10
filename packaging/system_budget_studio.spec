@@ -8,7 +8,10 @@ root = Path(SPECPATH).parent
 a = Analysis(
     [str(root / "src" / "budget_gui" / "app.py")],
     pathex=[str(root / "src")],
-    datas=[(str(root / "assets"), "budget_core/assets")]
+    datas=[
+        (str(root / "assets"), "budget_core/assets"),
+        (str(root / "src" / "budget_core" / "guide" / "chapters"), "budget_core/guide/chapters"),
+    ]
     + collect_data_files("pint")
     # python-docx reads its templates through "<package>/parts/../templates"; the .py files are
     # included so that the parts folder exists in the bundle (the path has to resolve).

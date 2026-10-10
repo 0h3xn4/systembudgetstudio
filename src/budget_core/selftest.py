@@ -58,6 +58,7 @@ def run_selftest() -> list[str]:
         failures += _time_domain_check()
         failures += _thermal_check()
         failures += _link_check()
+        failures += _guide_check()
     except Exception as exc:  # report the kind of failure, never file content
         failures.append(f"{type(exc).__name__} during the self-test")
     return failures
@@ -94,6 +95,23 @@ def _link_check() -> list[str]:
     document = build_link_report(project, result, make_provenance(project, user="self-test"))
     if not render_docx(document).startswith(b"PK"):
         failures.append("link DOCX output is not a ZIP file")
+    return failures
+
+
+def _guide_check() -> list[str]:
+    """The shipped guide chapters are present and the guide renders (HTML and PDF)."""
+    from budget_core.guide.build import build_guide
+    from budget_core.guide.html import render_html
+    from budget_core.guide.pdf import render_pdf
+
+    guide = build_guide()
+    failures: list[str] = []
+    if len(guide.chapters) < 8:
+        failures.append("the user guide chapters are missing")
+    if "Equations and sources" not in render_html(guide, embed_fonts=False):
+        failures.append("the user guide HTML lacks the equations chapter")
+    if not render_pdf(guide).startswith(b"%PDF-"):
+        failures.append("the user guide PDF is not a PDF file")
     return failures
 
 

@@ -22,6 +22,7 @@ from budget_core.reports.run import REPORT_KINDS
 from budget_gui.compare_view import CompareView
 from budget_gui.editor import EditorTabs
 from budget_gui.guided import GuidedWizard
+from budget_gui.help_view import GuideDialog
 from budget_gui.link_view import LinkPassesView
 from budget_gui.scenario_view import ScenarioView
 from budget_gui.session import ProjectSession
@@ -104,6 +105,11 @@ class MainWindow(QMainWindow):
         add("Export power &timeline…", QKeySequence("Ctrl+Shift+E"), self._choose_timeline_export)
         file_menu.addSeparator()
         add("&Quit", QKeySequence.StandardKey.Quit, self.close)
+        help_menu = self.menuBar().addMenu("&Help")
+        guide = QAction("&User guide", self)
+        guide.setShortcut(QKeySequence.StandardKey.HelpContents)
+        guide.triggered.connect(lambda: self.open_guide())
+        help_menu.addAction(guide)
 
     def open_guided_wizard(self, parent_folder: Path | None = None) -> GuidedWizard:
         """Show the guided new-project wizard; on Finish the project opens and its first power
@@ -115,6 +121,12 @@ class MainWindow(QMainWindow):
         wizard.created.connect(self._guided_created)
         wizard.open()
         return wizard
+
+    def open_guide(self) -> GuideDialog:
+        """The user guide; with a project open it also lists that project's numbers and sources."""
+        dialog = GuideDialog(self.session.project, self)
+        dialog.open()
+        return dialog
 
     def _guided_created(self, folder: Path) -> None:
         self.open_project(folder)
