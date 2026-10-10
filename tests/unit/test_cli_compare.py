@@ -36,6 +36,7 @@ def test_compare_two_revisions_writes_all_kinds(
         "compare.pdf",
         "compare.xlsx",
         "compare_differences.csv",
+        "compare_provenance.csv",
     ]
     data = json.loads((out / "compare.json").read_text(encoding="utf-8"))
     assert data["differences"]

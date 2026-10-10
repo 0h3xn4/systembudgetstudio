@@ -14,6 +14,7 @@ from budget_core.power.static_budget import StaticPowerResult
 from budget_core.power.time_domain import TimeDomainResult
 from budget_core.problems import Problem
 from budget_core.provenance import Provenance
+from budget_core.reports.csvutil import provenance_csv
 from budget_core.reports.document import ReportDocument
 from budget_core.reports.export import (
     mass_csv,
@@ -174,8 +175,9 @@ def write_outputs(
                     else result_json(out.result, out.provenance),
                 )
             )
-        if "csv" in kinds:
+        if "csv" in kinds and out.csv_files:
             files.extend(out.csv_files)
+            files.append((f"{out.prefix}_provenance.csv", provenance_csv(out.provenance)))
     names = [safe_name(name) for name, _ in files]
     if len(set(names)) != len(names):
         raise OutputError(

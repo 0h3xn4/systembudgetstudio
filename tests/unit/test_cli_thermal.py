@@ -60,6 +60,7 @@ def test_all_report_kinds_are_written(two_nodes: Path, tmp_path: Path) -> None:
         "thermal_static.xlsx",
         "thermal_static_cold.csv",
         "thermal_static_hot.csv",
+        "thermal_static_provenance.csv",
     ]
 
 

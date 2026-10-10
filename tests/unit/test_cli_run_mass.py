@@ -30,6 +30,7 @@ def test_mass_only(root: Path, tmp_path: Path) -> None:
         "mass_static.xlsx",
         "mass_static_eol.csv",
         "mass_static_launch.csv",
+        "mass_static_provenance.csv",
     ]
 
 

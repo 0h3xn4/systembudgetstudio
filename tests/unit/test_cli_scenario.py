@@ -31,6 +31,7 @@ def test_writes_environment_eclipses_passes_and_timeline(
         "day_eclipses.csv",
         "day_environment.json",
         "day_passes.csv",
+        "day_provenance.csv",
         "day_timeline.csv",
     ]
     text = capsys.readouterr().out

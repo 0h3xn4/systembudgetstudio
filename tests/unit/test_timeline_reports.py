@@ -184,6 +184,7 @@ def test_write_outputs_names(output, tmp_path: Path) -> None:  # type: ignore[no
         "power_time_synthetic_bol.csv",
         "power_time_synthetic_eol.csv",
         "power_time_synthetic_orbits.csv",
+        "power_time_synthetic_provenance.csv",
         "power_time_synthetic_violations.csv",
     ]
 
@@ -213,6 +214,7 @@ def test_cli_reports_findings_and_writes_every_file(
         "power_time_one_day_bol.csv",
         "power_time_one_day_eol.csv",
         "power_time_one_day_orbits.csv",
+        "power_time_one_day_provenance.csv",
         "power_time_one_day_violations.csv",
     ]
 
@@ -244,6 +246,7 @@ def test_cli_single_case_and_series_thinning(eps: Path, tmp_path: Path) -> None:
     assert sorted(p.name for p in out.iterdir()) == [
         "power_time_one_day_eol.csv",
         "power_time_one_day_orbits.csv",
+        "power_time_one_day_provenance.csv",
         "power_time_one_day_violations.csv",
     ]
     assert len((out / "power_time_one_day_eol.csv").read_text().splitlines()) == 8640 // 60 + 1
