@@ -72,8 +72,8 @@
 10: 'obc_b' | 'OBC B (cold redundant)' | 'DH' | 'DH' | 'off' | 0 | 1 | 0 | 0
 11: 'pcdu' | 'Power conditioning unit' | 'EPS' | 'EPS' | 'downlink' | 9 | 1 | 9 | 12
 12: 'pdu_data' | 'Payload data unit' | 'PL-DATA' | 'PL-DATA' | 'downlink' | 10 | 1 | 10 | 14
-13: 'reaction_wheels' | 'Reaction wheels' | 'AOCS' | 'AOCS' | 'downlink' | 7.199999999999999 | 1 | 7.199999999999999 | 30
-14: 'sband_trx' | 'S-band transceiver' | 'TTC' | 'TTC' | 'downlink' | 9.600000000000001 | 0.7 | 6.720000000000001 | 14
+13: 'reaction_wheels' | 'Reaction wheels' | 'AOCS' | 'AOCS' | 'downlink' | 7.2 | 1 | 7.2 | 30
+14: 'sband_trx' | 'S-band transceiver' | 'TTC' | 'TTC' | 'downlink' | 9.6 | 0.7 | 6.72 | 14
 15: 'solar_array' | 'Solar array panels' | 'EPS' | 'EPS' | 'off' | 0 | 1 | 0 | 0
 16: 'star_tracker' | 'Star tracker' | 'AOCS' | 'AOCS' | 'downlink' | 3.5 | 1 | 3.5 | 5
 17: 'structure' | 'Primary structure' | 'STRUCT' | 'STRUCT' | 'off' | 0 | 1 | 0 | 0
@@ -88,7 +88,7 @@
 27: 'PL-DATA' | 22.6 | 34 |  |  |  |  |  | 
 28: 'STRUCT' | 0 | 0 |  |  |  |  |  | 
 29: 'THERM' | 1.8 | 16 |  |  |  |  |  | 
-30: 'TTC' | 6.720000000000001 | 14 |  |  |  |  |  | 
+30: 'TTC' | 6.72 | 14 |  |  |  |  |  | 
 32: 'By thermal node' |  |  |  |  |  |  |  | 
 33: 'Node' | 'Dissipation (W)' | 'Peak dissipation (W)' |  |  |  |  |  | 
 34: 'AOCS' | 12.3 | 37.3 |  |  |  |  |  | 
@@ -152,7 +152,7 @@
 10: 'obc_b' | 'OBC B (cold redundant)' | 'DH' | 'DH' | 'off' | 0 | 1 | 0 | 0
 11: 'pcdu' | 'Power conditioning unit' | 'EPS' | 'EPS' | 'nominal' | 9 | 1 | 9 | 12
 12: 'pdu_data' | 'Payload data unit' | 'PL-DATA' | 'PL-DATA' | 'nominal' | 4 | 1 | 4 | 6
-13: 'reaction_wheels' | 'Reaction wheels' | 'AOCS' | 'AOCS' | 'nominal' | 7.199999999999999 | 1 | 7.199999999999999 | 30
+13: 'reaction_wheels' | 'Reaction wheels' | 'AOCS' | 'AOCS' | 'nominal' | 7.2 | 1 | 7.2 | 30
 14: 'sband_trx' | 'S-band transceiver' | 'TTC' | 'TTC' | 'nominal' | 2.5 | 1 | 2.5 | 3
 15: 'solar_array' | 'Solar array panels' | 'EPS' | 'EPS' | 'off' | 0 | 1 | 0 | 0
 16: 'star_tracker' | 'Star tracker' | 'AOCS' | 'AOCS' | 'nominal' | 3.5 | 1 | 3.5 | 5

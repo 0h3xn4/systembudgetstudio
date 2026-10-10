@@ -3,11 +3,11 @@
 2: 'INCOMPLETE: some inputs are placeholders (source TBD or missing). Entries marked n/a depend on them and are not computed. Do not use this report as evidence until the placeholders are replaced with sourced values.' |  | 
 4: 'Heat dissipation by spacecraft mode' |  | 
 5: 'Mode' | 'Average (W)' | 'Peak (W)'
-6: 'Charging' | 277.2625 | 496.979
-7: 'Downlink' | 275.9775 | 497.455
-8: 'Imaging' | 275.8125 | 496.686
+6: 'Charging' | 277.262 | 496.979
+7: 'Downlink' | 275.978 | 497.455
+8: 'Imaging' | 275.812 | 496.686
 9: 'Nominal' | 277.025 | 496.598
-10: 'Safe' | 275.9575 | 497.183
+10: 'Safe' | 275.957 | 497.183
 11: 'Average = sum of unit power x duty cycle x heat dissipation ratio. Peak uses the unit peak powers. n/a: a unit has no heat dissipation ratio for its power mode.' |  | 
 ## sheet Case cold rows=208 cols=8
 1: 'Eclipse with the lowest-power mode.' |  |  |  |  |  |  | 
@@ -126,7 +126,7 @@
 32: 'unit_029' | 'Stress unit 029' | 'THERM' | 'THERM' | 'charging' | 1.3 | 1 | 1.3 | 3.9
 33: 'unit_030' | 'Stress unit 030' | 'PL-DATA' | 'PL-DATA' | 'charging' | 3.01 | 1 | 3.01 | 4.515
 34: 'unit_031' | 'Stress unit 031' | 'HARNESS' | 'HARNESS' | 'charging' | 2.3 | 1 | 2.3 | 3.45
-35: 'unit_032' | 'Stress unit 032' | 'DH' | 'DH' | 'charging' | 1.3475 | 1 | 1.3475 | 4.042
+35: 'unit_032' | 'Stress unit 032' | 'DH' | 'DH' | 'charging' | 1.347 | 1 | 1.347 | 4.042
 36: 'unit_033' | 'Stress unit 033' | 'EPS' | 'EPS' | 'charging' | 3.12 | 1 | 3.12 | 4.68
 37: 'unit_034' | 'Stress unit 034' | 'AOCS' | 'AOCS' | 'charging' | 0.26 | 1 | 0.26 | 0.39
 38: 'unit_035' | 'Stress unit 035' | 'TTC' | 'TTC' | 'charging' | 0.245 | 1 | 0.245 | 0.735
@@ -139,7 +139,7 @@
 3: 'unit_000' | 'Stress unit 000' | 'DH' | 'DH' | 'downlink' | 0.13 | 1 | 0.13 | 0.39
 4: 'unit_001' | 'Stress unit 001' | 'EPS' | 'EPS' | 'downlink' | 0.49 | 1 | 0.49 | 0.735
 5: 'unit_002' | 'Stress unit 002' | 'AOCS' | 'AOCS' | 'downlink' | 0.5 | 1 | 0.5 | 0.75
-6: 'unit_003' | 'Stress unit 003' | 'TTC' | 'TTC' | 'downlink' | 0.3575 | 1 | 0.3575 | 1.073
+6: 'unit_003' | 'Stress unit 003' | 'TTC' | 'TTC' | 'downlink' | 0.357 | 1 | 0.357 | 1.073
 7: 'unit_004' | 'Stress unit 004' | 'PL' | 'PL' | 'downlink' | 0.96 | 1 | 0.96 | 1.44
 8: 'unit_005' | 'Stress unit 005' | 'THERM' | 'THERM' | 'downlink' | 1.235 | 1 | 1.235 | 1.853
 9: 'unit_006' | 'Stress unit 006' | 'PL-DATA' | 'PL-DATA' | 'downlink' | 0.77 | 1 | 0.77 | 2.31
@@ -151,10 +151,10 @@
 15: 'unit_012' | 'Stress unit 012' | 'PL' | 'PL' | 'downlink' | 1 | 1 | 1 | 3
 16: 'unit_013' | 'Stress unit 013' | 'THERM' | 'THERM' | 'downlink' | 2.365 | 1 | 2.365 | 3.548
 17: 'unit_014' | 'Stress unit 014' | 'PL-DATA' | 'PL-DATA' | 'downlink' | 2.76 | 1 | 2.76 | 4.14
-18: 'unit_015' | 'Stress unit 015' | 'HARNESS' | 'HARNESS' | 'downlink' | 1.5925 | 1 | 1.5925 | 4.777
+18: 'unit_015' | 'Stress unit 015' | 'HARNESS' | 'HARNESS' | 'downlink' | 1.593 | 1 | 1.593 | 4.777
 19: 'unit_016' | 'Stress unit 016' | 'DH' | 'DH' | 'downlink' | 3.64 | 1 | 3.64 | 5.46
 20: 'unit_017' | 'Stress unit 017' | 'EPS' | 'EPS' | 'downlink' | 0.2 | 1 | 0.2 | 0.3
-21: 'unit_018' | 'Stress unit 018' | 'AOCS' | 'AOCS' | 'downlink' | 0.1925 | 1 | 0.1925 | 0.578
+21: 'unit_018' | 'Stress unit 018' | 'AOCS' | 'AOCS' | 'downlink' | 0.193 | 1 | 0.193 | 0.578
 22: 'unit_019' | 'Stress unit 019' | 'TTC' | 'TTC' | 'downlink' | 0.6 | 1 | 0.6 | 0.9
 23: 'unit_020' | 'Stress unit 020' | 'PL' | 'PL' | 'downlink' | 0.845 | 1 | 0.845 | 1.268
 24: 'unit_021' | 'Stress unit 021' | 'THERM' | 'THERM' | 'downlink' | 0.56 | 1 | 0.56 | 1.68
@@ -166,7 +166,7 @@
 30: 'unit_027' | 'Stress unit 027' | 'TTC' | 'TTC' | 'downlink' | 0.85 | 1 | 0.85 | 2.55
 31: 'unit_028' | 'Stress unit 028' | 'PL' | 'PL' | 'downlink' | 2.035 | 1 | 2.035 | 3.053
 32: 'unit_029' | 'Stress unit 029' | 'THERM' | 'THERM' | 'downlink' | 2.4 | 1 | 2.4 | 3.6
-33: 'unit_030' | 'Stress unit 030' | 'PL-DATA' | 'PL-DATA' | 'downlink' | 1.3975 | 1 | 1.3975 | 4.192
+33: 'unit_030' | 'Stress unit 030' | 'PL-DATA' | 'PL-DATA' | 'downlink' | 1.397 | 1 | 1.397 | 4.192
 34: 'unit_031' | 'Stress unit 031' | 'HARNESS' | 'HARNESS' | 'downlink' | 3.22 | 1 | 3.22 | 4.83
 35: 'unit_032' | 'Stress unit 032' | 'DH' | 'DH' | 'downlink' | 2.45 | 1 | 2.45 | 3.675
 36: 'unit_033' | 'Stress unit 033' | 'EPS' | 'EPS' | 'downlink' | 1.43 | 1 | 1.43 | 4.29
@@ -179,7 +179,7 @@
 1: 'Units in mode Imaging' |  |  |  |  |  |  |  | 
 2: 'Unit' | 'Name' | 'Subsystem' | 'Node' | 'Power mode' | 'Effective power (W)' | 'Dissipation ratio' | 'Dissipation (W)' | 'Peak dissipation (W)'
 3: 'unit_000' | 'Stress unit 000' | 'DH' | 'DH' | 'imaging' | 0.24 | 1 | 0.24 | 0.36
-4: 'unit_001' | 'Stress unit 001' | 'EPS' | 'EPS' | 'imaging' | 0.2275 | 1 | 0.2275 | 0.682
+4: 'unit_001' | 'Stress unit 001' | 'EPS' | 'EPS' | 'imaging' | 0.228 | 1 | 0.228 | 0.682
 5: 'unit_002' | 'Stress unit 002' | 'AOCS' | 'AOCS' | 'imaging' | 0.7 | 1 | 0.7 | 1.05
 6: 'unit_003' | 'Stress unit 003' | 'TTC' | 'TTC' | 'imaging' | 0.65 | 1 | 0.65 | 0.975
 7: 'unit_004' | 'Stress unit 004' | 'PL' | 'PL' | 'imaging' | 0.44 | 1 | 0.44 | 1.32
@@ -225,7 +225,7 @@
 5: 'unit_002' | 'Stress unit 002' | 'AOCS' | 'AOCS' | 'nominal' | 0.325 | 1 | 0.325 | 0.975
 6: 'unit_003' | 'Stress unit 003' | 'TTC' | 'TTC' | 'nominal' | 0.91 | 1 | 0.91 | 1.365
 7: 'unit_004' | 'Stress unit 004' | 'PL' | 'PL' | 'nominal' | 0.8 | 1 | 0.8 | 1.2
-8: 'unit_005' | 'Stress unit 005' | 'THERM' | 'THERM' | 'nominal' | 0.5225 | 1 | 0.5225 | 1.567
+8: 'unit_005' | 'Stress unit 005' | 'THERM' | 'THERM' | 'nominal' | 0.522 | 1 | 0.522 | 1.567
 9: 'unit_006' | 'Stress unit 006' | 'PL-DATA' | 'PL-DATA' | 'nominal' | 1.32 | 1 | 1.32 | 1.98
 10: 'unit_007' | 'Stress unit 007' | 'HARNESS' | 'HARNESS' | 'nominal' | 1.625 | 1 | 1.625 | 2.438
 11: 'unit_008' | 'Stress unit 008' | 'DH' | 'DH' | 'nominal' | 0.98 | 1 | 0.98 | 2.94
@@ -240,7 +240,7 @@
 20: 'unit_017' | 'Stress unit 017' | 'EPS' | 'EPS' | 'nominal' | 0.13 | 1 | 0.13 | 0.39
 21: 'unit_018' | 'Stress unit 018' | 'AOCS' | 'AOCS' | 'nominal' | 0.49 | 1 | 0.49 | 0.735
 22: 'unit_019' | 'Stress unit 019' | 'TTC' | 'TTC' | 'nominal' | 0.5 | 1 | 0.5 | 0.75
-23: 'unit_020' | 'Stress unit 020' | 'PL' | 'PL' | 'nominal' | 0.3575 | 1 | 0.3575 | 1.073
+23: 'unit_020' | 'Stress unit 020' | 'PL' | 'PL' | 'nominal' | 0.357 | 1 | 0.357 | 1.073
 24: 'unit_021' | 'Stress unit 021' | 'THERM' | 'THERM' | 'nominal' | 0.96 | 1 | 0.96 | 1.44
 25: 'unit_022' | 'Stress unit 022' | 'PL-DATA' | 'PL-DATA' | 'nominal' | 1.235 | 1 | 1.235 | 1.853
 26: 'unit_023' | 'Stress unit 023' | 'HARNESS' | 'HARNESS' | 'nominal' | 0.77 | 1 | 0.77 | 2.31
@@ -252,10 +252,10 @@
 32: 'unit_029' | 'Stress unit 029' | 'THERM' | 'THERM' | 'nominal' | 1 | 1 | 1 | 3
 33: 'unit_030' | 'Stress unit 030' | 'PL-DATA' | 'PL-DATA' | 'nominal' | 2.365 | 1 | 2.365 | 3.548
 34: 'unit_031' | 'Stress unit 031' | 'HARNESS' | 'HARNESS' | 'nominal' | 2.76 | 1 | 2.76 | 4.14
-35: 'unit_032' | 'Stress unit 032' | 'DH' | 'DH' | 'nominal' | 1.5925 | 1 | 1.5925 | 4.777
+35: 'unit_032' | 'Stress unit 032' | 'DH' | 'DH' | 'nominal' | 1.593 | 1 | 1.593 | 4.777
 36: 'unit_033' | 'Stress unit 033' | 'EPS' | 'EPS' | 'nominal' | 3.64 | 1 | 3.64 | 5.46
 37: 'unit_034' | 'Stress unit 034' | 'AOCS' | 'AOCS' | 'nominal' | 0.2 | 1 | 0.2 | 0.3
-38: 'unit_035' | 'Stress unit 035' | 'TTC' | 'TTC' | 'nominal' | 0.1925 | 1 | 0.1925 | 0.578
+38: 'unit_035' | 'Stress unit 035' | 'TTC' | 'TTC' | 'nominal' | 0.193 | 1 | 0.193 | 0.578
 39: 'unit_036' | 'Stress unit 036' | 'PL' | 'PL' | 'nominal' | 0.6 | 1 | 0.6 | 0.9
 40: 'unit_037' | 'Stress unit 037' | 'THERM' | 'THERM' | 'nominal' | 0.845 | 1 | 0.845 | 1.268
 ...
@@ -265,7 +265,7 @@
 3: 'unit_000' | 'Stress unit 000' | 'DH' | 'DH' | 'safe' | 0.1 | 1 | 0.1 | 0.3
 4: 'unit_001' | 'Stress unit 001' | 'EPS' | 'EPS' | 'safe' | 0.385 | 1 | 0.385 | 0.578
 5: 'unit_002' | 'Stress unit 002' | 'AOCS' | 'AOCS' | 'safe' | 0.6 | 1 | 0.6 | 0.9
-6: 'unit_003' | 'Stress unit 003' | 'TTC' | 'TTC' | 'safe' | 0.4225 | 1 | 0.4225 | 1.268
+6: 'unit_003' | 'Stress unit 003' | 'TTC' | 'TTC' | 'safe' | 0.422 | 1 | 0.422 | 1.268
 7: 'unit_004' | 'Stress unit 004' | 'PL' | 'PL' | 'safe' | 1.12 | 1 | 1.12 | 1.68
 8: 'unit_005' | 'Stress unit 005' | 'THERM' | 'THERM' | 'safe' | 0.95 | 1 | 0.95 | 1.425
 9: 'unit_006' | 'Stress unit 006' | 'PL-DATA' | 'PL-DATA' | 'safe' | 0.605 | 1 | 0.605 | 1.815
@@ -280,7 +280,7 @@
 18: 'unit_015' | 'Stress unit 015' | 'HARNESS' | 'HARNESS' | 'safe' | 1.225 | 1 | 1.225 | 3.675
 19: 'unit_016' | 'Stress unit 016' | 'DH' | 'DH' | 'safe' | 2.86 | 1 | 2.86 | 4.29
 20: 'unit_017' | 'Stress unit 017' | 'EPS' | 'EPS' | 'safe' | 0.24 | 1 | 0.24 | 0.36
-21: 'unit_018' | 'Stress unit 018' | 'AOCS' | 'AOCS' | 'safe' | 0.2275 | 1 | 0.2275 | 0.682
+21: 'unit_018' | 'Stress unit 018' | 'AOCS' | 'AOCS' | 'safe' | 0.228 | 1 | 0.228 | 0.682
 22: 'unit_019' | 'Stress unit 019' | 'TTC' | 'TTC' | 'safe' | 0.7 | 1 | 0.7 | 1.05
 23: 'unit_020' | 'Stress unit 020' | 'PL' | 'PL' | 'safe' | 0.65 | 1 | 0.65 | 0.975
 24: 'unit_021' | 'Stress unit 021' | 'THERM' | 'THERM' | 'safe' | 0.44 | 1 | 0.44 | 1.32

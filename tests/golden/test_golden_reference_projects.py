@@ -9,6 +9,7 @@ differ between platforms); completeness of the full outputs is checked elsewhere
 
 from __future__ import annotations
 
+import re
 from dataclasses import replace
 from datetime import UTC, datetime
 from pathlib import Path
@@ -72,15 +73,19 @@ def build(kind: str, name: str) -> BudgetOutput:
     return out
 
 
+def whole_seconds(text: str) -> str:
+    """Pass times are refined by bisection to about a millisecond; the last digits depend on the
+    platform's floating point, so compare them to the second."""
+    return re.sub(r"(\d\d:\d\d:\d\d)\.\d+Z", r"\1Z", text)
+
+
 @pytest.mark.parametrize(("kind", "name"), CASES)
 def test_xlsx(kind: str, name: str) -> None:
-    check_golden(
-        f"ref_{kind}_{name}.xlsx.txt", dump_xlsx(render_xlsx(build(kind, name).document), ROWS)
-    )
+    dump = dump_xlsx(render_xlsx(build(kind, name).document), ROWS, float_digits=3)
+    check_golden(f"ref_{kind}_{name}.xlsx.txt", whole_seconds(dump))
 
 
 @pytest.mark.parametrize(("kind", "name"), CASES)
 def test_pdf(kind: str, name: str) -> None:
-    check_golden(
-        f"ref_{kind}_{name}.pdf.txt", dump_pdf(render_pdf(build(kind, name).document), PAGES)
-    )
+    dump = dump_pdf(render_pdf(build(kind, name).document), PAGES)
+    check_golden(f"ref_{kind}_{name}.pdf.txt", whole_seconds(dump))
