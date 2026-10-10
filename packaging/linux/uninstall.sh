@@ -1,13 +1,18 @@
 #!/bin/sh
 # Removes what install.sh created: the program folder, the command links and the menu entry.
-# Your projects, reports and settings are not touched (the tool stores none outside them).
+# Your projects, reports and settings are not touched (the tool stores none outside them), and
+# a command of yours that install.sh did not create is left alone.
 # Usage: uninstall.sh [--quiet]
 set -eu
 
 quiet=0
 [ "${1:-}" = "--quiet" ] && quiet=1
 
-prefix="$(cd "$(dirname "$0")" && pwd)"
+self="$0"
+if command -v readlink >/dev/null 2>&1 && resolved="$(readlink -f "$self" 2>/dev/null)"; then
+    self="$resolved"
+fi
+prefix="$(cd "$(dirname "$self")" && pwd -P)"
 manifest="$prefix/install-manifest.txt"
 if [ ! -f "$manifest" ]; then
     echo "$prefix has no install-manifest.txt; it was not installed by install.sh." >&2

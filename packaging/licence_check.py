@@ -115,9 +115,10 @@ NOTES = """
 
 - **LGPL (PySide6-Essentials, shiboken6; Qt).** Used under the LGPL-3.0 option of their dual
   licence. The Windows and Linux builds are one-folder bundles in which the Qt and PySide6 libraries
-  stay separate shared files, so a user can replace them (the LGPL relinking condition). Ship the
-  licence texts with the bundle (`licences.md` and the `LICENSES` of the packages) and do not
-  modify Qt itself.
+  stay separate shared files, so a user can replace them (the LGPL relinking condition). The bundle
+  ships the licence texts (`licences/<package>/`, with the LGPL and GPL texts from
+  `assets/licences/` for the Qt bindings, whose wheels carry none), `licences.md` and the SBOM
+  next to the program; `packaging/check_bundle.py` fails a build that lacks them. Do not modify Qt.
 - **Permissive licences** (MIT, BSD, Apache, PSF, HPND/MIT-CMU): keep the copyright notices; the
   bundle ships them with the package metadata.
 - **IBM Plex fonts** (`assets/fonts`): SIL Open Font License 1.1, the licence text is bundled in
@@ -141,9 +142,55 @@ def markdown(entries: list[Entry]) -> str:
     )
 
 
+LICENCE_FILE = re.compile(r"(^|/)(licen[cs]es?|copying|notice|authors)([^/]*)$", re.I)
+QT_TEXTS = ("LGPL-3.0.txt", "GPL-3.0.txt")
+
+
+def collect(out: Path) -> int:
+    """Copy the licence texts of every runtime package into `out/<package>/`; return how many
+    files were written. The LGPL and GPL texts kept in `assets/licences/` are always copied for
+    the LGPL packages (the Qt bindings), whether or not their wheel carries texts. Writes
+    `INDEX.md` too."""
+    out.mkdir(parents=True, exist_ok=True)
+    written = 0
+    index = [
+        "# Licence texts of the bundled packages",
+        "",
+        "| Package | Licence | Files |",
+        "|---|---|---|",
+    ]
+    for entry in review():
+        dist = distribution(entry.name)
+        folder = out / entry.name
+        files: list[str] = []
+        for file in dist.files or []:
+            if LICENCE_FILE.search(str(file).replace("\\", "/")) and "/fonts/" not in str(file):
+                source = Path(str(dist.locate_file(file)))
+                if source.is_file():
+                    target = folder / f"{len(files):02d}-{source.name}"
+                    folder.mkdir(parents=True, exist_ok=True)
+                    target.write_bytes(source.read_bytes())
+                    files.append(target.name)
+                    written += 1
+        if entry.category == "lgpl":
+            # always ship the LGPL and GPL texts for the LGPL packages: some wheels (Windows) carry
+            # their own licence files, others (Linux) carry none
+            folder.mkdir(parents=True, exist_ok=True)
+            for name in QT_TEXTS:
+                (folder / name).write_bytes((ROOT / "assets" / "licences" / name).read_bytes())
+                files.append(name)
+                written += 1
+        if not files:  # never ship a package without its licence text
+            raise SystemExit(f"No licence text found for {entry.name}")
+        index.append(f"| {entry.name} | {entry.licence} | {', '.join(files)} |")
+    (out / "INDEX.md").write_text("\n".join(index) + "\n", encoding="utf-8", newline="\n")
+    return written
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--markdown", type=Path, help="Write the review as Markdown.")
+    parser.add_argument("--collect", type=Path, help="Copy every package's licence text here.")
     args = parser.parse_args(argv)
     try:
         entries = review()
@@ -154,6 +201,8 @@ def main(argv: list[str] | None = None) -> int:
         print(f"{e.name:24} {e.category:11} {e.licence}")
     if args.markdown:
         args.markdown.write_text(markdown(entries), encoding="utf-8", newline="\n")
+    if args.collect:
+        print(f"Wrote {collect(args.collect)} licence file(s) to {args.collect}")
     bad = [e for e in entries if e.category not in ALLOWED]
     for e in bad:
         print(f"NOT ALLOWED: {e.name} ({e.licence}): {e.category}")
