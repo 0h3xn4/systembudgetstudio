@@ -6,14 +6,14 @@
 |---|---|---|---|---|
 | GUI | **PySide6** (LGPL) | PyQt6 (GPL/commercial) | Electron/web UI | PySide6: LGPL, same family as the sibling tools, no browser to bundle. PyQt6 licence conflicts with closed use. Electron is heavy and invites CDN/network habits. |
 | Packaging | **PyInstaller** (onedir + installer wrapper) | Nuitka | briefcase/MSIX | PyInstaller is proven in the sibling tools, works without admin rights, onedir zip = portable build. |
-| Plots | **pyqtgraph** (GUI) + **Matplotlib Agg** (reports) | Matplotlib only | Qt Charts | pyqtgraph handles 600k-point series interactively; Matplotlib gives report-quality SVG/PNG. |
+| Plots | One neutral `PlotSpec`, a `QPainter` widget (GUI) and **Pillow** (reports) | pyqtgraph + Matplotlib | Qt Charts | Smaller bundle, fewer licences, same look in the GUI and in reports; long series are reduced to a min/max envelope per pixel (D-068, which replaced D-014). |
 | PDF | **ReportLab** | QPdfWriter | WeasyPrint | Pure Python, good tables; WeasyPrint needs native Pango/Cairo. |
 | Units | suffix convention + `pint` at I/O edge | `pint` everywhere | none | Speed in solvers, explicit units where humans type. |
 | Orbit | **sgp4** | skyfield | own | sgp4 is small and pure-Python-capable; skyfield needs ephemeris files (extra data to bundle). |
 | Data | **ruamel.yaml**, **jsonschema**, **pydantic v2** | PyYAML + dataclasses | | ruamel preserves order/comments for clean diffs; pydantic gives typed model plus migration hooks. (pydantic-core is a Rust wheel; acceptable, reliable wheels.) |
 | Reports | python-docx, openpyxl | | | As specified. |
 
-Runtime deps: PySide6, pyqtgraph, numpy, scipy, pandas, matplotlib, sgp4, pint, pydantic, ruamel.yaml, jsonschema, reportlab, python-docx, openpyxl, markdown (user guide HTML). Dev extra: pytest, pytest-qt, hypothesis, mypy, ruff, pyinstaller, cyclonedx-bom, pip-licenses, pip-audit, pip-tools/uv.
+Runtime deps (`[project.dependencies]`): PySide6-Essentials, pydantic, ruamel.yaml, pint, openpyxl, reportlab, python-docx, pillow, numpy, sgp4. Everything else (pytest, pytest-qt, hypothesis, pypdf, jsonschema, mypy, ruff, pyinstaller, cyclonedx-bom, pip-licenses, pip-audit, uv) is in the `dev` extra.
 
 ## 2. Package structure
 
@@ -21,7 +21,7 @@ Runtime deps: PySide6, pyqtgraph, numpy, scipy, pandas, matplotlib, sgp4, pint, 
 src/budget_core/      no GUI, no network imports (enforced by import-linter test)
   model/              pydantic models: Project, Spacecraft, Unit, PowerMode, SpacecraftMode,
                       Scenario, Array, Battery, Link, Transmitter, Receiver, GroundStation
-  io/                 YAML load/save, schema versioning + migrations, CSV/XLSX unit import
+  io/                 YAML load/save, schema versioning + migrations, (unit import from CSV/XLSX is deferred, D-099)
   units/              suffix conventions, pint parse/format, dB helpers
   config/             schemas (*.schema.json) and loaders; every number carries `source`
   environment/        Environment interface; SpaceMissionStudioImport; ElementsPropagator (sgp4)
@@ -37,7 +37,7 @@ src/budget_core/      no GUI, no network imports (enforced by import-linter test
   problems/           Problem(severity, code, message, location) — shared by validate/solvers
   reports/            xlsx, docx, pdf, csv, json; provenance block; figures
   provenance.py       tool/library versions, project revision, scenario, date, user
-src/budget_cli/       `budget validate | run | report | compare | import-units | template`
+src/budget_cli/       `budget validate | run | scenario | power-timeline | link-passes | compare | guide | self-test | export-schemas | export-examples`
 src/budget_gui/       PySide6 + Carbon theme; worker threads; no logic beyond presentation
 ```
 
@@ -83,7 +83,7 @@ class Environment(Protocol):
     def passes(self, station: GroundStation) -> list[Pass]   # elevation/range vs time
 ```
 - `SpaceMissionStudioImport`: reads exported orbit/eclipse/pass files. **Blocker:** the export format must be provided (sample files + field description) before M3; until then the adapter is built against a documented interim format and recorded in DECISIONS.
-- `ElementsPropagator`: TLE or Keplerian → sgp4 → positions; cylindrical shadow default, conical option; pass finder via elevation root-finding (SciPy). Earth only.
+- `ElementsPropagator`: TLE or Keplerian → sgp4 → positions; cylindrical shadow default, conical option; pass finder via elevation bisection (NumPy, no SciPy; D-058). Earth only.
 - Attitude in v1: configurable per-face sun incidence from a simple attitude mode (sun-pointing, nadir-pointing, fixed inertial) — documented in DEVIATIONS.
 
 ## 6. Solvers (summary)
@@ -103,7 +103,7 @@ Solvers are pure functions: dissipation roll-up, then a steady-state nodal heat 
 
 ## 7. GUI
 
-Carbon g100/white themes via bundled QSS + IBM Plex; main window = project tree (left), tabbed editors (table editors with unit-aware delegates, timeline editor), result plots (pyqtgraph, cursors, eclipse/pass shading), bottom Problems panel (double-click jumps to the offending editor cell). Runs execute in a `QThread` worker with cancel and progress; the GUI only touches `budget_core` public API and `Problem` objects. Guided mode = wizard over the same API (`budget_core.wizard` builds the project, `budget_gui.guided` is the QWizard; D-086). The Compare tab runs `budget_core.compare_run` in a worker thread (D-084, D-085); Help > User guide shows `budget_core.guide` (D-087). Tracebacks are caught at the top level and replaced by a message and a "save diagnostic (no project content)" option.
+Carbon g100/white themes via bundled QSS + IBM Plex; main window = project tree (left), tabbed editors (table editors with unit-aware delegates, timeline editor), result plots (a QPainter widget, cursors, eclipse/pass shading; D-068), bottom Problems panel (double-click jumps to the offending editor cell). Runs execute in a `QThread` worker with cancel and progress; the GUI only touches `budget_core` public API and `Problem` objects. Guided mode = wizard over the same API (`budget_core.wizard` builds the project, `budget_gui.guided` is the QWizard; D-086). The Compare tab runs `budget_core.compare_run` in a worker thread (D-084, D-085); Help > User guide shows `budget_core.guide` (D-087). Tracebacks are caught at the top level and replaced by a message and a "save diagnostic (no project content)" option.
 
 ## 8. Packaging, CI, supply chain
 

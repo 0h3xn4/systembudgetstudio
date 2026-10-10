@@ -20,6 +20,6 @@ Each report ends with the configuration numbers used (value, source, placeholder
 
 The same project, scenario, user name and generation time give the same file contents. Use `--user` and `--date` (or `BUDGET_USER` and `SOURCE_DATE_EPOCH`) to regenerate an earlier report.
 
-## Importing power data
+## Entering power data
 
-Unit power tables can be exported to and imported from CSV or XLSX templates that the tool generates itself, so a supplier's data can be filled in outside the tool.
+Unit power data is typed in the unit editor or written in the unit's YAML file (`units/<id>.yaml`). Importing unit tables from CSV or XLSX is not part of version 1; a supplier's figures are entered by hand, with their source.
