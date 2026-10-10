@@ -73,3 +73,28 @@ def test_error_messages_do_not_echo_the_input_value() -> None:
 @given(st.floats(min_value=1e-9, max_value=1e12, allow_nan=False))
 def test_format_parse_round_trip(x: float) -> None:
     assert math.isclose(parse_quantity(format_quantity(x, "freq_hz"), "freq_hz"), x, rel_tol=1e-12)
+
+
+@pytest.mark.parametrize("text", ["60 rpm", "1 revolution/s", "1 cycle/s", "3 rad/s", "10 deg/s"])
+def test_angular_units_are_not_frequencies(text: str) -> None:
+    # pint treats a revolution as 2 pi, so 60 rpm used to read as 6.283 Hz instead of 1 Hz
+    with pytest.raises(UnitError, match="angle"):
+        parse_quantity(text, "freq_hz")
+
+
+def test_degree_fields_still_take_angle_units() -> None:
+    assert parse_quantity("0.5 rad", "elevation_deg") == pytest.approx(28.6478897565)
+    assert parse_quantity("1 turn", "elevation_deg") == pytest.approx(360.0)
+
+
+@pytest.mark.parametrize("text", ["-300 degC", "-460 degF", "-273.16 degC"])
+def test_celsius_and_fahrenheit_below_absolute_zero_are_refused(text: str) -> None:
+    with pytest.raises(UnitError, match="absolute zero"):
+        parse_quantity(text, "space_temp_k")
+
+
+def test_celsius_is_converted_and_kelvin_differences_stay_possible() -> None:
+    assert parse_quantity("0 degC", "space_temp_k") == pytest.approx(273.15)
+    assert parse_quantity("-273.15 degC", "space_temp_k") == pytest.approx(0.0, abs=1e-9)
+    assert parse_quantity("-1 degC", "space_temp_k") == pytest.approx(272.15)
+    assert parse_quantity("-5 K", "margin_k") == -5.0  # a margin is a difference

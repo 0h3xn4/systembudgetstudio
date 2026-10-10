@@ -251,3 +251,35 @@ def test_a_node_without_a_path_to_space_is_an_error_naming_it() -> None:
     assert len(failed) == 2  # hot and cold
     assert all("(B)" in p.message for p in failed)
     assert all(not c.complete for c in result.cases)
+
+
+def stiff_network(stiffness_wk: float):  # type: ignore[no-untyped-def]
+    s = STEFAN_BOLTZMANN_WM2K4
+    g = np.zeros((3, 3))
+    g[0, 1] = g[1, 0] = stiffness_wk
+    g[1, 2] = g[2, 1] = 1.0
+    return g, np.array([0.1 * s, 0.0, 0.001 * s]), np.array([5.0, 0.0, 5.0])
+
+
+def test_stiff_network_matches_the_merged_body() -> None:
+    # nodes 0 and 1 are so tightly coupled that they act as one body; node 2 hangs on it by 1 W/K.
+    # Hand solution of the two-body balance (bisection, see the comments): 204.36669, 209.25796 K
+    g, r, q = stiff_network(1.0e6)
+    t = solve_steady_state(g, r, q, 3.0)
+    assert t[0] == pytest.approx(204.36669, abs=1e-4)
+    assert t[2] == pytest.approx(209.25796, abs=1e-4)
+
+
+def test_unresolvable_stiffness_is_refused_not_answered_wrongly() -> None:
+    g, r, q = stiff_network(1.0e12)
+    with pytest.raises(ThermalSolveError, match="double precision"):
+        solve_steady_state(g, r, q, 3.0)
+
+
+def test_within_limits_with_a_placeholder_margin_is_not_called_ok() -> None:
+    limits = TemperatureLimits(operating_min_k=250.0, operating_max_k=330.0)
+    result = static_thermal_budget(thermal_project(limits_u2=limits, margin=None))
+    hot = next(c for c in result.cases if c.case == "hot")
+    check = next(c for c in hot.checks if c.unit_id == "u2")
+    assert check.status == "ok (margin not checked)"
+    assert any(p.code == "RESULT_INCOMPLETE" for p in result.problems)

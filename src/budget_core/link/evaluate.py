@@ -19,12 +19,13 @@ from budget_core.assumptions import Assumption, incomplete
 from budget_core.io.paths import resolve_inside
 from budget_core.link import budget as lb
 from budget_core.model import Antenna, Link, Project, Sourced
+from budget_core.power.signals import integral_of_steps
 from budget_core.problems import Problem, Severity
 from budget_core.scenario.run import ScenarioRun
-from budget_core.scenario.timeline import mode_index_on_grid
 from budget_core.timeutil import format_utc
 
 NDArray = np.ndarray[Any, np.dtype[np.float64]]
+BoolArray = np.ndarray[Any, np.dtype[np.bool_]]
 IntArray = np.ndarray[Any, np.dtype[np.int64]]
 GainFn = Callable[[NDArray], NDArray]
 
@@ -74,7 +75,7 @@ class PassSummary:
     aos_s: float
     los_s: float
     max_elevation_deg: float
-    usable_s: float  # time with a rate that closes while the link is active
+    usable_s: float | None  # time with a rate that closes while the link is active; None: n/a
     minimum_margin_db: float | None  # at the lowest listed rate, over the active samples
     volume_bits: float | None
 
@@ -93,7 +94,7 @@ class LinkSeries:
     pass_index: IntArray  # which pass each sample belongs to (0-based)
     elevation_deg: NDArray
     range_m: NDArray
-    active: NDArray  # bool: the link is used (active modes) and below the tracking limit
+    active: BoolArray  # bool: the link is used (active modes) and below the tracking limit
     path_loss_db: NDArray | None
     atmospheric_loss_db: NDArray | None
     eirp_dbw: NDArray | None
@@ -557,6 +558,18 @@ def evaluate(res: Resolved, elevation_deg: NDArray, range_m: NDArray) -> Evaluat
     return Evaluation(path, atmos, np.asarray(eirp), np.asarray(gt), np.asarray(cn0))
 
 
+def _not_closed(link_id: str, where: str) -> Problem:
+    return Problem(
+        Severity.ERROR,
+        "LINK_NOT_CLOSED",
+        f"Link '{link_id}' closes at none of its listed data rates {where}.",
+        file=f"links/{link_id}.yaml",
+        path="data_rates_bps",
+        hint="Lower the data rates, raise the transmit power or antenna gain, or review the "
+        "losses and the required margin.",
+    )
+
+
 def _scalar(x: NDArray) -> float:
     return float(x[0])
 
@@ -568,6 +581,7 @@ def link_static_budget(project: Project) -> StaticLinkResult:
     for link_id in sorted(project.links):
         link = project.links[link_id]
         res = resolve_link(project, link_id, notes)
+        first_row = len(rows)
         for point in link.static_points:
             el = np.array([point.elevation_deg])
             d = np.array([point.range_m])
@@ -609,6 +623,9 @@ def link_static_budget(project: Project) -> StaticLinkResult:
                     cont,
                 )
             )
+        mine = rows[first_row:]
+        if mine and all(r.rates for r in mine) and all(r.max_rate_bps is None for r in mine):
+            notes.add_problem(_not_closed(link_id, "at any of its static points"))
         if not link.static_points:
             notes.add_problem(
                 Problem(
@@ -633,8 +650,6 @@ def link_pass_series(project: Project, run: ScenarioRun) -> LinkSeriesResult:
     grid_t = env.grid.times_s
     step = env.grid.step_s
     duration = env.grid.duration_s
-    mode_ids = sorted(project.modes)
-    mode_at = mode_index_on_grid(run.timeline, grid_t, mode_ids)
     series: list[LinkSeries] = []
     for link_id in sorted(project.links):
         link = project.links[link_id]
@@ -659,26 +674,36 @@ def link_pass_series(project: Project, run: ScenarioRun) -> LinkSeriesResult:
         idx: list[int] = []
         pass_of: list[int] = []
         weight: list[float] = []
+        lows: list[float] = []
+        highs: list[float] = []
         for k, p in enumerate(vis.passes):
             first = max(int(np.searchsorted(grid_t, p.aos_s, side="right")) - 1, 0)
             last = int(np.searchsorted(grid_t, p.los_s, side="left"))
             for i in range(first, min(last + 1, len(grid_t))):
                 t0, t1 = grid_t[i], min(grid_t[i] + step, duration)
-                w = min(t1, p.los_s) - max(t0, p.aos_s)
-                if w > 1e-12:
+                lo, hi = max(t0, p.aos_s), min(t1, p.los_s)
+                if hi - lo > 1e-12:
                     idx.append(i)
                     pass_of.append(k)
-                    weight.append(w)
+                    weight.append(hi - lo)
+                    lows.append(lo)
+                    highs.append(hi)
         index = np.array(idx, dtype=np.int64)
         times = grid_t[index]
         el = np.asarray(vis.elevation_deg, dtype=np.float64)[index]
         rng = np.asarray(vis.range_m, dtype=np.float64)[index]
         w_arr = np.array(weight, dtype=np.float64)
         pass_arr = np.array(pass_of, dtype=np.int64)
-        active = np.ones(len(index), dtype=bool)
+        # time of each sample's part of the pass that falls in a mode the link runs in: a mode
+        # change inside a step counts for exactly the time it covers
         if link.active_modes:
-            wanted = {mode_ids.index(m) for m in link.active_modes if m in mode_ids}
-            active &= np.isin(mode_at[index], list(wanted))
+            ours = [seg for seg in run.timeline if seg.mode in link.active_modes]
+            starts, ends = [seg.start_s for seg in ours], [seg.end_s for seg in ours]
+            ones = [1.0] * len(ours)
+            span_hi = integral_of_steps(starts, ends, ones, np.array(highs, dtype=np.float64))
+            span_lo = integral_of_steps(starts, ends, ones, np.array(lows, dtype=np.float64))
+            w_arr = np.clip(span_hi - span_lo, 0.0, w_arr)
+        active = w_arr > 1e-12
         if link.max_elevation_deg is not None:
             active &= el <= link.max_elevation_deg
         ev = evaluate(res, el, rng)
@@ -698,9 +723,11 @@ def link_pass_series(project: Project, run: ScenarioRun) -> LinkSeriesResult:
             bits = selected * w_arr
             volume = float(bits.sum())
             per_day = volume / (duration / 86400.0) if duration > 0 else None
+            if active.any() and not bool((selected > 0).any()):
+                notes.add_problem(_not_closed(link_id, "in any pass of this scenario"))
         for k, p in enumerate(vis.passes):
             mask = pass_arr == k
-            usable = float(w_arr[mask & (selected > 0)].sum()) if selected is not None else 0.0
+            usable = float(w_arr[mask & (selected > 0)].sum()) if selected is not None else None
             low = (
                 float(margins[mask & active, 0].min())
                 if margins is not None and bool((mask & active).any())

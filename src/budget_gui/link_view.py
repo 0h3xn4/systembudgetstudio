@@ -274,7 +274,7 @@ class LinkPassesView(QWidget):
                     format_offset(p.aos_s),
                     f"{p.los_s - p.aos_s:.0f}",
                     f"{p.max_elevation_deg:.1f}",
-                    f"{p.usable_s:.0f}",
+                    num(p.usable_s, 0),
                     num(p.minimum_margin_db),
                     num(None if p.volume_bits is None else p.volume_bits / 1e6),
                 ]
