@@ -153,7 +153,7 @@ def passes_csv(result: LinkSeriesResult) -> str:
                     f"{p.los_s:.3f}",
                     format_utc(run.env.grid.start + timedelta(seconds=p.aos_s)),
                     f"{p.max_elevation_deg:.3f}",
-                    f"{p.usable_s:.3f}",
+                    _opt(p.usable_s, 3),
                     _opt(p.minimum_margin_db),
                     _opt(p.volume_bits, 1),
                 ]

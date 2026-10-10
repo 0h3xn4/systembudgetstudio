@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from collections.abc import Callable
+from collections.abc import Callable, Sequence
 from dataclasses import dataclass
 from typing import Any
 
@@ -21,6 +21,19 @@ class Interval:
     @property
     def duration_s(self) -> float:
         return self.end_s - self.start_s
+
+
+def merge_intervals(items: Sequence[Interval]) -> list[Interval]:
+    """Sorted intervals with every overlapping or touching pair joined (imported data may
+    overlap; the solvers integrate each instant once)."""
+    merged: list[Interval] = []
+    for item in sorted(items, key=lambda i: (i.start_s, i.end_s)):
+        if merged and item.start_s <= merged[-1].end_s:
+            if item.end_s > merged[-1].end_s:
+                merged[-1] = Interval(merged[-1].start_s, item.end_s)
+        else:
+            merged.append(item)
+    return merged
 
 
 def mask_to_intervals(

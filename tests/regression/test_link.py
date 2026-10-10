@@ -254,3 +254,44 @@ def test_a_bad_pattern_file_is_a_plain_message_without_its_content(tmp_path: Pat
     bad = [p for p in result.problems if p.code == "LINK_INPUT_INVALID"]
     assert bad and bad[0].file == "pattern.csv" and "SECRET" not in bad[0].message + bad[0].hint
     assert result.rows[0].cn0_dbhz is None
+
+
+# ---- audit round N2: overlap weighting, n/a, closure finding ---------------------------------
+
+
+def test_active_modes_are_weighted_by_the_overlap_with_the_mode_segment() -> None:
+    # pass 105..395 s on a 10 s grid, mode b exactly during the pass: the 5 s at each end belong to
+    # the samples at 100 s and 390 s, which start in mode a. The overlap is still 290 s.
+    rules = [ScenarioRule(kind="during_pass", site="gs", mode="b")]
+    project = link_project(links={"dl": downlink(active_modes=["b"])})
+    s = link_pass_series(project, pass_run(aos_s=105.0, los_s=395.0, rules=rules)).series[0]
+    assert s.volume_bits == pytest.approx(100e3 * 290.0)
+    assert s.passes[0].usable_s == pytest.approx(290.0)
+
+
+def test_usable_time_is_not_available_when_the_link_cannot_be_evaluated() -> None:
+    result = link_pass_series(link_project(ebn0=None), pass_run())
+    summary = result.series[0].passes[0]
+    assert summary.usable_s is None and summary.volume_bits is None
+
+
+def test_a_link_that_closes_at_no_rate_is_a_finding_in_the_pass_series() -> None:
+    result = link_pass_series(link_project(), pass_run(range_m=1.0e9))
+    found = [p for p in result.problems if p.code == "LINK_NOT_CLOSED"]
+    assert len(found) == 1 and found[0].file == "links/dl.yaml"
+    assert result.series[0].volume_bits == 0.0
+
+
+def test_a_link_that_closes_is_not_reported() -> None:
+    result = link_pass_series(link_project(), pass_run())
+    assert not [p for p in result.problems if p.code == "LINK_NOT_CLOSED"]
+
+
+def test_a_static_table_where_nothing_closes_is_a_finding() -> None:
+    point = downlink().static_points[0].model_copy(update={"range_m": 1.0e9})
+    link = downlink().model_copy(update={"static_points": [point]})
+    result = link_static_budget(link_project(links={"dl": link}))
+    assert [p.code for p in result.problems if p.code == "LINK_NOT_CLOSED"] == ["LINK_NOT_CLOSED"]
+    assert not [
+        p for p in link_static_budget(link_project()).problems if p.code == "LINK_NOT_CLOSED"
+    ]

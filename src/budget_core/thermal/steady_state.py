@@ -74,24 +74,52 @@ def solve_steady_state(
         raise ThermalSolveError("some nodes have no path to space", tuple(stranded))
 
     laplacian = np.diag(g.sum(axis=1)) - g
+    coupling = np.abs(laplacian)
     # Start from the equilibrium of the whole body treated as one node, a good first guess.
     t = np.full(n, (q.sum() / r.sum() + space_k**4) ** 0.25)
     for _ in range(max_iterations):
         flow = -laplacian @ t + r * (space_k**4 - t**4) + q
+        if _balanced(flow, coupling, t, q, r):
+            return _checked(laplacian, coupling, r, t)
         jacobian = laplacian + np.diag(4.0 * r * t**3)
         step = np.linalg.solve(jacobian, flow)
         biggest = float(np.max(np.abs(step) / t))
         scale = 1.0 if biggest <= 0.5 else 0.5 / biggest  # keep every temperature positive
         t = t + scale * step
-        # Converged when the step is tiny, or when the residual is at the rounding level of the
-        # heat flows involved (a weakly coupled network has a noise floor above any fixed step).
-        heat_scale = float(q.sum() + np.sum(r * t**4) + np.sum(np.abs(laplacian) @ t)) + 1e-300
-        if (
-            float(np.max(np.abs(step))) * scale < tolerance_k
-            or float(np.max(np.abs(flow))) <= 1e-12 * heat_scale
-        ):
-            return t
+        if float(np.max(np.abs(step))) * scale < tolerance_k:
+            flow = -laplacian @ t + r * (space_k**4 - t**4) + q
+            if _balanced(flow, coupling, t, q, r):
+                return _checked(laplacian, coupling, r, t)
     raise ThermalSolveError("the iteration did not converge")
+
+
+ACCURACY_K = 1e-4
+
+
+def _checked(laplacian: NDArray, coupling: NDArray, r: NDArray, t: NDArray) -> NDArray:
+    """The temperatures, if double precision can resolve them. The rounding of the conduction
+    terms is an uncertainty in the heat balance; mapped through the Jacobian it bounds the error of
+    each temperature. Conductances many orders above the radiation leave that error large, and a
+    wrong temperature must not be reported as a result."""
+    floor = 64.0 * np.finfo(np.float64).eps * (coupling @ t)
+    jacobian = laplacian + np.diag(4.0 * r * t**3)
+    uncertainty = float(np.max(np.abs(np.linalg.inv(jacobian)) @ floor))
+    if uncertainty > ACCURACY_K:
+        raise ThermalSolveError(
+            "the conductances are so large compared with the radiation that the temperatures "
+            "cannot be resolved in double precision (check the units of the conductances)"
+        )
+    return t
+
+
+def _balanced(flow: NDArray, coupling: NDArray, t: NDArray, q: NDArray, r: NDArray) -> bool:
+    """The heat balance holds at every node: the imbalance is a negligible share of the heat
+    flowing through the body, or no larger than the rounding of the conduction terms. A small
+    step alone is not enough: with very stiff conductances a tiny step can leave a large
+    imbalance."""
+    total = float(q.sum() + np.sum(r * t**4)) + 1e-300
+    floor = 64.0 * np.finfo(np.float64).eps * (coupling @ t)
+    return bool(np.all(np.abs(flow) <= 1e-9 * total + floor))
 
 
 def node_balance_w(

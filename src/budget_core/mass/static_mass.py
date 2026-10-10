@@ -247,11 +247,16 @@ def _limit_checks(
 
 def _limit_problems(limits: MassLimits | None, phases: list[PhaseMass]) -> list[Problem]:
     out: list[Problem] = []
-    names = [lim.name for lim in limits.limits] if limits else []
     for phase in phases:
-        for check in phase.limits:
+        # the checks of a phase are the limits that apply to it, in file order: two limits may
+        # share a name, so the position in the file comes from the order, not from the name
+        applying = [
+            i
+            for i, limit in enumerate(limits.limits if limits else [])
+            if limit.phase is None or limit.phase == phase.phase
+        ]
+        for index, check in zip(applying, phase.limits, strict=True):
             if check.status == "exceeded":
-                index = names.index(check.name)
                 out.append(
                     Problem(
                         Severity.ERROR,

@@ -385,69 +385,69 @@
       "case": "cold",
       "checks": [
         {
-          "lower_headroom_k": 12.350820691644344,
+          "lower_headroom_k": 12.350820700353012,
           "lower_limit_k": 233.15,
           "node": "ADCS",
           "required_margin_k": 5.0,
           "status": "ok",
-          "temperature_k": 245.50082069164435,
+          "temperature_k": 245.50082070035302,
           "unit_id": "adcs",
-          "upper_headroom_k": 97.64917930835563,
+          "upper_headroom_k": 97.64917929964696,
           "upper_limit_k": 343.15
         },
         {
-          "lower_headroom_k": 11.236544502151133,
+          "lower_headroom_k": 11.236544510180778,
           "lower_limit_k": 233.15,
           "node": "PL",
           "required_margin_k": 5.0,
           "status": "ok",
-          "temperature_k": 244.38654450215114,
+          "temperature_k": 244.38654451018078,
           "unit_id": "camera",
-          "upper_headroom_k": 98.76345549784884,
+          "upper_headroom_k": 98.7634554898192,
           "upper_limit_k": 343.15
         },
         {
-          "lower_headroom_k": 11.539729089912413,
+          "lower_headroom_k": 11.539729098100139,
           "lower_limit_k": 233.15,
           "node": "EPS",
           "required_margin_k": 5.0,
           "status": "ok",
-          "temperature_k": 244.68972908991242,
+          "temperature_k": 244.68972909810014,
           "unit_id": "eps",
-          "upper_headroom_k": 98.46027091008756,
+          "upper_headroom_k": 98.46027090189983,
           "upper_limit_k": 343.15
         },
         {
-          "lower_headroom_k": 12.350820691644344,
+          "lower_headroom_k": 12.350820700353012,
           "lower_limit_k": 233.15,
           "node": "ADCS",
           "required_margin_k": 5.0,
           "status": "ok",
-          "temperature_k": 245.50082069164435,
+          "temperature_k": 245.50082070035302,
           "unit_id": "gnss",
-          "upper_headroom_k": 97.64917930835563,
+          "upper_headroom_k": 97.64917929964696,
           "upper_limit_k": 343.15
         },
         {
-          "lower_headroom_k": 12.026115958636694,
+          "lower_headroom_k": 12.026115967091783,
           "lower_limit_k": 233.15,
           "node": "DH",
           "required_margin_k": 5.0,
           "status": "ok",
-          "temperature_k": 245.1761159586367,
+          "temperature_k": 245.1761159670918,
           "unit_id": "obc",
-          "upper_headroom_k": 97.97388404136328,
+          "upper_headroom_k": 97.97388403290819,
           "upper_limit_k": 343.15
         },
         {
-          "lower_headroom_k": 11.282372303356965,
+          "lower_headroom_k": 11.282372311305494,
           "lower_limit_k": 233.15,
           "node": "TTC",
           "required_margin_k": 5.0,
           "status": "ok",
-          "temperature_k": 244.43237230335697,
+          "temperature_k": 244.4323723113055,
           "unit_id": "radio",
-          "upper_headroom_k": 90.717627696643,
+          "upper_headroom_k": 90.71762768869448,
           "upper_limit_k": 335.15
         }
       ],
@@ -458,114 +458,114 @@
       "nodes": [
         {
           "absorbed_w": 3.2640000000000002,
-          "conducted_out_w": 0.1623523665038249,
+          "conducted_out_w": 0.16235236663061414,
           "dissipation_w": 0.4,
           "node": "ADCS",
-          "radiated_w": 3.5016476334961686,
-          "temperature_k": 245.50082069164435
+          "radiated_w": 3.5016476339930254,
+          "temperature_k": 245.50082070035302
         },
         {
           "absorbed_w": 3.2640000000000002,
-          "conducted_out_w": 0.08084106785830159,
+          "conducted_out_w": 0.08084106786520806,
           "dissipation_w": 0.3,
           "node": "DH",
-          "radiated_w": 3.483158932141698,
-          "temperature_k": 245.1761159586367
+          "radiated_w": 3.4831589326221755,
+          "temperature_k": 245.1761159670918
         },
         {
           "absorbed_w": 3.2640000000000002,
-          "conducted_out_w": -0.09160114048148671,
+          "conducted_out_w": -0.09160114053614166,
           "dissipation_w": 0.1,
           "node": "EPS",
-          "radiated_w": 3.455601140481484,
-          "temperature_k": 244.68972908991242
+          "radiated_w": 3.455601140944005,
+          "temperature_k": 244.68972909810014
         },
         {
           "absorbed_w": 3.2640000000000002,
-          "conducted_out_w": -0.17450619448355553,
+          "conducted_out_w": -0.17450619452203853,
           "dissipation_w": 0.0,
           "node": "PL",
-          "radiated_w": 3.438506194483565,
-          "temperature_k": 244.38654450215114
+          "radiated_w": 3.4385061949354716,
+          "temperature_k": 244.38654451018078
         },
         {
           "absorbed_w": 3.2640000000000002,
-          "conducted_out_w": 0.02291390060291576,
+          "conducted_out_w": 0.02291390056235798,
           "dissipation_w": 0.2,
           "node": "TTC",
-          "radiated_w": 3.441086099397086,
-          "temperature_k": 244.43237230335697
+          "radiated_w": 3.441086099844679,
+          "temperature_k": 244.4323723113055
         }
       ]
     },
     {
-      "balance_residual_w": 0.0,
+      "balance_residual_w": 4.4438124291446e-09,
       "case": "hot",
       "checks": [
         {
-          "lower_headroom_k": 101.27936471453714,
+          "lower_headroom_k": 101.27936473578464,
           "lower_limit_k": 233.15,
           "node": "ADCS",
           "required_margin_k": 5.0,
           "status": "ok",
-          "temperature_k": 334.42936471453714,
+          "temperature_k": 334.42936473578465,
           "unit_id": "adcs",
-          "upper_headroom_k": 8.720635285462834,
+          "upper_headroom_k": 8.720635264215332,
           "upper_limit_k": 343.15
         },
         {
-          "lower_headroom_k": 100.21894612502015,
+          "lower_headroom_k": 100.21894614071417,
           "lower_limit_k": 233.15,
           "node": "PL",
           "required_margin_k": 5.0,
           "status": "ok",
-          "temperature_k": 333.36894612502016,
+          "temperature_k": 333.3689461407142,
           "unit_id": "camera",
-          "upper_headroom_k": 9.781053874979818,
+          "upper_headroom_k": 9.781053859285805,
           "upper_limit_k": 343.15
         },
         {
-          "lower_headroom_k": 99.76594749788151,
+          "lower_headroom_k": 99.76594751432938,
           "lower_limit_k": 233.15,
           "node": "EPS",
           "required_margin_k": 5.0,
           "status": "ok",
-          "temperature_k": 332.9159474978815,
+          "temperature_k": 332.9159475143294,
           "unit_id": "eps",
-          "upper_headroom_k": 10.234052502118459,
+          "upper_headroom_k": 10.234052485670588,
           "upper_limit_k": 343.15
         },
         {
-          "lower_headroom_k": 101.27936471453714,
+          "lower_headroom_k": 101.27936473578464,
           "lower_limit_k": 233.15,
           "node": "ADCS",
           "required_margin_k": 5.0,
           "status": "ok",
-          "temperature_k": 334.42936471453714,
+          "temperature_k": 334.42936473578465,
           "unit_id": "gnss",
-          "upper_headroom_k": 8.720635285462834,
+          "upper_headroom_k": 8.720635264215332,
           "upper_limit_k": 343.15
         },
         {
-          "lower_headroom_k": 100.42353080736828,
+          "lower_headroom_k": 100.42353082585689,
           "lower_limit_k": 233.15,
           "node": "DH",
           "required_margin_k": 5.0,
           "status": "ok",
-          "temperature_k": 333.5735308073683,
+          "temperature_k": 333.5735308258569,
           "unit_id": "obc",
-          "upper_headroom_k": 9.576469192631691,
+          "upper_headroom_k": 9.576469174143085,
           "upper_limit_k": 343.15
         },
         {
-          "lower_headroom_k": 99.33168954646052,
+          "lower_headroom_k": 99.3316895626555,
           "lower_limit_k": 233.15,
           "node": "TTC",
           "required_margin_k": 5.0,
           "status": "margin",
-          "temperature_k": 332.48168954646053,
+          "temperature_k": 332.4816895626555,
           "unit_id": "radio",
-          "upper_headroom_k": 2.6683104535394477,
+          "upper_headroom_k": 2.6683104373444735,
           "upper_limit_k": 335.15
         }
       ],
@@ -576,43 +576,43 @@
       "nodes": [
         {
           "absorbed_w": 11.136000000000001,
-          "conducted_out_w": 0.42791695358442894,
+          "conducted_out_w": 0.4279169549638766,
           "dissipation_w": 1.35,
           "node": "ADCS",
-          "radiated_w": 12.058083046415563,
-          "temperature_k": 334.42936471453714
+          "radiated_w": 12.058083049479936,
+          "temperature_k": 334.42936473578465
         },
         {
           "absorbed_w": 11.136000000000001,
-          "conducted_out_w": -0.09912529884104515,
+          "conducted_out_w": -0.09912529920012503,
           "dissipation_w": 0.7,
           "node": "DH",
-          "radiated_w": 11.935125298841086,
-          "temperature_k": 333.5735308073683
+          "radiated_w": 11.935125301487146,
+          "temperature_k": 333.5735308258569
         },
         {
           "absorbed_w": 11.136000000000001,
-          "conducted_out_w": -0.5552909683127041,
+          "conducted_out_w": -0.5552909689561716,
           "dissipation_w": 0.15,
           "node": "EPS",
-          "radiated_w": 11.84129096831269,
-          "temperature_k": 332.9159474978815
+          "radiated_w": 11.84129097065279,
+          "temperature_k": 332.9159475143294
         },
         {
           "absorbed_w": 11.136000000000001,
-          "conducted_out_w": 0.670127602849135,
+          "conducted_out_w": 0.6701276022217257,
           "dissipation_w": 1.44,
           "node": "PL",
-          "radiated_w": 11.905872397150842,
-          "temperature_k": 333.36894612502016
+          "radiated_w": 11.905872399392813,
+          "temperature_k": 333.3689461407142
         },
         {
           "absorbed_w": 11.136000000000001,
-          "conducted_out_w": -0.4436282892798147,
+          "conducted_out_w": -0.44362828902933416,
           "dissipation_w": 0.2,
           "node": "TTC",
-          "radiated_w": 11.779628289279822,
-          "temperature_k": 332.48168954646053
+          "radiated_w": 11.779628291574936,
+          "temperature_k": 332.4816895626555
         }
       ]
     }

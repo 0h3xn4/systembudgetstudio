@@ -16,6 +16,7 @@ from typing import Any, Literal
 import numpy as np
 
 from budget_core.assumptions import Assumption, incomplete
+from budget_core.environment.intervals import Interval, merge_intervals
 from budget_core.model import Project, Sourced
 from budget_core.model.power_system import PowerSystem
 from budget_core.power import array as arr
@@ -30,6 +31,7 @@ from budget_core.scenario.timeline import mode_index_on_grid
 
 NDArray = np.ndarray[Any, np.dtype[np.float64]]
 BoolArray = np.ndarray[Any, np.dtype[np.bool_]]
+IntArray = np.ndarray[Any, np.dtype[np.intp]]
 LoadBasis = Literal["nominal", "margined"]
 CASES = ("bol", "eol")
 FILE = "config/power_system.yaml"
@@ -39,6 +41,12 @@ DOD_EXCEEDED = "BATTERY_DOD_EXCEEDED"
 BATTERY_DEPLETED = "BATTERY_DEPLETED"
 ORBIT_BALANCE_NEGATIVE = "ORBIT_BALANCE_NEGATIVE"
 PEAK_POWER_EXCEEDED = "PEAK_POWER_EXCEEDED"
+
+# Tolerances: a limit that is met exactly must not be reported because of rounding noise.
+RATIO_TOL = 1e-9  # state of charge, depth of discharge
+POWER_TOL_W = 1e-9
+ENERGY_TOL_WH = 1e-6
+REFINE_TOL_S = 1e-6  # refinement instants closer than this to an existing edge are the same edge
 
 CODES_TEXT = {
     DOD_EXCEEDED: "Depth of discharge above the allowed limit",
@@ -189,22 +197,37 @@ def _mode_flow(mode: ModePowerResult, basis: LoadBasis) -> tuple[float | None, .
     return mode.average.load_w, mode.average.source_w, mode.peak.source_w
 
 
-def _lit_ratio(run: ScenarioRun, edges: NDArray) -> NDArray:
-    """Share of each step in sunlight: exact for a sharp shadow, trapezoid for a soft one."""
+def refined_edges(edges: NDArray, extra_s: list[float]) -> NDArray:
+    """The scenario grid plus the given instants (eclipse edges, mode-segment edges). The grid
+    edges are kept exactly; an instant within `REFINE_TOL_S` of one is the same edge."""
+    inner = np.asarray(sorted(extra_s), dtype=np.float64)
+    inner = inner[(inner > edges[0] + REFINE_TOL_S) & (inner < edges[-1] - REFINE_TOL_S)]
+    if len(inner) == 0:
+        return edges
+    nearest = np.minimum(
+        np.abs(inner - edges[np.clip(np.searchsorted(edges, inner) - 1, 0, len(edges) - 1)]),
+        np.abs(inner - edges[np.clip(np.searchsorted(edges, inner), 0, len(edges) - 1)]),
+    )
+    inner = inner[nearest > REFINE_TOL_S]
+    if len(inner) > 1:
+        inner = inner[np.concatenate(([True], np.diff(inner) > REFINE_TOL_S))]
+    return np.asarray(np.union1d(edges, inner), dtype=np.float64)
+
+
+def _lit_ratio(run: ScenarioRun, edges: NDArray, shadows: list[Interval]) -> NDArray:
+    """Share of each step in sunlight, independent of the steps: exact for a sharp shadow; for a
+    soft one the ratio is the linear interpolation between the environment samples, so any
+    sub-step of a sample interval gets the exact trapezoid mean."""
     env = run.env
     ratio = np.asarray(env.sunlight_ratio, dtype=np.float64)
-    steps = len(edges) - 1
     soft = bool(np.any((ratio > 1e-9) & (ratio < 1.0 - 1e-9)))
     if not soft:
-        starts = [e.start_s for e in env.eclipses]
-        ends = [e.end_s for e in env.eclipses]
+        starts = [e.start_s for e in shadows]
+        ends = [e.end_s for e in shadows]
         shadow = step_means(starts, ends, [1.0] * len(starts), edges)
         return np.asarray(1.0 - shadow, dtype=np.float64)
-    first = ratio[:steps]
-    second = np.append(ratio[1 : steps + 1], ratio[steps - 1 : steps])[:steps]
-    if len(second) < steps:  # a non-divisible duration: the last step has only its first sample
-        second = np.append(second, first[len(second) :])
-    return np.asarray(0.5 * (first + second), dtype=np.float64)
+    at = np.interp(edges, env.grid.times_s, ratio)
+    return np.asarray(0.5 * (at[:-1] + at[1:]), dtype=np.float64)
 
 
 # ---- violations -----------------------------------------------------------------------------
@@ -230,7 +253,7 @@ def _exceeding(edges: NDArray, values: NDArray, limit: float) -> list[tuple[floa
     the ends are interpolated linearly between the edges."""
     out: list[tuple[float, float, float]] = []
     last = len(values) - 1
-    for a, b in _runs(values > limit):
+    for a, b in _runs(values > limit + RATIO_TOL):
         start = (
             float(edges[0])
             if a == 0
@@ -266,26 +289,37 @@ def time_domain_budget(
         col.assumptions.append(assumption)
     col.problems.extend(static.problems)
 
+    # Reported series live on the scenario grid; the battery is integrated on the grid refined by
+    # every eclipse edge and mode-segment edge, so a coarse step cannot average a discharge away.
     edges = step_edges(env.grid.duration_s, env.grid.step_s)
     dt = np.diff(edges)
+    shadows = merge_intervals(list(env.eclipses))
+    timeline = run.timeline
+    cuts = [t for e in shadows for t in (e.start_s, e.end_s)]
+    cuts += [t for s in timeline for t in (s.start_s, s.end_s)]
+    redges = refined_edges(edges, cuts)
+    rdt = np.diff(redges)
+    grid_edge_at = np.searchsorted(redges, edges)  # index of each grid edge in the refined edges
+    grid_of = np.searchsorted(edges, redges[:-1], side="right") - 1  # grid step of a refined step
 
     # --- modes, demand ------------------------------------------------------------------
-    timeline = run.timeline
     mode_ids = tuple(sorted({s.mode for s in timeline}))
     by_mode = {m.mode_id: m for m in static.modes}
     flows = {m: _mode_flow(by_mode[m], load_basis) for m in mode_ids}
     seg_starts = [s.start_s for s in timeline]
     seg_ends = [s.end_s for s in timeline]
 
-    def per_step(index: int) -> NDArray | None:
+    def per_step(index: int, at: NDArray) -> NDArray | None:
         if any(flows[s.mode][index] is None for s in timeline):
             return None
         values = [float(flows[s.mode][index] or 0.0) for s in timeline]
-        return step_means(seg_starts, seg_ends, values, edges)
+        return step_means(seg_starts, seg_ends, values, at)
 
-    load_w = per_step(0)
-    demand_w = per_step(1)
+    load_w = per_step(0, edges)
+    demand_w = per_step(1, edges)
+    solve_demand_w = per_step(1, redges)
     step_mode = mode_index_on_grid(timeline, edges[:-1], list(mode_ids))
+    solve_mode = mode_index_on_grid(timeline, redges[:-1], list(mode_ids))
     durations = {m: sum(s.duration_s for s in timeline if s.mode == m) for m in mode_ids}
     mode_rows = tuple(
         ModeRow(
@@ -298,7 +332,8 @@ def time_domain_budget(
         )
         for m in mode_ids
     )
-    lit = _lit_ratio(run, edges)
+    lit = _lit_ratio(run, edges, shadows)
+    solve_lit = _lit_ratio(run, redges, shadows)
     windows = tuple(orbit_windows(env.grid.times_s, env.position_m))
 
     phase = mission_phase or scenario.mission_phase
@@ -306,7 +341,9 @@ def time_domain_budget(
         phase = project.phases[0]
 
     # --- array ----------------------------------------------------------------------------
-    base_generation = _base_generation(project, system, run, edges, step_mode, mode_ids, lit, col)
+    base_generation = _base_generation(
+        project, system, run, grid_of, solve_mode, mode_ids, solve_lit, col
+    )
     life = col.get(
         "Design life",
         system.design_life_yr if system else None,
@@ -333,13 +370,13 @@ def time_domain_budget(
     )
 
     peak_violations = _peak_violations(run, mode_rows, peak_limit)
+    grid = _GridMap(edges, dt, redges, rdt, grid_edge_at)
     case_results = tuple(
         _solve_case(
             name,
-            edges,
-            dt,
+            grid,
             base_generation,
-            demand_w,
+            solve_demand_w,
             battery_inputs,
             life,
             annual,
@@ -488,13 +525,15 @@ def _base_generation(
     project: Project,
     system: PowerSystem | None,
     run: ScenarioRun,
-    edges: NDArray,
+    grid_of: IntArray,
     step_mode: NDArray,
     mode_ids: tuple[str, ...],
     lit: NDArray,
     col: _Collector,
 ) -> NDArray | None:
-    """Generation per step at beginning of life, or None when an input is missing."""
+    """Generation per solver step at beginning of life, or None when an input is missing.
+    `grid_of[i]` is the scenario-grid step that contains solver step i: the Sun direction is
+    sampled at the start of that grid step."""
     a = system.solar_array if system else None
     base = "solar_array."
     irradiance = col.get(
@@ -587,7 +626,7 @@ def _base_generation(
         return None
 
     env = run.env
-    steps = len(edges) - 1
+    steps = len(grid_of)
     kinds = np.array([p == "sun" for p in pointing])[step_mode]
     sun_body = np.empty((steps, 3), dtype=np.float64)
     if kinds.any():
@@ -595,7 +634,7 @@ def _base_generation(
         sun_body[kinds] = np.asarray(att.sun_direction_body, dtype=np.float64)
     if (~kinds).any():
         orbital = sun_in_orbital_frame(env.sun_direction, env.position_m, env.grid.times_s)
-        sun_body[~kinds] = orbital[:steps][~kinds]
+        sun_body[~kinds] = orbital[grid_of][~kinds]
     normals = np.array([f.normal_body for f in a.faces], dtype=np.float64)
     counts = np.array([f.cell_count for f in a.faces], dtype=np.float64)
     cosines = arr.face_cosines(normals, sun_body)
@@ -622,7 +661,7 @@ def _peak_violations(
     out: list[Violation] = []
     for seg in run.timeline:
         peak = over.get(seg.mode)
-        if peak is None or peak <= limit:
+        if peak is None or peak <= limit + POWER_TOL_W:
             continue
         if out and out[-1].end_s >= seg.start_s - 1e-9:
             previous = out[-1]
@@ -654,10 +693,29 @@ def _peak_violations(
     return out
 
 
+@dataclass(frozen=True)
+class _GridMap:
+    """The scenario grid, the refined edges the battery is solved on, and the mapping between."""
+
+    edges: NDArray
+    dt: NDArray
+    redges: NDArray
+    rdt: NDArray
+    edge_at: IntArray  # index of each grid edge among the refined edges
+
+    def mean(self, values: NDArray) -> NDArray:
+        """Time-weighted mean of a per-refined-step quantity over each grid step."""
+        weighted = np.add.reduceat(values * self.rdt, self.edge_at[:-1])
+        return np.asarray(weighted / self.dt, dtype=np.float64)
+
+    def at_edges(self, values: NDArray) -> NDArray:
+        """A state defined at the refined edges, read at the grid edges (exact: they coincide)."""
+        return np.asarray(values[self.edge_at], dtype=np.float64)
+
+
 def _solve_case(
     name: str,
-    edges: NDArray,
-    dt: NDArray,
+    grid: _GridMap,
     base_generation: NDArray | None,
     demand_w: NDArray | None,
     battery: _BatteryInputs | None,
@@ -667,6 +725,9 @@ def _solve_case(
     windows: tuple[tuple[float, float], ...],
     run: ScenarioRun,
 ) -> CaseResult:
+    """Solve one case on the refined edges; the series are reported on the scenario grid while
+    the extremes, violations and balances come from the refined solution."""
+    edges, dt = grid.redges, grid.rdt
     years = life_yr if name == "eol" else 0.0
     age = None
     if years is not None and annual is not None:
@@ -718,7 +779,7 @@ def _solve_case(
                 )
             )
     if unmet is not None:
-        for a, b in _runs(unmet > 1e-9):
+        for a, b in _runs(unmet > POWER_TOL_W):
             violations.append(
                 Violation(
                     name,
@@ -735,7 +796,7 @@ def _solve_case(
 
     balances = _balances(edges, dt, generation, demand_w, energy, windows, run)
     for balance in balances:
-        if balance.balance_wh is not None and balance.balance_wh < 0.0:
+        if balance.balance_wh is not None and balance.balance_wh < -ENERGY_TOL_WH:
             violations.append(
                 Violation(
                     name,
@@ -750,18 +811,25 @@ def _solve_case(
                 )
             )
     summary = _summary(dt, generation, demand_w, margin, soc, dod, unmet, curtailed, energy)
+
+    def on_grid(values: NDArray | None) -> NDArray | None:
+        return None if values is None else grid.mean(values)
+
+    def at_grid_edges(values: NDArray | None) -> NDArray | None:
+        return None if values is None else grid.at_edges(values)
+
     return CaseResult(
         name,
         years,
         capacity,
-        generation,
-        margin,
-        energy,
-        soc,
-        dod,
-        bat_power,
-        unmet,
-        curtailed,
+        on_grid(generation),
+        on_grid(margin),
+        at_grid_edges(energy),
+        at_grid_edges(soc),
+        at_grid_edges(dod),
+        on_grid(bat_power),
+        on_grid(unmet),
+        on_grid(curtailed),
         summary,
         tuple(balances),
         tuple(violations),
@@ -811,8 +879,9 @@ def _balances(
     if not windows:
         return []
     bounds = np.array([w for pair in windows for w in pair], dtype=np.float64)
-    ecl_s = [e.start_s for e in run.env.eclipses]
-    ecl_e = [e.end_s for e in run.env.eclipses]
+    shadows = merge_intervals(list(run.env.eclipses))
+    ecl_s = [e.start_s for e in shadows]
+    ecl_e = [e.end_s for e in shadows]
     shadow = integral_of_steps(ecl_s, ecl_e, [1.0] * len(ecl_s), bounds)
 
     def at(power: NDArray | None) -> NDArray | None:

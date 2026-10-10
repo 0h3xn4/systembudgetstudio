@@ -464,3 +464,17 @@ def test_i10_inertia_changes_with_the_phase() -> None:
 def test_determinism() -> None:
     p = project({"a": U(1.0, pos=(1, 2, 3)), "b": U(2.0)}, {"f": E({"all": 1.0}, pos=(0, 0, 1))})
     assert static_mass_budget(p) == static_mass_budget(p)
+
+
+def test_a_repeated_limit_name_points_at_its_own_position_in_the_file() -> None:
+    # two limits named "cap": the first is met, the second is exceeded; the finding must jump to
+    # limits[2] (the third entry), not to the first limit with that name
+    result = static_mass_budget(
+        project(
+            {"u1": U(5.0)},
+            system=0.0,
+            limits=[("cap", None, 9.0), ("other", None, 9.0), ("cap", None, 1.0)],
+        )
+    )
+    (problem,) = [p for p in result.problems if p.code == "MASS_LIMIT_EXCEEDED"]
+    assert problem.path == "limits[2]"

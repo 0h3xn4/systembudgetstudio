@@ -192,6 +192,7 @@ def _linear(number: float, token: str, key: str, info: _Suffix) -> float:
     except Exception as exc:  # pint can raise AttributeError/TypeError for odd tokens
         raise UnitError("the unit is not recognised") from exc
     try:
+        _check_physical(quantity, key)
         value = float(quantity.to(info.pint_unit).magnitude)
     except pint.errors.PintError as exc:
         raise UnitError(
@@ -201,6 +202,24 @@ def _linear(number: float, token: str, key: str, info: _Suffix) -> float:
     if not math.isfinite(value):
         raise UnitError("the converted value is not finite")
     return value
+
+
+_OFFSET_UNITS = {"degree_Celsius", "degree_Fahrenheit"}
+
+
+def _check_physical(quantity: Any, key: str) -> None:
+    """Refuse readings that pint converts but that mean something else here: an angle read as a
+    frequency (pint takes 60 rpm as 2 pi rad/s, not 1 Hz) and a temperature below absolute zero."""
+    if key != "deg":
+        base = {name for name, _ in quantity.to_base_units().unit_items()}
+        if base & {"radian", "steradian"}:
+            raise UnitError(
+                "the unit contains an angle (revolutions, radians or degrees), which this field "
+                "does not take; convert it to the field's unit first"
+            )
+    offset = {name for name, _ in quantity.unit_items()} & _OFFSET_UNITS
+    if key == "k" and offset and float(quantity.to("kelvin").magnitude) < -1e-9:
+        raise UnitError("the temperature is below absolute zero")
 
 
 def format_quantity(value: float, field: str) -> str:

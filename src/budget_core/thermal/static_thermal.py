@@ -108,6 +108,7 @@ class StaticThermalResult:
 
 STATUS_OK, STATUS_EXCEEDED, STATUS_MARGIN = "ok", "exceeded", "margin"
 STATUS_NO_LIMITS, STATUS_NA = "no limits", "n/a"
+STATUS_OK_UNMARGINED = "ok (margin not checked)"  # within limits, required margin is a placeholder
 
 
 def dissipation_w(power_w: float, ratio: float | None) -> float | None:
@@ -474,7 +475,7 @@ def _solve_case(
             f"No equilibrium temperature for case '{name}': nodes without a path to space "
             f"({stranded})."
             if exc.nodes
-            else f"The temperature solution for case '{name}' did not converge."
+            else f"The temperature solution for case '{name}' failed: {exc}."
         )
         notes.problems.append(
             Problem(
@@ -588,5 +589,7 @@ def _checks(
                     hint="The margin is set in config/thermal_environment.yaml.",
                 )
             )
+        if status == STATUS_OK and margin is None:
+            status = STATUS_OK_UNMARGINED  # "ok" would claim a margin that was never checked
         out.append(UnitLimitCheck(uid, node, t, lo, hi, down, up, margin, status))
     return tuple(out)

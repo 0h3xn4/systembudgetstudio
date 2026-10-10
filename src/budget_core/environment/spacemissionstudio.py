@@ -25,7 +25,7 @@ from budget_core.environment.data import (
     SiteVisibility,
     TimeGrid,
 )
-from budget_core.environment.intervals import Interval
+from budget_core.environment.intervals import Interval, merge_intervals
 from budget_core.timeutil import format_utc, parse_utc
 
 NDArray = np.ndarray[Any, np.dtype[np.float64]]
@@ -158,7 +158,7 @@ class SpaceMissionStudioImport:
                 raise EnvironmentInputError("an interval ends before it starts", file, line)
             if b > 0.0 and a < grid.duration_s:
                 out.append(Interval(max(a, 0.0), min(b, grid.duration_s)))
-        return sorted(out, key=lambda i: i.start_s)
+        return merge_intervals(out)
 
     def _site(self, grid: TimeGrid, times: NDArray, site: SiteDef) -> SiteVisibility:
         file = f"passes_{site.site_id}.csv"
