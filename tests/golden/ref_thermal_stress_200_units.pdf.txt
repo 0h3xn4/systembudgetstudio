@@ -1,0 +1,715 @@
+pages=62
+## page 1
+System Budget Studio 0.1.0 | Example stress case (200 units) rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 1
+Thermal budget (static): Example stress case (200 units)
+INCOMPLETE: some inputs are placeholders (source TBD or missing). Entries marked n/a depend on them and are not computed. Do not use this report as evidence until the
+placeholders are replaced with sourced values.
+Summary
+Heat dissipation by spacecraft mode
+Mode
+Average (W)
+Peak (W)
+Charging
+ 277.262
+ 496.979
+Downlink
+ 275.978
+ 497.455
+Imaging
+ 275.812
+ 496.686
+Nominal
+ 277.025
+ 496.598
+Safe
+ 275.957
+ 497.183
+Average = sum of unit power x duty cycle x heat dissipation ratio. Peak uses the unit peak powers. n/a: a unit has no heat dissipation ratio for its power mode.
+Case: cold
+Eclipse with the lowest-power mode.
+Node temperatures, case cold
+Node
+Temperature (K)
+not computed (inputs missing, see Problems)
+ n/a
+Unit temperature limits, case cold (operating)
+Unit
+Node
+Temperature (K)
+Lower limit (K)
+Upper limit (K)
+Headroom to lower (K)
+Headroom to upper (K)
+Status
+unit_000
+DH
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_001
+EPS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_002
+AOCS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_003
+TTC
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_004
+PL
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_005
+THERM
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_006
+PL-DATA
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_007
+HARNESS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_008
+DH
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_009
+EPS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_010
+AOCS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_011
+TTC
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_012
+PL
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+## page 2
+System Budget Studio 0.1.0 | Example stress case (200 units) rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 2
+Unit
+Node
+Temperature (K)
+Lower limit (K)
+Upper limit (K)
+Headroom to lower (K)
+Headroom to upper (K)
+Status
+unit_013
+THERM
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_014
+PL-DATA
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_015
+HARNESS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_016
+DH
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_017
+EPS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_018
+AOCS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_019
+TTC
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_020
+PL
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_021
+THERM
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_022
+PL-DATA
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_023
+HARNESS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_024
+DH
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_025
+EPS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_026
+AOCS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_027
+TTC
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_028
+PL
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_029
+THERM
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_030
+PL-DATA
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_031
+HARNESS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_032
+DH
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_033
+EPS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_034
+AOCS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_035
+TTC
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_036
+PL
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_037
+THERM
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_038
+PL-DATA
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_039
+HARNESS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_040
+DH
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_041
+EPS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_042
+AOCS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_043
+TTC
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_044
+PL
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_045
+THERM
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_046
+PL-DATA
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+## page 3
+System Budget Studio 0.1.0 | Example stress case (200 units) rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 3
+Unit
+Node
+Temperature (K)
+Lower limit (K)
+Upper limit (K)
+Headroom to lower (K)
+Headroom to upper (K)
+Status
+unit_047
+HARNESS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_048
+DH
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_049
+EPS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_050
+AOCS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_051
+TTC
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_052
+PL
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_053
+THERM
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_054
+PL-DATA
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_055
+HARNESS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_056
+DH
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_057
+EPS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_058
+AOCS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_059
+TTC
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_060
+PL
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_061
+THERM
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_062
+PL-DATA
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_063
+HARNESS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_064
+DH
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_065
+EPS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_066
+AOCS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_067
+TTC
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_068
+PL
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_069
+THERM
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_070
+PL-DATA
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_071
+HARNESS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_072
+DH
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_073
+EPS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_074
+AOCS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_075
+TTC
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_076
+PL
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_077
+THERM
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_078
+PL-DATA
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_079
+HARNESS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+unit_080
+DH
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+...

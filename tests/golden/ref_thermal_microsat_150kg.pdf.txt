@@ -1,0 +1,555 @@
+pages=19
+## page 1
+System Budget Studio 0.1.0 | Example 150 kg microsatellite rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 1
+Thermal budget (static): Example 150 kg microsatellite
+INCOMPLETE: some inputs are placeholders (source TBD or missing). Entries marked n/a depend on them and are not computed. Do not use this report as evidence until the
+placeholders are replaced with sourced values.
+Summary
+Heat dissipation by spacecraft mode
+Mode
+Average (W)
+Peak (W)
+Downlink
+ 59.420
+ 123.300
+Imaging
+ 70.100
+ 136.300
+Nominal
+ 35.800
+ 86.300
+Safe
+ 17.550
+ 48.500
+Survival
+ 19.750
+ 32.500
+Average = sum of unit power x duty cycle x heat dissipation ratio. Peak uses the unit peak powers. n/a: a unit has no heat dissipation ratio for its power mode.
+Case: cold
+Eclipse with the lowest-power mode.
+Node temperatures, case cold
+Node
+Temperature (K)
+not computed (inputs missing, see Problems)
+ n/a
+Unit temperature limits, case cold (operating)
+Unit
+Node
+Temperature (K)
+Lower limit (K)
+Upper limit (K)
+Headroom to lower (K)
+Headroom to upper (K)
+Status
+adapter
+STRUCT
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+battery
+EPS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+camera
+PL
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+gnss
+AOCS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+heaters
+THERM
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+magnetorquers
+AOCS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+obc_a
+DH
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+obc_b
+DH
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+pcdu
+EPS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+pdu_data
+PL-DATA
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+reaction_wheels
+AOCS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+sband_trx
+TTC
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+solar_array
+EPS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+## page 2
+System Budget Studio 0.1.0 | Example 150 kg microsatellite rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 2
+Unit
+Node
+Temperature (K)
+Lower limit (K)
+Upper limit (K)
+Headroom to lower (K)
+Headroom to upper (K)
+Status
+star_tracker
+AOCS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+structure
+STRUCT
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+sun_sensors
+AOCS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+xband_tx
+PL-DATA
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+Status: ok; margin = within the limits but closer than the required temperature margin; exceeded; no limits = the unit has no limits for this set (not checked).
+Case: hot
+Sunlight with the highest-power mode.
+Node temperatures, case hot
+Node
+Temperature (K)
+not computed (inputs missing, see Problems)
+ n/a
+Unit temperature limits, case hot (operating)
+Unit
+Node
+Temperature (K)
+Lower limit (K)
+Upper limit (K)
+Headroom to lower (K)
+Headroom to upper (K)
+Status
+adapter
+STRUCT
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+battery
+EPS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+camera
+PL
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+gnss
+AOCS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+heaters
+THERM
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+magnetorquers
+AOCS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+obc_a
+DH
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+obc_b
+DH
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+pcdu
+EPS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+pdu_data
+PL-DATA
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+reaction_wheels
+AOCS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+sband_trx
+TTC
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+solar_array
+EPS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+star_tracker
+AOCS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+structure
+STRUCT
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+sun_sensors
+AOCS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+xband_tx
+PL-DATA
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+Status: ok; margin = within the limits but closer than the required temperature margin; exceeded; no limits = the unit has no limits for this set (not checked).
+Mode: Downlink
+## page 3
+System Budget Studio 0.1.0 | Example 150 kg microsatellite rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 3
+Units in mode Downlink
+Unit
+Name
+Subsystem
+Node
+Power mode
+Effective power
+(W)
+Dissipation
+ratio
+Dissipation
+(W)
+Peak dissipation
+(W)
+adapter
+Separation adapter
+STRUCT
+STRUCT
+off
+ 0.000
+ 1.00
+ 0.000
+ 0.000
+battery
+Battery pack
+EPS
+EPS
+off
+ 0.000
+ 1.00
+ 0.000
+ 0.000
+camera
+Imager
+PL
+PL
+off
+ 0.000
+ 1.00
+ 0.000
+ 0.000
+gnss
+GNSS receiver
+AOCS
+AOCS
+downlink
+ 1.200
+ 1.00
+ 1.200
+ 1.800
+heaters
+Thermal heaters
+THERM
+THERM
+downlink
+ 1.800
+ 1.00
+ 1.800
+ 16.000
+magnetorquers
+Magnetorquers
+AOCS
+AOCS
+off
+ 0.000
+ 1.00
+ 0.000
+ 0.000
+obc_a
+OBC A
+DH
+DH
+downlink
+ 7.000
+ 1.00
+ 7.000
+ 10.000
+obc_b
+OBC B (cold redundant)
+DH
+DH
+off
+ 0.000
+ 1.00
+ 0.000
+ 0.000
+pcdu
+Power conditioning unit
+EPS
+EPS
+downlink
+ 9.000
+ 1.00
+ 9.000
+ 12.000
+pdu_data
+Payload data unit
+PL-DATA
+PL-DATA
+downlink
+ 10.000
+ 1.00
+ 10.000
+ 14.000
+reaction_wheels
+Reaction wheels
+AOCS
+AOCS
+downlink
+ 7.200
+ 1.00
+ 7.200
+ 30.000
+sband_trx
+S-band transceiver
+TTC
+TTC
+downlink
+ 9.600
+ 0.70
+ 6.720
+ 14.000
+solar_array
+Solar array panels
+EPS
+EPS
+off
+ 0.000
+ 1.00
+ 0.000
+ 0.000
+star_tracker
+Star tracker
+AOCS
+AOCS
+downlink
+ 3.500
+ 1.00
+ 3.500
+ 5.000
+structure
+Primary structure
+STRUCT
+STRUCT
+off
+ 0.000
+ 1.00
+ 0.000
+ 0.000
+sun_sensors
+Coarse sun sensors
+AOCS
+AOCS
+downlink
+ 0.400
+ 1.00
+ 0.400
+ 0.500
+xband_tx
+X-band transmitter
+PL-DATA
+PL-DATA
+downlink
+ 25.200
+ 0.50
+ 12.600
+ 20.000
+By subsystem
+Subsystem
+Dissipation (W)
+Peak dissipation (W)
+AOCS
+ 12.300
+ 37.300
+DH
+ 7.000
+ 10.000
+EPS
+ 9.000
+ 12.000
+PL
+ 0.000
+ 0.000
+PL-DATA
+ 22.600
+ 34.000
+STRUCT
+ 0.000
+ 0.000
+THERM
+ 1.800
+ 16.000
+TTC
+ 6.720
+ 14.000
+By thermal node
+Node
+Dissipation (W)
+Peak dissipation (W)
+AOCS
+ 12.300
+ 37.300
+DH
+ 7.000
+ 10.000
+...

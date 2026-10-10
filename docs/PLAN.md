@@ -44,9 +44,9 @@ Needs from you: environment flux values, optical properties and hot/cold case de
 Scope: link models (uplink/downlink, multiple links), static table at chosen elevation/range, pass time series, margin-constrained data rate and data volume per pass/day, attenuation tables from config (empty until supplied), link reports.
 Acceptance: textbook S-band 2 GHz/1000 km case within tolerance, ≥10 cases; margin monotonic in range; golden reports for micro-sat with two links.
 
-## M6 Polish (M)
+## M6 Polish (M, done)
 Scope: comparison view (scenarios/revisions), guided wizard (orbit → first budget < 10 min on sample), user guide with generated "Equations and sources" chapter (offline HTML + PDF), installer hardening (no-admin install, uninstall, RHEL 8 test), performance pass, final licence/SBOM review.
-Acceptance: all three reference projects produce golden reports; wizard timed test; clean-machine install checklist signed off.
+Acceptance: all three reference projects produce golden reports (`tests/golden/test_golden_reference_projects.py`); wizard timed test (`tests/gui/test_guided.py`); clean-machine install checklist (`docs/INSTALL_CHECKLIST.md`: the automated parts run in CI, the manual sign-off is the owner's). Decisions D-084 to D-091.
 
 ## Critical path / external inputs
 Scope changes: mass, CG, inertia and phases are in v1 and sit in M2b (D-033); thermal dissipation, limits and the steady-state node model are in v1 as M4b (D-036).

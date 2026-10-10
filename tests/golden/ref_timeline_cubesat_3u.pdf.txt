@@ -1,0 +1,528 @@
+pages=10
+## page 1
+System Budget Studio 0.1.0 | Example 3U CubeSat rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 1
+Power budget over time: Example 3U CubeSat
+INCOMPLETE: some inputs are placeholders (source TBD or missing). Entries marked n/a depend on them and are not computed. Do not use this report as evidence until the
+placeholders are replaced with sourced values.
+Summary
+Scenario one_day: One day: charging by default, imaging and downlink over passes.
+Environment source: elements; shadow model: cylindrical; start 2026-06-01T00:00:00Z; duration 86400 s; step 10 s (8640 steps).
+Eclipse fraction 35.71 % of the scenario; 15 complete orbit(s).
+Demand basis: nominal; mission phase for the depth-of-discharge limit: not set.
+Beginning of life (BOL): no array degradation or battery fade. End of life (EOL): the design life applied to both.
+Results by case
+Quantity
+Unit
+BOL
+EOL
+Battery capacity
+Wh
+ n/a
+ n/a
+Average generation
+W
+ n/a
+ n/a
+Average demand at source
+W
+ n/a
+ n/a
+Energy generated
+Wh
+ n/a
+ n/a
+Energy demanded
+Wh
+ n/a
+ n/a
+Smallest margin (generation - demand)
+W
+ n/a
+ n/a
+Lowest state of charge
+%
+ n/a
+ n/a
+Deepest depth of discharge
+%
+ n/a
+ n/a
+Energy not supplied
+Wh
+ n/a
+ n/a
+Energy curtailed (battery full)
+Wh
+ n/a
+ n/a
+Stored energy change over the scenario
+Wh
+ n/a
+ n/a
+Violations
+count
+ 0
+ 0
+n/a: an input the result needs is a placeholder or missing (see Problems).
+Violations
+Case
+Finding
+From (T+)
+To (T+)
+Duration (s)
+Worst value
+Limit
+Unit
+Input to change
+No violations found.
+Modes and orbits
+Spacecraft modes in the scenario
+Mode
+Name
+Time (s)
+Share
+Load (W)
+Demand at source (W)
+Peak at source (W)
+charging
+Charging
+ 50577.8
+ 58.5 %
+ 1.500
+ n/a
+ n/a
+downlink
+Downlink
+ 4827.4
+ 5.6 %
+ 2.800
+ n/a
+ n/a
+imaging
+Imaging
+ 138.4
+ 0.2 %
+ 3.840
+ n/a
+ n/a
+## page 2
+System Budget Studio 0.1.0 | Example 3U CubeSat rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 2
+Mode
+Name
+Time (s)
+Share
+Load (W)
+Demand at source (W)
+Peak at source (W)
+nominal
+Nominal
+ 30856.4
+ 35.7 %
+ 2.000
+ n/a
+ n/a
+Demand basis: nominal.
+Orbit energy balance, BOL
+Orbit
+Start (T+)
+Length (s)
+Eclipse (s)
+Generated (Wh)
+Demanded (Wh)
+Balance (Wh)
+Stored change (Wh)
+1
+T+00:00:00
+ 5742.7
+ 2056.8
+ n/a
+ n/a
+ n/a
+ n/a
+2
+T+01:35:42
+ 5742.7
+ 2056.8
+ n/a
+ n/a
+ n/a
+ n/a
+3
+T+03:11:25
+ 5742.7
+ 2056.9
+ n/a
+ n/a
+ n/a
+ n/a
+4
+T+04:47:08
+ 5742.7
+ 2056.9
+ n/a
+ n/a
+ n/a
+ n/a
+5
+T+06:22:50
+ 5742.7
+ 2057.0
+ n/a
+ n/a
+ n/a
+ n/a
+6
+T+07:58:33
+ 5742.7
+ 2057.0
+ n/a
+ n/a
+ n/a
+ n/a
+7
+T+09:34:16
+ 5742.7
+ 2057.1
+ n/a
+ n/a
+ n/a
+ n/a
+8
+T+11:09:59
+ 5742.7
+ 2057.1
+ n/a
+ n/a
+ n/a
+ n/a
+9
+T+12:45:41
+ 5742.7
+ 2057.1
+ n/a
+ n/a
+ n/a
+ n/a
+10
+T+14:21:24
+ 5742.7
+ 2057.2
+ n/a
+ n/a
+ n/a
+ n/a
+11
+T+15:57:07
+ 5742.7
+ 2057.2
+ n/a
+ n/a
+ n/a
+ n/a
+12
+T+17:32:50
+ 5742.7
+ 2057.3
+ n/a
+ n/a
+ n/a
+ n/a
+13
+T+19:08:32
+ 5742.7
+ 2057.3
+ n/a
+ n/a
+ n/a
+ n/a
+14
+T+20:44:15
+ 5742.7
+ 2057.4
+ n/a
+ n/a
+ n/a
+ n/a
+15
+T+22:19:58
+ 5742.7
+ 2057.4
+ n/a
+ n/a
+ n/a
+ n/a
+Complete orbits only; the balance is generation minus demand at the source.
+Orbit energy balance, EOL
+Orbit
+Start (T+)
+Length (s)
+Eclipse (s)
+Generated (Wh)
+Demanded (Wh)
+Balance (Wh)
+Stored change (Wh)
+1
+T+00:00:00
+ 5742.7
+ 2056.8
+ n/a
+ n/a
+ n/a
+ n/a
+2
+T+01:35:42
+ 5742.7
+ 2056.8
+ n/a
+ n/a
+ n/a
+ n/a
+3
+T+03:11:25
+ 5742.7
+ 2056.9
+ n/a
+ n/a
+ n/a
+ n/a
+4
+T+04:47:08
+ 5742.7
+ 2056.9
+ n/a
+ n/a
+ n/a
+ n/a
+5
+T+06:22:50
+ 5742.7
+ 2057.0
+ n/a
+ n/a
+ n/a
+ n/a
+6
+T+07:58:33
+ 5742.7
+ 2057.0
+ n/a
+ n/a
+ n/a
+ n/a
+7
+T+09:34:16
+ 5742.7
+ 2057.1
+ n/a
+ n/a
+ n/a
+ n/a
+8
+T+11:09:59
+ 5742.7
+ 2057.1
+ n/a
+ n/a
+ n/a
+ n/a
+9
+T+12:45:41
+ 5742.7
+ 2057.1
+ n/a
+ n/a
+ n/a
+ n/a
+10
+T+14:21:24
+ 5742.7
+ 2057.2
+ n/a
+ n/a
+ n/a
+ n/a
+11
+T+15:57:07
+ 5742.7
+ 2057.2
+ n/a
+ n/a
+ n/a
+ n/a
+## page 3
+System Budget Studio 0.1.0 | Example 3U CubeSat rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 3
+Orbit
+Start (T+)
+Length (s)
+Eclipse (s)
+Generated (Wh)
+Demanded (Wh)
+Balance (Wh)
+Stored change (Wh)
+12
+T+17:32:50
+ 5742.7
+ 2057.3
+ n/a
+ n/a
+ n/a
+ n/a
+13
+T+19:08:32
+ 5742.7
+ 2057.3
+ n/a
+ n/a
+ n/a
+ n/a
+14
+T+20:44:15
+ 5742.7
+ 2057.4
+ n/a
+ n/a
+ n/a
+ n/a
+15
+T+22:19:58
+ 5742.7
+ 2057.4
+ n/a
+ n/a
+ n/a
+ n/a
+Complete orbits only; the balance is generation minus demand at the source.
+Static power
+The static budget of every mode, the input of the time-domain run.
+Power by spacecraft mode
+Mode
+Average load
+(W)
+Average, unit margins
+(W)
+Average, system margin
+(W)
+Average at source
+(W)
+Average at source, with margins
+(W)
+Peak load
+(W)
+Peak at source, with margins (W)
+Charging
+ 1.500
+ n/a
+ n/a
+ n/a
+ n/a
+ 2.450
+ n/a
+Downlink
+ 2.800
+ n/a
+ n/a
+ n/a
+ n/a
+ 6.950
+ n/a
+Imaging
+ 3.840
+ n/a
+ n/a
+ n/a
+ n/a
+ 6.950
+ n/a
+Nominal
+ 2.000
+ n/a
+ n/a
+ n/a
+ n/a
+ 3.150
+ n/a
+Safe
+ 1.000
+ n/a
+ n/a
+ n/a
+ n/a
+ 1.600
+ n/a
+Average = sum of unit power x duty cycle. Peak = sum of unit peak powers. Source = after converter and distribution losses.
+Assumptions
+Configuration numbers used
+Name
+Value
+Unit
+Source
+Status
+Margin, maturity class class_a
+ n/a
+ratio
+TBD
+PLACEHOLDER
+Margin, maturity class class_b
+ n/a
+ratio
+TBD
+PLACEHOLDER
+Margin, maturity class class_c
+ n/a
+ratio
+TBD
+PLACEHOLDER
+System margin
+ n/a
+ratio
+TBD
+PLACEHOLDER
+Distribution loss
+ n/a
+ratio
+TBD
+PLACEHOLDER
+Converter efficiency, bus main
+ n/a
+ratio
+TBD
+PLACEHOLDER
+Solar irradiance
+ n/a
+W/m2
+TBD
+PLACEHOLDER
+Cell area
+ n/a
+m2
+TBD
+PLACEHOLDER
+Cell efficiency
+ n/a
+ratio
+TBD
+PLACEHOLDER
+Reference temperature
+ n/a
+K
+TBD
+PLACEHOLDER
+Cell temperature
+ n/a
+K
+TBD
+PLACEHOLDER
+Efficiency temperature coefficient
+ n/a
+1/K
+TBD
+PLACEHOLDER
+Packing loss
+ n/a
+ratio
+TBD
+PLACEHOLDER
+...

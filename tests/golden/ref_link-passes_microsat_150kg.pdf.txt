@@ -1,0 +1,554 @@
+pages=9
+## page 1
+System Budget Studio 0.1.0 | Example 150 kg microsatellite rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 1
+Link budget over passes: Example 150 kg microsatellite
+Summary
+Link budget at the static points
+Link
+Direction
+Point
+Elevatio
+n (deg)
+Rang
+e
+(km)
+EIRP
+(dBW
+)
+G/T (
+dB/K)
+Path loss
+(dB)
+Atmosphe
+ric (dB)
+Other
+losses
+(dB)
+C/N0
+(dBHz
+)
+Required
+Eb/N0 (dB)
+Highest closing rate
+(kbit/s)
+Rate at required
+margin (kbit/s)
+sband_dow
+n
+downlink
+5 deg elevation
+ 5.0
+ 2200.
+ 0
+ 9.49
+ 10.00
+ 166.14
+ 0.20
+ 2.50
+ 79.24
+ 4.00
+ 8192.000
+ 16765.545
+sband_dow
+n
+downlink
+zenith
+ 90.0
+ 550.0
+ 9.49
+ 10.00
+ 154.10
+ 0.20
+ 2.50
+ 91.29
+ 4.00
+ 8192.000
+ 268248.720
+xband_dow
+n
+downlink
+10 deg elevation
+ 10.0
+ 1600.
+ 0
+ 9.50
+ 20.00
+ 174.81
+ 2.83
+ 2.50
+ 77.96
+ 4.00
+ 10000.000
+ 12472.037
+xband_dow
+n
+downlink
+zenith
+ 90.0
+ 550.0
+ 19.50
+ 20.00
+ 165.53
+ 0.90
+ 2.50
+ 99.17
+ 4.00
+ 50000.000
+ 1647347.842
+Other losses = pointing, polarisation and implementation. A link closes at a rate when its margin is at least the required margin of the link. n/a: an input is a placeholder or missing. Highest closing rate empty (n/a
+with a result): no listed rate closes.
+Margin by data rate
+Link
+Point
+Data rate (kbit/s)
+Eb/N0 (dB)
+Margin (dB)
+Required margin (dB)
+Closes
+sband_down
+5 deg elevation
+ 32.000
+ 34.19
+ 30.19
+ 3.00
+yes
+sband_down
+5 deg elevation
+ 128.000
+ 28.17
+ 24.17
+ 3.00
+yes
+sband_down
+5 deg elevation
+ 512.000
+ 22.15
+ 18.15
+ 3.00
+yes
+sband_down
+5 deg elevation
+ 2048.000
+ 16.13
+ 12.13
+ 3.00
+yes
+sband_down
+5 deg elevation
+ 8192.000
+ 10.11
+ 6.11
+ 3.00
+yes
+sband_down
+zenith
+ 32.000
+ 46.23
+ 42.23
+ 3.00
+yes
+sband_down
+zenith
+ 128.000
+ 40.21
+ 36.21
+ 3.00
+yes
+sband_down
+zenith
+ 512.000
+ 34.19
+ 30.19
+ 3.00
+yes
+sband_down
+zenith
+ 2048.000
+ 28.17
+ 24.17
+ 3.00
+yes
+sband_down
+zenith
+ 8192.000
+ 22.15
+ 18.15
+ 3.00
+yes
+xband_down
+10 deg elevation
+ 1000.000
+ 17.96
+ 13.96
+ 3.00
+yes
+xband_down
+10 deg elevation
+ 10000.000
+ 7.96
+ 3.96
+ 3.00
+yes
+xband_down
+10 deg elevation
+ 50000.000
+ 0.97
+ -3.03
+ 3.00
+no
+xband_down
+zenith
+ 1000.000
+ 39.17
+ 35.17
+ 3.00
+yes
+xband_down
+zenith
+ 10000.000
+ 29.17
+ 25.17
+ 3.00
+yes
+xband_down
+zenith
+ 50000.000
+ 22.18
+ 18.18
+ 3.00
+yes
+## page 2
+System Budget Studio 0.1.0 | Example 150 kg microsatellite rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 2
+Passes
+Scenario commissioning_day: One day with a safe-mode commissioning start. Step 10 s, duration 86400 s.
+Data volume per link
+Link
+Station
+Passes
+Scenario total (Mbit)
+Per day (Mbit)
+Per day (MByte)
+sband_down
+gs_north
+ 11
+ 35125.84
+ 35125.84
+ 4390.73
+xband_down
+gs_south
+ 4
+ 21724.68
+ 21724.68
+ 2715.59
+From the highest listed rate that closes at each sample while the link is active (its modes, below its tracking limit). Per day = scenario total scaled to 86 400 s.
+Passes of link sband_down over gs_north
+Pass
+AOS (T+)
+AOS (UTC)
+Duration (s)
+Max elevation (deg)
+Usable (s)
+Lowest margin (dB)
+Volume (Mbit)
+1
+T+00:02:06
+2026-06-01T00:02:06.125793Z
+ 493.2
+ 19.2
+ 0.0
+ n/a
+ 0.00
+2
+T+01:36:43
+2026-06-01T01:36:43.526917Z
+ 586.6
+ 74.9
+ 580.1
+ 30.15
+ 4752.37
+3
+T+03:11:37
+2026-06-01T03:11:37.600403Z
+ 542.6
+ 31.1
+ 540.2
+ 30.14
+ 4425.40
+4
+T+04:46:25
+2026-06-01T04:46:25.799866Z
+ 424.8
+ 14.1
+ 420.6
+ 30.13
+ 3445.86
+5
+T+06:20:35
+2026-06-01T06:20:35.381165Z
+ 329.2
+ 9.5
+ 324.6
+ 30.17
+ 2659.37
+6
+T+07:53:28
+2026-06-01T07:53:28.876648Z
+ 375.9
+ 11.3
+ 374.7
+ 30.13
+ 3069.78
+7
+T+09:26:02
+2026-06-01T09:26:02.626038Z
+ 500.3
+ 21.6
+ 493.0
+ 30.17
+ 4038.41
+8
+T+10:59:35
+2026-06-01T10:59:35.551453Z
+ 581.7
+ 63.8
+ 577.2
+ 30.26
+ 4728.59
+9
+T+12:34:52
+2026-06-01T12:34:52.50885Z
+ 552.4
+ 32.0
+ 544.9
+ 30.22
+ 4463.80
+10
+T+14:12:52
+2026-06-01T14:12:52.806091Z
+ 309.6
+ 8.6
+ 302.4
+ 30.13
+ 2477.30
+11
+T+23:57:48
+2026-06-01T23:57:48.998718Z
+ 131.0
+ 13.8
+ 130.0
+ 30.12
+ 1064.96
+Lowest margin is at the lowest listed rate over the active samples.
+Passes of link xband_down over gs_south
+Pass
+AOS (T+)
+AOS (UTC)
+Duration (s)
+Max elevation (deg)
+Usable (s)
+Lowest margin (dB)
+Volume (Mbit)
+1
+T+02:32:03
+2026-06-01T02:32:03.085632Z
+ 444.4
+ 34.1
+ 437.5
+ 12.83
+ 10285.14
+2
+T+04:07:10
+2026-06-01T04:07:10.902405Z
+ 373.6
+ 21.7
+ 364.5
+ 12.82
+ 3514.54
+3
+T+13:18:57
+2026-06-01T13:18:57.928772Z
+ 406.9
+ 26.2
+ 404.8
+ 12.72
+ 3914.81
+4
+T+14:53:30
+2026-06-01T14:53:30.978699Z
+ 419.2
+ 27.6
+ 410.2
+ 12.56
+ 4010.19
+Lowest margin is at the lowest listed rate over the active samples.
+Assumptions
+Configuration numbers used
+Name
+Value
+Unit
+Source
+Status
+Transmit power
+ 5.0000
+W
+Synthetic example value; not from a data sheet or a standard.
+sourced
+## page 3
+System Budget Studio 0.1.0 | Example 150 kg microsatellite rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 3
+Name
+Value
+Unit
+Source
+Status
+Line loss
+ 0.5000
+dB
+Synthetic example value; not from a data sheet or a standard.
+sourced
+Antenna gain, transmitter
+ 3.0000
+dBi
+Synthetic example value; not from a data sheet or a standard.
+sourced
+G/T
+ 10.0000
+dB/K
+Synthetic example value; not from a data sheet or a standard.
+sourced
+Required margin
+ 3.0000
+dB
+Synthetic example value; not from a data sheet or a standard.
+sourced
+Pointing loss
+ 1.0000
+dB
+Synthetic example value; not from a data sheet or a standard.
+sourced
+Polarisation loss
+ 0.5000
+dB
+Synthetic example value; not from a data sheet or a standard.
+sourced
+Implementation loss
+ 1.0000
+dB
+Synthetic example value; not from a data sheet or a standard.
+sourced
+Required Eb/N0, QPSK rate 1/2
+ 4.0000
+dB
+Synthetic example value; not from a data sheet or a standard.
+sourced
+Attenuation gas_s
+ 0.2000
+dB
+Synthetic example value; not from a data sheet or a standard.
+sourced
+Transmit power
+ 10.0000
+W
+Synthetic example value; not from a data sheet or a standard.
+sourced
+Line loss
+ 0.5000
+dB
+Synthetic example value; not from a data sheet or a standard.
+sourced
+Antenna pattern, transmitter
+ n/a
+dBi
+Synthetic example value; not from a data sheet or a standard.
+sourced
+G/T
+ 20.0000
+dB/K
+Synthetic example value; not from a data sheet or a standard.
+sourced
+Required margin
+ 3.0000
+dB
+Synthetic example value; not from a data sheet or a standard.
+sourced
+Pointing loss
+ 1.0000
+dB
+Synthetic example value; not from a data sheet or a standard.
+sourced
+Polarisation loss
+ 0.5000
+dB
+Synthetic example value; not from a data sheet or a standard.
+sourced
+Implementation loss
+ 1.0000
+dB
+Synthetic example value; not from a data sheet or a standard.
+sourced
+Attenuation rain_x at 5 deg
+ 3.0000
+dB
+Synthetic example value; not from a data sheet or a standard.
+sourced
+Attenuation rain_x at 20 deg
+ 1.0000
+dB
+Synthetic example value; not from a data sheet or a standard.
+sourced
+Attenuation rain_x at 90 deg
+ 0.4000
+dB
+Synthetic example value; not from a data sheet or a standard.
+sourced
+Attenuation gas_x
+ 0.5000
+dB
+Synthetic example value; not from a data sheet or a standard.
+sourced
+Equations
+ID
+Name
+Formula
+Source
+LNK-EIRP
+Effective isotropic radiated power
+EIRP = P_tx - L_line + G_tx (dBW)
+SOURCE_MISSING
+LNK-FSPL
+Free-space path loss
+L_fs = 20 log10(4 pi d f / c) (dB)
+SOURCE_MISSING
+LNK-GT
+Receiver figure of merit
+G/T = G_rx - L_feed - 10 log10(T_sys) (dB/K), or given directly
+SOURCE_MISSING
+LNK-CN0
+Carrier to noise density
+C/N0 = EIRP - L_fs - L_atm - L_point - L_pol - L_impl + G/T - 10 log10(k) (dBHz)
+SOURCE_MISSING
+LNK-EBN0
+Energy per bit to noise density
+Eb/N0 = C/N0 - 10 log10(R_b) (dB)
+SOURCE_MISSING
+LNK-MARGIN
+Link margin
+margin = Eb/N0 - Eb/N0_required (dB); the link closes when margin >= required margin
+SOURCE_MISSING
+LNK-ATT
+Atmospheric attenuation
+L_atm = sum of the named table entries, linear interpolation by elevation
+SOURCE_MISSING
+LNK-NADIR
+Angle from nadir at the spacecraft
+sin(eta) = R cos(el) / r, r^2 = R^2 + d^2 + 2 R d sin(el)
+SOURCE_MISSING
+LNK-VOLUME
+Data volume
+V = sum over samples of R_selected * (time of the step inside the pass); R_selected is the
+highest listed rate with margin >= required margin while the link is active
+SOURCE_MISSING
+SOURCE_MISSING: the formula is a project convention or textbook definition whose reference text is not available to the tool yet (see docs/DECISIONS.md).
+...

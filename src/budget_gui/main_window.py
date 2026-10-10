@@ -73,7 +73,9 @@ class MainWindow(QMainWindow):
         bottom.setWidget(self.problems_panel)
         self.addDockWidget(Qt.DockWidgetArea.BottomDockWidgetArea, bottom)
         self.setStatusBar(QStatusBar())
-        self.statusBar().showMessage(f"Version {__version__} — offline")
+        self.statusBar().showMessage(
+            f"Version {__version__} — offline. File > New project (guided) starts a first budget."
+        )
 
         self._build_menu()
         self.session.changed.connect(self._refresh)

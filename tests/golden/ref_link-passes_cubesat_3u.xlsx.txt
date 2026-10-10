@@ -1,0 +1,107 @@
+## sheet Summary rows=11 cols=14
+1: 'Link budget over passes: Example 3U CubeSat' |  |  |  |  |  |  |  |  |  |  |  |  | 
+2: 'INCOMPLETE: some inputs are placeholders (source TBD or missing). Entries marked n/a depend on them and are not computed. Do not use this report as evidence until the placeholders are replaced with sourced values.' |  |  |  |  |  |  |  |  |  |  |  |  | 
+4: 'Link budget at the static points' |  |  |  |  |  |  |  |  |  |  |  |  | 
+5: 'Link' | 'Direction' | 'Point' | 'Elevation (deg)' | 'Range (km)' | 'EIRP (dBW)' | 'G/T (dB/K)' | 'Path loss (dB)' | 'Atmospheric (dB)' | 'Other losses (dB)' | 'C/N0 (dBHz)' | 'Required Eb/N0 (dB)' | 'Highest closing rate (kbit/s)' | 'Rate at required margin (kbit/s)'
+6: 'uhf_down' | 'downlink' | '5 deg elevation' | 5 | 2200 | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a'
+7: 'uhf_down' | 'downlink' | 'zenith' | 90 | 550 | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a'
+8: 'Other losses = pointing, polarisation and implementation. A link closes at a rate when its margin is at least the required margin of the link. n/a: an input is a placeholder or missing. Highest closing rate empty (n/a with a result): no listed rate closes.' |  |  |  |  |  |  |  |  |  |  |  |  | 
+10: 'Margin by data rate' |  |  |  |  |  |  |  |  |  |  |  |  | 
+11: 'Link' | 'Point' | 'Data rate (kbit/s)' | 'Eb/N0 (dB)' | 'Margin (dB)' | 'Required margin (dB)' | 'Closes' |  |  |  |  |  |  | 
+## sheet Passes rows=20 cols=8
+1: 'Scenario one_day: One day: charging by default, imaging and downlink over passes. Step 10 s, duration 86400 s.' |  |  |  |  |  |  | 
+2: 'Data volume per link' |  |  |  |  |  |  | 
+3: 'Link' | 'Station' | 'Passes' | 'Scenario total (Mbit)' | 'Per day (Mbit)' | 'Per day (MByte)' |  | 
+4: 'uhf_down' | 'gs_north' | 11 | 'n/a' | 'n/a' | 'n/a' |  | 
+5: 'From the highest listed rate that closes at each sample while the link is active (its modes, below its tracking limit). Per day = scenario total scaled to 86 400 s.' |  |  |  |  |  |  | 
+7: 'Passes of link uhf_down over gs_north' |  |  |  |  |  |  | 
+8: 'Pass' | 'AOS (T+)' | 'AOS (UTC)' | 'Duration (s)' | 'Max elevation (deg)' | 'Usable (s)' | 'Lowest margin (dB)' | 'Volume (Mbit)'
+9: '1' | 'T+00:02:06' | '2026-06-01T00:02:06.125793Z' | 493.2177734375 | 19.21839064579204 | 0 | 'n/a' | 'n/a'
+10: '2' | 'T+01:36:43' | '2026-06-01T01:36:43.526917Z' | 586.5966796875 | 74.89292899026297 | 0 | 'n/a' | 'n/a'
+11: '3' | 'T+03:11:37' | '2026-06-01T03:11:37.600403Z' | 542.60986328125 | 31.14948812769731 | 0 | 'n/a' | 'n/a'
+12: '4' | 'T+04:46:25' | '2026-06-01T04:46:25.799866Z' | 424.8370361328125 | 14.05721131676231 | 0 | 'n/a' | 'n/a'
+13: '5' | 'T+06:20:35' | '2026-06-01T06:20:35.381165Z' | 329.249267578125 | 9.494057423502866 | 0 | 'n/a' | 'n/a'
+14: '6' | 'T+07:53:28' | '2026-06-01T07:53:28.876648Z' | 375.8526611328125 | 11.3396039086025 | 0 | 'n/a' | 'n/a'
+15: '7' | 'T+09:26:02' | '2026-06-01T09:26:02.626038Z' | 500.34423828125 | 21.60812360491966 | 0 | 'n/a' | 'n/a'
+16: '8' | 'T+10:59:35' | '2026-06-01T10:59:35.551453Z' | 581.668701171875 | 63.79924339639885 | 0 | 'n/a' | 'n/a'
+17: '9' | 'T+12:34:52' | '2026-06-01T12:34:52.50885Z' | 552.3883056640625 | 31.99709010841761 | 0 | 'n/a' | 'n/a'
+18: '10' | 'T+14:12:52' | '2026-06-01T14:12:52.806091Z' | 309.598388671875 | 8.560320806366681 | 0 | 'n/a' | 'n/a'
+19: '11' | 'T+23:57:48' | '2026-06-01T23:57:48.998718Z' | 131.0012817382812 | 13.75837450503596 | 0 | 'n/a' | 'n/a'
+20: 'Lowest margin is at the lowest listed rate over the active samples.' |  |  |  |  |  |  | 
+## sheet Assumptions rows=24 cols=5
+1: 'Configuration numbers used' |  |  |  | 
+2: 'Name' | 'Value' | 'Unit' | 'Source' | 'Status'
+3: 'Transmit power' | 'n/a' | 'W' | 'TBD' | 'PLACEHOLDER'
+4: 'Line loss' | 'n/a' | 'dB' | 'TBD' | 'PLACEHOLDER'
+5: 'Antenna gain, transmitter' | 'n/a' | 'dBi' | 'TBD' | 'PLACEHOLDER'
+6: 'G/T' | 'n/a' | 'dB/K' | 'TBD' | 'PLACEHOLDER'
+7: 'Required margin' | 'n/a' | 'dB' | 'TBD' | 'PLACEHOLDER'
+8: 'Pointing loss' | 'n/a' | 'dB' | 'TBD' | 'PLACEHOLDER'
+9: 'Polarisation loss' | 'n/a' | 'dB' | 'TBD' | 'PLACEHOLDER'
+10: 'Implementation loss' | 'n/a' | 'dB' | 'TBD' | 'PLACEHOLDER'
+11: 'Required Eb/N0, BPSK none' | 'n/a' | 'dB' | 'TBD' | 'PLACEHOLDER'
+13: 'Equations' |  |  |  | 
+14: 'ID' | 'Name' | 'Formula' | 'Source' | 
+15: 'LNK-EIRP' | 'Effective isotropic radiated power' | 'EIRP = P_tx - L_line + G_tx  (dBW)' | 'SOURCE_MISSING' | 
+16: 'LNK-FSPL' | 'Free-space path loss' | 'L_fs = 20 log10(4 pi d f / c)  (dB)' | 'SOURCE_MISSING' | 
+17: 'LNK-GT' | 'Receiver figure of merit' | 'G/T = G_rx - L_feed - 10 log10(T_sys)  (dB/K), or given directly' | 'SOURCE_MISSING' | 
+18: 'LNK-CN0' | 'Carrier to noise density' | 'C/N0 = EIRP - L_fs - L_atm - L_point - L_pol - L_impl + G/T - 10 log10(k)  (dBHz)' | 'SOURCE_MISSING' | 
+19: 'LNK-EBN0' | 'Energy per bit to noise density' | 'Eb/N0 = C/N0 - 10 log10(R_b)  (dB)' | 'SOURCE_MISSING' | 
+20: 'LNK-MARGIN' | 'Link margin' | 'margin = Eb/N0 - Eb/N0_required  (dB); the link closes when margin >= required margin' | 'SOURCE_MISSING' | 
+21: 'LNK-ATT' | 'Atmospheric attenuation' | 'L_atm = sum of the named table entries, linear interpolation by elevation' | 'SOURCE_MISSING' | 
+22: 'LNK-NADIR' | 'Angle from nadir at the spacecraft' | 'sin(eta) = R cos(el) / r,  r^2 = R^2 + d^2 + 2 R d sin(el)' | 'SOURCE_MISSING' | 
+23: 'LNK-VOLUME' | 'Data volume' | 'V = sum over samples of R_selected * (time of the step inside the pass); R_selected is the highest listed rate with margin >= required margin while the link is active' | 'SOURCE_MISSING' | 
+24: 'SOURCE_MISSING: the formula is a project convention or textbook definition whose reference text is not available to the tool yet (see docs/DECISIONS.md).' |  |  |  | 
+## sheet Problems rows=102 cols=4
+1: 'Problems and open items' |  |  | 
+2: 'Severity' | 'Code' | 'Location' | 'Message'
+3: 'warning' | 'CONFIG_EMPTY_TABLE' | 'config/attenuation_table.yaml:3' | 'The table has no entries.'
+4: 'warning' | 'RESULT_INCOMPLETE' | 'config/ebn0_table.yaml' | 'The required Eb/N0 is a placeholder.'
+5: 'warning' | 'RESULT_INCOMPLETE' | 'config/ebn0_table.yaml' | 'The required Eb/N0 is a placeholder.'
+6: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/ebn0_table.yaml:7' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+7: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:6' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+8: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:10' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+9: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:15' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+10: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:19' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+11: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:24' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+12: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:28' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+13: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:32' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+14: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:36' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+15: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/mass_limits.yaml:7' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+16: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_config.yaml:4' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+17: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_config.yaml:9' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+18: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:4' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+19: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:45' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+20: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:49' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+21: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:53' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+22: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:57' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+23: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:61' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+24: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:65' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+25: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:69' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+26: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:73' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+27: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:77' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+28: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:82' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+29: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:86' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+30: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:92' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+31: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:96' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+32: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:100' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+33: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:104' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+34: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:109' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+35: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:113' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+36: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:128' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+37: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_environment.yaml:4' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+38: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_environment.yaml:8' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+39: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_environment.yaml:17' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+40: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/thermal_environment.yaml:21' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+...
+## sheet Provenance rows=10 cols=2
+1: 'Provenance' | 
+2: 'Item' | 'Value'
+3: 'Tool' | 'System Budget Studio 0.1.0'
+4: 'Python' | '3.x'
+5: 'Libraries' | 'pinned for-golden-tests'
+6: 'Project' | 'Example 3U CubeSat'
+7: 'Project revision' | '1'
+8: 'Scenario' | 'static (no scenario)'
+9: 'Generated (UTC)' | '2026-01-02T03:04:05Z'
+10: 'User' | 'Golden User'

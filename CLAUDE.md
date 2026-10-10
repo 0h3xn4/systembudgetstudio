@@ -8,7 +8,8 @@ Spec: `docs/SPEC.md` (authoritative). Plan: `docs/PLAN.md`. Architecture: `docs/
 - Lint/type: `ruff check . && ruff format --check . && mypy`
 - Lock: `packaging/lock.sh` (uv, hashes)
 - Regenerate generated files after model changes: `budget export-schemas src/budget_core/schemas` and `budget export-examples examples` (tests fail on drift)
-- Package: `pyinstaller packaging/system_budget_studio.spec`
+- Package: `pyinstaller packaging/system_budget_studio.spec` (Linux release: `packaging/linux/build_in_container.sh` in `rockylinux:8`)
+- Licences: `python packaging/licence_check.py --markdown docs/LICENCES.md` (permissive or LGPL only); user guide: `budget guide --out guide`
 
 ## Conventions
 - Core (`budget_core`) has no GUI or networking imports; GUI and CLI depend only on the core.

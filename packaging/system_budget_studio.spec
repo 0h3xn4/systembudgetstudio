@@ -1,4 +1,6 @@
 # PyInstaller spec: one-folder build (portable zip / installer payload). Run from the repo root.
+# The folder holds two executables that share one set of libraries: the windowed
+# `system-budget-studio` and the console tool `budget` (batch runs, scripts).
 from pathlib import Path
 
 from PyInstaller.utils.hooks import collect_data_files
@@ -6,7 +8,7 @@ from PyInstaller.utils.hooks import collect_data_files
 root = Path(SPECPATH).parent
 
 a = Analysis(
-    [str(root / "src" / "budget_gui" / "app.py")],
+    [str(root / "packaging" / "entry_gui.py"), str(root / "packaging" / "entry_cli.py")],
     pathex=[str(root / "src")],
     datas=[
         (str(root / "assets"), "budget_core/assets"),
@@ -22,12 +24,28 @@ a = Analysis(
     excludes=["PySide6.QtNetwork", "tkinter"],
 )
 pyz = PYZ(a.pure)
-exe = EXE(
+
+
+def scripts(keep):
+    """The bootstrap scripts plus the one entry script of an executable."""
+    own = {"entry_gui", "entry_cli"}
+    return [s for s in a.scripts if s[0] not in own or s[0] == keep]
+
+
+gui = EXE(
     pyz,
-    a.scripts,
+    scripts("entry_gui"),
     [],
     exclude_binaries=True,
     name="system-budget-studio",
     console=False,
 )
-coll = COLLECT(exe, a.binaries, a.datas, name="system-budget-studio")
+cli = EXE(
+    pyz,
+    scripts("entry_cli"),
+    [],
+    exclude_binaries=True,
+    name="budget",
+    console=True,
+)
+coll = COLLECT(gui, cli, a.binaries, a.datas, name="system-budget-studio")

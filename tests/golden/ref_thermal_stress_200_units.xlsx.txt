@@ -1,0 +1,398 @@
+## sheet Summary rows=11 cols=3
+1: 'Thermal budget (static): Example stress case (200 units)' |  | 
+2: 'INCOMPLETE: some inputs are placeholders (source TBD or missing). Entries marked n/a depend on them and are not computed. Do not use this report as evidence until the placeholders are replaced with sourced values.' |  | 
+4: 'Heat dissipation by spacecraft mode' |  | 
+5: 'Mode' | 'Average (W)' | 'Peak (W)'
+6: 'Charging' | 277.2625 | 496.979
+7: 'Downlink' | 275.9775 | 497.455
+8: 'Imaging' | 275.8125 | 496.686
+9: 'Nominal' | 277.025 | 496.598
+10: 'Safe' | 275.9575 | 497.183
+11: 'Average = sum of unit power x duty cycle x heat dissipation ratio. Peak uses the unit peak powers. n/a: a unit has no heat dissipation ratio for its power mode.' |  | 
+## sheet Case cold rows=208 cols=8
+1: 'Eclipse with the lowest-power mode.' |  |  |  |  |  |  | 
+2: 'Node temperatures, case cold' |  |  |  |  |  |  | 
+3: 'Node' | 'Temperature (K)' |  |  |  |  |  | 
+4: 'not computed (inputs missing, see Problems)' | 'n/a' |  |  |  |  |  | 
+6: 'Unit temperature limits, case cold (operating)' |  |  |  |  |  |  | 
+7: 'Unit' | 'Node' | 'Temperature (K)' | 'Lower limit (K)' | 'Upper limit (K)' | 'Headroom to lower (K)' | 'Headroom to upper (K)' | 'Status'
+8: 'unit_000' | 'DH' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+9: 'unit_001' | 'EPS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+10: 'unit_002' | 'AOCS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+11: 'unit_003' | 'TTC' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+12: 'unit_004' | 'PL' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+13: 'unit_005' | 'THERM' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+14: 'unit_006' | 'PL-DATA' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+15: 'unit_007' | 'HARNESS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+16: 'unit_008' | 'DH' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+17: 'unit_009' | 'EPS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+18: 'unit_010' | 'AOCS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+19: 'unit_011' | 'TTC' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+20: 'unit_012' | 'PL' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+21: 'unit_013' | 'THERM' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+22: 'unit_014' | 'PL-DATA' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+23: 'unit_015' | 'HARNESS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+24: 'unit_016' | 'DH' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+25: 'unit_017' | 'EPS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+26: 'unit_018' | 'AOCS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+27: 'unit_019' | 'TTC' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+28: 'unit_020' | 'PL' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+29: 'unit_021' | 'THERM' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+30: 'unit_022' | 'PL-DATA' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+31: 'unit_023' | 'HARNESS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+32: 'unit_024' | 'DH' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+33: 'unit_025' | 'EPS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+34: 'unit_026' | 'AOCS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+35: 'unit_027' | 'TTC' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+36: 'unit_028' | 'PL' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+37: 'unit_029' | 'THERM' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+38: 'unit_030' | 'PL-DATA' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+39: 'unit_031' | 'HARNESS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+40: 'unit_032' | 'DH' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+...
+## sheet Case hot rows=208 cols=8
+1: 'Sunlight with the highest-power mode.' |  |  |  |  |  |  | 
+2: 'Node temperatures, case hot' |  |  |  |  |  |  | 
+3: 'Node' | 'Temperature (K)' |  |  |  |  |  | 
+4: 'not computed (inputs missing, see Problems)' | 'n/a' |  |  |  |  |  | 
+6: 'Unit temperature limits, case hot (operating)' |  |  |  |  |  |  | 
+7: 'Unit' | 'Node' | 'Temperature (K)' | 'Lower limit (K)' | 'Upper limit (K)' | 'Headroom to lower (K)' | 'Headroom to upper (K)' | 'Status'
+8: 'unit_000' | 'DH' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+9: 'unit_001' | 'EPS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+10: 'unit_002' | 'AOCS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+11: 'unit_003' | 'TTC' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+12: 'unit_004' | 'PL' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+13: 'unit_005' | 'THERM' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+14: 'unit_006' | 'PL-DATA' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+15: 'unit_007' | 'HARNESS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+16: 'unit_008' | 'DH' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+17: 'unit_009' | 'EPS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+18: 'unit_010' | 'AOCS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+19: 'unit_011' | 'TTC' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+20: 'unit_012' | 'PL' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+21: 'unit_013' | 'THERM' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+22: 'unit_014' | 'PL-DATA' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+23: 'unit_015' | 'HARNESS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+24: 'unit_016' | 'DH' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+25: 'unit_017' | 'EPS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+26: 'unit_018' | 'AOCS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+27: 'unit_019' | 'TTC' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+28: 'unit_020' | 'PL' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+29: 'unit_021' | 'THERM' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+30: 'unit_022' | 'PL-DATA' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+31: 'unit_023' | 'HARNESS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+32: 'unit_024' | 'DH' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+33: 'unit_025' | 'EPS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+34: 'unit_026' | 'AOCS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+35: 'unit_027' | 'TTC' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+36: 'unit_028' | 'PL' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+37: 'unit_029' | 'THERM' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+38: 'unit_030' | 'PL-DATA' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+39: 'unit_031' | 'HARNESS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+40: 'unit_032' | 'DH' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+...
+## sheet Mode charging rows=224 cols=9
+1: 'Units in mode Charging' |  |  |  |  |  |  |  | 
+2: 'Unit' | 'Name' | 'Subsystem' | 'Node' | 'Power mode' | 'Effective power (W)' | 'Dissipation ratio' | 'Dissipation (W)' | 'Peak dissipation (W)'
+3: 'unit_000' | 'Stress unit 000' | 'DH' | 'DH' | 'charging' | 0.28 | 1 | 0.28 | 0.42
+4: 'unit_001' | 'Stress unit 001' | 'EPS' | 'EPS' | 'charging' | 0.35 | 1 | 0.35 | 0.525
+5: 'unit_002' | 'Stress unit 002' | 'AOCS' | 'AOCS' | 'charging' | 0.275 | 1 | 0.275 | 0.825
+6: 'unit_003' | 'Stress unit 003' | 'TTC' | 'TTC' | 'charging' | 0.78 | 1 | 0.78 | 1.17
+7: 'unit_004' | 'Stress unit 004' | 'PL' | 'PL' | 'charging' | 1.04 | 1 | 1.04 | 1.56
+8: 'unit_005' | 'Stress unit 005' | 'THERM' | 'THERM' | 'charging' | 0.665 | 1 | 0.665 | 1.995
+9: 'unit_006' | 'Stress unit 006' | 'PL-DATA' | 'PL-DATA' | 'charging' | 1.1 | 1 | 1.1 | 1.65
+10: 'unit_007' | 'Stress unit 007' | 'HARNESS' | 'HARNESS' | 'charging' | 1.375 | 1 | 1.375 | 2.062
+11: 'unit_008' | 'Stress unit 008' | 'DH' | 'DH' | 'charging' | 0.84 | 1 | 0.84 | 2.52
+12: 'unit_009' | 'Stress unit 009' | 'EPS' | 'EPS' | 'charging' | 2.015 | 1 | 2.015 | 3.022
+13: 'unit_010' | 'Stress unit 010' | 'AOCS' | 'AOCS' | 'charging' | 2.38 | 1 | 2.38 | 3.57
+14: 'unit_011' | 'Stress unit 011' | 'TTC' | 'TTC' | 'charging' | 0.925 | 1 | 0.925 | 2.775
+15: 'unit_012' | 'Stress unit 012' | 'PL' | 'PL' | 'charging' | 2.2 | 1 | 2.2 | 3.3
+16: 'unit_013' | 'Stress unit 013' | 'THERM' | 'THERM' | 'charging' | 2.58 | 1 | 2.58 | 3.87
+17: 'unit_014' | 'Stress unit 014' | 'PL-DATA' | 'PL-DATA' | 'charging' | 1.495 | 1 | 1.495 | 4.485
+18: 'unit_015' | 'Stress unit 015' | 'HARNESS' | 'HARNESS' | 'charging' | 3.43 | 1 | 3.43 | 5.145
+19: 'unit_016' | 'Stress unit 016' | 'DH' | 'DH' | 'charging' | 2.6 | 1 | 2.6 | 3.9
+20: 'unit_017' | 'Stress unit 017' | 'EPS' | 'EPS' | 'charging' | 0.11 | 1 | 0.11 | 0.33
+21: 'unit_018' | 'Stress unit 018' | 'AOCS' | 'AOCS' | 'charging' | 0.42 | 1 | 0.42 | 0.63
+22: 'unit_019' | 'Stress unit 019' | 'TTC' | 'TTC' | 'charging' | 0.65 | 1 | 0.65 | 0.975
+23: 'unit_020' | 'Stress unit 020' | 'PL' | 'PL' | 'charging' | 0.455 | 1 | 0.455 | 1.365
+24: 'unit_021' | 'Stress unit 021' | 'THERM' | 'THERM' | 'charging' | 0.8 | 1 | 0.8 | 1.2
+25: 'unit_022' | 'Stress unit 022' | 'PL-DATA' | 'PL-DATA' | 'charging' | 1.045 | 1 | 1.045 | 1.567
+26: 'unit_023' | 'Stress unit 023' | 'HARNESS' | 'HARNESS' | 'charging' | 0.66 | 1 | 0.66 | 1.98
+27: 'unit_024' | 'Stress unit 024' | 'DH' | 'DH' | 'charging' | 1.625 | 1 | 1.625 | 2.438
+28: 'unit_025' | 'Stress unit 025' | 'EPS' | 'EPS' | 'charging' | 1.96 | 1 | 1.96 | 2.94
+29: 'unit_026' | 'Stress unit 026' | 'AOCS' | 'AOCS' | 'charging' | 0.775 | 1 | 0.775 | 2.325
+30: 'unit_027' | 'Stress unit 027' | 'TTC' | 'TTC' | 'charging' | 1.87 | 1 | 1.87 | 2.805
+31: 'unit_028' | 'Stress unit 028' | 'PL' | 'PL' | 'charging' | 2.22 | 1 | 2.22 | 3.33
+32: 'unit_029' | 'Stress unit 029' | 'THERM' | 'THERM' | 'charging' | 1.3 | 1 | 1.3 | 3.9
+33: 'unit_030' | 'Stress unit 030' | 'PL-DATA' | 'PL-DATA' | 'charging' | 3.01 | 1 | 3.01 | 4.515
+34: 'unit_031' | 'Stress unit 031' | 'HARNESS' | 'HARNESS' | 'charging' | 2.3 | 1 | 2.3 | 3.45
+35: 'unit_032' | 'Stress unit 032' | 'DH' | 'DH' | 'charging' | 1.3475 | 1 | 1.3475 | 4.042
+36: 'unit_033' | 'Stress unit 033' | 'EPS' | 'EPS' | 'charging' | 3.12 | 1 | 3.12 | 4.68
+37: 'unit_034' | 'Stress unit 034' | 'AOCS' | 'AOCS' | 'charging' | 0.26 | 1 | 0.26 | 0.39
+38: 'unit_035' | 'Stress unit 035' | 'TTC' | 'TTC' | 'charging' | 0.245 | 1 | 0.245 | 0.735
+39: 'unit_036' | 'Stress unit 036' | 'PL' | 'PL' | 'charging' | 0.5 | 1 | 0.5 | 0.75
+40: 'unit_037' | 'Stress unit 037' | 'THERM' | 'THERM' | 'charging' | 0.715 | 1 | 0.715 | 1.073
+...
+## sheet Mode downlink rows=224 cols=9
+1: 'Units in mode Downlink' |  |  |  |  |  |  |  | 
+2: 'Unit' | 'Name' | 'Subsystem' | 'Node' | 'Power mode' | 'Effective power (W)' | 'Dissipation ratio' | 'Dissipation (W)' | 'Peak dissipation (W)'
+3: 'unit_000' | 'Stress unit 000' | 'DH' | 'DH' | 'downlink' | 0.13 | 1 | 0.13 | 0.39
+4: 'unit_001' | 'Stress unit 001' | 'EPS' | 'EPS' | 'downlink' | 0.49 | 1 | 0.49 | 0.735
+5: 'unit_002' | 'Stress unit 002' | 'AOCS' | 'AOCS' | 'downlink' | 0.5 | 1 | 0.5 | 0.75
+6: 'unit_003' | 'Stress unit 003' | 'TTC' | 'TTC' | 'downlink' | 0.3575 | 1 | 0.3575 | 1.073
+7: 'unit_004' | 'Stress unit 004' | 'PL' | 'PL' | 'downlink' | 0.96 | 1 | 0.96 | 1.44
+8: 'unit_005' | 'Stress unit 005' | 'THERM' | 'THERM' | 'downlink' | 1.235 | 1 | 1.235 | 1.853
+9: 'unit_006' | 'Stress unit 006' | 'PL-DATA' | 'PL-DATA' | 'downlink' | 0.77 | 1 | 0.77 | 2.31
+10: 'unit_007' | 'Stress unit 007' | 'HARNESS' | 'HARNESS' | 'downlink' | 1.25 | 1 | 1.25 | 1.875
+11: 'unit_008' | 'Stress unit 008' | 'DH' | 'DH' | 'downlink' | 1.54 | 1 | 1.54 | 2.31
+12: 'unit_009' | 'Stress unit 009' | 'EPS' | 'EPS' | 'downlink' | 0.93 | 1 | 0.93 | 2.79
+13: 'unit_010' | 'Stress unit 010' | 'AOCS' | 'AOCS' | 'downlink' | 2.21 | 1 | 2.21 | 3.315
+14: 'unit_011' | 'Stress unit 011' | 'TTC' | 'TTC' | 'downlink' | 2.59 | 1 | 2.59 | 3.885
+15: 'unit_012' | 'Stress unit 012' | 'PL' | 'PL' | 'downlink' | 1 | 1 | 1 | 3
+16: 'unit_013' | 'Stress unit 013' | 'THERM' | 'THERM' | 'downlink' | 2.365 | 1 | 2.365 | 3.548
+17: 'unit_014' | 'Stress unit 014' | 'PL-DATA' | 'PL-DATA' | 'downlink' | 2.76 | 1 | 2.76 | 4.14
+18: 'unit_015' | 'Stress unit 015' | 'HARNESS' | 'HARNESS' | 'downlink' | 1.5925 | 1 | 1.5925 | 4.777
+19: 'unit_016' | 'Stress unit 016' | 'DH' | 'DH' | 'downlink' | 3.64 | 1 | 3.64 | 5.46
+20: 'unit_017' | 'Stress unit 017' | 'EPS' | 'EPS' | 'downlink' | 0.2 | 1 | 0.2 | 0.3
+21: 'unit_018' | 'Stress unit 018' | 'AOCS' | 'AOCS' | 'downlink' | 0.1925 | 1 | 0.1925 | 0.578
+22: 'unit_019' | 'Stress unit 019' | 'TTC' | 'TTC' | 'downlink' | 0.6 | 1 | 0.6 | 0.9
+23: 'unit_020' | 'Stress unit 020' | 'PL' | 'PL' | 'downlink' | 0.845 | 1 | 0.845 | 1.268
+24: 'unit_021' | 'Stress unit 021' | 'THERM' | 'THERM' | 'downlink' | 0.56 | 1 | 0.56 | 1.68
+25: 'unit_022' | 'Stress unit 022' | 'PL-DATA' | 'PL-DATA' | 'downlink' | 0.95 | 1 | 0.95 | 1.425
+26: 'unit_023' | 'Stress unit 023' | 'HARNESS' | 'HARNESS' | 'downlink' | 1.21 | 1 | 1.21 | 1.815
+27: 'unit_024' | 'Stress unit 024' | 'DH' | 'DH' | 'downlink' | 0.75 | 1 | 0.75 | 2.25
+28: 'unit_025' | 'Stress unit 025' | 'EPS' | 'EPS' | 'downlink' | 1.82 | 1 | 1.82 | 2.73
+29: 'unit_026' | 'Stress unit 026' | 'AOCS' | 'AOCS' | 'downlink' | 2.17 | 1 | 2.17 | 3.255
+30: 'unit_027' | 'Stress unit 027' | 'TTC' | 'TTC' | 'downlink' | 0.85 | 1 | 0.85 | 2.55
+31: 'unit_028' | 'Stress unit 028' | 'PL' | 'PL' | 'downlink' | 2.035 | 1 | 2.035 | 3.053
+32: 'unit_029' | 'Stress unit 029' | 'THERM' | 'THERM' | 'downlink' | 2.4 | 1 | 2.4 | 3.6
+33: 'unit_030' | 'Stress unit 030' | 'PL-DATA' | 'PL-DATA' | 'downlink' | 1.3975 | 1 | 1.3975 | 4.192
+34: 'unit_031' | 'Stress unit 031' | 'HARNESS' | 'HARNESS' | 'downlink' | 3.22 | 1 | 3.22 | 4.83
+35: 'unit_032' | 'Stress unit 032' | 'DH' | 'DH' | 'downlink' | 2.45 | 1 | 2.45 | 3.675
+36: 'unit_033' | 'Stress unit 033' | 'EPS' | 'EPS' | 'downlink' | 1.43 | 1 | 1.43 | 4.29
+37: 'unit_034' | 'Stress unit 034' | 'AOCS' | 'AOCS' | 'downlink' | 0.24 | 1 | 0.24 | 0.36
+38: 'unit_035' | 'Stress unit 035' | 'TTC' | 'TTC' | 'downlink' | 0.455 | 1 | 0.455 | 0.682
+39: 'unit_036' | 'Stress unit 036' | 'PL' | 'PL' | 'downlink' | 0.35 | 1 | 0.35 | 1.05
+40: 'unit_037' | 'Stress unit 037' | 'THERM' | 'THERM' | 'downlink' | 0.65 | 1 | 0.65 | 0.975
+...
+## sheet Mode imaging rows=224 cols=9
+1: 'Units in mode Imaging' |  |  |  |  |  |  |  | 
+2: 'Unit' | 'Name' | 'Subsystem' | 'Node' | 'Power mode' | 'Effective power (W)' | 'Dissipation ratio' | 'Dissipation (W)' | 'Peak dissipation (W)'
+3: 'unit_000' | 'Stress unit 000' | 'DH' | 'DH' | 'imaging' | 0.24 | 1 | 0.24 | 0.36
+4: 'unit_001' | 'Stress unit 001' | 'EPS' | 'EPS' | 'imaging' | 0.2275 | 1 | 0.2275 | 0.682
+5: 'unit_002' | 'Stress unit 002' | 'AOCS' | 'AOCS' | 'imaging' | 0.7 | 1 | 0.7 | 1.05
+6: 'unit_003' | 'Stress unit 003' | 'TTC' | 'TTC' | 'imaging' | 0.65 | 1 | 0.65 | 0.975
+7: 'unit_004' | 'Stress unit 004' | 'PL' | 'PL' | 'imaging' | 0.44 | 1 | 0.44 | 1.32
+8: 'unit_005' | 'Stress unit 005' | 'THERM' | 'THERM' | 'imaging' | 1.14 | 1 | 1.14 | 1.71
+9: 'unit_006' | 'Stress unit 006' | 'PL-DATA' | 'PL-DATA' | 'imaging' | 1.43 | 1 | 1.43 | 2.145
+10: 'unit_007' | 'Stress unit 007' | 'HARNESS' | 'HARNESS' | 'imaging' | 0.875 | 1 | 0.875 | 2.625
+11: 'unit_008' | 'Stress unit 008' | 'DH' | 'DH' | 'imaging' | 1.4 | 1 | 1.4 | 2.1
+12: 'unit_009' | 'Stress unit 009' | 'EPS' | 'EPS' | 'imaging' | 1.705 | 1 | 1.705 | 2.558
+13: 'unit_010' | 'Stress unit 010' | 'AOCS' | 'AOCS' | 'imaging' | 1.02 | 1 | 1.02 | 3.06
+14: 'unit_011' | 'Stress unit 011' | 'TTC' | 'TTC' | 'imaging' | 2.405 | 1 | 2.405 | 3.607
+15: 'unit_012' | 'Stress unit 012' | 'PL' | 'PL' | 'imaging' | 2.8 | 1 | 2.8 | 4.2
+16: 'unit_013' | 'Stress unit 013' | 'THERM' | 'THERM' | 'imaging' | 1.075 | 1 | 1.075 | 3.225
+17: 'unit_014' | 'Stress unit 014' | 'PL-DATA' | 'PL-DATA' | 'imaging' | 2.53 | 1 | 2.53 | 3.795
+18: 'unit_015' | 'Stress unit 015' | 'HARNESS' | 'HARNESS' | 'imaging' | 2.94 | 1 | 2.94 | 4.41
+19: 'unit_016' | 'Stress unit 016' | 'DH' | 'DH' | 'imaging' | 1.69 | 1 | 1.69 | 5.07
+20: 'unit_017' | 'Stress unit 017' | 'EPS' | 'EPS' | 'imaging' | 0.28 | 1 | 0.28 | 0.42
+21: 'unit_018' | 'Stress unit 018' | 'AOCS' | 'AOCS' | 'imaging' | 0.35 | 1 | 0.35 | 0.525
+22: 'unit_019' | 'Stress unit 019' | 'TTC' | 'TTC' | 'imaging' | 0.275 | 1 | 0.275 | 0.825
+23: 'unit_020' | 'Stress unit 020' | 'PL' | 'PL' | 'imaging' | 0.78 | 1 | 0.78 | 1.17
+24: 'unit_021' | 'Stress unit 021' | 'THERM' | 'THERM' | 'imaging' | 1.04 | 1 | 1.04 | 1.56
+25: 'unit_022' | 'Stress unit 022' | 'PL-DATA' | 'PL-DATA' | 'imaging' | 0.665 | 1 | 0.665 | 1.995
+26: 'unit_023' | 'Stress unit 023' | 'HARNESS' | 'HARNESS' | 'imaging' | 1.1 | 1 | 1.1 | 1.65
+27: 'unit_024' | 'Stress unit 024' | 'DH' | 'DH' | 'imaging' | 1.375 | 1 | 1.375 | 2.062
+28: 'unit_025' | 'Stress unit 025' | 'EPS' | 'EPS' | 'imaging' | 0.84 | 1 | 0.84 | 2.52
+29: 'unit_026' | 'Stress unit 026' | 'AOCS' | 'AOCS' | 'imaging' | 2.015 | 1 | 2.015 | 3.022
+30: 'unit_027' | 'Stress unit 027' | 'TTC' | 'TTC' | 'imaging' | 2.38 | 1 | 2.38 | 3.57
+31: 'unit_028' | 'Stress unit 028' | 'PL' | 'PL' | 'imaging' | 0.925 | 1 | 0.925 | 2.775
+32: 'unit_029' | 'Stress unit 029' | 'THERM' | 'THERM' | 'imaging' | 2.2 | 1 | 2.2 | 3.3
+33: 'unit_030' | 'Stress unit 030' | 'PL-DATA' | 'PL-DATA' | 'imaging' | 2.58 | 1 | 2.58 | 3.87
+34: 'unit_031' | 'Stress unit 031' | 'HARNESS' | 'HARNESS' | 'imaging' | 1.495 | 1 | 1.495 | 4.485
+35: 'unit_032' | 'Stress unit 032' | 'DH' | 'DH' | 'imaging' | 3.43 | 1 | 3.43 | 5.145
+36: 'unit_033' | 'Stress unit 033' | 'EPS' | 'EPS' | 'imaging' | 2.6 | 1 | 2.6 | 3.9
+37: 'unit_034' | 'Stress unit 034' | 'AOCS' | 'AOCS' | 'imaging' | 0.11 | 1 | 0.11 | 0.33
+38: 'unit_035' | 'Stress unit 035' | 'TTC' | 'TTC' | 'imaging' | 0.42 | 1 | 0.42 | 0.63
+39: 'unit_036' | 'Stress unit 036' | 'PL' | 'PL' | 'imaging' | 0.65 | 1 | 0.65 | 0.975
+40: 'unit_037' | 'Stress unit 037' | 'THERM' | 'THERM' | 'imaging' | 0.455 | 1 | 0.455 | 1.365
+...
+## sheet Mode nominal rows=224 cols=9
+1: 'Units in mode Nominal' |  |  |  |  |  |  |  | 
+2: 'Unit' | 'Name' | 'Subsystem' | 'Node' | 'Power mode' | 'Effective power (W)' | 'Dissipation ratio' | 'Dissipation (W)' | 'Peak dissipation (W)'
+3: 'unit_000' | 'Stress unit 000' | 'DH' | 'DH' | 'nominal' | 0.22 | 1 | 0.22 | 0.33
+4: 'unit_001' | 'Stress unit 001' | 'EPS' | 'EPS' | 'nominal' | 0.42 | 1 | 0.42 | 0.63
+5: 'unit_002' | 'Stress unit 002' | 'AOCS' | 'AOCS' | 'nominal' | 0.325 | 1 | 0.325 | 0.975
+6: 'unit_003' | 'Stress unit 003' | 'TTC' | 'TTC' | 'nominal' | 0.91 | 1 | 0.91 | 1.365
+7: 'unit_004' | 'Stress unit 004' | 'PL' | 'PL' | 'nominal' | 0.8 | 1 | 0.8 | 1.2
+8: 'unit_005' | 'Stress unit 005' | 'THERM' | 'THERM' | 'nominal' | 0.5225 | 1 | 0.5225 | 1.567
+9: 'unit_006' | 'Stress unit 006' | 'PL-DATA' | 'PL-DATA' | 'nominal' | 1.32 | 1 | 1.32 | 1.98
+10: 'unit_007' | 'Stress unit 007' | 'HARNESS' | 'HARNESS' | 'nominal' | 1.625 | 1 | 1.625 | 2.438
+11: 'unit_008' | 'Stress unit 008' | 'DH' | 'DH' | 'nominal' | 0.98 | 1 | 0.98 | 2.94
+12: 'unit_009' | 'Stress unit 009' | 'EPS' | 'EPS' | 'nominal' | 1.55 | 1 | 1.55 | 2.325
+13: 'unit_010' | 'Stress unit 010' | 'AOCS' | 'AOCS' | 'nominal' | 1.87 | 1 | 1.87 | 2.805
+14: 'unit_011' | 'Stress unit 011' | 'TTC' | 'TTC' | 'nominal' | 1.11 | 1 | 1.11 | 3.33
+15: 'unit_012' | 'Stress unit 012' | 'PL' | 'PL' | 'nominal' | 2.6 | 1 | 2.6 | 3.9
+16: 'unit_013' | 'Stress unit 013' | 'THERM' | 'THERM' | 'nominal' | 3.01 | 1 | 3.01 | 4.515
+17: 'unit_014' | 'Stress unit 014' | 'PL-DATA' | 'PL-DATA' | 'nominal' | 1.15 | 1 | 1.15 | 3.45
+18: 'unit_015' | 'Stress unit 015' | 'HARNESS' | 'HARNESS' | 'nominal' | 2.695 | 1 | 2.695 | 4.042
+19: 'unit_016' | 'Stress unit 016' | 'DH' | 'DH' | 'nominal' | 3.12 | 1 | 3.12 | 4.68
+20: 'unit_017' | 'Stress unit 017' | 'EPS' | 'EPS' | 'nominal' | 0.13 | 1 | 0.13 | 0.39
+21: 'unit_018' | 'Stress unit 018' | 'AOCS' | 'AOCS' | 'nominal' | 0.49 | 1 | 0.49 | 0.735
+22: 'unit_019' | 'Stress unit 019' | 'TTC' | 'TTC' | 'nominal' | 0.5 | 1 | 0.5 | 0.75
+23: 'unit_020' | 'Stress unit 020' | 'PL' | 'PL' | 'nominal' | 0.3575 | 1 | 0.3575 | 1.073
+24: 'unit_021' | 'Stress unit 021' | 'THERM' | 'THERM' | 'nominal' | 0.96 | 1 | 0.96 | 1.44
+25: 'unit_022' | 'Stress unit 022' | 'PL-DATA' | 'PL-DATA' | 'nominal' | 1.235 | 1 | 1.235 | 1.853
+26: 'unit_023' | 'Stress unit 023' | 'HARNESS' | 'HARNESS' | 'nominal' | 0.77 | 1 | 0.77 | 2.31
+27: 'unit_024' | 'Stress unit 024' | 'DH' | 'DH' | 'nominal' | 1.25 | 1 | 1.25 | 1.875
+28: 'unit_025' | 'Stress unit 025' | 'EPS' | 'EPS' | 'nominal' | 1.54 | 1 | 1.54 | 2.31
+29: 'unit_026' | 'Stress unit 026' | 'AOCS' | 'AOCS' | 'nominal' | 0.93 | 1 | 0.93 | 2.79
+30: 'unit_027' | 'Stress unit 027' | 'TTC' | 'TTC' | 'nominal' | 2.21 | 1 | 2.21 | 3.315
+31: 'unit_028' | 'Stress unit 028' | 'PL' | 'PL' | 'nominal' | 2.59 | 1 | 2.59 | 3.885
+32: 'unit_029' | 'Stress unit 029' | 'THERM' | 'THERM' | 'nominal' | 1 | 1 | 1 | 3
+33: 'unit_030' | 'Stress unit 030' | 'PL-DATA' | 'PL-DATA' | 'nominal' | 2.365 | 1 | 2.365 | 3.548
+34: 'unit_031' | 'Stress unit 031' | 'HARNESS' | 'HARNESS' | 'nominal' | 2.76 | 1 | 2.76 | 4.14
+35: 'unit_032' | 'Stress unit 032' | 'DH' | 'DH' | 'nominal' | 1.5925 | 1 | 1.5925 | 4.777
+36: 'unit_033' | 'Stress unit 033' | 'EPS' | 'EPS' | 'nominal' | 3.64 | 1 | 3.64 | 5.46
+37: 'unit_034' | 'Stress unit 034' | 'AOCS' | 'AOCS' | 'nominal' | 0.2 | 1 | 0.2 | 0.3
+38: 'unit_035' | 'Stress unit 035' | 'TTC' | 'TTC' | 'nominal' | 0.1925 | 1 | 0.1925 | 0.578
+39: 'unit_036' | 'Stress unit 036' | 'PL' | 'PL' | 'nominal' | 0.6 | 1 | 0.6 | 0.9
+40: 'unit_037' | 'Stress unit 037' | 'THERM' | 'THERM' | 'nominal' | 0.845 | 1 | 0.845 | 1.268
+...
+## sheet Mode safe rows=224 cols=9
+1: 'Units in mode Safe' |  |  |  |  |  |  |  | 
+2: 'Unit' | 'Name' | 'Subsystem' | 'Node' | 'Power mode' | 'Effective power (W)' | 'Dissipation ratio' | 'Dissipation (W)' | 'Peak dissipation (W)'
+3: 'unit_000' | 'Stress unit 000' | 'DH' | 'DH' | 'safe' | 0.1 | 1 | 0.1 | 0.3
+4: 'unit_001' | 'Stress unit 001' | 'EPS' | 'EPS' | 'safe' | 0.385 | 1 | 0.385 | 0.578
+5: 'unit_002' | 'Stress unit 002' | 'AOCS' | 'AOCS' | 'safe' | 0.6 | 1 | 0.6 | 0.9
+6: 'unit_003' | 'Stress unit 003' | 'TTC' | 'TTC' | 'safe' | 0.4225 | 1 | 0.4225 | 1.268
+7: 'unit_004' | 'Stress unit 004' | 'PL' | 'PL' | 'safe' | 1.12 | 1 | 1.12 | 1.68
+8: 'unit_005' | 'Stress unit 005' | 'THERM' | 'THERM' | 'safe' | 0.95 | 1 | 0.95 | 1.425
+9: 'unit_006' | 'Stress unit 006' | 'PL-DATA' | 'PL-DATA' | 'safe' | 0.605 | 1 | 0.605 | 1.815
+10: 'unit_007' | 'Stress unit 007' | 'HARNESS' | 'HARNESS' | 'safe' | 1.5 | 1 | 1.5 | 2.25
+11: 'unit_008' | 'Stress unit 008' | 'DH' | 'DH' | 'safe' | 1.82 | 1 | 1.82 | 2.73
+12: 'unit_009' | 'Stress unit 009' | 'EPS' | 'EPS' | 'safe' | 1.085 | 1 | 1.085 | 3.255
+13: 'unit_010' | 'Stress unit 010' | 'AOCS' | 'AOCS' | 'safe' | 1.7 | 1 | 1.7 | 2.55
+14: 'unit_011' | 'Stress unit 011' | 'TTC' | 'TTC' | 'safe' | 2.035 | 1 | 2.035 | 3.053
+15: 'unit_012' | 'Stress unit 012' | 'PL' | 'PL' | 'safe' | 1.2 | 1 | 1.2 | 3.6
+16: 'unit_013' | 'Stress unit 013' | 'THERM' | 'THERM' | 'safe' | 2.795 | 1 | 2.795 | 4.192
+17: 'unit_014' | 'Stress unit 014' | 'PL-DATA' | 'PL-DATA' | 'safe' | 3.22 | 1 | 3.22 | 4.83
+18: 'unit_015' | 'Stress unit 015' | 'HARNESS' | 'HARNESS' | 'safe' | 1.225 | 1 | 1.225 | 3.675
+19: 'unit_016' | 'Stress unit 016' | 'DH' | 'DH' | 'safe' | 2.86 | 1 | 2.86 | 4.29
+20: 'unit_017' | 'Stress unit 017' | 'EPS' | 'EPS' | 'safe' | 0.24 | 1 | 0.24 | 0.36
+21: 'unit_018' | 'Stress unit 018' | 'AOCS' | 'AOCS' | 'safe' | 0.2275 | 1 | 0.2275 | 0.682
+22: 'unit_019' | 'Stress unit 019' | 'TTC' | 'TTC' | 'safe' | 0.7 | 1 | 0.7 | 1.05
+23: 'unit_020' | 'Stress unit 020' | 'PL' | 'PL' | 'safe' | 0.65 | 1 | 0.65 | 0.975
+24: 'unit_021' | 'Stress unit 021' | 'THERM' | 'THERM' | 'safe' | 0.44 | 1 | 0.44 | 1.32
+25: 'unit_022' | 'Stress unit 022' | 'PL-DATA' | 'PL-DATA' | 'safe' | 1.14 | 1 | 1.14 | 1.71
+26: 'unit_023' | 'Stress unit 023' | 'HARNESS' | 'HARNESS' | 'safe' | 1.43 | 1 | 1.43 | 2.145
+27: 'unit_024' | 'Stress unit 024' | 'DH' | 'DH' | 'safe' | 0.875 | 1 | 0.875 | 2.625
+28: 'unit_025' | 'Stress unit 025' | 'EPS' | 'EPS' | 'safe' | 1.4 | 1 | 1.4 | 2.1
+29: 'unit_026' | 'Stress unit 026' | 'AOCS' | 'AOCS' | 'safe' | 1.705 | 1 | 1.705 | 2.558
+30: 'unit_027' | 'Stress unit 027' | 'TTC' | 'TTC' | 'safe' | 1.02 | 1 | 1.02 | 3.06
+31: 'unit_028' | 'Stress unit 028' | 'PL' | 'PL' | 'safe' | 2.405 | 1 | 2.405 | 3.607
+32: 'unit_029' | 'Stress unit 029' | 'THERM' | 'THERM' | 'safe' | 2.8 | 1 | 2.8 | 4.2
+33: 'unit_030' | 'Stress unit 030' | 'PL-DATA' | 'PL-DATA' | 'safe' | 1.075 | 1 | 1.075 | 3.225
+34: 'unit_031' | 'Stress unit 031' | 'HARNESS' | 'HARNESS' | 'safe' | 2.53 | 1 | 2.53 | 3.795
+35: 'unit_032' | 'Stress unit 032' | 'DH' | 'DH' | 'safe' | 2.94 | 1 | 2.94 | 4.41
+36: 'unit_033' | 'Stress unit 033' | 'EPS' | 'EPS' | 'safe' | 1.69 | 1 | 1.69 | 5.07
+37: 'unit_034' | 'Stress unit 034' | 'AOCS' | 'AOCS' | 'safe' | 0.28 | 1 | 0.28 | 0.42
+38: 'unit_035' | 'Stress unit 035' | 'TTC' | 'TTC' | 'safe' | 0.35 | 1 | 0.35 | 0.525
+39: 'unit_036' | 'Stress unit 036' | 'PL' | 'PL' | 'safe' | 0.275 | 1 | 0.275 | 0.825
+40: 'unit_037' | 'Stress unit 037' | 'THERM' | 'THERM' | 'safe' | 0.78 | 1 | 0.78 | 1.17
+...
+## sheet Assumptions rows=74 cols=5
+1: 'Configuration numbers used' |  |  |  | 
+2: 'Name' | 'Value' | 'Unit' | 'Source' | 'Status'
+3: 'Space temperature' | 'n/a' | 'K' | 'TBD' | 'PLACEHOLDER'
+4: 'Temperature margin' | 'n/a' | 'K' | 'TBD' | 'PLACEHOLDER'
+5: 'Conductance AOCS - DH' | 'n/a' | 'W/K' | 'TBD' | 'PLACEHOLDER'
+6: 'Conductance DH - EPS' | 'n/a' | 'W/K' | 'TBD' | 'PLACEHOLDER'
+7: 'Conductance EPS - HARNESS' | 'n/a' | 'W/K' | 'TBD' | 'PLACEHOLDER'
+8: 'Conductance HARNESS - PL' | 'n/a' | 'W/K' | 'TBD' | 'PLACEHOLDER'
+9: 'Conductance PL - PL-DATA' | 'n/a' | 'W/K' | 'TBD' | 'PLACEHOLDER'
+10: 'Conductance PL-DATA - THERM' | 'n/a' | 'W/K' | 'TBD' | 'PLACEHOLDER'
+11: 'Conductance THERM - TTC' | 'n/a' | 'W/K' | 'TBD' | 'PLACEHOLDER'
+12: 'Solar flux, case cold' | 'n/a' | 'W/m2' | 'TBD' | 'PLACEHOLDER'
+13: 'Albedo, case cold' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+14: 'Earth infrared, case cold' | 'n/a' | 'W/m2' | 'TBD' | 'PLACEHOLDER'
+15: 'Emissivity, AOCS panel' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+16: 'Absorptivity, AOCS panel' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+17: 'Solar view, AOCS panel, case cold' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+18: 'Earth view, AOCS panel, case cold' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+19: 'Emissivity, DH panel' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+20: 'Absorptivity, DH panel' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+21: 'Solar view, DH panel, case cold' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+22: 'Earth view, DH panel, case cold' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+23: 'Emissivity, EPS panel' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+24: 'Absorptivity, EPS panel' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+25: 'Solar view, EPS panel, case cold' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+26: 'Earth view, EPS panel, case cold' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+27: 'Emissivity, HARNESS panel' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+28: 'Absorptivity, HARNESS panel' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+29: 'Solar view, HARNESS panel, case cold' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+30: 'Earth view, HARNESS panel, case cold' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+31: 'Emissivity, PL panel' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+32: 'Absorptivity, PL panel' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+33: 'Solar view, PL panel, case cold' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+34: 'Earth view, PL panel, case cold' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+35: 'Emissivity, PL-DATA panel' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+36: 'Absorptivity, PL-DATA panel' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+37: 'Solar view, PL-DATA panel, case cold' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+38: 'Earth view, PL-DATA panel, case cold' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+39: 'Emissivity, THERM panel' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+40: 'Absorptivity, THERM panel' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+...
+## sheet Problems rows=361 cols=4
+1: 'Problems and open items' |  |  | 
+2: 'Severity' | 'Code' | 'Location' | 'Message'
+3: 'warning' | 'CONFIG_EMPTY_TABLE' | 'config/attenuation_table.yaml:3' | 'The table has no entries.'
+4: 'warning' | 'CONFIG_EMPTY_TABLE' | 'config/ebn0_table.yaml:3' | 'The table has no entries.'
+5: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:6' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+6: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:10' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+7: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:15' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+8: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:19' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+9: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:24' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+10: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:28' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+11: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:32' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+12: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:36' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+13: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/mass_limits.yaml:7' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+14: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_config.yaml:4' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+15: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_config.yaml:9' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+16: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_config.yaml:13' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+17: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:4' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+18: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:45' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+19: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:49' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+20: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:53' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+21: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:57' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+22: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:61' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+23: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:65' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+24: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:69' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+25: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:73' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+26: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:77' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+27: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:82' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+28: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:86' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+29: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:92' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+30: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:96' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+31: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:100' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+32: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:104' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+33: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:109' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+34: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:113' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+35: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:125' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+36: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_environment.yaml' | "The albedo of case 'cold' is a placeholder."
+37: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_environment.yaml' | "The Earth infrared flux of case 'cold' is a placeholder."
+38: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_environment.yaml' | "The solar flux of case 'cold' is a placeholder."
+39: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_environment.yaml' | "The albedo of case 'hot' is a placeholder."
+40: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_environment.yaml' | "The Earth infrared flux of case 'hot' is a placeholder."
+...
+## sheet Provenance rows=10 cols=2
+1: 'Provenance' | 
+2: 'Item' | 'Value'
+3: 'Tool' | 'System Budget Studio 0.1.0'
+4: 'Python' | '3.x'
+5: 'Libraries' | 'pinned for-golden-tests'
+6: 'Project' | 'Example stress case (200 units)'
+7: 'Project revision' | '1'
+8: 'Scenario' | 'static (no scenario)'
+9: 'Generated (UTC)' | '2026-01-02T03:04:05Z'
+10: 'User' | 'Golden User'

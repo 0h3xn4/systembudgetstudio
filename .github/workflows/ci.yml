@@ -32,6 +32,11 @@ jobs:
           python -m venv rt
           rt/${{ runner.os == 'Windows' && 'Scripts' || 'bin' }}/pip install -e .
           rt/${{ runner.os == 'Windows' && 'Scripts' || 'bin' }}/budget --version
+      - name: A regular (non-editable) install ships its data files (fonts, schemas, guide chapters)
+        run: |
+          python -m venv rt2
+          rt2/${{ runner.os == 'Windows' && 'Scripts' || 'bin' }}/pip install .
+          rt2/${{ runner.os == 'Windows' && 'Scripts' || 'bin' }}/budget self-test
       - name: Install dev tooling from hashed lock
         run: |
           python -m pip install --require-hashes -r requirements-dev.lock
