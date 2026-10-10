@@ -168,3 +168,18 @@ def test_jump_line_for_a_list_path(window: MainWindow) -> None:
         expected <= window._line_of("config/mass_limits.yaml", "limits[0].limit_kg") <= expected + 1
     )
     assert window._line_of("config/mass_limits.yaml", "limits[0]") is not None
+
+
+def test_an_unexpected_error_while_computing_becomes_a_plain_problem(
+    window: MainWindow, eps: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    import budget_gui.session as session_module
+
+    def boom(*_: object) -> None:
+        raise RuntimeError("SECRET project text")
+
+    monkeypatch.setattr(session_module, "static_mass_budget", boom)
+    window.open_project(eps)
+    problems = window.session.problems
+    assert [p.code for p in problems] == ["INTERNAL_ERROR"]
+    assert "RuntimeError" in problems[0].message and "SECRET" not in problems[0].message

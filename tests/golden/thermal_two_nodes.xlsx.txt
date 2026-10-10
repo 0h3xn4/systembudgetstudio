@@ -19,8 +19,8 @@
 ## sheet Case hot rows=11 cols=8
 1: 'Node temperatures, case hot' |  |  |  |  |  |  | 
 2: 'Node' | 'Temperature (K)' | 'Temperature (C)' | 'Dissipated (W)' | 'Absorbed from environment (W)' | 'Radiated to space (W)' | 'Conducted to other nodes (W)' | 
-3: 'A' | 283.007419021177 | 9.857419021177009 | 10 | 275 | 291.0000000000001 | -6 | 
-4: 'B' | 286.007419021177 | 12.85741902117701 | 6 | 0 | 0 | 6 | 
+3: 'A' | 283.007419 | 9.85741902 | 10 | 275 | 291.0 | -6 | 
+4: 'B' | 286.007419 | 12.857419 | 6 | 0 | 0 | 6 | 
 5: 'Mode hot; limit set: operating. Largest node imbalance after solving: below 0.000001 W.' |  |  |  |  |  |  | 
 7: 'Unit temperature limits, case hot (operating)' |  |  |  |  |  |  | 
 8: 'Unit' | 'Node' | 'Temperature (K)' | 'Lower limit (K)' | 'Upper limit (K)' | 'Headroom to lower (K)' | 'Headroom to upper (K)' | 'Status'

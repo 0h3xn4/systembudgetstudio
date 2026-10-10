@@ -13,8 +13,9 @@ from budget_core.io.yamlio import YamlSyntaxError, load_yaml_text
 from budget_core.problems import Severity
 from budget_core.units.quantity import UnitError, parse_quantity
 from tests.helpers import edit, write_valid_project
+from tests.perf_limits import REFUSE_S
 
-FAST_S = 2.0
+FAST_S = REFUSE_S
 
 
 def errors_of(root: Path) -> list[str]:
@@ -77,7 +78,7 @@ def test_a_hang_in_a_project_file_becomes_a_problem(root: Path) -> None:
     started = time.perf_counter()
     edit(root, "units/obc.yaml", "avg_power_w: 1.0", "avg_power_w: '1 (9**9**9) W'")
     assert "FIELD_INVALID" in errors_of(root) or "UNIT_INVALID" in errors_of(root)
-    assert time.perf_counter() - started < 10.0
+    assert time.perf_counter() - started < REFUSE_S
 
 
 # ---- YAML ------------------------------------------------------------------------------------

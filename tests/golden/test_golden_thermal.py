@@ -1,5 +1,6 @@
 """Golden tests of the static thermal budget reports: the two-node test project and the complete
-CubeSat example (pure arithmetic, so the numbers are the same on every platform)."""
+CubeSat example. Numbers are compared to 9 significant digits: a different BLAS build changes the
+last ones."""
 
 from __future__ import annotations
 
@@ -17,7 +18,7 @@ from budget_core.reports.pdf import render_pdf
 from budget_core.reports.run import thermal_output
 from budget_core.reports.xlsx import render_xlsx
 from budget_core.thermal.static_thermal import static_thermal_budget
-from tests.golden_util import check_golden, dump_docx, dump_pdf, dump_xlsx
+from tests.golden_util import check_golden, dump_docx, dump_pdf, dump_xlsx, stable_floats
 from tests.thermal_helpers import thermal_project
 
 EXAMPLES = Path(__file__).resolve().parents[2] / "examples"
@@ -46,7 +47,10 @@ NAMES = ["two_nodes", "cubesat_3u_eps", "cubesat_3u"]
 @pytest.mark.parametrize("name", NAMES)
 def test_xlsx(name: str) -> None:
     _, out = build(name)
-    check_golden(f"thermal_{name}.xlsx.txt", dump_xlsx(render_xlsx(out.document)))
+    check_golden(
+        f"thermal_{name}.xlsx.txt",
+        dump_xlsx(render_xlsx(out.document), significant_digits=9, zero_below=1e-6),
+    )
 
 
 @pytest.mark.parametrize("name", NAMES)
@@ -66,12 +70,14 @@ def test_json(name: str) -> None:
     from budget_core.reports.export import result_json
 
     result, out = build(name)
-    check_golden(f"thermal_{name}.json.txt", result_json(result, out.provenance))
+    check_golden(f"thermal_{name}.json.txt", stable_floats(result_json(result, out.provenance)))
 
 
 def test_csv_files() -> None:
     result, out = build("cubesat_3u_eps")
     files = dict(out.csv_files)
-    check_golden("thermal_cubesat_3u_eps_hot.csv", files["thermal_case_hot.csv"])
-    check_golden("thermal_cubesat_3u_eps_imaging.csv", files["thermal_static_imaging.csv"])
+    check_golden("thermal_cubesat_3u_eps_hot.csv", stable_floats(files["thermal_case_hot.csv"]))
+    check_golden(
+        "thermal_cubesat_3u_eps_imaging.csv", stable_floats(files["thermal_static_imaging.csv"])
+    )
     assert files["thermal_case_cold.csv"] == thermal_case_csv(result.cases[0])

@@ -10,6 +10,7 @@ import pytest
 from budget_core.environment.data import SiteDef, TimeGrid
 from budget_core.environment.elements import ElementsPropagator
 from budget_core.model import Elements, Orbit
+from tests.perf_limits import LIMIT_S, TARGET_S
 
 pytestmark = pytest.mark.perf
 
@@ -43,4 +44,4 @@ def test_one_week_at_one_second_with_three_sites() -> None:
         "b": True,
     }
     assert len(env.sites["c"].passes) >= 1  # 30 degree minimum elevation: few passes
-    assert elapsed < 10.0, f"took {elapsed:.1f} s"
+    assert elapsed < LIMIT_S, f"took {elapsed:.1f} s; the target is {TARGET_S:.0f} s"
