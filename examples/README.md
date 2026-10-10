@@ -18,12 +18,12 @@ The copy is identical to this folder. (A test fails if the two ever differ, so t
 
 | Example | Shows | Complete inputs for | Takes |
 |---|---|---|---|
-| [`cubesat_3u`](cubesat_3u) | A minimal 3U CubeSat; what a project with **placeholders** looks like: results that cannot be computed say *n/a* and the report is marked INCOMPLETE | static power, mass; scenario | seconds |
+| [`cubesat_3u`](cubesat_3u) | A minimal 3U CubeSat; what a project with **placeholders** looks like: results that cannot be computed say *n/a* and the report is marked [INCOMPLETE](../docs/glossary.md#incomplete) | static power, mass; scenario | seconds |
 | [`cubesat_3u_eps`](cubesat_3u_eps) | The same CubeSat with a complete (invented) solar array, battery and thermal model: the time-domain power budget, thermal budget and **findings** | power timeline, thermal | seconds |
-| [`microsat_150kg`](microsat_150kg) | A 150 kg satellite with 17 units, propellant (mass phases) and **two links** (S-band and X-band downlinks), two ground stations and an imaging target | link budget, link passes, mass | seconds |
+| [`microsat_150kg`](microsat_150kg) | A 150 kg satellite with 17 units, propellant ([mass phases](../docs/glossary.md#mission-phase)) and **two links** (S-band and X-band downlinks), two ground stations and an imaging target | link budget, link passes, mass | seconds |
 | [`stress_200_units`](stress_200_units) | 200 units and a **one-week scenario at 1 s** (604,801 steps): a performance and scale check | scenario, static budgets | about 10 s per run |
 
-Every example leaves some numbers as placeholders on purpose (the margin policy, the Eb/N0 table, mass limits and so on): the tool will not invent standards values, so each result that needs one shows *n/a* until you supply it with a source. Reports say so in an INCOMPLETE banner.
+Every example leaves some numbers as [placeholders](../docs/glossary.md#placeholder) on purpose (the margin policy, the [Eb/N0](../docs/glossary.md#ebn0) table, mass limits and so on): the tool will not invent standards values, so each result that needs one shows *n/a* until you supply it with a source. Reports say so in an INCOMPLETE banner.
 
 ## cubesat_3u: placeholders everywhere
 

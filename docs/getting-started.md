@@ -101,7 +101,7 @@ config/margin_policy.yaml:6: warning CONFIG_PLACEHOLDER: This number is a placeh
 0 errors, 6 warnings.
 ```
 
-Reading it: each problem is `file:line: severity CODE: message (at field)` and a hint on the next line. **Warnings** are open items, here the *placeholders*: numbers the tool will not invent (the margin policy, the mass limit, the Eb/N0 table). **Errors** would stop a budget from being computed. Add `--strict` to treat warnings as failures too.
+Reading it: each problem is `file:line: severity CODE: message (at field)` and a hint on the next line. **Warnings** are open items, here the *[placeholders](glossary.md#placeholder)*: numbers the tool will not invent (the margin policy, the mass limit, the Eb/N0 table). **Errors** would stop a budget from being computed. Add `--strict` to treat warnings as failures too.
 
 Compute the static power budget and write the reports:
 
@@ -143,7 +143,7 @@ config/power_system.yaml: error PEAK_POWER_EXCEEDED: The peak power demand at th
 1 error, 0 warnings.
 ```
 
-**What it says.** BOL and EOL are *beginning* and *end of life* (the array is new, or aged by its design life; see the [glossary](glossary.md)). The battery never gets below 89 % charge, so there is no battery problem. But the demand at the power source exceeds the **peak power limit** during 12 intervals, the first starting 2 minutes 6 seconds into the scenario. The command ends with exit code 1 because it found an error; scripts can use that.
+**What it says.** BOL and EOL are *[beginning* and *end of life](glossary.md#bol-eol)* (the array is new, or aged by its design life; see the [glossary](glossary.md)). The battery never gets below 89 % charge, so there is no battery problem. But the demand at the power source exceeds the **[peak power limit](glossary.md#peak-power)** during 12 intervals, the first starting 2 minutes 6 seconds into the scenario. The command ends with exit code 1 because it found an error; scripts can use that.
 
 **Step 2: look at the details.** `out/power_time_one_day_violations.csv` has one row per interval, with start and end time, the worst value, the limit and the input to change:
 

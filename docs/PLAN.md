@@ -1,4 +1,6 @@
-# System Budget Studio — Plan (proposal)
+# System Budget Studio — Plan
+
+Status: milestones M0 to M6 are done (see the [changelog](../CHANGELOG.md)); this file keeps the plan as it was agreed, with each milestone marked. For using the tool see the [user manual](user-manual/README.md).
 
 Rules for every milestone: tests first; ruff + mypy strict clean; no network; each ends with a demo note in `docs/demo/Mx.md`. Estimates are relative (S/M/L).
 

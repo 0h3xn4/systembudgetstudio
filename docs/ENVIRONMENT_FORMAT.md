@@ -49,4 +49,4 @@ Times are UTC (`2026-06-01T00:00:00Z`, fractional seconds allowed). Errors name 
 ```
 budget scenario PROJECT [--scenario ID] [--out DIR]
 ```
-writes `<id>_environment.json`, `<id>_eclipses.csv`, `<id>_passes.csv` and `<id>_timeline.csv`.
+writes `<id>_environment.json`, `<id>_eclipses.csv`, `<id>_passes.csv`, `<id>_timeline.csv` and `<id>_provenance.csv`.

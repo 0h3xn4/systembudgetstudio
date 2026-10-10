@@ -1,4 +1,6 @@
-# System Budget Studio — Architecture (proposal)
+# System Budget Studio — Architecture
+
+Status: built (milestones M0 to M6). This document began as the architecture proposal and has been corrected to match the code; where a decision changed it, the decision number (`D-0xx`, see [DECISIONS.md](DECISIONS.md)) is given. For using the tool see the [user manual](user-manual/README.md); for the file format see [FILE_FORMAT.md](FILE_FORMAT.md), which is authoritative.
 
 ## 1. Technology stack
 
@@ -18,7 +20,7 @@ Runtime deps (`[project.dependencies]`): PySide6-Essentials, pydantic, ruamel.ya
 ## 2. Package structure
 
 ```
-src/budget_core/      no GUI, no network imports (enforced by import-linter test)
+src/budget_core/      no GUI, no network imports (kept by convention and review; the offline test checks that no networking module is imported)
   model/              pydantic models: Project, Spacecraft, Unit, PowerMode, SpacecraftMode,
                       Scenario, Array, Battery, Link, Transmitter, Receiver, GroundStation
   io/                 YAML load/save, schema versioning + migrations, (unit import from CSV/XLSX is deferred, D-099)
@@ -41,7 +43,7 @@ src/budget_cli/       `budget validate | run | scenario | power-timeline | link-
 src/budget_gui/       PySide6 + Carbon theme; worker threads; no logic beyond presentation
 ```
 
-Dependency direction: `budget_gui → budget_cli? no` — GUI and CLI both depend only on `budget_core`. Nothing depends on the GUI.
+Dependency direction: the GUI and the CLI both depend only on `budget_core`. Nothing depends on the GUI.
 
 ## 3. Core design rules
 
@@ -49,9 +51,9 @@ Dependency direction: `budget_gui → budget_cli? no` — GUI and CLI both depen
 - **Problems, not exceptions** for user errors: loaders and solvers return `Problem` records (`code`, `message`, `where` = file + YAML path). The GUI Problems panel and `budget validate` render the same list; `where` becomes a jump link.
 - **Config with sources**: every number in `config/*.yaml` is `{value, unit, source}`. `source: TBD` produces a `CONFIG_PLACEHOLDER` problem (warning) and is flagged in every report's assumptions list.
 - **Equation registry**: each solver function is registered with an ID, name, source citation (or `SOURCE_MISSING`); the "Equations and sources" chapter is generated from the registry plus config files.
-- **Determinism**: stable sorting, fixed float formatting (`repr`-round-trip or fixed precision per column), no timestamps inside content except the provenance header, which is excluded when comparing for byte-identity via an explicit `--reproducible` mode (date taken from `SOURCE_DATE_EPOCH`, user name from a flag).
+- **Determinism**: stable sorting, fixed float formatting (`repr`-round-trip or fixed precision per column), no timestamps inside content except the provenance header, so the same inputs plus the same generation time and user give the same bytes: `--date` (or `SOURCE_DATE_EPOCH`) and `--user` (or `BUDGET_USER`) fix the two values that vary.
 - **Privacy**: no logging of project content; temp files only inside the project folder; no crash dumps; error text includes file/path but never values.
-- **Offline**: an import-guard test runs CLI and GUI-offscreen smoke flows with `socket` patched to raise and checks `sys.modules` for networking modules (`http.client`, `urllib.request`, `ssl`, `requests`, `socket` use). Update/download feature (TLE, tables) lives in one module `budget_core/refdata/` that is imported lazily only on explicit user action, with checksum verification, rollback copy and a manual-import alternative; the guard test whitelists only that module and asserts it is never imported in normal runs.
+- **Offline**: `tests/offline/test_offline.py` runs the CLI and the offscreen window in a fresh interpreter with sockets blocked and fails if a networking module (`http.client`, `urllib.request`, `ssl`, `requests`, `PySide6.QtNetwork`, …) is imported. No download feature exists in version 0.1.0. If one is added (reference data such as TLEs or tables), it must live in one module that is imported only on explicit user action, verify a checksum, keep a rollback copy and offer a manual-import alternative (spec constraint 2); the offline test would whitelist only that module.
 
 ## 4. Data model and files
 
@@ -59,20 +61,22 @@ Project folder (all YAML, LF endings, schema-versioned):
 
 ```
 project/
-  project.yaml            schema_version, name, revision, spacecraft ref, margin_policy ref
-  spacecraft.yaml         buses, array, battery, converters
-  units/<unit>.yaml       name, subsystem, mass_kg, bus, maturity, catalogue_ref?, modes[]
-  modes/<mode>.yaml       spacecraft mode -> {unit: unit_mode}
-  scenarios/<name>.yaml   orbit ref, epoch, duration, timeline segments or rules
-  ground_stations/*.yaml
+  project.yaml            schema_version, kind, name, revision, description
+  spacecraft.yaml         buses, mission phases, body frame
+  units/<unit>.yaml       name, subsystem, mass_kg, bus, maturity, catalogue_ref?, modes[], mass properties, temperature limits
+  modes/<mode>.yaml       spacecraft mode -> {unit: unit power mode}
+  orbits/  ground_stations/  targets/  scenarios/  expendables/
   links/<name>.yaml       tx, rx, antennas, modulation, direction
-  config/*.yaml + *.schema.json   margin policy, eb/n0 table, attenuation, array/battery constants, report templates
+  config/*.yaml           margin policy, power config, power system (array, battery, attitude, limits),
+                          mass limits, thermal model and environment, Eb/N0 table, attenuation table
   results/                generated (git-ignored by default)
 ```
 
+The complete, current field list is in [FILE_FORMAT.md](FILE_FORMAT.md). JSON Schemas of every kind are generated (`budget export-schemas`) into `src/budget_core/schemas/`.
+
 Fields carry unit suffixes (`avg_power_w`, `freq_hz`). Hand-typed values may be strings with units (`"2.2 GHz"`) which `pint` normalises on load; saves write canonical suffix fields. Each file: `schema_version: <int>`; loader runs ordered migrations `vN → vN+1`; newer than supported → `SCHEMA_TOO_NEW` error with upgrade instruction.
 
-Reserved extension points: `catalogue_ref` on units; a `budgets:` registry in `project.yaml` so thermal/mass/storage budgets can be added later without breaking the schema.
+Reserved extension point: `catalogue_ref` on units (decision D-009). Storage budgets are out of scope for version 1 and no registry for them exists yet.
 
 ## 5. Environment adapters
 
@@ -114,7 +118,7 @@ Carbon g100/white themes via bundled QSS + IBM Plex; main window = project tree 
 
 ## 9. Testing strategy
 
-Tests first per milestone. Per solver ≥ 10 hand-calculated regression cases with stated tolerances (hand calculations committed in `tests/regression/*.md` next to the test). Hypothesis properties: unit round-trips; margin monotonic in range; generation monotonic in array area. Golden files for each report type on three synthetic projects (3U, 150 kg micro, 200-unit week stress). pytest-qt for main flows. Performance test marks (`@pytest.mark.perf`) assert the 10 s target on CI reference runner with generous headroom reported rather than flaky-failed.
+Tests first per milestone. Per solver ≥ 10 hand-calculated regression cases with stated tolerances (the hand calculation is written out in comments in the test file, with the stated tolerance). Hypothesis properties: unit round-trips; margin monotonic in range; generation monotonic in array area. Golden files for each report type on the synthetic reference projects (3U, 150 kg micro, 200-unit week stress). pytest-qt for main flows. Performance test marks (`@pytest.mark.perf`) assert the 10 s target on CI reference runner with generous headroom reported rather than flaky-failed.
 
 ## 10. Risks
 
