@@ -2,56 +2,56 @@
 1: 'Link budget over passes: Example 150 kg microsatellite' |  |  |  |  |  |  |  |  |  |  |  |  | 
 3: 'Link budget at the static points' |  |  |  |  |  |  |  |  |  |  |  |  | 
 4: 'Link' | 'Direction' | 'Point' | 'Elevation (deg)' | 'Range (km)' | 'EIRP (dBW)' | 'G/T (dB/K)' | 'Path loss (dB)' | 'Atmospheric (dB)' | 'Other losses (dB)' | 'C/N0 (dBHz)' | 'Required Eb/N0 (dB)' | 'Highest closing rate (kbit/s)' | 'Rate at required margin (kbit/s)'
-5: 'sband_down' | 'downlink' | '5 deg elevation' | 5 | 2200 | 9.49 | 10 | 166.145 | 0.2 | 2.5 | 79.244 | 4 | 8192 | 16765.545
-6: 'sband_down' | 'downlink' | 'zenith' | 90 | 550 | 9.49 | 10 | 154.103 | 0.2 | 2.5 | 91.285 | 4 | 8192 | 268248.72
-7: 'xband_down' | 'downlink' | '10 deg elevation' | 10 | 1600 | 9.5 | 20 | 174.806 | 2.833 | 2.5 | 77.959 | 4 | 10000 | 12472.037
-8: 'xband_down' | 'downlink' | 'zenith' | 90 | 550 | 19.5 | 20 | 165.531 | 0.9 | 2.5 | 99.168 | 4 | 50000 | 1647347.842
+5: 'sband_down' | 'downlink' | '5 deg elevation' | 5 | 2200 | 9.4897 | 10 | 166.145 | 0.2 | 2.5 | 79.2442 | 4 | 8192 | 16765.5
+6: 'sband_down' | 'downlink' | 'zenith' | 90 | 550 | 9.4897 | 10 | 154.103 | 0.2 | 2.5 | 91.2854 | 4 | 8192 | 268249.0
+7: 'xband_down' | 'downlink' | '10 deg elevation' | 10 | 1600 | 9.5 | 20 | 174.806 | 2.83333 | 2.5 | 77.9594 | 4 | 10000 | 12472.0
+8: 'xband_down' | 'downlink' | 'zenith' | 90 | 550 | 19.5 | 20 | 165.531 | 0.9 | 2.5 | 99.1679 | 4 | 50000 | 1647350.0
 9: 'Other losses = pointing, polarisation and implementation. A link closes at a rate when its margin is at least the required margin of the link. n/a: an input is a placeholder or missing. Highest closing rate empty (n/a with a result): no listed rate closes.' |  |  |  |  |  |  |  |  |  |  |  |  | 
 11: 'Margin by data rate' |  |  |  |  |  |  |  |  |  |  |  |  | 
 12: 'Link' | 'Point' | 'Data rate (kbit/s)' | 'Eb/N0 (dB)' | 'Margin (dB)' | 'Required margin (dB)' | 'Closes' |  |  |  |  |  |  | 
-13: 'sband_down' | '5 deg elevation' | 32 | 34.193 | 30.193 | 3 | 'yes' |  |  |  |  |  |  | 
-14: 'sband_down' | '5 deg elevation' | 128 | 28.172 | 24.172 | 3 | 'yes' |  |  |  |  |  |  | 
-15: 'sband_down' | '5 deg elevation' | 512 | 22.151 | 18.151 | 3 | 'yes' |  |  |  |  |  |  | 
-16: 'sband_down' | '5 deg elevation' | 2048 | 16.131 | 12.131 | 3 | 'yes' |  |  |  |  |  |  | 
-17: 'sband_down' | '5 deg elevation' | 8192 | 10.11 | 6.11 | 3 | 'yes' |  |  |  |  |  |  | 
-18: 'sband_down' | 'zenith' | 32 | 46.234 | 42.234 | 3 | 'yes' |  |  |  |  |  |  | 
-19: 'sband_down' | 'zenith' | 128 | 40.213 | 36.213 | 3 | 'yes' |  |  |  |  |  |  | 
-20: 'sband_down' | 'zenith' | 512 | 34.193 | 30.193 | 3 | 'yes' |  |  |  |  |  |  | 
-21: 'sband_down' | 'zenith' | 2048 | 28.172 | 24.172 | 3 | 'yes' |  |  |  |  |  |  | 
-22: 'sband_down' | 'zenith' | 8192 | 22.151 | 18.151 | 3 | 'yes' |  |  |  |  |  |  | 
-23: 'xband_down' | '10 deg elevation' | 1000 | 17.959 | 13.959 | 3 | 'yes' |  |  |  |  |  |  | 
-24: 'xband_down' | '10 deg elevation' | 10000 | 7.959 | 3.959 | 3 | 'yes' |  |  |  |  |  |  | 
-25: 'xband_down' | '10 deg elevation' | 50000 | 0.97 | -3.03 | 3 | 'no' |  |  |  |  |  |  | 
-26: 'xband_down' | 'zenith' | 1000 | 39.168 | 35.168 | 3 | 'yes' |  |  |  |  |  |  | 
-27: 'xband_down' | 'zenith' | 10000 | 29.168 | 25.168 | 3 | 'yes' |  |  |  |  |  |  | 
-28: 'xband_down' | 'zenith' | 50000 | 22.178 | 18.178 | 3 | 'yes' |  |  |  |  |  |  | 
+13: 'sband_down' | '5 deg elevation' | 32 | 34.1927 | 30.1927 | 3 | 'yes' |  |  |  |  |  |  | 
+14: 'sband_down' | '5 deg elevation' | 128 | 28.1721 | 24.1721 | 3 | 'yes' |  |  |  |  |  |  | 
+15: 'sband_down' | '5 deg elevation' | 512 | 22.1515 | 18.1515 | 3 | 'yes' |  |  |  |  |  |  | 
+16: 'sband_down' | '5 deg elevation' | 2048 | 16.1309 | 12.1309 | 3 | 'yes' |  |  |  |  |  |  | 
+17: 'sband_down' | '5 deg elevation' | 8192 | 10.1103 | 6.11028 | 3 | 'yes' |  |  |  |  |  |  | 
+18: 'sband_down' | 'zenith' | 32 | 46.2339 | 42.2339 | 3 | 'yes' |  |  |  |  |  |  | 
+19: 'sband_down' | 'zenith' | 128 | 40.2133 | 36.2133 | 3 | 'yes' |  |  |  |  |  |  | 
+20: 'sband_down' | 'zenith' | 512 | 34.1927 | 30.1927 | 3 | 'yes' |  |  |  |  |  |  | 
+21: 'sband_down' | 'zenith' | 2048 | 28.1721 | 24.1721 | 3 | 'yes' |  |  |  |  |  |  | 
+22: 'sband_down' | 'zenith' | 8192 | 22.1515 | 18.1515 | 3 | 'yes' |  |  |  |  |  |  | 
+23: 'xband_down' | '10 deg elevation' | 1000 | 17.9594 | 13.9594 | 3 | 'yes' |  |  |  |  |  |  | 
+24: 'xband_down' | '10 deg elevation' | 10000 | 7.95937 | 3.95937 | 3 | 'yes' |  |  |  |  |  |  | 
+25: 'xband_down' | '10 deg elevation' | 50000 | 0.969674 | -3.03033 | 3 | 'no' |  |  |  |  |  |  | 
+26: 'xband_down' | 'zenith' | 1000 | 39.1679 | 35.1679 | 3 | 'yes' |  |  |  |  |  |  | 
+27: 'xband_down' | 'zenith' | 10000 | 29.1679 | 25.1679 | 3 | 'yes' |  |  |  |  |  |  | 
+28: 'xband_down' | 'zenith' | 50000 | 22.1782 | 18.1782 | 3 | 'yes' |  |  |  |  |  |  | 
 ## sheet Passes rows=29 cols=8
 1: 'Scenario commissioning_day: One day with a safe-mode commissioning start. Step 10 s, duration 86400 s.' |  |  |  |  |  |  | 
 2: 'Data volume per link' |  |  |  |  |  |  | 
 3: 'Link' | 'Station' | 'Passes' | 'Scenario total (Mbit)' | 'Per day (Mbit)' | 'Per day (MByte)' |  | 
-4: 'sband_down' | 'gs_north' | 11 | 35125.842 | 35125.842 | 4390.73 |  | 
-5: 'xband_down' | 'gs_south' | 4 | 21724.684 | 21724.684 | 2715.586 |  | 
+4: 'sband_down' | 'gs_north' | 11 | 35125.8 | 35125.8 | 4390.73 |  | 
+5: 'xband_down' | 'gs_south' | 4 | 21724.7 | 21724.7 | 2715.59 |  | 
 6: 'From the highest listed rate that closes at each sample while the link is active (its modes, below its tracking limit). Per day = scenario total scaled to 86 400 s.' |  |  |  |  |  |  | 
 8: 'Passes of link sband_down over gs_north' |  |  |  |  |  |  | 
 9: 'Pass' | 'AOS (T+)' | 'AOS (UTC)' | 'Duration (s)' | 'Max elevation (deg)' | 'Usable (s)' | 'Lowest margin (dB)' | 'Volume (Mbit)'
-10: '1' | 'T+00:02:06' | '2026-06-01T00:02:06Z' | 493.218 | 19.218 | 0 | 'n/a' | 0
-11: '2' | 'T+01:36:43' | '2026-06-01T01:36:43Z' | 586.597 | 74.893 | 580.124 | 30.146 | 4752.373
-12: '3' | 'T+03:11:37' | '2026-06-01T03:11:37Z' | 542.61 | 31.149 | 540.21 | 30.135 | 4425.403
-13: '4' | 'T+04:46:25' | '2026-06-01T04:46:25Z' | 424.837 | 14.057 | 420.637 | 30.125 | 3445.858
-14: '5' | 'T+06:20:35' | '2026-06-01T06:20:35Z' | 329.249 | 9.494 | 324.63 | 30.17 | 2659.372
-15: '6' | 'T+07:53:28' | '2026-06-01T07:53:28Z' | 375.853 | 11.34 | 374.729 | 30.127 | 3069.782
-16: '7' | 'T+09:26:02' | '2026-06-01T09:26:02Z' | 500.344 | 21.608 | 492.97 | 30.167 | 4038.412
-17: '8' | 'T+10:59:35' | '2026-06-01T10:59:35Z' | 581.669 | 63.799 | 577.22 | 30.263 | 4728.587
-18: '9' | 'T+12:34:52' | '2026-06-01T12:34:52Z' | 552.388 | 31.997 | 544.897 | 30.223 | 4463.797
-19: '10' | 'T+14:12:52' | '2026-06-01T14:12:52Z' | 309.598 | 8.56 | 302.404 | 30.135 | 2477.298
-20: '11' | 'T+23:57:48' | '2026-06-01T23:57:48Z' | 131.001 | 13.758 | 130 | 30.12 | 1064.96
+10: '1' | 'T+00:02:06' | '2026-06-01T00:02:06Z' | 493.218 | 19.2184 | 0 | 'n/a' | 0
+11: '2' | 'T+01:36:43' | '2026-06-01T01:36:43Z' | 586.597 | 74.8929 | 580.124 | 30.1457 | 4752.37
+12: '3' | 'T+03:11:37' | '2026-06-01T03:11:37Z' | 542.61 | 31.1495 | 540.21 | 30.1355 | 4425.4
+13: '4' | 'T+04:46:25' | '2026-06-01T04:46:25Z' | 424.837 | 14.0572 | 420.637 | 30.1253 | 3445.86
+14: '5' | 'T+06:20:35' | '2026-06-01T06:20:35Z' | 329.249 | 9.49406 | 324.63 | 30.1704 | 2659.37
+15: '6' | 'T+07:53:28' | '2026-06-01T07:53:28Z' | 375.853 | 11.3396 | 374.729 | 30.1274 | 3069.78
+16: '7' | 'T+09:26:02' | '2026-06-01T09:26:02Z' | 500.344 | 21.6081 | 492.97 | 30.1674 | 4038.41
+17: '8' | 'T+10:59:35' | '2026-06-01T10:59:35Z' | 581.669 | 63.7992 | 577.22 | 30.2629 | 4728.59
+18: '9' | 'T+12:34:52' | '2026-06-01T12:34:52Z' | 552.388 | 31.9971 | 544.897 | 30.2229 | 4463.8
+19: '10' | 'T+14:12:52' | '2026-06-01T14:12:52Z' | 309.598 | 8.56032 | 302.404 | 30.1346 | 2477.3
+20: '11' | 'T+23:57:48' | '2026-06-01T23:57:48Z' | 131.001 | 13.7584 | 130 | 30.1201 | 1064.96
 21: 'Lowest margin is at the lowest listed rate over the active samples.' |  |  |  |  |  |  | 
 23: 'Passes of link xband_down over gs_south' |  |  |  |  |  |  | 
 24: 'Pass' | 'AOS (T+)' | 'AOS (UTC)' | 'Duration (s)' | 'Max elevation (deg)' | 'Usable (s)' | 'Lowest margin (dB)' | 'Volume (Mbit)'
-25: '1' | 'T+02:32:03' | '2026-06-01T02:32:03Z' | 444.429 | 34.052 | 437.514 | 12.835 | 10285.143
-26: '2' | 'T+04:07:10' | '2026-06-01T04:07:10Z' | 373.637 | 21.665 | 364.539 | 12.818 | 3514.539
-27: '3' | 'T+13:18:57' | '2026-06-01T13:18:57Z' | 406.88 | 26.153 | 404.809 | 12.723 | 3914.809
-28: '4' | 'T+14:53:30' | '2026-06-01T14:53:30Z' | 419.214 | 27.56 | 410.193 | 12.56 | 4010.193
+25: '1' | 'T+02:32:03' | '2026-06-01T02:32:03Z' | 444.429 | 34.052 | 437.514 | 12.8349 | 10285.1
+26: '2' | 'T+04:07:10' | '2026-06-01T04:07:10Z' | 373.637 | 21.6654 | 364.539 | 12.8181 | 3514.54
+27: '3' | 'T+13:18:57' | '2026-06-01T13:18:57Z' | 406.88 | 26.1526 | 404.809 | 12.7235 | 3914.81
+28: '4' | 'T+14:53:30' | '2026-06-01T14:53:30Z' | 419.214 | 27.5604 | 410.193 | 12.5605 | 4010.19
 29: 'Lowest margin is at the lowest listed rate over the active samples.' |  |  |  |  |  |  | 
 ## sheet Assumptions rows=37 cols=5
 1: 'Configuration numbers used' |  |  |  | 

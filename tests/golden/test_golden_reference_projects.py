@@ -81,7 +81,7 @@ def whole_seconds(text: str) -> str:
 
 @pytest.mark.parametrize(("kind", "name"), CASES)
 def test_xlsx(kind: str, name: str) -> None:
-    dump = dump_xlsx(render_xlsx(build(kind, name).document), ROWS, float_digits=3)
+    dump = dump_xlsx(render_xlsx(build(kind, name).document), ROWS, significant_digits=6)
     check_golden(f"ref_{kind}_{name}.xlsx.txt", whole_seconds(dump))
 
 
