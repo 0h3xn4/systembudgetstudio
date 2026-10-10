@@ -33,6 +33,7 @@ def test_default_writes_all_reports_into_results(
         "power_static.xlsx",
         "power_static_downlink.csv",
         "power_static_nominal.csv",
+        "power_static_provenance.csv",
     ]
     assert [n for n in names if n.startswith("mass_")] == [
         "mass_static.docx",
@@ -41,6 +42,7 @@ def test_default_writes_all_reports_into_results(
         "mass_static.xlsx",
         "mass_static_eol.csv",
         "mass_static_launch.csv",
+        "mass_static_provenance.csv",
     ]
     assert [n for n in names if n.startswith("thermal_")] == [
         "thermal_static.docx",
@@ -49,6 +51,7 @@ def test_default_writes_all_reports_into_results(
         "thermal_static.xlsx",
         "thermal_static_downlink.csv",
         "thermal_static_nominal.csv",
+        "thermal_static_provenance.csv",
     ]
     text = capsys.readouterr().out
     assert "Wrote" in text and "Traceback" not in text

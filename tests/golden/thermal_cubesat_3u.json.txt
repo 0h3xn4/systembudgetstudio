@@ -677,7 +677,7 @@
         {
           "dissipation_w": 1.15,
           "name": "ADCS",
-          "peak_dissipation_w": 1.7999999999999998
+          "peak_dissipation_w": 1.8
         },
         {
           "dissipation_w": 0.6,
@@ -779,7 +779,7 @@
         {
           "dissipation_w": 1.15,
           "name": "ADCS",
-          "peak_dissipation_w": 1.7999999999999998
+          "peak_dissipation_w": 1.8
         },
         {
           "dissipation_w": 0.6,
@@ -945,7 +945,7 @@
         {
           "dissipation_w": 1.15,
           "name": "ADCS",
-          "peak_dissipation_w": 1.7999999999999998
+          "peak_dissipation_w": 1.8
         },
         {
           "dissipation_w": 0.5,
@@ -1047,7 +1047,7 @@
         {
           "dissipation_w": 1.15,
           "name": "ADCS",
-          "peak_dissipation_w": 1.7999999999999998
+          "peak_dissipation_w": 1.8
         },
         {
           "dissipation_w": 0.5,

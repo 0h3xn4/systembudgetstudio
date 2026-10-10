@@ -81,7 +81,11 @@ def whole_seconds(text: str) -> str:
 
 @pytest.mark.parametrize(("kind", "name"), CASES)
 def test_xlsx(kind: str, name: str) -> None:
-    dump = dump_xlsx(render_xlsx(build(kind, name).document), ROWS, significant_digits=6)
+    # the residual of the thermal solve is rounding noise (it depends on the BLAS build)
+    floor = 1e-6 if kind == "thermal" else None
+    dump = dump_xlsx(
+        render_xlsx(build(kind, name).document), ROWS, significant_digits=6, zero_below=floor
+    )
     check_golden(f"ref_{kind}_{name}.xlsx.txt", whole_seconds(dump))
 
 

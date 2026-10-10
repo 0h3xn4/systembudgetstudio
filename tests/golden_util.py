@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import io
 import os
+import re
 from pathlib import Path
 
 from docx import Document
@@ -13,8 +14,28 @@ from pypdf import PdfReader
 GOLDEN_DIR = Path(__file__).parent / "golden"
 
 
+# A decimal number that is not part of a version string or a date ("0.1.0", "1.2.3").
+_FLOAT = re.compile(r"(?<![\w.])-?\d+(?:\.\d+(?:[eE][+-]?\d+)?|[eE][+-]?\d+)(?![\w.])")
+
+
+def stable_floats(text: str, digits: int = 9, zero_below: float = 1e-6) -> str:
+    """Text with every decimal number rounded to `digits` significant digits and every number
+    smaller than `zero_below` written as 0.0. Results of linear algebra (a different BLAS build
+    changes the last digits, and the residual of a solved system is pure rounding noise) are
+    compared at the precision the physics supports, not bit for bit."""
+
+    def fix(match: re.Match[str]) -> str:
+        value = float(match.group(0))
+        return "0.0" if abs(value) < zero_below else repr(float(f"{value:.{digits}g}"))
+
+    return _FLOAT.sub(fix, text)
+
+
 def dump_xlsx(
-    data: bytes, max_rows: int | None = None, significant_digits: int | None = None
+    data: bytes,
+    max_rows: int | None = None,
+    significant_digits: int | None = None,
+    zero_below: float | None = None,
 ) -> str:
     wb = load_workbook(io.BytesIO(data))
     lines: list[str] = []
@@ -28,6 +49,8 @@ def dump_xlsx(
                 row = tuple(
                     float(f"{v:.{significant_digits}g}") if isinstance(v, float) else v for v in row
                 )
+            if zero_below is not None:
+                row = tuple(0.0 if isinstance(v, float) and abs(v) < zero_below else v for v in row)
             cells = ["" if v is None else repr(v) for v in row]
             if any(cells):
                 lines.append(f"{i}: " + " | ".join(cells))

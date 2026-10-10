@@ -224,8 +224,8 @@
           "conducted_out_w": -6.0,
           "dissipation_w": 10.0,
           "node": "A",
-          "radiated_w": 291.0000000000001,
-          "temperature_k": 283.007419021177
+          "radiated_w": 291.0,
+          "temperature_k": 283.007419
         },
         {
           "absorbed_w": 0.0,
@@ -233,7 +233,7 @@
           "dissipation_w": 6.0,
           "node": "B",
           "radiated_w": 0.0,
-          "temperature_k": 286.007419021177
+          "temperature_k": 286.007419
         }
       ]
     }

@@ -177,6 +177,7 @@ def test_export_writes_the_scenario_files(window: MainWindow, qtbot, tmp_path: P
         "one_day_eclipses.csv",
         "one_day_environment.json",
         "one_day_passes.csv",
+        "one_day_provenance.csv",
         "one_day_timeline.csv",
     ]
 

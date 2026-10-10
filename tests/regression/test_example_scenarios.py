@@ -8,6 +8,7 @@ import pytest
 
 from budget_core.io.project_loader import load_project
 from budget_core.scenario.run import run_scenario
+from tests.perf_limits import LIMIT_S
 
 ROOT = Path(__file__).resolve().parents[2] / "examples"
 
@@ -60,6 +61,6 @@ def test_stress_week_runs_within_the_performance_target() -> None:
     assert project is not None
     started = time.perf_counter()
     run = run_scenario(project, "stress_week")
-    assert time.perf_counter() - started < 10.0
+    assert time.perf_counter() - started < LIMIT_S
     assert run.env.grid.count == 604801 and len(run.env.eclipses) > 90
     assert {s.mode for s in run.timeline} <= set(project.modes)

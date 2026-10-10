@@ -208,7 +208,9 @@ def build_parser() -> argparse.ArgumentParser:
     sch = sub.add_parser("export-schemas", help="Write the JSON Schema of every file kind.")
     sch.add_argument("out_dir", type=Path)
 
-    exa = sub.add_parser("export-examples", help="Write the three synthetic example projects.")
+    exa = sub.add_parser(
+        "export-examples", help="Write the synthetic example projects (invented data)."
+    )
     exa.add_argument("out_dir", type=Path)
     return parser
 

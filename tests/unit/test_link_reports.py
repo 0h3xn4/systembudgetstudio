@@ -137,6 +137,7 @@ def test_write_outputs_names(parts, tmp_path: Path) -> None:  # type: ignore[no-
     assert sorted(p.name for p in written) == [
         "link_static.docx",
         "link_static.json",
+        "link_static_provenance.csv",
         "link_static_table.csv",
     ]
 
@@ -158,6 +159,7 @@ def test_run_link_budget_writes_the_static_files(micro: Path, tmp_path: Path) ->
         "link_static.json",
         "link_static.pdf",
         "link_static.xlsx",
+        "link_static_provenance.csv",
         "link_static_table.csv",
     ]
 

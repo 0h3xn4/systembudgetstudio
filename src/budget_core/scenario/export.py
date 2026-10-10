@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Any
 
 from budget_core.provenance import Provenance
-from budget_core.reports.csvutil import csv_writer
+from budget_core.reports.csvutil import csv_writer, provenance_csv
 from budget_core.reports.files import write_file
 from budget_core.scenario.run import ScenarioRun
 from budget_core.timeutil import format_utc
@@ -167,5 +167,6 @@ def write_scenario_outputs(run: ScenarioRun, provenance: Provenance, out_dir: Pa
         f"{sid}_eclipses.csv": eclipses_csv(run),
         f"{sid}_passes.csv": passes_csv(run),
         f"{sid}_timeline.csv": timeline_csv(run),
+        f"{sid}_provenance.csv": provenance_csv(provenance),
     }
     return [write_file(out_dir, name, text) for name, text in files.items()]

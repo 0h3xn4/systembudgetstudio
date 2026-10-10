@@ -5,7 +5,10 @@ from __future__ import annotations
 import csv
 import re
 from collections.abc import Iterable
-from typing import Any
+from typing import TYPE_CHECKING, Any
+
+if TYPE_CHECKING:
+    from budget_core.provenance import Provenance
 
 DANGEROUS_START = ("=", "+", "-", "@", "\t", "\r")
 # "-0.5", "+3", "1e-9", and a number with a short unit as the tool writes it: "+2.500 W", "+20.0 %"
@@ -40,3 +43,15 @@ class _Writer:
 
 def csv_writer(handle: Any) -> _Writer:
     return _Writer(handle)
+
+
+def provenance_csv(provenance: Provenance) -> str:
+    """The provenance block as a two-column CSV (`item,value`), written beside every set of CSV
+    files, which have no room for a header block of their own."""
+    import io
+
+    handle = io.StringIO()
+    writer = csv_writer(handle)
+    writer.writerow(["item", "value"])
+    writer.writerows(provenance.rows())
+    return handle.getvalue()
