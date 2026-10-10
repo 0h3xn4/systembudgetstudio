@@ -98,3 +98,34 @@ def test_cli_exit_codes(tmp_path: Path) -> None:
     assert check_bundle.main([str(fake_bundle(tmp_path / "ok"))]) == 0
     assert check_bundle.main([str(fake_bundle(tmp_path / "bad", extra=("hypothesis",)))]) == 1
     assert check_bundle.main([str(tmp_path / "missing")]) == 2
+
+
+def test_lgpl_texts_are_shipped_even_when_the_wheel_has_its_own_files(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """On Windows the Qt wheels carry licence files of their own; the LGPL text must still ship."""
+    real = licence_check.distribution
+
+    class WithOwnFile:
+        def __init__(self, dist: object) -> None:
+            self._dist = dist
+            self.files = [Path("x.dist-info/LICENSE")]
+
+        def locate_file(self, _file: object) -> Path:
+            own = tmp_path / "own-licence.txt"
+            own.write_text("wheel licence", encoding="utf-8")
+            return own
+
+        def __getattr__(self, name: str) -> object:
+            return getattr(self._dist, name)
+
+    monkeypatch.setattr(
+        licence_check,
+        "distribution",
+        lambda name: WithOwnFile(real(name)) if name == "pyside6-essentials" else real(name),
+    )
+    out = tmp_path / "out"
+    licence_check.collect(out)
+    folder = out / "pyside6-essentials"
+    assert (folder / "LGPL-3.0.txt").is_file() and (folder / "GPL-3.0.txt").is_file()
+    assert any(p.name.endswith("own-licence.txt") for p in folder.iterdir())

@@ -148,8 +148,9 @@ QT_TEXTS = ("LGPL-3.0.txt", "GPL-3.0.txt")
 
 def collect(out: Path) -> int:
     """Copy the licence texts of every runtime package into `out/<package>/`; return how many
-    files were written. The Qt bindings ship no text in their wheels, so the LGPL and GPL texts
-    kept in `assets/licences/` are copied for them. Writes `INDEX.md` too."""
+    files were written. The LGPL and GPL texts kept in `assets/licences/` are always copied for
+    the LGPL packages (the Qt bindings), whether or not their wheel carries texts. Writes
+    `INDEX.md` too."""
     out.mkdir(parents=True, exist_ok=True)
     written = 0
     index = [
@@ -171,7 +172,9 @@ def collect(out: Path) -> int:
                     target.write_bytes(source.read_bytes())
                     files.append(target.name)
                     written += 1
-        if not files and entry.category == "lgpl":
+        if entry.category == "lgpl":
+            # always ship the LGPL and GPL texts for the LGPL packages: some wheels (Windows) carry
+            # their own licence files, others (Linux) carry none
             folder.mkdir(parents=True, exist_ok=True)
             for name in QT_TEXTS:
                 (folder / name).write_bytes((ROOT / "assets" / "licences" / name).read_bytes())
