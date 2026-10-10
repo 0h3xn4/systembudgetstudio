@@ -65,14 +65,14 @@ end;
 
 procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
 var
-  Existing, Dir, Rest, Entry, Result: string;
+  Existing, Dir, Rest, Entry, Kept: string;
   P: Integer;
 begin
   if CurUninstallStep <> usPostUninstall then Exit;
   if not RegQueryStringValue(HKCU, 'Environment', 'Path', Existing) then Exit;
   Dir := Lowercase(ExpandConstant('{app}'));
   Rest := Existing;
-  Result := '';
+  Kept := '';
   { rebuild the list without the entry that is exactly our folder }
   while Rest <> '' do
   begin
@@ -89,10 +89,10 @@ begin
     end;
     if (Entry <> '') and (Lowercase(Entry) <> Dir) then
     begin
-      if Result <> '' then Result := Result + ';';
-      Result := Result + Entry;
+      if Kept <> '' then Kept := Kept + ';';
+      Kept := Kept + Entry;
     end;
   end;
-  if Result <> Existing then
-    RegWriteExpandStringValue(HKCU, 'Environment', 'Path', Result);
+  if Kept <> Existing then
+    RegWriteExpandStringValue(HKCU, 'Environment', 'Path', Kept);
 end;
