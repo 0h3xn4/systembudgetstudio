@@ -1,0 +1,70 @@
+## sheet Summary rows=11 cols=3
+1: 'Comparison: Example 3U CubeSat, complete power and thermal inputs rev 1 and Example 3U CubeSat, complete power and thermal inputs rev 2' |  | 
+2: 'INCOMPLETE: some inputs are placeholders (source TBD or missing). Entries marked n/a depend on them and are not computed. Do not use this report as evidence until the placeholders are replaced with sourced values.' |  | 
+4: 'rev 1 compared with rev 2.' |  | 
+5: '24 values differ out of 1545 compared.' |  | 
+6: 'Values that look equal at the displayed precision are not reported as differences.' |  | 
+7: 'Compared sides' |  | 
+8: 'Item' | 'rev 1' | 'rev 2'
+9: 'Project' | 'Example 3U CubeSat, complete power and thermal inputs' | 'Example 3U CubeSat, complete power and thermal inputs'
+10: 'Project revision' | '1' | '2'
+11: 'Scenario' | 'static (no scenario)' | 'static (no scenario)'
+## sheet Differences Static power budget rows=33 cols=7
+1: 'Summary — Power by spacecraft mode' |  |  |  |  |  | 
+2: 'Row' | 'Quantity' | 'rev 1' | 'rev 2' | 'Change' | 'Change (%)' | 'Status'
+3: 'Nominal' | 'Average load (W)' | '2.000' | '2.400' | '+0.400 W' | '+20.0 %' | 'changed'
+4: 'Nominal' | 'Average, unit margins (W)' | '2.167' | '2.608' | '+0.441 W' | '+20.4 %' | 'changed'
+5: 'Nominal' | 'Average, system margin (W)' | '2.384' | '2.868' | '+0.484 W' | '+20.3 %' | 'changed'
+6: 'Nominal' | 'Average at source (W)' | '2.291' | '2.749' | '+0.458 W' | '+20.0 %' | 'changed'
+7: 'Nominal' | 'Average at source, with margins (W)' | '2.731' | '3.286' | '+0.555 W' | '+20.3 %' | 'changed'
+9: 'Mode: Nominal — Units in mode Nominal' |  |  |  |  |  | 
+10: 'Row' | 'Quantity' | 'rev 1' | 'rev 2' | 'Change' | 'Change (%)' | 'Status'
+11: 'adcs' | 'Average (W)' | '0.900' | '1.300' | '+0.400 W' | '+44.4 %' | 'changed'
+12: 'adcs' | 'Effective (W)' | '0.900' | '1.300' | '+0.400 W' | '+44.4 %' | 'changed'
+13: 'adcs' | 'With margin (W)' | '0.990' | '1.430' | '+0.440 W' | '+44.4 %' | 'changed'
+15: 'Mode: Nominal — By subsystem' |  |  |  |  |  | 
+16: 'Row' | 'Quantity' | 'rev 1' | 'rev 2' | 'Change' | 'Change (%)' | 'Status'
+17: 'ADCS' | 'Effective (W)' | '1.150' | '1.550' | '+0.400 W' | '+34.8 %' | 'changed'
+18: 'ADCS' | 'With margin (W)' | '1.265' | '1.705' | '+0.440 W' | '+34.8 %' | 'changed'
+20: 'Mode: Nominal — By supply bus' |  |  |  |  |  | 
+21: 'Row' | 'Quantity' | 'rev 1' | 'rev 2' | 'Change' | 'Change (%)' | 'Status'
+22: 'main' | 'Average load (W)' | '2.000' | '2.400' | '+0.400 W' | '+20.0 %' | 'changed'
+23: 'main' | 'Average load, with margins (W)' | '2.384' | '2.868' | '+0.484 W' | '+20.3 %' | 'changed'
+24: 'main' | 'Average at source (W)' | '2.291' | '2.749' | '+0.458 W' | '+20.0 %' | 'changed'
+25: 'main' | 'Average at source, with margins (W)' | '2.731' | '3.286' | '+0.555 W' | '+20.3 %' | 'changed'
+27: 'Mode: Nominal — Totals' |  |  |  |  |  | 
+28: 'Row' | 'Quantity' | 'rev 1' | 'rev 2' | 'Change' | 'Change (%)' | 'Status'
+29: 'Load, nominal' | 'Average (W)' | '2.000' | '2.400' | '+0.400 W' | '+20.0 %' | 'changed'
+30: 'Load, with unit margins' | 'Average (W)' | '2.167' | '2.608' | '+0.441 W' | '+20.4 %' | 'changed'
+31: 'Load, with system margin' | 'Average (W)' | '2.384' | '2.868' | '+0.484 W' | '+20.3 %' | 'changed'
+32: 'Source, nominal' | 'Average (W)' | '2.291' | '2.749' | '+0.458 W' | '+20.0 %' | 'changed'
+33: 'Source, with margins' | 'Average (W)' | '2.731' | '3.286' | '+0.555 W' | '+20.3 %' | 'changed'
+## sheet Differences Mass budget rows=1 cols=1
+1: 'No differences.'
+## sheet Differences Thermal budget rows=16 cols=7
+1: 'Summary — Heat dissipation by spacecraft mode' |  |  |  |  |  | 
+2: 'Row' | 'Quantity' | 'rev 1' | 'rev 2' | 'Change' | 'Change (%)' | 'Status'
+3: 'Nominal' | 'Average (W)' | '2.000' | '2.400' | '+0.400 W' | '+20.0 %' | 'changed'
+5: 'Mode: Nominal — Units in mode Nominal' |  |  |  |  |  | 
+6: 'Row' | 'Quantity' | 'rev 1' | 'rev 2' | 'Change' | 'Change (%)' | 'Status'
+7: 'adcs' | 'Effective power (W)' | '0.900' | '1.300' | '+0.400 W' | '+44.4 %' | 'changed'
+8: 'adcs' | 'Dissipation (W)' | '0.900' | '1.300' | '+0.400 W' | '+44.4 %' | 'changed'
+10: 'Mode: Nominal — By subsystem' |  |  |  |  |  | 
+11: 'Row' | 'Quantity' | 'rev 1' | 'rev 2' | 'Change' | 'Change (%)' | 'Status'
+12: 'ADCS' | 'Dissipation (W)' | '1.150' | '1.550' | '+0.400 W' | '+34.8 %' | 'changed'
+14: 'Mode: Nominal — By thermal node' |  |  |  |  |  | 
+15: 'Row' | 'Quantity' | 'rev 1' | 'rev 2' | 'Change' | 'Change (%)' | 'Status'
+16: 'ADCS' | 'Dissipation (W)' | '1.150' | '1.550' | '+0.400 W' | '+34.8 %' | 'changed'
+## sheet Differences Link budget rows=1 cols=1
+1: 'No differences.'
+## sheet Provenance rows=10 cols=2
+1: 'Provenance' | 
+2: 'Item' | 'Value'
+3: 'Tool' | 'System Budget Studio 0.1.0'
+4: 'Python' | '3.x'
+5: 'Libraries' | 'openpyxl for-golden-tests, pint for-golden-tests, pydantic for-golden-tests, reportlab for-golden-tests, ruamel.yaml for-golden-tests'
+6: 'Project' | 'Example 3U CubeSat, complete power and thermal inputs'
+7: 'Project revision' | '1'
+8: 'Scenario' | 'static vs static'
+9: 'Generated (UTC)' | '2026-01-02T03:04:05Z'
+10: 'User' | 'Golden User'

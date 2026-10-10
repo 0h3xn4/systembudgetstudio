@@ -1,0 +1,403 @@
+pages=13
+## page 1
+System Budget Studio 0.1.0 | Example 3U CubeSat rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 1
+Thermal budget (static): Example 3U CubeSat
+INCOMPLETE: some inputs are placeholders (source TBD or missing). Entries marked n/a depend on them and are not computed. Do not use this report as evidence until the
+placeholders are replaced with sourced values.
+Summary
+Heat dissipation by spacecraft mode
+Mode
+Average (W)
+Peak (W)
+Charging
+ 1.500
+ 2.450
+Downlink
+ 2.530
+ 5.750
+Imaging
+ 3.840
+ 6.950
+Nominal
+ 2.000
+ 3.150
+Safe
+ 1.000
+ 1.600
+Average = sum of unit power x duty cycle x heat dissipation ratio. Peak uses the unit peak powers. n/a: a unit has no heat dissipation ratio for its power mode.
+Case: cold
+Eclipse with the lowest-power mode.
+Node temperatures, case cold
+Node
+Temperature (K)
+not computed (inputs missing, see Problems)
+ n/a
+Unit temperature limits, case cold (operating)
+Unit
+Node
+Temperature (K)
+Lower limit (K)
+Upper limit (K)
+Headroom to lower (K)
+Headroom to upper (K)
+Status
+adcs
+ADCS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+camera
+PL
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+eps
+EPS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+gnss
+ADCS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+obc
+DH
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+radio
+TTC
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+Status: ok; margin = within the limits but closer than the required temperature margin; exceeded; no limits = the unit has no limits for this set (not checked).
+Case: hot
+Sunlight with the highest-power mode.
+Node temperatures, case hot
+Node
+Temperature (K)
+not computed (inputs missing, see Problems)
+ n/a
+## page 2
+System Budget Studio 0.1.0 | Example 3U CubeSat rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 2
+Unit temperature limits, case hot (operating)
+Unit
+Node
+Temperature (K)
+Lower limit (K)
+Upper limit (K)
+Headroom to lower (K)
+Headroom to upper (K)
+Status
+adcs
+ADCS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+camera
+PL
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+eps
+EPS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+gnss
+ADCS
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+obc
+DH
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+radio
+TTC
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+no limits
+Status: ok; margin = within the limits but closer than the required temperature margin; exceeded; no limits = the unit has no limits for this set (not checked).
+Mode: Charging
+Units in mode Charging
+Unit
+Name
+Subsystem
+Node
+Power mode
+Effective power (W)
+Dissipation ratio
+Dissipation (W)
+Peak dissipation (W)
+adcs
+ADCS module
+ADCS
+ADCS
+charging
+ 0.600
+ 1.00
+ 0.600
+ 1.000
+camera
+Camera payload
+PL
+PL
+off
+ 0.000
+ 1.00
+ 0.000
+ 0.000
+eps
+Power board
+EPS
+EPS
+charging
+ 0.150
+ 1.00
+ 0.150
+ 0.250
+gnss
+GNSS receiver
+ADCS
+ADCS
+charging
+ 0.250
+ 1.00
+ 0.250
+ 0.400
+obc
+On-board computer
+DH
+DH
+charging
+ 0.300
+ 1.00
+ 0.300
+ 0.500
+radio
+UHF/VHF radio
+TTC
+TTC
+charging
+ 0.200
+ 1.00
+ 0.200
+ 0.300
+By subsystem
+Subsystem
+Dissipation (W)
+Peak dissipation (W)
+ADCS
+ 0.850
+ 1.400
+DH
+ 0.300
+ 0.500
+EPS
+ 0.150
+ 0.250
+PL
+ 0.000
+ 0.000
+TTC
+ 0.200
+ 0.300
+By thermal node
+Node
+Dissipation (W)
+Peak dissipation (W)
+ADCS
+ 0.850
+ 1.400
+DH
+ 0.300
+ 0.500
+EPS
+ 0.150
+ 0.250
+PL
+ 0.000
+ 0.000
+## page 3
+System Budget Studio 0.1.0 | Example 3U CubeSat rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 3
+Node
+Dissipation (W)
+Peak dissipation (W)
+TTC
+ 0.200
+ 0.300
+Mode: Downlink
+Units in mode Downlink
+Unit
+Name
+Subsystem
+Node
+Power mode
+Effective power (W)
+Dissipation ratio
+Dissipation (W)
+Peak dissipation (W)
+adcs
+ADCS module
+ADCS
+ADCS
+downlink
+ 0.900
+ 1.00
+ 0.900
+ 1.400
+camera
+Camera payload
+PL
+PL
+off
+ 0.000
+ 1.00
+ 0.000
+ 0.000
+eps
+Power board
+EPS
+EPS
+downlink
+ 0.150
+ 1.00
+ 0.150
+ 0.250
+gnss
+GNSS receiver
+ADCS
+ADCS
+downlink
+ 0.250
+ 1.00
+ 0.250
+ 0.400
+obc
+On-board computer
+DH
+DH
+downlink
+ 0.600
+ 1.00
+ 0.600
+ 0.900
+radio
+UHF/VHF radio
+TTC
+TTC
+downlink
+ 0.900
+ 0.70
+ 0.630
+ 2.800
+By subsystem
+Subsystem
+Dissipation (W)
+Peak dissipation (W)
+ADCS
+ 1.150
+ 1.800
+DH
+ 0.600
+ 0.900
+EPS
+ 0.150
+ 0.250
+PL
+ 0.000
+ 0.000
+TTC
+ 0.630
+ 2.800
+By thermal node
+Node
+Dissipation (W)
+Peak dissipation (W)
+ADCS
+ 1.150
+ 1.800
+DH
+ 0.600
+ 0.900
+EPS
+ 0.150
+ 0.250
+PL
+ 0.000
+ 0.000
+TTC
+ 0.630
+ 2.800
+Mode: Imaging
+Units in mode Imaging
+Unit
+Name
+Subsystem
+Node
+Power mode
+Effective power (W)
+Dissipation ratio
+Dissipation (W)
+Peak dissipation (W)
+adcs
+ADCS module
+ADCS
+ADCS
+imaging
+ 1.100
+ 1.00
+ 1.100
+ 1.800
+camera
+Camera payload
+PL
+PL
+imaging
+ 1.440
+ 1.00
+ 1.440
+ 3.200
+...

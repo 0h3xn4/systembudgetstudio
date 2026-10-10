@@ -1,0 +1,661 @@
+pages=16
+## page 1
+System Budget Studio 0.1.0 | Example stress case (200 units) rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 1
+Power budget over time: Example stress case (200 units)
+INCOMPLETE: some inputs are placeholders (source TBD or missing). Entries marked n/a depend on them and are not computed. Do not use this report as evidence until the
+placeholders are replaced with sourced values.
+Summary
+Scenario stress_week: One week at 1 s resolution.
+Environment source: elements; shadow model: conical; start 2026-06-01T00:00:00Z; duration 604800 s; step 1 s (604800 steps).
+Eclipse fraction 36.07 % of the scenario; 105 complete orbit(s).
+Demand basis: nominal; mission phase for the depth-of-discharge limit: not set.
+Beginning of life (BOL): no array degradation or battery fade. End of life (EOL): the design life applied to both.
+Results by case
+Quantity
+Unit
+BOL
+EOL
+Battery capacity
+Wh
+ n/a
+ n/a
+Average generation
+W
+ n/a
+ n/a
+Average demand at source
+W
+ n/a
+ n/a
+Energy generated
+Wh
+ n/a
+ n/a
+Energy demanded
+Wh
+ n/a
+ n/a
+Smallest margin (generation - demand)
+W
+ n/a
+ n/a
+Lowest state of charge
+%
+ n/a
+ n/a
+Deepest depth of discharge
+%
+ n/a
+ n/a
+Energy not supplied
+Wh
+ n/a
+ n/a
+Energy curtailed (battery full)
+Wh
+ n/a
+ n/a
+Stored energy change over the scenario
+Wh
+ n/a
+ n/a
+Violations
+count
+ 0
+ 0
+n/a: an input the result needs is a placeholder or missing (see Problems).
+Violations
+Case
+Finding
+From (T+)
+To (T+)
+Duration (s)
+Worst value
+Limit
+Unit
+Input to change
+No violations found.
+Modes and orbits
+Spacecraft modes in the scenario
+Mode
+Name
+Time (s)
+Share
+Load (W)
+Demand at source (W)
+Peak at source (W)
+charging
+Charging
+ 386648.1
+ 63.9 %
+ 277.262
+ n/a
+ n/a
+downlink
+Downlink
+ 5614.6
+ 0.9 %
+ 275.978
+ n/a
+ n/a
+safe
+Safe
+ 212537.3
+ 35.1 %
+ 275.957
+ n/a
+ n/a
+Demand basis: nominal.
+## page 2
+System Budget Studio 0.1.0 | Example stress case (200 units) rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 2
+Orbit energy balance, BOL
+Orbit
+Start (T+)
+Length (s)
+Eclipse (s)
+Generated (Wh)
+Demanded (Wh)
+Balance (Wh)
+Stored change (Wh)
+1
+T+00:00:00
+ 5742.7
+ 2066.4
+ n/a
+ n/a
+ n/a
+ n/a
+2
+T+01:35:42
+ 5742.7
+ 2066.4
+ n/a
+ n/a
+ n/a
+ n/a
+3
+T+03:11:25
+ 5742.7
+ 2066.5
+ n/a
+ n/a
+ n/a
+ n/a
+4
+T+04:47:08
+ 5742.7
+ 2066.5
+ n/a
+ n/a
+ n/a
+ n/a
+5
+T+06:22:50
+ 5742.7
+ 2066.5
+ n/a
+ n/a
+ n/a
+ n/a
+6
+T+07:58:33
+ 5742.7
+ 2066.6
+ n/a
+ n/a
+ n/a
+ n/a
+7
+T+09:34:16
+ 5742.7
+ 2066.6
+ n/a
+ n/a
+ n/a
+ n/a
+8
+T+11:09:59
+ 5742.7
+ 2066.7
+ n/a
+ n/a
+ n/a
+ n/a
+9
+T+12:45:41
+ 5742.7
+ 2066.7
+ n/a
+ n/a
+ n/a
+ n/a
+10
+T+14:21:24
+ 5742.7
+ 2066.7
+ n/a
+ n/a
+ n/a
+ n/a
+11
+T+15:57:07
+ 5742.7
+ 2066.8
+ n/a
+ n/a
+ n/a
+ n/a
+12
+T+17:32:50
+ 5742.7
+ 2066.8
+ n/a
+ n/a
+ n/a
+ n/a
+13
+T+19:08:32
+ 5742.7
+ 2066.9
+ n/a
+ n/a
+ n/a
+ n/a
+14
+T+20:44:15
+ 5742.7
+ 2066.9
+ n/a
+ n/a
+ n/a
+ n/a
+15
+T+22:19:58
+ 5742.7
+ 2067.0
+ n/a
+ n/a
+ n/a
+ n/a
+16
+T+23:55:40
+ 5742.7
+ 2067.0
+ n/a
+ n/a
+ n/a
+ n/a
+17
+T+25:31:23
+ 5742.7
+ 2067.0
+ n/a
+ n/a
+ n/a
+ n/a
+18
+T+27:07:06
+ 5742.7
+ 2067.1
+ n/a
+ n/a
+ n/a
+ n/a
+19
+T+28:42:49
+ 5742.7
+ 2067.1
+ n/a
+ n/a
+ n/a
+ n/a
+20
+T+30:18:31
+ 5742.7
+ 2067.2
+ n/a
+ n/a
+ n/a
+ n/a
+21
+T+31:54:14
+ 5742.7
+ 2067.2
+ n/a
+ n/a
+ n/a
+ n/a
+22
+T+33:29:57
+ 5742.7
+ 2067.2
+ n/a
+ n/a
+ n/a
+ n/a
+23
+T+35:05:40
+ 5742.7
+ 2067.3
+ n/a
+ n/a
+ n/a
+ n/a
+24
+T+36:41:22
+ 5742.7
+ 2067.3
+ n/a
+ n/a
+ n/a
+ n/a
+25
+T+38:17:05
+ 5742.7
+ 2067.4
+ n/a
+ n/a
+ n/a
+ n/a
+26
+T+39:52:48
+ 5742.7
+ 2067.4
+ n/a
+ n/a
+ n/a
+ n/a
+27
+T+41:28:30
+ 5742.7
+ 2067.5
+ n/a
+ n/a
+ n/a
+ n/a
+28
+T+43:04:13
+ 5742.7
+ 2067.5
+ n/a
+ n/a
+ n/a
+ n/a
+29
+T+44:39:56
+ 5742.7
+ 2067.5
+ n/a
+ n/a
+ n/a
+ n/a
+30
+T+46:15:39
+ 5742.7
+ 2067.6
+ n/a
+ n/a
+ n/a
+ n/a
+31
+T+47:51:21
+ 5742.7
+ 2067.6
+ n/a
+ n/a
+ n/a
+ n/a
+32
+T+49:27:04
+ 5742.7
+ 2067.7
+ n/a
+ n/a
+ n/a
+ n/a
+## page 3
+System Budget Studio 0.1.0 | Example stress case (200 units) rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 3
+Orbit
+Start (T+)
+Length (s)
+Eclipse (s)
+Generated (Wh)
+Demanded (Wh)
+Balance (Wh)
+Stored change (Wh)
+33
+T+51:02:47
+ 5742.7
+ 2067.7
+ n/a
+ n/a
+ n/a
+ n/a
+34
+T+52:38:30
+ 5742.7
+ 2067.7
+ n/a
+ n/a
+ n/a
+ n/a
+35
+T+54:14:12
+ 5742.7
+ 2067.8
+ n/a
+ n/a
+ n/a
+ n/a
+36
+T+55:49:55
+ 5742.7
+ 2067.8
+ n/a
+ n/a
+ n/a
+ n/a
+37
+T+57:25:38
+ 5742.7
+ 2067.9
+ n/a
+ n/a
+ n/a
+ n/a
+38
+T+59:01:20
+ 5742.7
+ 2067.9
+ n/a
+ n/a
+ n/a
+ n/a
+39
+T+60:37:03
+ 5742.7
+ 2067.9
+ n/a
+ n/a
+ n/a
+ n/a
+40
+T+62:12:46
+ 5742.7
+ 2068.0
+ n/a
+ n/a
+ n/a
+ n/a
+41
+T+63:48:29
+ 5742.7
+ 2068.0
+ n/a
+ n/a
+ n/a
+ n/a
+42
+T+65:24:11
+ 5742.7
+ 2068.1
+ n/a
+ n/a
+ n/a
+ n/a
+43
+T+66:59:54
+ 5742.7
+ 2068.1
+ n/a
+ n/a
+ n/a
+ n/a
+44
+T+68:35:37
+ 5742.7
+ 2068.1
+ n/a
+ n/a
+ n/a
+ n/a
+45
+T+70:11:20
+ 5742.7
+ 2068.2
+ n/a
+ n/a
+ n/a
+ n/a
+46
+T+71:47:02
+ 5742.7
+ 2068.2
+ n/a
+ n/a
+ n/a
+ n/a
+47
+T+73:22:45
+ 5742.7
+ 2068.3
+ n/a
+ n/a
+ n/a
+ n/a
+48
+T+74:58:28
+ 5742.7
+ 2068.3
+ n/a
+ n/a
+ n/a
+ n/a
+49
+T+76:34:10
+ 5742.7
+ 2068.3
+ n/a
+ n/a
+ n/a
+ n/a
+50
+T+78:09:53
+ 5742.7
+ 2068.4
+ n/a
+ n/a
+ n/a
+ n/a
+51
+T+79:45:36
+ 5742.7
+ 2068.4
+ n/a
+ n/a
+ n/a
+ n/a
+52
+T+81:21:19
+ 5742.7
+ 2068.5
+ n/a
+ n/a
+ n/a
+ n/a
+53
+T+82:57:01
+ 5742.7
+ 2068.5
+ n/a
+ n/a
+ n/a
+ n/a
+54
+T+84:32:44
+ 5742.7
+ 2068.5
+ n/a
+ n/a
+ n/a
+ n/a
+55
+T+86:08:27
+ 5742.7
+ 2068.6
+ n/a
+ n/a
+ n/a
+ n/a
+56
+T+87:44:10
+ 5742.7
+ 2068.6
+ n/a
+ n/a
+ n/a
+ n/a
+57
+T+89:19:52
+ 5742.7
+ 2068.7
+ n/a
+ n/a
+ n/a
+ n/a
+58
+T+90:55:35
+ 5742.7
+ 2068.7
+ n/a
+ n/a
+ n/a
+ n/a
+59
+T+92:31:18
+ 5742.7
+ 2068.7
+ n/a
+ n/a
+ n/a
+ n/a
+60
+T+94:07:00
+ 5742.7
+ 2068.8
+ n/a
+ n/a
+ n/a
+ n/a
+61
+T+95:42:43
+ 5742.7
+ 2068.8
+ n/a
+ n/a
+ n/a
+ n/a
+62
+T+97:18:26
+ 5742.7
+ 2068.9
+ n/a
+ n/a
+ n/a
+ n/a
+63
+T+98:54:09
+ 5742.7
+ 2068.9
+ n/a
+ n/a
+ n/a
+ n/a
+64
+T+100:29:51
+ 5742.7
+ 2068.9
+ n/a
+ n/a
+ n/a
+ n/a
+65
+T+102:05:34
+ 5742.7
+ 2069.0
+ n/a
+ n/a
+ n/a
+ n/a
+66
+T+103:41:17
+ 5742.7
+ 2069.0
+ n/a
+ n/a
+ n/a
+ n/a
+...

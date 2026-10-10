@@ -1,0 +1,408 @@
+pages=7
+## page 1
+System Budget Studio 0.1.0 | Example 3U CubeSat rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 1
+Link budget over passes: Example 3U CubeSat
+INCOMPLETE: some inputs are placeholders (source TBD or missing). Entries marked n/a depend on them and are not computed. Do not use this report as evidence until the
+placeholders are replaced with sourced values.
+Summary
+Link budget at the static points
+Link
+Direction
+Point
+Elevation
+(deg)
+Range
+(km)
+EIRP
+(dBW)
+G/T (d
+B/K)
+Path loss
+(dB)
+Atmospher
+ic (dB)
+Other
+losses (dB)
+C/N0
+(dBHz
+)
+Required
+Eb/N0 (dB)
+Highest closing rate
+(kbit/s)
+Rate at required margin
+(kbit/s)
+uhf_dow
+n
+downlink
+5 deg elevation
+ 5.0
+ 2200.
+ 0
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+uhf_dow
+n
+downlink
+zenith
+ 90.0
+ 550.0
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+ n/a
+Other losses = pointing, polarisation and implementation. A link closes at a rate when its margin is at least the required margin of the link. n/a: an input is a placeholder or missing. Highest closing rate empty (n/a
+with a result): no listed rate closes.
+Margin by data rate
+Link
+Point
+Data rate (kbit/s)
+Eb/N0 (dB)
+Margin (dB)
+Required margin (dB)
+Closes
+Passes
+Scenario one_day: One day: charging by default, imaging and downlink over passes. Step 10 s, duration 86400 s.
+Data volume per link
+Link
+Station
+Passes
+Scenario total (Mbit)
+Per day (Mbit)
+Per day (MByte)
+uhf_down
+gs_north
+ 11
+ n/a
+ n/a
+ n/a
+From the highest listed rate that closes at each sample while the link is active (its modes, below its tracking limit). Per day = scenario total scaled to 86 400 s.
+Passes of link uhf_down over gs_north
+Pass
+AOS (T+)
+AOS (UTC)
+Duration (s)
+Max elevation (deg)
+Usable (s)
+Lowest margin (dB)
+Volume (Mbit)
+1
+T+00:02:06
+2026-06-01T00:02:06Z
+ 493.2
+ 19.2
+ 0.0
+ n/a
+ n/a
+2
+T+01:36:43
+2026-06-01T01:36:43Z
+ 586.6
+ 74.9
+ 0.0
+ n/a
+ n/a
+3
+T+03:11:37
+2026-06-01T03:11:37Z
+ 542.6
+ 31.1
+ 0.0
+ n/a
+ n/a
+4
+T+04:46:25
+2026-06-01T04:46:25Z
+ 424.8
+ 14.1
+ 0.0
+ n/a
+ n/a
+5
+T+06:20:35
+2026-06-01T06:20:35Z
+ 329.2
+ 9.5
+ 0.0
+ n/a
+ n/a
+6
+T+07:53:28
+2026-06-01T07:53:28Z
+ 375.9
+ 11.3
+ 0.0
+ n/a
+ n/a
+7
+T+09:26:02
+2026-06-01T09:26:02Z
+ 500.3
+ 21.6
+ 0.0
+ n/a
+ n/a
+8
+T+10:59:35
+2026-06-01T10:59:35Z
+ 581.7
+ 63.8
+ 0.0
+ n/a
+ n/a
+9
+T+12:34:52
+2026-06-01T12:34:52Z
+ 552.4
+ 32.0
+ 0.0
+ n/a
+ n/a
+## page 2
+System Budget Studio 0.1.0 | Example 3U CubeSat rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 2
+Pass
+AOS (T+)
+AOS (UTC)
+Duration (s)
+Max elevation (deg)
+Usable (s)
+Lowest margin (dB)
+Volume (Mbit)
+10
+T+14:12:52
+2026-06-01T14:12:52Z
+ 309.6
+ 8.6
+ 0.0
+ n/a
+ n/a
+11
+T+23:57:48
+2026-06-01T23:57:48Z
+ 131.0
+ 13.8
+ 0.0
+ n/a
+ n/a
+Lowest margin is at the lowest listed rate over the active samples.
+Assumptions
+Configuration numbers used
+Name
+Value
+Unit
+Source
+Status
+Transmit power
+ n/a
+W
+TBD
+PLACEHOLDER
+Line loss
+ n/a
+dB
+TBD
+PLACEHOLDER
+Antenna gain, transmitter
+ n/a
+dBi
+TBD
+PLACEHOLDER
+G/T
+ n/a
+dB/K
+TBD
+PLACEHOLDER
+Required margin
+ n/a
+dB
+TBD
+PLACEHOLDER
+Pointing loss
+ n/a
+dB
+TBD
+PLACEHOLDER
+Polarisation loss
+ n/a
+dB
+TBD
+PLACEHOLDER
+Implementation loss
+ n/a
+dB
+TBD
+PLACEHOLDER
+Required Eb/N0, BPSK none
+ n/a
+dB
+TBD
+PLACEHOLDER
+Equations
+ID
+Name
+Formula
+Source
+LNK-EIRP
+Effective isotropic radiated power
+EIRP = P_tx - L_line + G_tx (dBW)
+SOURCE_MISSING
+LNK-FSPL
+Free-space path loss
+L_fs = 20 log10(4 pi d f / c) (dB)
+SOURCE_MISSING
+LNK-GT
+Receiver figure of merit
+G/T = G_rx - L_feed - 10 log10(T_sys) (dB/K), or given directly
+SOURCE_MISSING
+LNK-CN0
+Carrier to noise density
+C/N0 = EIRP - L_fs - L_atm - L_point - L_pol - L_impl + G/T - 10 log10(k) (dBHz)
+SOURCE_MISSING
+LNK-EBN0
+Energy per bit to noise density
+Eb/N0 = C/N0 - 10 log10(R_b) (dB)
+SOURCE_MISSING
+LNK-MARGIN
+Link margin
+margin = Eb/N0 - Eb/N0_required (dB); the link closes when margin >= required margin
+SOURCE_MISSING
+LNK-ATT
+Atmospheric attenuation
+L_atm = sum of the named table entries, linear interpolation by elevation
+SOURCE_MISSING
+LNK-NADIR
+Angle from nadir at the spacecraft
+sin(eta) = R cos(el) / r, r^2 = R^2 + d^2 + 2 R d sin(el)
+SOURCE_MISSING
+LNK-VOLUME
+Data volume
+V = sum over samples of R_selected * (time of the step inside the pass); R_selected is the
+highest listed rate with margin >= required margin while the link is active
+SOURCE_MISSING
+SOURCE_MISSING: the formula is a project convention or textbook definition whose reference text is not available to the tool yet (see docs/DECISIONS.md).
+Problems
+Problems and open items
+## page 3
+System Budget Studio 0.1.0 | Example 3U CubeSat rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 3
+Severity
+Code
+Location
+Message
+warning
+CONFIG_EMPTY_TABLE
+config/attenuation_table.yaml:3
+The table has no entries.
+warning
+RESULT_INCOMPLETE
+config/ebn0_table.yaml
+The required Eb/N0 is a placeholder.
+warning
+RESULT_INCOMPLETE
+config/ebn0_table.yaml
+The required Eb/N0 is a placeholder.
+warning
+CONFIG_PLACEHOLDER
+config/ebn0_table.yaml:7
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/margin_policy.yaml:6
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/margin_policy.yaml:10
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/margin_policy.yaml:15
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/margin_policy.yaml:19
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/margin_policy.yaml:24
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/margin_policy.yaml:28
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/margin_policy.yaml:32
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/margin_policy.yaml:36
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/mass_limits.yaml:7
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_config.yaml:4
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_config.yaml:9
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:4
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:45
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:49
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:53
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:57
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+config/power_system.yaml:61
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+...

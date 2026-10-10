@@ -19,7 +19,10 @@ from PySide6.QtWidgets import (
 from budget_core import APP_NAME, __version__
 from budget_core.problems import sort_problems
 from budget_core.reports.run import REPORT_KINDS
+from budget_gui.compare_view import CompareView
 from budget_gui.editor import EditorTabs
+from budget_gui.guided import GuidedWizard
+from budget_gui.help_view import GuideDialog
 from budget_gui.link_view import LinkPassesView
 from budget_gui.scenario_view import ScenarioView
 from budget_gui.session import ProjectSession
@@ -58,6 +61,8 @@ class MainWindow(QMainWindow):
         self.link_passes_view = LinkPassesView()
         self.link_passes_view.run_provider = self.scenario_view.reusable_run
         self.editors.add_fixed(self.link_passes_view, "Link passes")
+        self.compare_view = CompareView()
+        self.editors.add_fixed(self.compare_view, "Compare")
         self.setCentralWidget(self.editors)
         self._worker: ExportWorker | None = None
 
@@ -68,7 +73,9 @@ class MainWindow(QMainWindow):
         bottom.setWidget(self.problems_panel)
         self.addDockWidget(Qt.DockWidgetArea.BottomDockWidgetArea, bottom)
         self.setStatusBar(QStatusBar())
-        self.statusBar().showMessage(f"Version {__version__} — offline")
+        self.statusBar().showMessage(
+            f"Version {__version__} — offline. File > New project (guided) starts a first budget."
+        )
 
         self._build_menu()
         self.session.changed.connect(self._refresh)
@@ -90,6 +97,7 @@ class MainWindow(QMainWindow):
             action.triggered.connect(slot)
             file_menu.addAction(action)
 
+        add("&New project (guided)…", QKeySequence.StandardKey.New, self.open_guided_wizard)
         add("&Open project…", QKeySequence.StandardKey.Open, self._choose_project)
         add("&Save file", QKeySequence.StandardKey.Save, self.save_current)
         add("&Reload project", QKeySequence(Qt.Key.Key_F5), self.session.reload)
@@ -99,6 +107,33 @@ class MainWindow(QMainWindow):
         add("Export power &timeline…", QKeySequence("Ctrl+Shift+E"), self._choose_timeline_export)
         file_menu.addSeparator()
         add("&Quit", QKeySequence.StandardKey.Quit, self.close)
+        help_menu = self.menuBar().addMenu("&Help")
+        guide = QAction("&User guide", self)
+        guide.setShortcut(QKeySequence.StandardKey.HelpContents)
+        guide.triggered.connect(lambda: self.open_guide())
+        help_menu.addAction(guide)
+
+    def open_guided_wizard(self, parent_folder: Path | None = None) -> GuidedWizard:
+        """Show the guided new-project wizard; on Finish the project opens and its first power
+        timeline is computed."""
+        folder = (
+            parent_folder if isinstance(parent_folder, Path) else Path.home() / "SystemBudgetStudio"
+        )
+        wizard = GuidedWizard(folder, self)
+        wizard.created.connect(self._guided_created)
+        wizard.open()
+        return wizard
+
+    def open_guide(self) -> GuideDialog:
+        """The user guide; with a project open it also lists that project's numbers and sources."""
+        dialog = GuideDialog(self.session.project, self)
+        dialog.open()
+        return dialog
+
+    def _guided_created(self, folder: Path) -> None:
+        self.open_project(folder)
+        self.editors.setCurrentWidget(self.timeline_view)
+        self.timeline_view.compute()
 
     def _choose_project(self) -> None:
         folder = QFileDialog.getExistingDirectory(self, "Open project folder")
@@ -211,6 +246,7 @@ class MainWindow(QMainWindow):
         load_problems = session.load_result.problems if session.load_result else []
         self.timeline_view.set_project(project, load_problems)
         self.link_passes_view.set_project(project, load_problems)
+        self.compare_view.set_project(project)
         self._update_problems()
         self.editors.reload_clean_files()
         name = project.meta.name if project else (session.path.name if session.path else "")
@@ -265,6 +301,7 @@ class MainWindow(QMainWindow):
         self.scenario_view.wait_for_worker()
         self.timeline_view.wait_for_worker()
         self.link_passes_view.wait_for_worker()
+        self.compare_view.wait_for_worker()
         if self.editors.has_unsaved_changes():
             answer = QMessageBox.question(
                 self,

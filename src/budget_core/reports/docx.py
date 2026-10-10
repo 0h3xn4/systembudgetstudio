@@ -8,6 +8,7 @@ from datetime import datetime
 
 from docx import Document
 from docx.enum.section import WD_ORIENT
+from docx.enum.style import WD_STYLE_TYPE
 from docx.enum.table import WD_TABLE_ALIGNMENT
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.oxml import OxmlElement
@@ -43,6 +44,35 @@ def _run(paragraph: Paragraph, text: str, *, bold: bool = False, size: float = 8
     run.font.size = Pt(size)
 
 
+CELL_STYLES = (
+    # (name, bold, right aligned)
+    ("Budget cell", False, False),
+    ("Budget cell bold", True, False),
+    ("Budget cell right", False, True),
+    ("Budget cell right bold", True, True),
+)
+
+
+def _cell_styles(doc: object) -> dict[tuple[bool, bool], str]:
+    """Paragraph styles for table cells, so a cell needs one run with text only (setting the
+    font on every run of a large table is the slowest part of the DOCX export)."""
+    styles = doc.styles  # type: ignore[attr-defined]
+    found: dict[tuple[bool, bool], str] = {}
+    for name, bold, right in CELL_STYLES:
+        try:
+            style = styles[name]
+        except KeyError:
+            style = styles.add_style(name, WD_STYLE_TYPE.PARAGRAPH)
+            style.base_style = styles["Normal"]
+            style.font.name = FONT
+            style.font.size = Pt(7.5)
+            style.font.bold = bold
+            if right:
+                style.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+        found[(bold, right)] = style.style_id
+    return found
+
+
 def _table(doc: object, table: Table) -> None:
     heading = doc.add_paragraph()  # type: ignore[attr-defined]
     _run(heading, table.title, bold=True, size=9.0)
@@ -50,20 +80,21 @@ def _table(doc: object, table: Table) -> None:
     grid = doc.add_table(rows=1, cols=len(table.columns))  # type: ignore[attr-defined]
     grid.style = "Table Grid"
     grid.alignment = WD_TABLE_ALIGNMENT.CENTER
+    styles = _cell_styles(doc)
     for cell, column in zip(grid.rows[0].cells, table.columns, strict=True):
-        cell.text = ""
-        _run(cell.paragraphs[0], column.header, bold=True, size=7.5)
+        paragraph = cell.paragraphs[0]
+        paragraph._p.style = styles[(True, False)]  # the style id; no lookup by name
+        paragraph.add_run(column.header)
         _shade(cell, HEADER_FILL)
     last = len(table.rows) - 1
     for i, values in enumerate(table.rows):
         cells = grid.add_row().cells
+        emphasise = table.emphasise_last_row and i == last
         for cell, value, column in zip(cells, values, table.columns, strict=True):
-            cell.text = ""
-            text = _format(value, column)
-            _run(cell.paragraphs[0], text, bold=table.emphasise_last_row and i == last, size=7.5)
-            if column.kind != "text":
-                cell.paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.RIGHT
-            if table.emphasise_last_row and i == last:
+            paragraph = cell.paragraphs[0]
+            paragraph._p.style = styles[(emphasise, column.kind != "text")]
+            paragraph.add_run(_format(value, column))
+            if emphasise:
                 _shade(cell, EMPHASIS_FILL)
     # repeat the header row on every page
     header_props = grid.rows[0]._tr.get_or_add_trPr()

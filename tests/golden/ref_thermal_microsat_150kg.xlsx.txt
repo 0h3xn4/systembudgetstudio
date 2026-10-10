@@ -1,0 +1,356 @@
+## sheet Summary rows=11 cols=3
+1: 'Thermal budget (static): Example 150 kg microsatellite' |  | 
+2: 'INCOMPLETE: some inputs are placeholders (source TBD or missing). Entries marked n/a depend on them and are not computed. Do not use this report as evidence until the placeholders are replaced with sourced values.' |  | 
+4: 'Heat dissipation by spacecraft mode' |  | 
+5: 'Mode' | 'Average (W)' | 'Peak (W)'
+6: 'Downlink' | 59.42 | 123.3
+7: 'Imaging' | 70.1 | 136.3
+8: 'Nominal' | 35.8 | 86.3
+9: 'Safe' | 17.55 | 48.5
+10: 'Survival' | 19.75 | 32.5
+11: 'Average = sum of unit power x duty cycle x heat dissipation ratio. Peak uses the unit peak powers. n/a: a unit has no heat dissipation ratio for its power mode.' |  | 
+## sheet Case cold rows=25 cols=8
+1: 'Eclipse with the lowest-power mode.' |  |  |  |  |  |  | 
+2: 'Node temperatures, case cold' |  |  |  |  |  |  | 
+3: 'Node' | 'Temperature (K)' |  |  |  |  |  | 
+4: 'not computed (inputs missing, see Problems)' | 'n/a' |  |  |  |  |  | 
+6: 'Unit temperature limits, case cold (operating)' |  |  |  |  |  |  | 
+7: 'Unit' | 'Node' | 'Temperature (K)' | 'Lower limit (K)' | 'Upper limit (K)' | 'Headroom to lower (K)' | 'Headroom to upper (K)' | 'Status'
+8: 'adapter' | 'STRUCT' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+9: 'battery' | 'EPS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+10: 'camera' | 'PL' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+11: 'gnss' | 'AOCS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+12: 'heaters' | 'THERM' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+13: 'magnetorquers' | 'AOCS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+14: 'obc_a' | 'DH' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+15: 'obc_b' | 'DH' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+16: 'pcdu' | 'EPS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+17: 'pdu_data' | 'PL-DATA' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+18: 'reaction_wheels' | 'AOCS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+19: 'sband_trx' | 'TTC' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+20: 'solar_array' | 'EPS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+21: 'star_tracker' | 'AOCS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+22: 'structure' | 'STRUCT' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+23: 'sun_sensors' | 'AOCS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+24: 'xband_tx' | 'PL-DATA' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+25: 'Status: ok; margin = within the limits but closer than the required temperature margin; exceeded; no limits = the unit has no limits for this set (not checked).' |  |  |  |  |  |  | 
+## sheet Case hot rows=25 cols=8
+1: 'Sunlight with the highest-power mode.' |  |  |  |  |  |  | 
+2: 'Node temperatures, case hot' |  |  |  |  |  |  | 
+3: 'Node' | 'Temperature (K)' |  |  |  |  |  | 
+4: 'not computed (inputs missing, see Problems)' | 'n/a' |  |  |  |  |  | 
+6: 'Unit temperature limits, case hot (operating)' |  |  |  |  |  |  | 
+7: 'Unit' | 'Node' | 'Temperature (K)' | 'Lower limit (K)' | 'Upper limit (K)' | 'Headroom to lower (K)' | 'Headroom to upper (K)' | 'Status'
+8: 'adapter' | 'STRUCT' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+9: 'battery' | 'EPS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+10: 'camera' | 'PL' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+11: 'gnss' | 'AOCS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+12: 'heaters' | 'THERM' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+13: 'magnetorquers' | 'AOCS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+14: 'obc_a' | 'DH' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+15: 'obc_b' | 'DH' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+16: 'pcdu' | 'EPS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+17: 'pdu_data' | 'PL-DATA' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+18: 'reaction_wheels' | 'AOCS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+19: 'sband_trx' | 'TTC' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+20: 'solar_array' | 'EPS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+21: 'star_tracker' | 'AOCS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+22: 'structure' | 'STRUCT' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+23: 'sun_sensors' | 'AOCS' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+24: 'xband_tx' | 'PL-DATA' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'n/a' | 'no limits'
+25: 'Status: ok; margin = within the limits but closer than the required temperature margin; exceeded; no limits = the unit has no limits for this set (not checked).' |  |  |  |  |  |  | 
+## sheet Mode downlink rows=41 cols=9
+1: 'Units in mode Downlink' |  |  |  |  |  |  |  | 
+2: 'Unit' | 'Name' | 'Subsystem' | 'Node' | 'Power mode' | 'Effective power (W)' | 'Dissipation ratio' | 'Dissipation (W)' | 'Peak dissipation (W)'
+3: 'adapter' | 'Separation adapter' | 'STRUCT' | 'STRUCT' | 'off' | 0 | 1 | 0 | 0
+4: 'battery' | 'Battery pack' | 'EPS' | 'EPS' | 'off' | 0 | 1 | 0 | 0
+5: 'camera' | 'Imager' | 'PL' | 'PL' | 'off' | 0 | 1 | 0 | 0
+6: 'gnss' | 'GNSS receiver' | 'AOCS' | 'AOCS' | 'downlink' | 1.2 | 1 | 1.2 | 1.8
+7: 'heaters' | 'Thermal heaters' | 'THERM' | 'THERM' | 'downlink' | 1.8 | 1 | 1.8 | 16
+8: 'magnetorquers' | 'Magnetorquers' | 'AOCS' | 'AOCS' | 'off' | 0 | 1 | 0 | 0
+9: 'obc_a' | 'OBC A' | 'DH' | 'DH' | 'downlink' | 7 | 1 | 7 | 10
+10: 'obc_b' | 'OBC B (cold redundant)' | 'DH' | 'DH' | 'off' | 0 | 1 | 0 | 0
+11: 'pcdu' | 'Power conditioning unit' | 'EPS' | 'EPS' | 'downlink' | 9 | 1 | 9 | 12
+12: 'pdu_data' | 'Payload data unit' | 'PL-DATA' | 'PL-DATA' | 'downlink' | 10 | 1 | 10 | 14
+13: 'reaction_wheels' | 'Reaction wheels' | 'AOCS' | 'AOCS' | 'downlink' | 7.2 | 1 | 7.2 | 30
+14: 'sband_trx' | 'S-band transceiver' | 'TTC' | 'TTC' | 'downlink' | 9.6 | 0.7 | 6.72 | 14
+15: 'solar_array' | 'Solar array panels' | 'EPS' | 'EPS' | 'off' | 0 | 1 | 0 | 0
+16: 'star_tracker' | 'Star tracker' | 'AOCS' | 'AOCS' | 'downlink' | 3.5 | 1 | 3.5 | 5
+17: 'structure' | 'Primary structure' | 'STRUCT' | 'STRUCT' | 'off' | 0 | 1 | 0 | 0
+18: 'sun_sensors' | 'Coarse sun sensors' | 'AOCS' | 'AOCS' | 'downlink' | 0.4 | 1 | 0.4 | 0.5
+19: 'xband_tx' | 'X-band transmitter' | 'PL-DATA' | 'PL-DATA' | 'downlink' | 25.2 | 0.5 | 12.6 | 20
+21: 'By subsystem' |  |  |  |  |  |  |  | 
+22: 'Subsystem' | 'Dissipation (W)' | 'Peak dissipation (W)' |  |  |  |  |  | 
+23: 'AOCS' | 12.3 | 37.3 |  |  |  |  |  | 
+24: 'DH' | 7 | 10 |  |  |  |  |  | 
+25: 'EPS' | 9 | 12 |  |  |  |  |  | 
+26: 'PL' | 0 | 0 |  |  |  |  |  | 
+27: 'PL-DATA' | 22.6 | 34 |  |  |  |  |  | 
+28: 'STRUCT' | 0 | 0 |  |  |  |  |  | 
+29: 'THERM' | 1.8 | 16 |  |  |  |  |  | 
+30: 'TTC' | 6.72 | 14 |  |  |  |  |  | 
+32: 'By thermal node' |  |  |  |  |  |  |  | 
+33: 'Node' | 'Dissipation (W)' | 'Peak dissipation (W)' |  |  |  |  |  | 
+34: 'AOCS' | 12.3 | 37.3 |  |  |  |  |  | 
+35: 'DH' | 7 | 10 |  |  |  |  |  | 
+36: 'EPS' | 9 | 12 |  |  |  |  |  | 
+37: 'PL' | 0 | 0 |  |  |  |  |  | 
+38: 'PL-DATA' | 22.6 | 34 |  |  |  |  |  | 
+39: 'STRUCT' | 0 | 0 |  |  |  |  |  | 
+40: 'THERM' | 1.8 | 16 |  |  |  |  |  | 
+...
+## sheet Mode imaging rows=41 cols=9
+1: 'Units in mode Imaging' |  |  |  |  |  |  |  | 
+2: 'Unit' | 'Name' | 'Subsystem' | 'Node' | 'Power mode' | 'Effective power (W)' | 'Dissipation ratio' | 'Dissipation (W)' | 'Peak dissipation (W)'
+3: 'adapter' | 'Separation adapter' | 'STRUCT' | 'STRUCT' | 'off' | 0 | 1 | 0 | 0
+4: 'battery' | 'Battery pack' | 'EPS' | 'EPS' | 'off' | 0 | 1 | 0 | 0
+5: 'camera' | 'Imager' | 'PL' | 'PL' | 'imaging' | 17.6 | 1 | 17.6 | 30
+6: 'gnss' | 'GNSS receiver' | 'AOCS' | 'AOCS' | 'imaging' | 1.2 | 1 | 1.2 | 1.8
+7: 'heaters' | 'Thermal heaters' | 'THERM' | 'THERM' | 'imaging' | 1.8 | 1 | 1.8 | 16
+8: 'magnetorquers' | 'Magnetorquers' | 'AOCS' | 'AOCS' | 'off' | 0 | 1 | 0 | 0
+9: 'obc_a' | 'OBC A' | 'DH' | 'DH' | 'imaging' | 7.5 | 1 | 7.5 | 10
+10: 'obc_b' | 'OBC B (cold redundant)' | 'DH' | 'DH' | 'off' | 0 | 1 | 0 | 0
+11: 'pcdu' | 'Power conditioning unit' | 'EPS' | 'EPS' | 'imaging' | 9 | 1 | 9 | 12
+12: 'pdu_data' | 'Payload data unit' | 'PL-DATA' | 'PL-DATA' | 'imaging' | 14 | 1 | 14 | 18
+13: 'reaction_wheels' | 'Reaction wheels' | 'AOCS' | 'AOCS' | 'imaging' | 12.6 | 1 | 12.6 | 40
+14: 'sband_trx' | 'S-band transceiver' | 'TTC' | 'TTC' | 'imaging' | 2.5 | 1 | 2.5 | 3
+15: 'solar_array' | 'Solar array panels' | 'EPS' | 'EPS' | 'off' | 0 | 1 | 0 | 0
+16: 'star_tracker' | 'Star tracker' | 'AOCS' | 'AOCS' | 'imaging' | 3.5 | 1 | 3.5 | 5
+17: 'structure' | 'Primary structure' | 'STRUCT' | 'STRUCT' | 'off' | 0 | 1 | 0 | 0
+18: 'sun_sensors' | 'Coarse sun sensors' | 'AOCS' | 'AOCS' | 'imaging' | 0.4 | 1 | 0.4 | 0.5
+19: 'xband_tx' | 'X-band transmitter' | 'PL-DATA' | 'PL-DATA' | 'off' | 0 | 1 | 0 | 0
+21: 'By subsystem' |  |  |  |  |  |  |  | 
+22: 'Subsystem' | 'Dissipation (W)' | 'Peak dissipation (W)' |  |  |  |  |  | 
+23: 'AOCS' | 17.7 | 47.3 |  |  |  |  |  | 
+24: 'DH' | 7.5 | 10 |  |  |  |  |  | 
+25: 'EPS' | 9 | 12 |  |  |  |  |  | 
+26: 'PL' | 17.6 | 30 |  |  |  |  |  | 
+27: 'PL-DATA' | 14 | 18 |  |  |  |  |  | 
+28: 'STRUCT' | 0 | 0 |  |  |  |  |  | 
+29: 'THERM' | 1.8 | 16 |  |  |  |  |  | 
+30: 'TTC' | 2.5 | 3 |  |  |  |  |  | 
+32: 'By thermal node' |  |  |  |  |  |  |  | 
+33: 'Node' | 'Dissipation (W)' | 'Peak dissipation (W)' |  |  |  |  |  | 
+34: 'AOCS' | 17.7 | 47.3 |  |  |  |  |  | 
+35: 'DH' | 7.5 | 10 |  |  |  |  |  | 
+36: 'EPS' | 9 | 12 |  |  |  |  |  | 
+37: 'PL' | 17.6 | 30 |  |  |  |  |  | 
+38: 'PL-DATA' | 14 | 18 |  |  |  |  |  | 
+39: 'STRUCT' | 0 | 0 |  |  |  |  |  | 
+40: 'THERM' | 1.8 | 16 |  |  |  |  |  | 
+...
+## sheet Mode nominal rows=41 cols=9
+1: 'Units in mode Nominal' |  |  |  |  |  |  |  | 
+2: 'Unit' | 'Name' | 'Subsystem' | 'Node' | 'Power mode' | 'Effective power (W)' | 'Dissipation ratio' | 'Dissipation (W)' | 'Peak dissipation (W)'
+3: 'adapter' | 'Separation adapter' | 'STRUCT' | 'STRUCT' | 'off' | 0 | 1 | 0 | 0
+4: 'battery' | 'Battery pack' | 'EPS' | 'EPS' | 'off' | 0 | 1 | 0 | 0
+5: 'camera' | 'Imager' | 'PL' | 'PL' | 'off' | 0 | 1 | 0 | 0
+6: 'gnss' | 'GNSS receiver' | 'AOCS' | 'AOCS' | 'nominal' | 1.2 | 1 | 1.2 | 1.8
+7: 'heaters' | 'Thermal heaters' | 'THERM' | 'THERM' | 'nominal' | 1.8 | 1 | 1.8 | 16
+8: 'magnetorquers' | 'Magnetorquers' | 'AOCS' | 'AOCS' | 'nominal' | 0.2 | 1 | 0.2 | 3
+9: 'obc_a' | 'OBC A' | 'DH' | 'DH' | 'nominal' | 6 | 1 | 6 | 9
+10: 'obc_b' | 'OBC B (cold redundant)' | 'DH' | 'DH' | 'off' | 0 | 1 | 0 | 0
+11: 'pcdu' | 'Power conditioning unit' | 'EPS' | 'EPS' | 'nominal' | 9 | 1 | 9 | 12
+12: 'pdu_data' | 'Payload data unit' | 'PL-DATA' | 'PL-DATA' | 'nominal' | 4 | 1 | 4 | 6
+13: 'reaction_wheels' | 'Reaction wheels' | 'AOCS' | 'AOCS' | 'nominal' | 7.2 | 1 | 7.2 | 30
+14: 'sband_trx' | 'S-band transceiver' | 'TTC' | 'TTC' | 'nominal' | 2.5 | 1 | 2.5 | 3
+15: 'solar_array' | 'Solar array panels' | 'EPS' | 'EPS' | 'off' | 0 | 1 | 0 | 0
+16: 'star_tracker' | 'Star tracker' | 'AOCS' | 'AOCS' | 'nominal' | 3.5 | 1 | 3.5 | 5
+17: 'structure' | 'Primary structure' | 'STRUCT' | 'STRUCT' | 'off' | 0 | 1 | 0 | 0
+18: 'sun_sensors' | 'Coarse sun sensors' | 'AOCS' | 'AOCS' | 'nominal' | 0.4 | 1 | 0.4 | 0.5
+19: 'xband_tx' | 'X-band transmitter' | 'PL-DATA' | 'PL-DATA' | 'off' | 0 | 1 | 0 | 0
+21: 'By subsystem' |  |  |  |  |  |  |  | 
+22: 'Subsystem' | 'Dissipation (W)' | 'Peak dissipation (W)' |  |  |  |  |  | 
+23: 'AOCS' | 12.5 | 40.3 |  |  |  |  |  | 
+24: 'DH' | 6 | 9 |  |  |  |  |  | 
+25: 'EPS' | 9 | 12 |  |  |  |  |  | 
+26: 'PL' | 0 | 0 |  |  |  |  |  | 
+27: 'PL-DATA' | 4 | 6 |  |  |  |  |  | 
+28: 'STRUCT' | 0 | 0 |  |  |  |  |  | 
+29: 'THERM' | 1.8 | 16 |  |  |  |  |  | 
+30: 'TTC' | 2.5 | 3 |  |  |  |  |  | 
+32: 'By thermal node' |  |  |  |  |  |  |  | 
+33: 'Node' | 'Dissipation (W)' | 'Peak dissipation (W)' |  |  |  |  |  | 
+34: 'AOCS' | 12.5 | 40.3 |  |  |  |  |  | 
+35: 'DH' | 6 | 9 |  |  |  |  |  | 
+36: 'EPS' | 9 | 12 |  |  |  |  |  | 
+37: 'PL' | 0 | 0 |  |  |  |  |  | 
+38: 'PL-DATA' | 4 | 6 |  |  |  |  |  | 
+39: 'STRUCT' | 0 | 0 |  |  |  |  |  | 
+40: 'THERM' | 1.8 | 16 |  |  |  |  |  | 
+...
+## sheet Mode safe rows=41 cols=9
+1: 'Units in mode Safe' |  |  |  |  |  |  |  | 
+2: 'Unit' | 'Name' | 'Subsystem' | 'Node' | 'Power mode' | 'Effective power (W)' | 'Dissipation ratio' | 'Dissipation (W)' | 'Peak dissipation (W)'
+3: 'adapter' | 'Separation adapter' | 'STRUCT' | 'STRUCT' | 'off' | 0 | 1 | 0 | 0
+4: 'battery' | 'Battery pack' | 'EPS' | 'EPS' | 'off' | 0 | 1 | 0 | 0
+5: 'camera' | 'Imager' | 'PL' | 'PL' | 'off' | 0 | 1 | 0 | 0
+6: 'gnss' | 'GNSS receiver' | 'AOCS' | 'AOCS' | 'off' | 0 | 1 | 0 | 0
+7: 'heaters' | 'Thermal heaters' | 'THERM' | 'THERM' | 'safe' | 3.2 | 1 | 3.2 | 16
+8: 'magnetorquers' | 'Magnetorquers' | 'AOCS' | 'AOCS' | 'safe' | 0.45 | 1 | 0.45 | 3
+9: 'obc_a' | 'OBC A' | 'DH' | 'DH' | 'safe' | 4 | 1 | 4 | 6
+10: 'obc_b' | 'OBC B (cold redundant)' | 'DH' | 'DH' | 'safe' | 0 | 1 | 0 | 0
+11: 'pcdu' | 'Power conditioning unit' | 'EPS' | 'EPS' | 'safe' | 6 | 1 | 6 | 8
+12: 'pdu_data' | 'Payload data unit' | 'PL-DATA' | 'PL-DATA' | 'off' | 0 | 1 | 0 | 0
+13: 'reaction_wheels' | 'Reaction wheels' | 'AOCS' | 'AOCS' | 'safe' | 1 | 1 | 1 | 12
+14: 'sband_trx' | 'S-band transceiver' | 'TTC' | 'TTC' | 'safe' | 2.5 | 1 | 2.5 | 3
+15: 'solar_array' | 'Solar array panels' | 'EPS' | 'EPS' | 'off' | 0 | 1 | 0 | 0
+16: 'star_tracker' | 'Star tracker' | 'AOCS' | 'AOCS' | 'off' | 0 | 1 | 0 | 0
+17: 'structure' | 'Primary structure' | 'STRUCT' | 'STRUCT' | 'off' | 0 | 1 | 0 | 0
+18: 'sun_sensors' | 'Coarse sun sensors' | 'AOCS' | 'AOCS' | 'safe' | 0.4 | 1 | 0.4 | 0.5
+19: 'xband_tx' | 'X-band transmitter' | 'PL-DATA' | 'PL-DATA' | 'off' | 0 | 1 | 0 | 0
+21: 'By subsystem' |  |  |  |  |  |  |  | 
+22: 'Subsystem' | 'Dissipation (W)' | 'Peak dissipation (W)' |  |  |  |  |  | 
+23: 'AOCS' | 1.85 | 15.5 |  |  |  |  |  | 
+24: 'DH' | 4 | 6 |  |  |  |  |  | 
+25: 'EPS' | 6 | 8 |  |  |  |  |  | 
+26: 'PL' | 0 | 0 |  |  |  |  |  | 
+27: 'PL-DATA' | 0 | 0 |  |  |  |  |  | 
+28: 'STRUCT' | 0 | 0 |  |  |  |  |  | 
+29: 'THERM' | 3.2 | 16 |  |  |  |  |  | 
+30: 'TTC' | 2.5 | 3 |  |  |  |  |  | 
+32: 'By thermal node' |  |  |  |  |  |  |  | 
+33: 'Node' | 'Dissipation (W)' | 'Peak dissipation (W)' |  |  |  |  |  | 
+34: 'AOCS' | 1.85 | 15.5 |  |  |  |  |  | 
+35: 'DH' | 4 | 6 |  |  |  |  |  | 
+36: 'EPS' | 6 | 8 |  |  |  |  |  | 
+37: 'PL' | 0 | 0 |  |  |  |  |  | 
+38: 'PL-DATA' | 0 | 0 |  |  |  |  |  | 
+39: 'STRUCT' | 0 | 0 |  |  |  |  |  | 
+40: 'THERM' | 3.2 | 16 |  |  |  |  |  | 
+...
+## sheet Mode survival rows=41 cols=9
+1: 'Units in mode Survival' |  |  |  |  |  |  |  | 
+2: 'Unit' | 'Name' | 'Subsystem' | 'Node' | 'Power mode' | 'Effective power (W)' | 'Dissipation ratio' | 'Dissipation (W)' | 'Peak dissipation (W)'
+3: 'adapter' | 'Separation adapter' | 'STRUCT' | 'STRUCT' | 'off' | 0 | 1 | 0 | 0
+4: 'battery' | 'Battery pack' | 'EPS' | 'EPS' | 'off' | 0 | 1 | 0 | 0
+5: 'camera' | 'Imager' | 'PL' | 'PL' | 'off' | 0 | 1 | 0 | 0
+6: 'gnss' | 'GNSS receiver' | 'AOCS' | 'AOCS' | 'off' | 0 | 1 | 0 | 0
+7: 'heaters' | 'Thermal heaters' | 'THERM' | 'THERM' | 'survival' | 8.4 | 1 | 8.4 | 16
+8: 'magnetorquers' | 'Magnetorquers' | 'AOCS' | 'AOCS' | 'survival' | 0.45 | 1 | 0.45 | 3
+9: 'obc_a' | 'OBC A' | 'DH' | 'DH' | 'survival' | 3 | 1 | 3 | 4
+10: 'obc_b' | 'OBC B (cold redundant)' | 'DH' | 'DH' | 'off' | 0 | 1 | 0 | 0
+11: 'pcdu' | 'Power conditioning unit' | 'EPS' | 'EPS' | 'survival' | 5 | 1 | 5 | 6
+12: 'pdu_data' | 'Payload data unit' | 'PL-DATA' | 'PL-DATA' | 'off' | 0 | 1 | 0 | 0
+13: 'reaction_wheels' | 'Reaction wheels' | 'AOCS' | 'AOCS' | 'off' | 0 | 1 | 0 | 0
+14: 'sband_trx' | 'S-band transceiver' | 'TTC' | 'TTC' | 'survival' | 2.5 | 1 | 2.5 | 3
+15: 'solar_array' | 'Solar array panels' | 'EPS' | 'EPS' | 'off' | 0 | 1 | 0 | 0
+16: 'star_tracker' | 'Star tracker' | 'AOCS' | 'AOCS' | 'off' | 0 | 1 | 0 | 0
+17: 'structure' | 'Primary structure' | 'STRUCT' | 'STRUCT' | 'off' | 0 | 1 | 0 | 0
+18: 'sun_sensors' | 'Coarse sun sensors' | 'AOCS' | 'AOCS' | 'survival' | 0.4 | 1 | 0.4 | 0.5
+19: 'xband_tx' | 'X-band transmitter' | 'PL-DATA' | 'PL-DATA' | 'off' | 0 | 1 | 0 | 0
+21: 'By subsystem' |  |  |  |  |  |  |  | 
+22: 'Subsystem' | 'Dissipation (W)' | 'Peak dissipation (W)' |  |  |  |  |  | 
+23: 'AOCS' | 0.85 | 3.5 |  |  |  |  |  | 
+24: 'DH' | 3 | 4 |  |  |  |  |  | 
+25: 'EPS' | 5 | 6 |  |  |  |  |  | 
+26: 'PL' | 0 | 0 |  |  |  |  |  | 
+27: 'PL-DATA' | 0 | 0 |  |  |  |  |  | 
+28: 'STRUCT' | 0 | 0 |  |  |  |  |  | 
+29: 'THERM' | 8.4 | 16 |  |  |  |  |  | 
+30: 'TTC' | 2.5 | 3 |  |  |  |  |  | 
+32: 'By thermal node' |  |  |  |  |  |  |  | 
+33: 'Node' | 'Dissipation (W)' | 'Peak dissipation (W)' |  |  |  |  |  | 
+34: 'AOCS' | 0.85 | 3.5 |  |  |  |  |  | 
+35: 'DH' | 3 | 4 |  |  |  |  |  | 
+36: 'EPS' | 5 | 6 |  |  |  |  |  | 
+37: 'PL' | 0 | 0 |  |  |  |  |  | 
+38: 'PL-DATA' | 0 | 0 |  |  |  |  |  | 
+39: 'STRUCT' | 0 | 0 |  |  |  |  |  | 
+40: 'THERM' | 8.4 | 16 |  |  |  |  |  | 
+...
+## sheet Assumptions rows=74 cols=5
+1: 'Configuration numbers used' |  |  |  | 
+2: 'Name' | 'Value' | 'Unit' | 'Source' | 'Status'
+3: 'Space temperature' | 'n/a' | 'K' | 'TBD' | 'PLACEHOLDER'
+4: 'Temperature margin' | 'n/a' | 'K' | 'TBD' | 'PLACEHOLDER'
+5: 'Conductance AOCS - DH' | 'n/a' | 'W/K' | 'TBD' | 'PLACEHOLDER'
+6: 'Conductance DH - EPS' | 'n/a' | 'W/K' | 'TBD' | 'PLACEHOLDER'
+7: 'Conductance EPS - PL' | 'n/a' | 'W/K' | 'TBD' | 'PLACEHOLDER'
+8: 'Conductance PL - PL-DATA' | 'n/a' | 'W/K' | 'TBD' | 'PLACEHOLDER'
+9: 'Conductance PL-DATA - STRUCT' | 'n/a' | 'W/K' | 'TBD' | 'PLACEHOLDER'
+10: 'Conductance STRUCT - THERM' | 'n/a' | 'W/K' | 'TBD' | 'PLACEHOLDER'
+11: 'Conductance THERM - TTC' | 'n/a' | 'W/K' | 'TBD' | 'PLACEHOLDER'
+12: 'Solar flux, case cold' | 'n/a' | 'W/m2' | 'TBD' | 'PLACEHOLDER'
+13: 'Albedo, case cold' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+14: 'Earth infrared, case cold' | 'n/a' | 'W/m2' | 'TBD' | 'PLACEHOLDER'
+15: 'Emissivity, AOCS panel' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+16: 'Absorptivity, AOCS panel' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+17: 'Solar view, AOCS panel, case cold' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+18: 'Earth view, AOCS panel, case cold' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+19: 'Emissivity, DH panel' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+20: 'Absorptivity, DH panel' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+21: 'Solar view, DH panel, case cold' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+22: 'Earth view, DH panel, case cold' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+23: 'Emissivity, EPS panel' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+24: 'Absorptivity, EPS panel' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+25: 'Solar view, EPS panel, case cold' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+26: 'Earth view, EPS panel, case cold' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+27: 'Emissivity, PL panel' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+28: 'Absorptivity, PL panel' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+29: 'Solar view, PL panel, case cold' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+30: 'Earth view, PL panel, case cold' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+31: 'Emissivity, PL-DATA panel' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+32: 'Absorptivity, PL-DATA panel' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+33: 'Solar view, PL-DATA panel, case cold' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+34: 'Earth view, PL-DATA panel, case cold' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+35: 'Emissivity, STRUCT panel' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+36: 'Absorptivity, STRUCT panel' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+37: 'Solar view, STRUCT panel, case cold' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+38: 'Earth view, STRUCT panel, case cold' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+39: 'Emissivity, THERM panel' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+40: 'Absorptivity, THERM panel' | 'n/a' | 'ratio' | 'TBD' | 'PLACEHOLDER'
+...
+## sheet Problems rows=177 cols=4
+1: 'Problems and open items' |  |  | 
+2: 'Severity' | 'Code' | 'Location' | 'Message'
+3: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:6' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+4: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:10' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+5: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:15' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+6: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:19' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+7: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:24' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+8: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:28' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+9: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:32' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+10: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:36' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+11: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/mass_limits.yaml:7' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+12: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_config.yaml:4' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+13: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_config.yaml:9' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+14: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_config.yaml:13' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+15: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:4' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+16: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:45' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+17: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:49' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+18: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:53' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+19: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:57' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+20: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:61' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+21: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:65' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+22: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:69' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+23: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:73' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+24: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:77' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+25: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:82' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+26: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:86' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+27: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:92' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+28: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:96' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+29: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:100' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+30: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:104' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+31: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:109' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+32: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:113' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+33: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:117' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+34: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/power_system.yaml:129' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+35: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_environment.yaml' | "The albedo of case 'cold' is a placeholder."
+36: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_environment.yaml' | "The Earth infrared flux of case 'cold' is a placeholder."
+37: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_environment.yaml' | "The solar flux of case 'cold' is a placeholder."
+38: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_environment.yaml' | "The albedo of case 'hot' is a placeholder."
+39: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_environment.yaml' | "The Earth infrared flux of case 'hot' is a placeholder."
+40: 'warning' | 'RESULT_INCOMPLETE' | 'config/thermal_environment.yaml' | "The solar flux of case 'hot' is a placeholder."
+...
+## sheet Provenance rows=10 cols=2
+1: 'Provenance' | 
+2: 'Item' | 'Value'
+3: 'Tool' | 'System Budget Studio 0.1.0'
+4: 'Python' | '3.x'
+5: 'Libraries' | 'pinned for-golden-tests'
+6: 'Project' | 'Example 150 kg microsatellite'
+7: 'Project revision' | '1'
+8: 'Scenario' | 'static (no scenario)'
+9: 'Generated (UTC)' | '2026-01-02T03:04:05Z'
+10: 'User' | 'Golden User'

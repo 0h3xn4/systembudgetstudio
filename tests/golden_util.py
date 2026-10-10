@@ -13,7 +13,9 @@ from pypdf import PdfReader
 GOLDEN_DIR = Path(__file__).parent / "golden"
 
 
-def dump_xlsx(data: bytes, max_rows: int | None = None) -> str:
+def dump_xlsx(
+    data: bytes, max_rows: int | None = None, significant_digits: int | None = None
+) -> str:
     wb = load_workbook(io.BytesIO(data))
     lines: list[str] = []
     for ws in wb:
@@ -22,6 +24,10 @@ def dump_xlsx(data: bytes, max_rows: int | None = None) -> str:
             if max_rows is not None and i > max_rows:
                 lines.append("...")
                 break
+            if significant_digits is not None:  # sums over many steps differ in the last digits
+                row = tuple(
+                    float(f"{v:.{significant_digits}g}") if isinstance(v, float) else v for v in row
+                )
             cells = ["" if v is None else repr(v) for v in row]
             if any(cells):
                 lines.append(f"{i}: " + " | ".join(cells))
