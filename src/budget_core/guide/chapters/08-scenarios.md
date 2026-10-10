@@ -16,4 +16,4 @@ An orbit is given as a two-line element set (TLE) or as mean orbital elements. G
 
 ## Imported environments
 
-Instead of the built-in propagator a scenario can read orbit, eclipse and pass files exported by SpaceMissionStudio (`environment_source: spacemissionstudio`). The format is described in `docs/ENVIRONMENT_FORMAT.md`.
+Instead of the built-in propagator a scenario can read orbit, eclipse and pass files exported by SpaceMissionStudio (`environment_source: spacemissionstudio`). The format is described in `docs/ENVIRONMENT_FORMAT.md` in the source repository.

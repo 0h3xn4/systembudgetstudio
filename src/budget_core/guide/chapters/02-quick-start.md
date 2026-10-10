@@ -20,7 +20,7 @@ budget validate demo/cubesat_3u_eps
 budget run demo/cubesat_3u_eps --out out
 budget power-timeline demo/cubesat_3u_eps --out out
 budget link-passes demo/microsat_150kg --out out
-budget compare demo/cubesat_3u_eps other_revision --out out
+budget compare demo/cubesat_3u_eps demo/cubesat_3u --out out
 budget guide --out guide
 ```
 

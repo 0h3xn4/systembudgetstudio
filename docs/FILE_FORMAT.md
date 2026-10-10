@@ -2,6 +2,8 @@
 
 A project is a folder of YAML files (LF line endings). Every file starts with `schema_version` and `kind`. All kinds are at schema version 1 except `margin_policy`, `scenario` and `unit` (version 2, see below).
 
+**Contents:** [Mass properties (decisions D-048 to D-050)](#mass-properties-decisions-d-048-to-d-050) · [Power system (decisions D-061 to D-066)](#power-system-decisions-d-061-to-d-066) · [Thermal (decisions D-071 to D-076)](#thermal-decisions-d-071-to-d-076) · [Links (decisions D-077 to D-083)](#links-decisions-d-077-to-d-083) · [Unit schema 2](#unit-schema-2) · [Scenario schema 2](#scenario-schema-2) · [Margin policy schema 2](#margin-policy-schema-2) · [Problem codes (budget validate)](#problem-codes-budget-validate) · [Schema versions](#schema-versions)
+
 ```
 project.yaml            kind: project            name, revision, description
 spacecraft.yaml         kind: spacecraft         name, buses[{name, nominal_voltage_v}], mission_phases[], body_frame
@@ -177,9 +179,11 @@ JSON Schemas for all kinds: `budget export-schemas <dir>` (also committed in `sr
 
 Errors: `FILE_NOT_FOUND`, `FILE_INVALID`, `YAML_SYNTAX`, `KIND_MISMATCH`, `SCHEMA_VERSION_MISSING`, `SCHEMA_TOO_NEW`, `SCHEMA_MIGRATION_MISSING`, `SCHEMA_MIGRATION_FAILED`, `FIELD_MISSING`, `FIELD_UNKNOWN`, `FIELD_INVALID`, `UNIT_INVALID`, `DUPLICATE_NAME`, `SOURCE_MISSING`, `REF_UNKNOWN_BUS`, `REF_UNKNOWN_MATURITY`, `REF_UNKNOWN_UNIT`, `REF_UNKNOWN_UNIT_MODE`, `UNIT_NOT_MAPPED`.
 Errors (config values): `CONFIG_VALUE_INVALID`, `REF_UNKNOWN_PHASE`, `PHASE_MASS_MISSING`.
-Thermal (errors at load): `THERMAL_NODE_UNKNOWN`, `REF_UNKNOWN_CASE`. Link (errors at load): `REF_UNKNOWN_STATION`, `REF_UNKNOWN_ATTENUATION`, `REF_UNKNOWN_MODULATION`, `LINK_ANTENNA_PATTERN_GROUND`, `LINK_PATTERN_FILE_MISSING`; `LINK_INPUT_INVALID` (error when running: unreadable pattern file); warnings `LINK_ATTENUATION_FREQUENCY`, `LINK_SITE_NOT_IN_SCENARIO`; info `LINK_NO_STATIC_POINTS`. Environment: `REF_UNKNOWN_ORBIT`, `REF_UNKNOWN_SITE`, `REF_UNKNOWN_MODE`, `DUPLICATE_ID`, `IMPORT_DIR_MISSING`, `ORBIT_INVALID` (errors at load); `SCENARIO_UNKNOWN`, `ENV_INPUT_INVALID`, `ENV_PROPAGATION_FAILED` (errors when running a scenario).
-Result findings (errors): `MASS_LIMIT_EXCEEDED`; thermal: `THERMAL_LIMIT_EXCEEDED`, `THERMAL_MARGIN_INSUFFICIENT`, `THERMAL_SOLVE_FAILED`; time-domain power: `BATTERY_DOD_EXCEEDED`, `BATTERY_DEPLETED`, `ORBIT_BALANCE_NEGATIVE`, `PEAK_POWER_EXCEEDED`. Warnings: `MASS_PROPS_MISSING`, `MASS_FRAME_UNDEFINED`, `RESULT_INCOMPLETE` (a result needs a placeholder number, shown as n/a), `CONFIG_MISSING`, `CONFIG_PLACEHOLDER`, `CONFIG_EMPTY_TABLE`, `THERMAL_NO_LIMITS`. Info: `FILE_MIGRATED`, `MASS_INERTIA_POINT_MASS`.
+Thermal (errors at load): `THERMAL_NODE_UNKNOWN`, `REF_UNKNOWN_CASE`. Link (errors at load): `REF_UNKNOWN_STATION`, `REF_UNKNOWN_ATTENUATION`, `REF_UNKNOWN_MODULATION`, `LINK_ANTENNA_PATTERN_GROUND`, `LINK_PATTERN_FILE_MISSING`; `LINK_INPUT_INVALID` (error when running: unreadable pattern file); warnings `LINK_ATTENUATION_FREQUENCY`, `LINK_SITE_NOT_IN_SCENARIO`; info `LINK_NO_STATIC_POINTS`; error when running: `LINK_NOT_CLOSED` (no listed data rate closes, D-098). Environment: `REF_UNKNOWN_ORBIT`, `REF_UNKNOWN_SITE`, `REF_UNKNOWN_MODE`, `DUPLICATE_ID`, `IMPORT_DIR_MISSING`, `ORBIT_INVALID` (errors at load); `SCENARIO_UNKNOWN`, `ENV_INPUT_INVALID`, `ENV_PROPAGATION_FAILED` (errors when running a scenario).
+Result findings (errors): `MASS_LIMIT_EXCEEDED`; thermal: `THERMAL_LIMIT_EXCEEDED`, `THERMAL_MARGIN_INSUFFICIENT`, `THERMAL_SOLVE_FAILED`; time-domain power: `BATTERY_DOD_EXCEEDED`, `BATTERY_DEPLETED`, `ORBIT_BALANCE_NEGATIVE`, `PEAK_POWER_EXCEEDED`. Warnings: `MASS_PROPS_MISSING`, `MASS_FRAME_UNDEFINED`, `RESULT_INCOMPLETE` (a result needs a placeholder number, shown as n/a), `CONFIG_MISSING`, `CONFIG_PLACEHOLDER`, `CONFIG_EMPTY_TABLE`, `THERMAL_NO_LIMITS`. Info: `FILE_MIGRATED`, `MASS_INERTIA_POINT_MASS`. Unexpected failure in the window: `INTERNAL_ERROR` (error; names only the kind of failure).
 
 ## Schema versions
 
 Older files are migrated in memory (`budget_core/io/migrations.py`, one function per version step); newer files fail with `SCHEMA_TOO_NEW`. `margin_policy`, `scenario` and `unit` are at version 2; all other kinds are at version 1.
+
+Next: [Environment inputs](ENVIRONMENT_FORMAT.md) · [User manual: create a project](user-manual/create-a-project.md) · [Docs index](README.md).

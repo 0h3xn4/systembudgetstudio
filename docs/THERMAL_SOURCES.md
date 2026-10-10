@@ -14,3 +14,5 @@ System Budget Studio enters **no** thermal value itself (decision D-039, D-073).
 | Heat dissipation ratio of transmitters and other exporting units | `modes[].heat_dissipation_ratio` | The unit data sheet (RF output power, efficiency) |
 
 The Stefan-Boltzmann constant is the one thermal number the tool carries (definition from the 2019 SI constants, decision D-072).
+
+Next: [Thermal budget (user manual)](user-manual/thermal-budget.md) · [Placeholders and sources](user-manual/placeholders-and-sources.md) · [Docs index](README.md).

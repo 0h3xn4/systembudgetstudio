@@ -1,6 +1,6 @@
 # System Budget Studio — working notes
 
-Spec: `docs/SPEC.md` (authoritative). Plan: `docs/PLAN.md`. Architecture: `docs/ARCHITECTURE.md`. Record decisions in `docs/DECISIONS.md`, physics simplifications in `docs/DEVIATIONS.md`.
+Docs index: `docs/README.md` (change the docs with the code: `docs/developer/README.md#keep-the-documentation-true`). Spec: `docs/SPEC.md` (authoritative). Plan: `docs/PLAN.md`. Architecture: `docs/ARCHITECTURE.md`. Record decisions in `docs/DECISIONS.md`, physics simplifications in `docs/DEVIATIONS.md`.
 
 ## Commands
 - Install: `pip install -e ".[dev]"`

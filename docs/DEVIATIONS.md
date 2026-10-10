@@ -25,3 +25,5 @@ _None yet. Planned (to be confirmed when implemented):_
 - **DV-C1 (M6):** the comparison reports values as displayed (display precision hides smaller changes) and matches rows by their first column, so a renamed unit is one removed and one added row; it compares the report tables, not the underlying solver arrays.
 - **DV-G1 (M6):** the user guide PDF has no italic face (IBM Plex Italic is not bundled), so italics print upright; the HTML shows italics.
 - **DV-W1 (M6):** the wizard builds near-circular orbits only (eccentricity 0.001) from altitude, inclination and RAAN; argument of perigee 90 deg and mean anomaly 0 as in the samples; the orbit is not checked for sun-synchronism or decay.
+
+Next: [Decisions](DECISIONS.md) · [Architecture](ARCHITECTURE.md) · [Docs index](README.md).

@@ -13,7 +13,7 @@ expendables/<id>.yaml     consumables with a mass per mission phase
 config/                   margin policy, power, thermal, Eb/N0 and attenuation tables
 ```
 
-The complete field list is in the file format reference (`docs/FILE_FORMAT.md`), and the JSON Schema of every kind is written by `budget export-schemas <folder>`.
+The complete field list is in the file format reference (`docs/FILE_FORMAT.md` in the source repository), and the JSON Schema of every kind is written by `budget export-schemas <folder>`.
 
 ## Sourced numbers
 
