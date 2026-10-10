@@ -3,8 +3,10 @@
 from __future__ import annotations
 
 from collections.abc import Callable, Iterator
+from pathlib import Path as FsPath
 from typing import Any
 
+from budget_core.io.paths import resolve_inside
 from budget_core.io.yamlio import LineMap, Path, format_path
 from budget_core.model import Antenna, BudgetModel, Link, Project, Sourced
 from budget_core.problems import Problem, Severity
@@ -671,12 +673,15 @@ def _link_references(project: Project, lines: dict[str, LineMap]) -> list[Proble
                 )
             )
         for side, ant in _antennas(link):
-            if ant.pattern_file is not None and not (project.root / ant.pattern_file).is_file():
+            found = resolve_inside(project.root, ant.pattern_file) if ant.pattern_file else None
+            if ant.pattern_file is not None and (found is None or not found.is_file()):
                 out.append(
                     _p(
                         err,
                         "LINK_PATTERN_FILE_MISSING",
-                        "The antenna pattern file does not exist.",
+                        "The antenna pattern file must be inside the project folder."
+                        if found is None
+                        else "The antenna pattern file does not exist.",
                         file,
                         (side, "antenna", "pattern_file"),
                         lines,
@@ -684,6 +689,11 @@ def _link_references(project: Project, lines: dict[str, LineMap]) -> list[Proble
                     )
                 )
     return out
+
+
+def _inside_dir(root: FsPath, rel: str) -> bool:
+    found = resolve_inside(root, rel)
+    return found is not None and found.is_dir()
 
 
 def _thermal_references(project: Project, lines: dict[str, LineMap]) -> list[Problem]:
@@ -969,14 +979,15 @@ def _environment_references(project: Project, lines: dict[str, LineMap]) -> list
         missing_import = (
             sc.environment_source == "spacemissionstudio"
             and sc.import_dir is not None
-            and not (project.root / sc.import_dir).is_dir()
+            and not _inside_dir(project.root, sc.import_dir)
         )
         if missing_import:
             out.append(
                 _p(
                     err,
                     "IMPORT_DIR_MISSING",
-                    "The SpaceMissionStudio import folder does not exist.",
+                    "The SpaceMissionStudio import folder must be an existing folder inside "
+                    "the project folder.",
                     file,
                     ("import_dir",),
                     lines,

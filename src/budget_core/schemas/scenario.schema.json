@@ -156,6 +156,7 @@
       "items": {
         "$ref": "#/$defs/ScenarioRule"
       },
+      "maxItems": 10000,
       "title": "Rules",
       "type": "array"
     },
@@ -168,6 +169,7 @@
       "items": {
         "$ref": "#/$defs/ScenarioSegment"
       },
+      "maxItems": 10000,
       "title": "Segments",
       "type": "array"
     },

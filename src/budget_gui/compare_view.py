@@ -259,6 +259,9 @@ class CompareView(QWidget):
             self.export_to(Path(folder), set(REPORT_KINDS))
 
     def export_to(self, folder: Path, kinds: Collection[str]) -> None:
+        if self._export_worker is not None and self._export_worker.isRunning():
+            self.export_failed.emit("An export is already running; wait for it to finish.")
+            return
         if self.output is None:
             self.export_failed.emit("Run a comparison first.")
             return

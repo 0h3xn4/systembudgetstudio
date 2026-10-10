@@ -15,8 +15,16 @@ from PySide6.QtGui import (
     QTextCharFormat,
     QTextFormat,
 )
-from PySide6.QtWidgets import QPlainTextEdit, QTabBar, QTabWidget, QTextEdit, QWidget
+from PySide6.QtWidgets import (
+    QMessageBox,
+    QPlainTextEdit,
+    QTabBar,
+    QTabWidget,
+    QTextEdit,
+    QWidget,
+)
 
+from budget_core.reports.files import write_file
 from budget_gui.unit_editor import UnitEditor
 
 
@@ -46,12 +54,26 @@ class YamlEditor(QPlainTextEdit):
         self.load()
 
     def load(self) -> None:
-        text = self.path.read_bytes().decode("utf-8", errors="replace")
+        try:
+            text = self.path.read_bytes().decode("utf-8")
+        except UnicodeDecodeError:
+            # never show replacement characters: saving them would corrupt the file
+            self.setPlainText("# This file is not valid UTF-8 text and cannot be edited here.\n")
+            self.setReadOnly(True)
+            self.document().setModified(False)
+            return
+        self.setReadOnly(False)
         self.setPlainText(text.replace("\r\n", "\n"))
         self.document().setModified(False)
 
     def save(self) -> None:
-        self.path.write_bytes(self.toPlainText().encode("utf-8"))  # LF only (QPlainTextEdit)
+        if self.isReadOnly():
+            return
+        # LF only (QPlainTextEdit); written through a temporary file so a crash cannot leave a
+        # half-written project file
+        write_file(
+            self.path.parent, self.path.name, self.toPlainText().encode("utf-8"), sanitise=False
+        )
         self.document().setModified(False)
 
     def current_line(self) -> int:
@@ -166,6 +188,11 @@ class EditorTabs(QTabWidget):
 
     def _close_tab(self, index: int) -> None:
         widget = self.widget(index)
+        modified = (isinstance(widget, YamlEditor) and widget.document().isModified()) or (
+            isinstance(widget, UnitEditor) and widget.is_modified()
+        )
+        if modified and not self.confirm_discard("This file has unsaved changes."):
+            return
         if isinstance(widget, YamlEditor):
             self._editors.pop(widget.rel_path, None)
         elif isinstance(widget, UnitEditor):
@@ -174,6 +201,16 @@ class EditorTabs(QTabWidget):
             return
         self.removeTab(index)
         widget.deleteLater()
+
+    def confirm_discard(self, reason: str) -> bool:
+        """Ask whether unsaved edits may be thrown away; False keeps them."""
+        answer = QMessageBox.question(
+            self,
+            "System Budget Studio",
+            f"{reason} Discard the changes?",
+            QMessageBox.StandardButton.Discard | QMessageBox.StandardButton.Cancel,
+        )
+        return answer == QMessageBox.StandardButton.Discard
 
     def add_unit_editor(self, unit_id: str, editor: UnitEditor) -> None:
         self._unit_editors[unit_id] = editor

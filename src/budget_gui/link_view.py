@@ -83,6 +83,7 @@ class LinkPassesView(QWidget):
         self.run_provider: Callable[[str], ScenarioRun | None] | None = None
         self._worker: LinkWorker | None = None
         self._export_worker: ExportWorker | None = None
+        self._computing_for: Project | None = None
 
         self.scenario_combo = QComboBox()
         self.link_combo = QComboBox()
@@ -161,6 +162,7 @@ class LinkPassesView(QWidget):
             return
         if self.result is not None:
             self.is_stale = True
+            self.export_button.setEnabled(False)  # the result belongs to the old project
             self.status.setText("The project changed since the last computation. Press Compute.")
         else:
             self.status.setText("Not computed yet. Press Compute.")
@@ -178,6 +180,7 @@ class LinkPassesView(QWidget):
         self.compute_button.setEnabled(False)
         self.status.setText("Computing…")
         reused = self.run_provider(self.selected_id()) if self.run_provider else None
+        self._computing_for = self.project
         worker = LinkWorker(self.project, self.selected_id(), reused)
         worker.finished_ok.connect(self._done)
         worker.failed.connect(self._failed)
@@ -193,7 +196,7 @@ class LinkPassesView(QWidget):
     def _done(self, result: LinkSeriesResult) -> None:
         self._finish_worker()
         self.result = result
-        self.is_stale = False
+        self.is_stale = self.project is not self._computing_for  # reloaded while it ran
         previous = self.link_combo.currentText()
         self.link_combo.blockSignals(True)
         self.link_combo.clear()
@@ -202,12 +205,14 @@ class LinkPassesView(QWidget):
             self.link_combo.setCurrentText(previous)
         self.link_combo.blockSignals(False)
         self._show()
-        self.export_button.setEnabled(True)
+        self.export_button.setEnabled(not self.is_stale)
         total = sum((s.volume_bits or 0.0) for s in result.series) / 8e6
         n = sum(len(s.passes) for s in result.series)
         text = f"{len(result.series)} link(s), {n} pass(es), {total:.1f} MByte in the scenario"
         if any(s.margin_db is None for s in result.series):
             text += "; some inputs are placeholders, results marked n/a are not computed"
+        if self.is_stale:
+            text = "The project changed while this ran. Press Compute again"
         self.status.setText(text + ".")
         self.computed.emit(result)
 
@@ -302,7 +307,7 @@ class LinkPassesView(QWidget):
 
     # ---- export ------------------------------------------------------------------------------
     def output(self) -> BudgetOutput | None:
-        if self.result is None or self.project is None:
+        if self.result is None or self.project is None or self.is_stale:
             return None
         provenance = make_provenance(self.project, scenario=self.result.run.scenario_id)
         static = link_static_budget(self.project)
@@ -316,9 +321,16 @@ class LinkPassesView(QWidget):
             self.export_to(Path(folder), set(REPORT_KINDS))
 
     def export_to(self, folder: Path, kinds: Collection[str]) -> None:
+        if self._export_worker is not None and self._export_worker.isRunning():
+            self.export_failed.emit("An export is already running; wait for it to finish.")
+            return
         output = self.output()
         if output is None:
-            self.export_failed.emit("Compute the link passes first.")
+            self.export_failed.emit(
+                "The project changed since this result was computed. Press Compute again."
+                if self.is_stale
+                else "Compute the link passes first."
+            )
             return
         worker = ExportWorker([output], folder, kinds)
         worker.finished_ok.connect(self._export_done)

@@ -7,7 +7,7 @@ from typing import Any, get_args, get_origin
 from pydantic import BaseModel, ConfigDict, Field, ValidationInfo, field_validator
 from pydantic_core import PydanticCustomError
 
-from budget_core.units.quantity import UnitError, has_unit_suffix, parse_quantity
+from budget_core.units.quantity import MAX_MAGNITUDE, UnitError, has_unit_suffix, parse_quantity
 
 
 class BudgetModel(BaseModel):
@@ -21,6 +21,8 @@ class BudgetModel(BaseModel):
         numeric = has_unit_suffix(name) or name == "value"
         if numeric and isinstance(value, bool):
             raise PydanticCustomError("unit_invalid", "expected a number, not a yes/no value")
+        if numeric:
+            _check_magnitude(value)
         if not has_unit_suffix(name):
             return value
         if isinstance(value, str):
@@ -32,6 +34,24 @@ class BudgetModel(BaseModel):
         if isinstance(value, dict):
             return {k: _parse(v, name) if isinstance(v, str) else v for k, v in value.items()}
         return value
+
+
+def _check_magnitude(value: Any) -> None:
+    """Reject numbers so large that products or squares overflow to infinity later on."""
+    items = (
+        value
+        if isinstance(value, list)
+        else list(value.values())
+        if isinstance(value, dict)
+        else [value]
+    )
+    for item in items:
+        if (
+            isinstance(item, int | float)
+            and not isinstance(item, bool)
+            and abs(item) > MAX_MAGNITUDE
+        ):
+            raise PydanticCustomError("value_range", "the value is far outside any physical range")
 
 
 def _holds_numbers(annotation: Any) -> bool:

@@ -6,7 +6,6 @@ the value at the start of the step. Unavailable values (placeholders) are empty 
 
 from __future__ import annotations
 
-import csv
 import io
 import json
 from dataclasses import asdict
@@ -22,6 +21,7 @@ from budget_core.power.time_domain import (
     violation_problems,
 )
 from budget_core.provenance import Provenance
+from budget_core.reports.csvutil import csv_writer
 from budget_core.timeutil import format_utc
 
 NDArray = np.ndarray[Any, np.dtype[Any]]
@@ -83,7 +83,7 @@ def series_csv(result: TimeDomainResult, case: str, every: int = 1) -> str:
 
 def _csv(header: list[str], rows: list[list[str]]) -> str:
     buffer = io.StringIO()
-    writer = csv.writer(buffer, lineterminator="\n")
+    writer = csv_writer(buffer)
     writer.writerow(header)
     writer.writerows(rows)
     return buffer.getvalue()

@@ -27,6 +27,7 @@ from budget_core.assets import font_path
 from budget_core.plots.render import image_size
 from budget_core.reports.document import Column, Figure, ReportDocument, format_cell
 from budget_core.reports.document import Table as DocTable
+from budget_core.reports.textsafe import clean_document
 
 # ReportLab can fetch images from URLs (and imports urllib.request/ssl for it, unconditionally).
 # This tool never loads remote resources (constraint 1). ReportLab only checks URLs when
@@ -122,6 +123,7 @@ def _figure_flowable(
 
 
 def render_pdf(doc: ReportDocument) -> bytes:
+    doc = clean_document(doc)
     _register_fonts()
     styles = _styles()
     buffer = io.BytesIO()

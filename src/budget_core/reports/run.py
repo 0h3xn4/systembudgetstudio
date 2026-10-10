@@ -22,6 +22,7 @@ from budget_core.reports.export import (
     thermal_case_csv,
     thermal_mode_csv,
 )
+from budget_core.reports.files import OutputError, safe_name, write_file
 from budget_core.reports.link_export import (
     link_json,
     passes_csv,
@@ -145,37 +146,40 @@ def timeline_output(
 def write_outputs(
     outputs: Sequence[BudgetOutput], out_dir: Path, kinds: Collection[str] = REPORT_KINDS
 ) -> list[Path]:
-    """Write the selected kinds of every output into `out_dir` (created if needed)."""
-    out_dir.mkdir(parents=True, exist_ok=True)
-    written: list[Path] = []
+    """Write the selected kinds of every output into `out_dir` (created if needed).
 
-    def write(name: str, data: bytes | str) -> None:
-        path = out_dir / name
-        path.write_bytes(data if isinstance(data, bytes) else data.encode("utf-8"))
-        written.append(path)
-
+    Names are reduced to plain file names (they may be built from project text) and written
+    atomically. Two outputs that would end up in the same file are refused, not overwritten."""
+    files: list[tuple[str, bytes | str]] = []
     for out in outputs:
         # Renderers are imported only when needed: ReportLab pulls in networking modules.
         if "xlsx" in kinds:
             from budget_core.reports.xlsx import render_xlsx
 
-            write(f"{out.prefix}.xlsx", render_xlsx(out.document))
+            files.append((f"{out.prefix}.xlsx", render_xlsx(out.document)))
         if "pdf" in kinds:
             from budget_core.reports.pdf import render_pdf
 
-            write(f"{out.prefix}.pdf", render_pdf(out.document))
+            files.append((f"{out.prefix}.pdf", render_pdf(out.document)))
         if "docx" in kinds:
             from budget_core.reports.docx import render_docx
 
-            write(f"{out.prefix}.docx", render_docx(out.document))
+            files.append((f"{out.prefix}.docx", render_docx(out.document)))
         if "json" in kinds:
-            write(
-                f"{out.prefix}.json",
-                out.json_text
-                if out.json_text is not None
-                else result_json(out.result, out.provenance),
+            files.append(
+                (
+                    f"{out.prefix}.json",
+                    out.json_text
+                    if out.json_text is not None
+                    else result_json(out.result, out.provenance),
+                )
             )
         if "csv" in kinds:
-            for name, text in out.csv_files:
-                write(name, text)
-    return written
+            files.extend(out.csv_files)
+    names = [safe_name(name) for name, _ in files]
+    if len(set(names)) != len(names):
+        raise OutputError(
+            "Two outputs would be written to the same file name. Rename the units, links, "
+            "phases or cases whose names are almost identical."
+        )
+    return [write_file(Path(out_dir), name, data) for name, data in files]

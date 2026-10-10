@@ -7,6 +7,7 @@ from pathlib import Path
 
 from PySide6.QtCore import QThread, Signal
 
+from budget_core.reports.files import OutputError
 from budget_core.reports.run import BudgetOutput, write_outputs
 
 
@@ -24,6 +25,9 @@ class ExportWorker(QThread):
         outputs, folder, kinds = self._args
         try:
             written = write_outputs(outputs, folder, kinds)
+        except OutputError as exc:  # plain language by construction (no project content)
+            self.failed.emit(str(exc))
+            return
         except OSError:
             self.failed.emit(
                 "The reports could not be written. Check that the folder exists, is a folder "

@@ -19,6 +19,7 @@ from budget_core.power.static_budget import static_power_budget
 from budget_core.power.time_domain import time_domain_budget, violation_problems
 from budget_core.problems import Problem, Severity, sort_problems
 from budget_core.provenance import make_provenance
+from budget_core.reports.files import OutputError
 from budget_core.reports.run import (
     REPORT_KINDS,
     BudgetOutput,
@@ -528,9 +529,9 @@ def _guide(args: argparse.Namespace) -> int:
     return 0
 
 
-def main(argv: Sequence[str] | None = None) -> int:
-    parser = build_parser()
-    args = parser.parse_args(argv)
+def _dispatch(
+    args: argparse.Namespace, parser: argparse.ArgumentParser, argv: Sequence[str] | None
+) -> int:
     if args.command == "validate":
         return _validate(args)
     if args.command == "scenario":
@@ -561,3 +562,31 @@ def main(argv: Sequence[str] | None = None) -> int:
         return 0
     parser.print_help(sys.stderr if argv else sys.stdout)
     return 0
+
+
+def main(argv: Sequence[str] | None = None) -> int:
+    """Run a command. Nothing unexpected reaches the user as a traceback or as project text:
+    only the kind of the failure is named (spec constraints 11 and 20)."""
+    parser = build_parser()
+    args = parser.parse_args(argv)
+    try:
+        return _dispatch(args, parser, argv)
+    except KeyboardInterrupt:
+        return 130
+    except BrokenPipeError:  # the reader of our output went away (for example `| head`)
+        return 1
+    except OutputError as exc:
+        print(str(exc))
+        return 1
+    except OSError:
+        print(
+            "A file or folder could not be read or written. Check the paths and that you "
+            "may use them."
+        )
+        return 1
+    except Exception as exc:
+        print(
+            f"Internal error ({type(exc).__name__}). Run 'budget validate <project folder>' to "
+            "check the project and report the problem."
+        )
+        return 1
