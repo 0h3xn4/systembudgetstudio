@@ -20,7 +20,9 @@ packaging/build.sh
 version="$(python -c 'from budget_core import __version__; print(__version__)')"
 name="system-budget-studio-${version}-linux-x86_64"
 cp packaging/linux/install.sh packaging/linux/uninstall.sh dist/system-budget-studio/
+python packaging/check_bundle.py dist/system-budget-studio
 tar -C dist -czf "dist/${name}.tar.gz" system-budget-studio
+(cd dist && sha256sum "${name}.tar.gz" > SHA256SUMS.txt)
 
 # Install test as an ordinary user: no root, no network, a fresh HOME.
 useradd --create-home tester
@@ -34,6 +36,7 @@ cd system-budget-studio
 export PATH=\$HOME/.local/bin:\$PATH
 budget --version
 budget self-test
+QT_QPA_PLATFORM=offscreen system-budget-studio --smoke
 test -f ~/.local/share/applications/system-budget-studio.desktop
 ~/.local/opt/system-budget-studio/uninstall.sh
 test ! -e ~/.local/opt/system-budget-studio

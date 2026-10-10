@@ -48,6 +48,19 @@ def main() -> int:
         failures = run_selftest()
         print("Self-test passed." if not failures else "FAILED: " + "; ".join(failures))
         return 1 if failures else 0
+    if args == [
+        "--smoke"
+    ]:  # a packaged build can create its window (Qt libraries and plugins load)
+        from budget_core.selftest import run_selftest
+
+        smoke_app = create_app(sys.argv)
+        smoke_window = MainWindow()
+        smoke_window.show()
+        smoke_app.processEvents()
+        failures = run_selftest()
+        smoke_window.close()
+        print("Smoke test passed." if not failures else "FAILED: " + "; ".join(failures))
+        return 1 if failures else 0
     app = create_app(sys.argv)
     window = MainWindow()
     window.show()

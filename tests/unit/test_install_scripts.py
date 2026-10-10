@@ -139,3 +139,117 @@ def test_uninstall_refuses_a_folder_it_did_not_install(tmp_path: Path) -> None:
     (folder / "keep.txt").write_text("x")
     assert run(folder / "uninstall.sh", tmp_path).returncode == 1
     assert (folder / "keep.txt").exists()
+
+
+# ---- audit follow-up -------------------------------------------------------------------------
+def installed(bundle: Path, home: Path, *args: str) -> Path:
+    home.mkdir(exist_ok=True)
+    result = run(bundle / "install.sh", home, *args)
+    assert result.returncode == 0, result.stderr
+    return home / ".local/opt/system-budget-studio"
+
+
+def test_running_the_installed_copy_never_destroys_the_installation(
+    bundle: Path, tmp_path: Path
+) -> None:
+    home = tmp_path / "home"
+    prefix = installed(bundle, home)
+    result = run(prefix / "install.sh", home)
+    assert result.returncode != 0 and "installed copy" in result.stderr
+    assert (prefix / "budget").is_file() and (prefix / "_internal/lib.so").is_file()
+    assert (home / ".local/bin/budget").is_symlink()
+
+
+def test_a_broken_old_uninstaller_does_not_block_an_upgrade(bundle: Path, tmp_path: Path) -> None:
+    home = tmp_path / "home"
+    prefix = installed(bundle, home)
+    (prefix / "uninstall.sh").unlink()
+    (prefix / "stale-file").write_text("old", encoding="utf-8")
+    (bundle / "_internal" / "lib.so").write_text("v2", encoding="utf-8")
+    installed(bundle, home)
+    assert (prefix / "_internal/lib.so").read_text(encoding="utf-8") == "v2"
+    assert not (prefix / "stale-file").exists()  # nothing of the old version is mixed in
+
+
+def test_trailing_slash_and_relative_prefixes_are_normalised(bundle: Path, tmp_path: Path) -> None:
+    home = tmp_path / "home"
+    home.mkdir()
+    target = tmp_path / "apps" / "sbs"
+    result = run(bundle / "install.sh", home, "--prefix", f"{target}/")
+    assert result.returncode == 0, result.stderr
+    link = home / ".local/bin/budget"
+    assert os.readlink(link) == str(target.resolve() / "budget")
+    assert run(target / "uninstall.sh", home).returncode == 0
+    assert not link.exists() and not link.is_symlink() and not target.exists()
+
+
+def test_relative_prefix_gives_absolute_links(bundle: Path, tmp_path: Path) -> None:
+    home = tmp_path / "home"
+    home.mkdir()
+    env = {"PATH": os.environ["PATH"], "HOME": str(home)}
+    work = tmp_path / "work"
+    work.mkdir()
+    done = subprocess.run(
+        ["sh", str(bundle / "install.sh"), "--prefix", "rel/sbs"],
+        env=env,
+        cwd=work,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert done.returncode == 0, done.stderr
+    assert os.path.isabs(os.readlink(home / ".local/bin/budget"))
+    assert (work / "rel/sbs/budget").is_file()
+
+
+def test_an_existing_command_of_the_user_is_not_replaced(bundle: Path, tmp_path: Path) -> None:
+    home = tmp_path / "home"
+    (home / ".local/bin").mkdir(parents=True)
+    mine = home / ".local/bin/budget"
+    mine.write_text("my own tool", encoding="utf-8")
+    result = run(bundle / "install.sh", home)
+    assert result.returncode == 0, result.stderr
+    assert mine.read_text(encoding="utf-8") == "my own tool" and not mine.is_symlink()
+    assert "not replacing" in (result.stdout + result.stderr).lower()
+    prefix = home / ".local/opt/system-budget-studio"
+    assert run(prefix / "uninstall.sh", home).returncode == 0
+    assert mine.read_text(encoding="utf-8") == "my own tool"  # uninstall leaves it too
+
+
+def test_force_replaces_an_existing_command(bundle: Path, tmp_path: Path) -> None:
+    home = tmp_path / "home"
+    (home / ".local/bin").mkdir(parents=True)
+    (home / ".local/bin/budget").write_text("old", encoding="utf-8")
+    result = run(bundle / "install.sh", home, "--force")
+    assert result.returncode == 0, result.stderr
+    assert (home / ".local/bin/budget").is_symlink()
+
+
+def test_desktop_entry_escapes_special_characters(bundle: Path, tmp_path: Path) -> None:
+    home = tmp_path / "home"
+    home.mkdir()
+    prefix = tmp_path / "100%" / "a$b" / "c d"
+    result = run(bundle / "install.sh", home, "--prefix", str(prefix))
+    assert result.returncode == 0, result.stderr
+    entry = (home / ".local/share/applications/system-budget-studio.desktop").read_text("utf-8")
+    exec_line = next(line for line in entry.splitlines() if line.startswith("Exec="))
+    assert "100%%" in exec_line  # a literal percent sign is %%
+    assert "a\\\\$b" in exec_line  # a literal dollar sign: \$ inside quotes, written as \\$
+    assert exec_line.startswith('Exec="') and exec_line.endswith('" %f')
+
+
+def test_the_installer_can_be_started_through_a_symlink(bundle: Path, tmp_path: Path) -> None:
+    home = tmp_path / "home"
+    home.mkdir()
+    elsewhere = tmp_path / "elsewhere"
+    elsewhere.mkdir()
+    os.symlink(bundle / "install.sh", elsewhere / "install.sh")
+    result = run(elsewhere / "install.sh", home)
+    assert result.returncode == 0, result.stderr
+    assert (home / ".local/opt/system-budget-studio/budget").is_file()
+
+
+def test_help_shows_only_the_usage(bundle: Path, tmp_path: Path) -> None:
+    result = run(bundle / "install.sh", tmp_path, "--help")
+    assert result.returncode == 0
+    assert "Usage" in result.stdout and "set -eu" not in result.stdout

@@ -21,7 +21,21 @@ a = Analysis(
     hiddenimports=["pint", "ruamel.yaml", "openpyxl", "reportlab.pdfbase._fontdata", "sgp4.vallado_cpp", "docx", "PIL"],
     # ssl, http and urllib cannot be excluded: ReportLab imports them (and never uses them for
     # network access, see DECISIONS D-043). The Qt network module is not needed.
-    excludes=["PySide6.QtNetwork", "tkinter"],
+    excludes=[
+        "PySide6.QtNetwork",
+        "tkinter",
+        # development code must never reach the bundle (checked by packaging/check_bundle.py)
+        "hypothesis",
+        "mypy",
+        "pydantic.mypy",
+        "pytest",
+        "_pytest",
+        "pytestqt",
+        "IPython",
+        "setuptools",
+        "pip",
+        "chardet",
+    ],
 )
 pyz = PYZ(a.pure)
 

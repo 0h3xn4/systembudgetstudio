@@ -23,6 +23,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: The tag must match the version in pyproject.toml
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          version="$(sed -n 's/^version = "\(.*\)"/\1/p' pyproject.toml | head -1)"
+          test "v$version" = "$GITHUB_REF_NAME" || { echo "tag $GITHUB_REF_NAME does not match version $version"; exit 1; }
       - name: Build, install and uninstall on Rocky Linux 8 (container, unprivileged user)
         run: |
           docker run --rm -e HOST_UID="$(id -u)" -e HOST_GID="$(id -g)" \
@@ -37,6 +42,8 @@ jobs:
           export PATH="$HOME/.local/bin:$PATH"
           budget --version
           budget self-test
+          QT_QPA_PLATFORM=offscreen system-budget-studio --smoke
+          python3 packaging/check_bundle.py "$HOME/.local/opt/system-budget-studio"
           "$HOME/.local/opt/system-budget-studio/uninstall.sh"
           test ! -e "$HOME/.local/opt/system-budget-studio"
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
@@ -44,6 +51,7 @@ jobs:
           name: system-budget-studio-Linux
           path: |
             dist/*.tar.gz
+            dist/SHA256SUMS.txt
             dist/sbom.cdx.json
             dist/licences.md
 
@@ -58,6 +66,12 @@ jobs:
       - run: |
           python -m pip install --require-hashes -r requirements-dev.lock
           python -m pip install --no-deps -e .
+      - name: The tag must match the version in pyproject.toml
+        if: startsWith(github.ref, 'refs/tags/')
+        shell: bash
+        run: |
+          version="$(sed -n 's/^version = "\(.*\)"/\1/p' pyproject.toml | head -1)"
+          test "v$version" = "$GITHUB_REF_NAME" || { echo "tag $GITHUB_REF_NAME does not match version $version"; exit 1; }
       - name: Build the bundle
         shell: bash
         run: packaging/build.sh
@@ -70,6 +84,10 @@ jobs:
           & $iscc "/DAppVersion=$version" "/DBundleDir=$PWD\dist\system-budget-studio" "/DOutputDir=$PWD\dist" packaging\windows\system_budget_studio.iss
           if ($LASTEXITCODE -ne 0) { throw "Inno Setup failed" }
           Compress-Archive -Path dist\system-budget-studio -DestinationPath "dist\system-budget-studio-$version-windows-x64-portable.zip"
+          Get-ChildItem dist\*-setup.exe, dist\*-portable.zip | ForEach-Object {
+            $hash = (Get-FileHash $_.FullName -Algorithm SHA256).Hash.ToLower()
+            "$hash  $($_.Name)" | Add-Content -Encoding ascii dist\SHA256SUMS.txt
+          }
       - name: Silent per-user install, self-test, uninstall
         shell: pwsh
         run: |
@@ -81,13 +99,34 @@ jobs:
           if ($LASTEXITCODE -ne 0) { throw "self-test failed" }
           $gui = Start-Process -Wait -PassThru -FilePath "$target\system-budget-studio.exe" -ArgumentList "--self-test"
           if ($gui.ExitCode -ne 0) { throw "GUI self-test failed" }
+          $env:QT_QPA_PLATFORM = "offscreen"
+          $smoke = Start-Process -Wait -PassThru -FilePath "$target\system-budget-studio.exe" -ArgumentList "--smoke"
+          if ($smoke.ExitCode -ne 0) { throw "GUI smoke test failed (the window could not be created)" }
           Start-Process -Wait -FilePath "$target\unins000.exe" -ArgumentList "/VERYSILENT","/SUPPRESSMSGBOXES"
           if (Test-Path "$target\budget.exe") { throw "uninstall left the program behind" }
+      - name: The PATH option adds and removes exactly one entry, and an upgrade leaves no stale file
+        shell: pwsh
+        run: |
+          $setup = Get-ChildItem dist\*-setup.exe | Select-Object -First 1
+          $target = Join-Path $env:RUNNER_TEMP "sbs-path"
+          $before = (Get-ItemProperty -Path HKCU:\Environment -Name Path -ErrorAction SilentlyContinue).Path
+          Start-Process -Wait -FilePath $setup.FullName -ArgumentList "/VERYSILENT","/CURRENTUSER","/SUPPRESSMSGBOXES","/TASKS=addtopath","/DIR=$target"
+          $during = (Get-ItemProperty -Path HKCU:\Environment -Name Path).Path
+          if (($during -split ";") -notcontains $target) { throw "the PATH task did not add the folder" }
+          New-Item -ItemType File -Force -Path "$target\_internal\stale-from-an-old-version.txt" | Out-Null
+          Start-Process -Wait -FilePath $setup.FullName -ArgumentList "/VERYSILENT","/CURRENTUSER","/SUPPRESSMSGBOXES","/TASKS=addtopath","/DIR=$target"
+          if (Test-Path "$target\_internal\stale-from-an-old-version.txt") { throw "the upgrade left a stale file behind" }
+          if ((($(Get-ItemProperty -Path HKCU:\Environment -Name Path).Path) -split ";" | Where-Object { $_ -eq $target }).Count -ne 1) { throw "the upgrade duplicated the PATH entry" }
+          Start-Process -Wait -FilePath "$target\unins000.exe" -ArgumentList "/VERYSILENT","/SUPPRESSMSGBOXES"
+          $after = (Get-ItemProperty -Path HKCU:\Environment -Name Path -ErrorAction SilentlyContinue).Path
+          if (($after -split ";") -contains $target) { throw "uninstall left the PATH entry behind" }
+          if ($after -ne $before) { Write-Host "PATH differs from before: '$before' -> '$after'" }
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: system-budget-studio-Windows
           path: |
             dist/*-setup.exe
             dist/*-portable.zip
+            dist/SHA256SUMS.txt
             dist/sbom.cdx.json
             dist/licences.md

@@ -20,6 +20,8 @@ AppPublisher=System Budget Studio
 ; "lowest": installs for the current user only ({autopf} becomes %LOCALAPPDATA%\Programs).
 PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=commandline
+; announce a changed PATH so that terminals opened afterwards see it
+ChangesEnvironment=yes
 DefaultDirName={autopf}\System Budget Studio
 DisableProgramGroupPage=yes
 DisableDirPage=auto
@@ -32,6 +34,10 @@ SolidCompression=yes
 UninstallDisplayName=System Budget Studio
 UninstallDisplayIcon={app}\system-budget-studio.exe
 WizardStyle=modern
+
+[InstallDelete]
+; an upgrade replaces the whole library folder, so no file of an older version stays behind
+Type: filesandordirs; Name: "{app}\_internal"
 
 [Files]
 Source: "{#BundleDir}\*"; DestDir: "{app}"; Flags: recursesubdirs createallsubdirs ignoreversion
@@ -59,16 +65,34 @@ end;
 
 procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
 var
-  Existing, Dir: string;
+  Existing, Dir, Rest, Entry, Result: string;
   P: Integer;
 begin
   if CurUninstallStep <> usPostUninstall then Exit;
   if not RegQueryStringValue(HKCU, 'Environment', 'Path', Existing) then Exit;
-  Dir := ';' + ExpandConstant('{app}');
-  P := Pos(Lowercase(Dir), Lowercase(Existing));
-  if P > 0 then
+  Dir := Lowercase(ExpandConstant('{app}'));
+  Rest := Existing;
+  Result := '';
+  { rebuild the list without the entry that is exactly our folder }
+  while Rest <> '' do
   begin
-    Delete(Existing, P, Length(Dir));
-    RegWriteExpandStringValue(HKCU, 'Environment', 'Path', Existing);
+    P := Pos(';', Rest);
+    if P = 0 then
+    begin
+      Entry := Rest;
+      Rest := '';
+    end
+    else
+    begin
+      Entry := Copy(Rest, 1, P - 1);
+      Rest := Copy(Rest, P + 1, Length(Rest));
+    end;
+    if (Entry <> '') and (Lowercase(Entry) <> Dir) then
+    begin
+      if Result <> '' then Result := Result + ';';
+      Result := Result + Entry;
+    end;
   end;
+  if Result <> Existing then
+    RegWriteExpandStringValue(HKCU, 'Environment', 'Path', Result);
 end;
