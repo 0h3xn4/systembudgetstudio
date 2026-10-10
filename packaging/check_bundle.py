@@ -34,9 +34,12 @@ REQUIRED_FILES = (
 )
 
 
-def executables(bundle: Path) -> list[str]:
-    suffix = ".exe" if (bundle / "budget.exe").exists() or sys.platform == "win32" else ""
-    return [f"system-budget-studio{suffix}", f"budget{suffix}"]
+EXECUTABLES = ("system-budget-studio", "budget")
+
+
+def has_executable(bundle: Path, name: str) -> bool:
+    """The program file, with the .exe suffix on Windows."""
+    return (bundle / name).is_file() or (bundle / f"{name}.exe").is_file()
 
 
 def check(bundle: Path) -> list[str]:
@@ -51,8 +54,8 @@ def check(bundle: Path) -> list[str]:
     for rel in REQUIRED_FILES:
         if not (bundle / rel).is_file():
             problems.append(f"missing from the bundle: {rel}")
-    for exe in executables(bundle):
-        if not (bundle / exe).is_file():
+    for exe in EXECUTABLES:
+        if not has_executable(bundle, exe):
             problems.append(f"missing executable: {exe}")
     return problems
 
