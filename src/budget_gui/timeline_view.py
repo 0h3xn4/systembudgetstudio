@@ -95,6 +95,7 @@ class PowerTimelineView(QWidget):
         self.run_provider: Callable[[str], ScenarioRun | None] | None = None
         self._worker: TimelineWorker | None = None
         self._export_worker: ExportWorker | None = None
+        self._computing_for: Project | None = None
 
         self.scenario_combo = QComboBox()
         self.basis_combo = QComboBox()
@@ -187,6 +188,7 @@ class PowerTimelineView(QWidget):
             return
         if self.result is not None:
             self.is_stale = True
+            self.export_button.setEnabled(False)  # the result belongs to the old project
             self.status.setText("The project changed since the last computation. Press Compute.")
         else:
             self.status.setText("Not computed yet. Press Compute.")
@@ -204,6 +206,7 @@ class PowerTimelineView(QWidget):
         self.compute_button.setEnabled(False)
         self.status.setText("Computing…")
         reused = self.run_provider(self.selected_id()) if self.run_provider else None
+        self._computing_for = self.project
         worker = TimelineWorker(
             self.project, self.selected_id(), self.basis_combo.currentText(), reused
         )
@@ -221,15 +224,17 @@ class PowerTimelineView(QWidget):
     def _done(self, result: TimeDomainResult) -> None:
         self._finish_worker()
         self.result = result
-        self.is_stale = False
+        self.is_stale = self.project is not self._computing_for  # reloaded while it ran
         self._show()
-        self.export_button.setEnabled(True)
+        self.export_button.setEnabled(not self.is_stale)
         count = len(result.violations)
         incomplete = any(a.placeholder for a in result.assumptions)
         text = f"{result.steps} steps; {count} violation(s)"
         if incomplete:
             text += "; some inputs are placeholders, results marked n/a are not computed"
-        self.status.setText(text + ".")
+        if self.is_stale:
+            text = "The project changed while this ran. Press Compute again."
+        self.status.setText(text if self.is_stale else text + ".")
         self.computed.emit(result)
 
     def _failed(self, message: str) -> None:
@@ -410,7 +415,7 @@ class PowerTimelineView(QWidget):
 
     # ---- export ------------------------------------------------------------------------------
     def output(self, series_every: int = 1) -> BudgetOutput | None:
-        if self.result is None or self.project is None:
+        if self.result is None or self.project is None or self.is_stale:
             return None
         provenance = make_provenance(self.project, scenario=self.result.run.scenario_id)
         return timeline_output(
@@ -429,9 +434,16 @@ class PowerTimelineView(QWidget):
             self.export_to(Path(folder), set(REPORT_KINDS))
 
     def export_to(self, folder: Path, kinds: Collection[str]) -> None:
+        if self._export_worker is not None and self._export_worker.isRunning():
+            self.export_failed.emit("An export is already running; wait for it to finish.")
+            return
         output = self.output()
         if output is None:
-            self.export_failed.emit("Compute the power timeline first.")
+            self.export_failed.emit(
+                "The project changed since this result was computed. Press Compute again."
+                if self.is_stale
+                else "Compute the power timeline first."
+            )
             return
         worker = ExportWorker([output], folder, kinds)
         worker.finished_ok.connect(self._export_done)

@@ -47,13 +47,14 @@ def _discard(path: Path) -> None:
         path.unlink(missing_ok=True)
 
 
-def write_file(folder: Path, name: str, data: bytes | str) -> Path:
-    """Write `data` as `folder/<safe name>` atomically and return the path."""
+def write_file(folder: Path, name: str, data: bytes | str, *, sanitise: bool = True) -> Path:
+    """Write `data` as `folder/<safe name>` atomically and return the path. `sanitise=False` keeps
+    `name` as it is (for an existing file the user chose, which must keep its own name)."""
     folder = Path(folder)
     if not isinstance(data, bytes | str):
         raise TypeError("data must be text or bytes")
     payload = data if isinstance(data, bytes) else data.encode("utf-8")
-    target = folder / safe_name(name)
+    target = folder / (safe_name(name) if sanitise else Path(name).name)
     temporary = folder / f".{target.name}.{os.getpid()}.tmp"
     try:
         folder.mkdir(parents=True, exist_ok=True)

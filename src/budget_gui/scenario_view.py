@@ -432,6 +432,7 @@ class ScenarioView(QWidget):
         self.last_run: ScenarioRun | None = None
         self.is_stale = False
         self._key = ""
+        self._computing_for: Project | None = None
         self._worker: ScenarioWorker | None = None
 
         self.combo = QComboBox()
@@ -537,6 +538,7 @@ class ScenarioView(QWidget):
             return
         self.compute_button.setEnabled(False)
         self.status.setText("Computing…")
+        self._computing_for = self.project
         worker = ScenarioWorker(self.project, self.selected_id())
         worker.finished_ok.connect(self._done)
         worker.failed.connect(self._failed)
@@ -551,10 +553,14 @@ class ScenarioView(QWidget):
 
     def _done(self, run: ScenarioRun) -> None:
         self._finish_worker()
-        assert self.project is not None
+        computed_for = self._computing_for
+        if self.project is None or computed_for is None:
+            return
         self.last_run = run
-        self.is_stale = False
-        self._key = environment_key(self.project, run.scenario)
+        # the key describes the project the run was computed for; if it was reloaded meanwhile
+        # the run is stale and must not be reused by the other views
+        self.is_stale = self.project is not computed_for
+        self._key = environment_key(computed_for, run.scenario)
         self._show_run(run)
         env = run.env
         passes = ", ".join(f"{sid} {len(v.passes)}" for sid, v in sorted(env.sites.items()))

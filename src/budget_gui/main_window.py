@@ -32,6 +32,20 @@ from budget_gui.widgets import PowerView, ProblemsPanel, ProjectTree
 from budget_gui.worker import ExportWorker
 
 
+def _path_tokens(path: str) -> tuple[str | int, ...]:
+    """'limits[0].limit_kg' -> ('limits', 0, 'limit_kg'), the keys of the file's line map."""
+    tokens: list[str | int] = []
+    for part in path.split("."):
+        name, *indices = part.split("[")
+        if name:
+            tokens.append(name)
+        for index in indices:
+            digits = index.rstrip("]")
+            if digits.isdigit():
+                tokens.append(int(digits))
+    return tuple(tokens)
+
+
 class MainWindow(QMainWindow):
     export_finished = Signal(list)
     export_failed = Signal(str)
@@ -131,7 +145,8 @@ class MainWindow(QMainWindow):
         return dialog
 
     def _guided_created(self, folder: Path) -> None:
-        self.open_project(folder)
+        if not self.open_project(folder):
+            return  # the new project exists on disk; the user kept their edits in the old one
         self.editors.setCurrentWidget(self.timeline_view)
         self.timeline_view.compute()
 
@@ -176,9 +191,16 @@ class MainWindow(QMainWindow):
             self.export_to(Path(folder), set(REPORT_KINDS))
 
     # ---- project -----------------------------------------------------------------------------
-    def open_project(self, path: Path) -> None:
+    def open_project(self, path: Path) -> bool:
+        """Open a project folder. Returns False (and changes nothing) when the user keeps
+        unsaved edits instead of discarding them."""
+        if self.editors.has_unsaved_changes():
+            if not self.editors.confirm_discard("Some files have unsaved changes."):
+                return False
+            self.editors.discard_all_changes()
         self.editors.close_all_files()
         self.session.open(Path(path))
+        return True
 
     def open_file(self, rel: str, line: int | None = None) -> None:
         if self.session.path is None or not (self.session.path / rel).is_file():
@@ -189,7 +211,7 @@ class MainWindow(QMainWindow):
         lines = self.session.load_result.lines.get(rel) if self.session.load_result else None
         if lines is None:
             return None
-        return lines.lookup(tuple(p for p in path.split(".") if p))
+        return lines.lookup(_path_tokens(path))
 
     def jump_to_input(self, rel: str, path: str) -> None:
         """Open the file that governs a finding at the line of the named field."""
@@ -276,6 +298,9 @@ class MainWindow(QMainWindow):
     # ---- export ------------------------------------------------------------------------------
     def export_to(self, folder: Path, kinds: Collection[str]) -> None:
         session = self.session
+        if self._worker is not None and self._worker.isRunning():
+            self.export_failed.emit("An export is already running; wait for it to finish.")
+            return
         if not session.outputs:
             self.export_failed.emit("There is no budget to export; fix the errors first.")
             return
@@ -296,12 +321,6 @@ class MainWindow(QMainWindow):
 
     # ---- closing -----------------------------------------------------------------------------
     def closeEvent(self, event: QCloseEvent) -> None:  # noqa: N802 (Qt naming)
-        if self._worker is not None and self._worker.isRunning():
-            self._worker.wait(10000)
-        self.scenario_view.wait_for_worker()
-        self.timeline_view.wait_for_worker()
-        self.link_passes_view.wait_for_worker()
-        self.compare_view.wait_for_worker()
         if self.editors.has_unsaved_changes():
             answer = QMessageBox.question(
                 self,
@@ -312,4 +331,10 @@ class MainWindow(QMainWindow):
             if answer != QMessageBox.StandardButton.Discard:
                 event.ignore()
                 return
+        if self._worker is not None and self._worker.isRunning():
+            self._worker.wait(10000)
+        self.scenario_view.wait_for_worker()
+        self.timeline_view.wait_for_worker()
+        self.link_passes_view.wait_for_worker()
+        self.compare_view.wait_for_worker()
         event.accept()

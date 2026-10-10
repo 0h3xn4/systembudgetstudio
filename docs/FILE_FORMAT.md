@@ -165,6 +165,8 @@ static_points:                   # chosen elevation and range for the static tab
 
 `margin_ratio` became `power_margin_ratio` and `mass_margin_ratio` per class; `system_margin_ratio` became `system_power_margin_ratio` and `system_mass_margin_ratio`. Version 1 files migrate in memory (`FILE_MIGRATED`); the new mass values are placeholders until supplied.
 
+Limits: a project file may be at most 2 MB, nested at most 64 levels and hold at most 200,000 entries; YAML anchors and aliases (`&x`, `*x`, `<<`) are not supported; every unit-suffixed number must be below 1e20 in its canonical unit; a scenario has at most 1,000,000 time steps and 10,000 rules or segments. `pattern_file` and `import_dir` must be relative paths below the project folder.
+
 Every number in `config/` is `{value, source, note?}`. `source: TBD` or `value: null` marks a placeholder and raises the warning `CONFIG_PLACEHOLDER`. Never copy standards values without a source.
 
 Units: the field-name suffix is the unit. A value may be written with a unit (`mass_kg: 200 g`); it is saved as the canonical number. See D-025, D-026.
