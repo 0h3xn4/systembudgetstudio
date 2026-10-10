@@ -1,0 +1,25 @@
+comparison,section,table,row,quantity,value_a,value_b,change,change_percent,status
+Static power budget,Summary,Power by spacecraft mode,Nominal,Average load (W),2.000,2.400,+0.400 W,+20.0 %,changed
+Static power budget,Summary,Power by spacecraft mode,Nominal,"Average, unit margins (W)",2.167,2.608,+0.441 W,+20.4 %,changed
+Static power budget,Summary,Power by spacecraft mode,Nominal,"Average, system margin (W)",2.384,2.868,+0.484 W,+20.3 %,changed
+Static power budget,Summary,Power by spacecraft mode,Nominal,Average at source (W),2.291,2.749,+0.458 W,+20.0 %,changed
+Static power budget,Summary,Power by spacecraft mode,Nominal,"Average at source, with margins (W)",2.731,3.286,+0.555 W,+20.3 %,changed
+Static power budget,Mode: Nominal,Units in mode Nominal,adcs,Average (W),0.900,1.300,+0.400 W,+44.4 %,changed
+Static power budget,Mode: Nominal,Units in mode Nominal,adcs,Effective (W),0.900,1.300,+0.400 W,+44.4 %,changed
+Static power budget,Mode: Nominal,Units in mode Nominal,adcs,With margin (W),0.990,1.430,+0.440 W,+44.4 %,changed
+Static power budget,Mode: Nominal,By subsystem,ADCS,Effective (W),1.150,1.550,+0.400 W,+34.8 %,changed
+Static power budget,Mode: Nominal,By subsystem,ADCS,With margin (W),1.265,1.705,+0.440 W,+34.8 %,changed
+Static power budget,Mode: Nominal,By supply bus,main,Average load (W),2.000,2.400,+0.400 W,+20.0 %,changed
+Static power budget,Mode: Nominal,By supply bus,main,"Average load, with margins (W)",2.384,2.868,+0.484 W,+20.3 %,changed
+Static power budget,Mode: Nominal,By supply bus,main,Average at source (W),2.291,2.749,+0.458 W,+20.0 %,changed
+Static power budget,Mode: Nominal,By supply bus,main,"Average at source, with margins (W)",2.731,3.286,+0.555 W,+20.3 %,changed
+Static power budget,Mode: Nominal,Totals,"Load, nominal",Average (W),2.000,2.400,+0.400 W,+20.0 %,changed
+Static power budget,Mode: Nominal,Totals,"Load, with unit margins",Average (W),2.167,2.608,+0.441 W,+20.4 %,changed
+Static power budget,Mode: Nominal,Totals,"Load, with system margin",Average (W),2.384,2.868,+0.484 W,+20.3 %,changed
+Static power budget,Mode: Nominal,Totals,"Source, nominal",Average (W),2.291,2.749,+0.458 W,+20.0 %,changed
+Static power budget,Mode: Nominal,Totals,"Source, with margins",Average (W),2.731,3.286,+0.555 W,+20.3 %,changed
+Thermal budget,Summary,Heat dissipation by spacecraft mode,Nominal,Average (W),2.000,2.400,+0.400 W,+20.0 %,changed
+Thermal budget,Mode: Nominal,Units in mode Nominal,adcs,Effective power (W),0.900,1.300,+0.400 W,+44.4 %,changed
+Thermal budget,Mode: Nominal,Units in mode Nominal,adcs,Dissipation (W),0.900,1.300,+0.400 W,+44.4 %,changed
+Thermal budget,Mode: Nominal,By subsystem,ADCS,Dissipation (W),1.150,1.550,+0.400 W,+34.8 %,changed
+Thermal budget,Mode: Nominal,By thermal node,ADCS,Dissipation (W),1.150,1.550,+0.400 W,+34.8 %,changed

@@ -1,0 +1,330 @@
+{
+  "compared": 1545,
+  "differences": [
+    {
+      "change": "+0.400 W",
+      "change_percent": "+20.0 %",
+      "comparison": "Static power budget",
+      "quantity": "Average load (W)",
+      "row": "Nominal",
+      "section": "Summary",
+      "status": "changed",
+      "table": "Power by spacecraft mode",
+      "value_a": "2.000",
+      "value_b": "2.400"
+    },
+    {
+      "change": "+0.441 W",
+      "change_percent": "+20.4 %",
+      "comparison": "Static power budget",
+      "quantity": "Average, unit margins (W)",
+      "row": "Nominal",
+      "section": "Summary",
+      "status": "changed",
+      "table": "Power by spacecraft mode",
+      "value_a": "2.167",
+      "value_b": "2.608"
+    },
+    {
+      "change": "+0.484 W",
+      "change_percent": "+20.3 %",
+      "comparison": "Static power budget",
+      "quantity": "Average, system margin (W)",
+      "row": "Nominal",
+      "section": "Summary",
+      "status": "changed",
+      "table": "Power by spacecraft mode",
+      "value_a": "2.384",
+      "value_b": "2.868"
+    },
+    {
+      "change": "+0.458 W",
+      "change_percent": "+20.0 %",
+      "comparison": "Static power budget",
+      "quantity": "Average at source (W)",
+      "row": "Nominal",
+      "section": "Summary",
+      "status": "changed",
+      "table": "Power by spacecraft mode",
+      "value_a": "2.291",
+      "value_b": "2.749"
+    },
+    {
+      "change": "+0.555 W",
+      "change_percent": "+20.3 %",
+      "comparison": "Static power budget",
+      "quantity": "Average at source, with margins (W)",
+      "row": "Nominal",
+      "section": "Summary",
+      "status": "changed",
+      "table": "Power by spacecraft mode",
+      "value_a": "2.731",
+      "value_b": "3.286"
+    },
+    {
+      "change": "+0.400 W",
+      "change_percent": "+44.4 %",
+      "comparison": "Static power budget",
+      "quantity": "Average (W)",
+      "row": "adcs",
+      "section": "Mode: Nominal",
+      "status": "changed",
+      "table": "Units in mode Nominal",
+      "value_a": "0.900",
+      "value_b": "1.300"
+    },
+    {
+      "change": "+0.400 W",
+      "change_percent": "+44.4 %",
+      "comparison": "Static power budget",
+      "quantity": "Effective (W)",
+      "row": "adcs",
+      "section": "Mode: Nominal",
+      "status": "changed",
+      "table": "Units in mode Nominal",
+      "value_a": "0.900",
+      "value_b": "1.300"
+    },
+    {
+      "change": "+0.440 W",
+      "change_percent": "+44.4 %",
+      "comparison": "Static power budget",
+      "quantity": "With margin (W)",
+      "row": "adcs",
+      "section": "Mode: Nominal",
+      "status": "changed",
+      "table": "Units in mode Nominal",
+      "value_a": "0.990",
+      "value_b": "1.430"
+    },
+    {
+      "change": "+0.400 W",
+      "change_percent": "+34.8 %",
+      "comparison": "Static power budget",
+      "quantity": "Effective (W)",
+      "row": "ADCS",
+      "section": "Mode: Nominal",
+      "status": "changed",
+      "table": "By subsystem",
+      "value_a": "1.150",
+      "value_b": "1.550"
+    },
+    {
+      "change": "+0.440 W",
+      "change_percent": "+34.8 %",
+      "comparison": "Static power budget",
+      "quantity": "With margin (W)",
+      "row": "ADCS",
+      "section": "Mode: Nominal",
+      "status": "changed",
+      "table": "By subsystem",
+      "value_a": "1.265",
+      "value_b": "1.705"
+    },
+    {
+      "change": "+0.400 W",
+      "change_percent": "+20.0 %",
+      "comparison": "Static power budget",
+      "quantity": "Average load (W)",
+      "row": "main",
+      "section": "Mode: Nominal",
+      "status": "changed",
+      "table": "By supply bus",
+      "value_a": "2.000",
+      "value_b": "2.400"
+    },
+    {
+      "change": "+0.484 W",
+      "change_percent": "+20.3 %",
+      "comparison": "Static power budget",
+      "quantity": "Average load, with margins (W)",
+      "row": "main",
+      "section": "Mode: Nominal",
+      "status": "changed",
+      "table": "By supply bus",
+      "value_a": "2.384",
+      "value_b": "2.868"
+    },
+    {
+      "change": "+0.458 W",
+      "change_percent": "+20.0 %",
+      "comparison": "Static power budget",
+      "quantity": "Average at source (W)",
+      "row": "main",
+      "section": "Mode: Nominal",
+      "status": "changed",
+      "table": "By supply bus",
+      "value_a": "2.291",
+      "value_b": "2.749"
+    },
+    {
+      "change": "+0.555 W",
+      "change_percent": "+20.3 %",
+      "comparison": "Static power budget",
+      "quantity": "Average at source, with margins (W)",
+      "row": "main",
+      "section": "Mode: Nominal",
+      "status": "changed",
+      "table": "By supply bus",
+      "value_a": "2.731",
+      "value_b": "3.286"
+    },
+    {
+      "change": "+0.400 W",
+      "change_percent": "+20.0 %",
+      "comparison": "Static power budget",
+      "quantity": "Average (W)",
+      "row": "Load, nominal",
+      "section": "Mode: Nominal",
+      "status": "changed",
+      "table": "Totals",
+      "value_a": "2.000",
+      "value_b": "2.400"
+    },
+    {
+      "change": "+0.441 W",
+      "change_percent": "+20.4 %",
+      "comparison": "Static power budget",
+      "quantity": "Average (W)",
+      "row": "Load, with unit margins",
+      "section": "Mode: Nominal",
+      "status": "changed",
+      "table": "Totals",
+      "value_a": "2.167",
+      "value_b": "2.608"
+    },
+    {
+      "change": "+0.484 W",
+      "change_percent": "+20.3 %",
+      "comparison": "Static power budget",
+      "quantity": "Average (W)",
+      "row": "Load, with system margin",
+      "section": "Mode: Nominal",
+      "status": "changed",
+      "table": "Totals",
+      "value_a": "2.384",
+      "value_b": "2.868"
+    },
+    {
+      "change": "+0.458 W",
+      "change_percent": "+20.0 %",
+      "comparison": "Static power budget",
+      "quantity": "Average (W)",
+      "row": "Source, nominal",
+      "section": "Mode: Nominal",
+      "status": "changed",
+      "table": "Totals",
+      "value_a": "2.291",
+      "value_b": "2.749"
+    },
+    {
+      "change": "+0.555 W",
+      "change_percent": "+20.3 %",
+      "comparison": "Static power budget",
+      "quantity": "Average (W)",
+      "row": "Source, with margins",
+      "section": "Mode: Nominal",
+      "status": "changed",
+      "table": "Totals",
+      "value_a": "2.731",
+      "value_b": "3.286"
+    },
+    {
+      "change": "+0.400 W",
+      "change_percent": "+20.0 %",
+      "comparison": "Thermal budget",
+      "quantity": "Average (W)",
+      "row": "Nominal",
+      "section": "Summary",
+      "status": "changed",
+      "table": "Heat dissipation by spacecraft mode",
+      "value_a": "2.000",
+      "value_b": "2.400"
+    },
+    {
+      "change": "+0.400 W",
+      "change_percent": "+44.4 %",
+      "comparison": "Thermal budget",
+      "quantity": "Effective power (W)",
+      "row": "adcs",
+      "section": "Mode: Nominal",
+      "status": "changed",
+      "table": "Units in mode Nominal",
+      "value_a": "0.900",
+      "value_b": "1.300"
+    },
+    {
+      "change": "+0.400 W",
+      "change_percent": "+44.4 %",
+      "comparison": "Thermal budget",
+      "quantity": "Dissipation (W)",
+      "row": "adcs",
+      "section": "Mode: Nominal",
+      "status": "changed",
+      "table": "Units in mode Nominal",
+      "value_a": "0.900",
+      "value_b": "1.300"
+    },
+    {
+      "change": "+0.400 W",
+      "change_percent": "+34.8 %",
+      "comparison": "Thermal budget",
+      "quantity": "Dissipation (W)",
+      "row": "ADCS",
+      "section": "Mode: Nominal",
+      "status": "changed",
+      "table": "By subsystem",
+      "value_a": "1.150",
+      "value_b": "1.550"
+    },
+    {
+      "change": "+0.400 W",
+      "change_percent": "+34.8 %",
+      "comparison": "Thermal budget",
+      "quantity": "Dissipation (W)",
+      "row": "ADCS",
+      "section": "Mode: Nominal",
+      "status": "changed",
+      "table": "By thermal node",
+      "value_a": "1.150",
+      "value_b": "1.550"
+    }
+  ],
+  "label_a": "rev 1",
+  "label_b": "rev 2",
+  "provenance": {
+    "generated": "2026-01-02T03:04:05Z",
+    "libraries": [
+      [
+        "openpyxl",
+        "for-golden-tests"
+      ],
+      [
+        "pint",
+        "for-golden-tests"
+      ],
+      [
+        "pydantic",
+        "for-golden-tests"
+      ],
+      [
+        "reportlab",
+        "for-golden-tests"
+      ],
+      [
+        "ruamel.yaml",
+        "for-golden-tests"
+      ]
+    ],
+    "project_name": "Example 3U CubeSat, complete power and thermal inputs",
+    "project_revision": "1",
+    "python_version": "3.x",
+    "scenario": "static vs static",
+    "tool": "System Budget Studio",
+    "tool_version": "0.1.0",
+    "user": "Golden User"
+  },
+  "truncated": 0,
+  "unchanged": 1521,
+  "unmatched": []
+}

@@ -1,0 +1,82 @@
+pictures=0
+Comparison: Example 3U CubeSat, complete power and thermal inputs rev 1 and Example 3U CubeSat, complete power and thermal inputs rev 2
+INCOMPLETE: some inputs are placeholders (source TBD or missing). Entries marked n/a depend on them and are not computed. Do not use this report as evidence until the placeholders are replaced with sourced values.
+Summary
+rev 1 compared with rev 2.
+24 values differ out of 1545 compared.
+Values that look equal at the displayed precision are not reported as differences.
+Compared sides
+## table
+Item | rev 1 | rev 2
+Project | Example 3U CubeSat, complete power and thermal inputs | Example 3U CubeSat, complete power and thermal inputs
+Project revision | 1 | 2
+Scenario | static (no scenario) | static (no scenario)
+Differences: Static power budget
+Summary — Power by spacecraft mode
+## table
+Row | Quantity | rev 1 | rev 2 | Change | Change (%) | Status
+Nominal | Average load (W) | 2.000 | 2.400 | +0.400 W | +20.0 % | changed
+Nominal | Average, unit margins (W) | 2.167 | 2.608 | +0.441 W | +20.4 % | changed
+Nominal | Average, system margin (W) | 2.384 | 2.868 | +0.484 W | +20.3 % | changed
+Nominal | Average at source (W) | 2.291 | 2.749 | +0.458 W | +20.0 % | changed
+Nominal | Average at source, with margins (W) | 2.731 | 3.286 | +0.555 W | +20.3 % | changed
+Mode: Nominal — Units in mode Nominal
+## table
+Row | Quantity | rev 1 | rev 2 | Change | Change (%) | Status
+adcs | Average (W) | 0.900 | 1.300 | +0.400 W | +44.4 % | changed
+adcs | Effective (W) | 0.900 | 1.300 | +0.400 W | +44.4 % | changed
+adcs | With margin (W) | 0.990 | 1.430 | +0.440 W | +44.4 % | changed
+Mode: Nominal — By subsystem
+## table
+Row | Quantity | rev 1 | rev 2 | Change | Change (%) | Status
+ADCS | Effective (W) | 1.150 | 1.550 | +0.400 W | +34.8 % | changed
+ADCS | With margin (W) | 1.265 | 1.705 | +0.440 W | +34.8 % | changed
+Mode: Nominal — By supply bus
+## table
+Row | Quantity | rev 1 | rev 2 | Change | Change (%) | Status
+main | Average load (W) | 2.000 | 2.400 | +0.400 W | +20.0 % | changed
+main | Average load, with margins (W) | 2.384 | 2.868 | +0.484 W | +20.3 % | changed
+main | Average at source (W) | 2.291 | 2.749 | +0.458 W | +20.0 % | changed
+main | Average at source, with margins (W) | 2.731 | 3.286 | +0.555 W | +20.3 % | changed
+Mode: Nominal — Totals
+## table
+Row | Quantity | rev 1 | rev 2 | Change | Change (%) | Status
+Load, nominal | Average (W) | 2.000 | 2.400 | +0.400 W | +20.0 % | changed
+Load, with unit margins | Average (W) | 2.167 | 2.608 | +0.441 W | +20.4 % | changed
+Load, with system margin | Average (W) | 2.384 | 2.868 | +0.484 W | +20.3 % | changed
+Source, nominal | Average (W) | 2.291 | 2.749 | +0.458 W | +20.0 % | changed
+Source, with margins | Average (W) | 2.731 | 3.286 | +0.555 W | +20.3 % | changed
+Differences: Mass budget
+No differences.
+Differences: Thermal budget
+Summary — Heat dissipation by spacecraft mode
+## table
+Row | Quantity | rev 1 | rev 2 | Change | Change (%) | Status
+Nominal | Average (W) | 2.000 | 2.400 | +0.400 W | +20.0 % | changed
+Mode: Nominal — Units in mode Nominal
+## table
+Row | Quantity | rev 1 | rev 2 | Change | Change (%) | Status
+adcs | Effective power (W) | 0.900 | 1.300 | +0.400 W | +44.4 % | changed
+adcs | Dissipation (W) | 0.900 | 1.300 | +0.400 W | +44.4 % | changed
+Mode: Nominal — By subsystem
+## table
+Row | Quantity | rev 1 | rev 2 | Change | Change (%) | Status
+ADCS | Dissipation (W) | 1.150 | 1.550 | +0.400 W | +34.8 % | changed
+Mode: Nominal — By thermal node
+## table
+Row | Quantity | rev 1 | rev 2 | Change | Change (%) | Status
+ADCS | Dissipation (W) | 1.150 | 1.550 | +0.400 W | +34.8 % | changed
+Differences: Link budget
+No differences.
+Provenance
+Provenance
+## table
+Item | Value
+Tool | System Budget Studio 0.1.0
+Python | 3.x
+Libraries | openpyxl for-golden-tests, pint for-golden-tests, pydantic for-golden-tests, reportlab for-golden-tests, ruamel.yaml for-golden-tests
+Project | Example 3U CubeSat, complete power and thermal inputs
+Project revision | 1
+Scenario | static vs static
+Generated (UTC) | 2026-01-02T03:04:05Z
+User | Golden User

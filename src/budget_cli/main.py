@@ -10,6 +10,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from budget_core import APP_NAME, __version__
+from budget_core.compare_run import ALL_KINDS, Side, compare_sides, default_kinds
 from budget_core.examples import export_examples
 from budget_core.io.project_loader import load_project
 from budget_core.link.evaluate import link_pass_series, link_static_budget
@@ -35,6 +36,7 @@ from budget_core.selftest import run_selftest
 from budget_core.thermal.static_thermal import static_thermal_budget
 
 REPORTS = REPORT_KINDS
+COMPARE_KINDS = ALL_KINDS
 
 
 def _iso_datetime(text: str) -> datetime:
@@ -152,6 +154,40 @@ def build_parser() -> argparse.ArgumentParser:
     lp.add_argument("--user", help="User name for the provenance block.")
     lp.add_argument("--date", type=_iso_datetime, help="Generation time, ISO 8601.")
     lp.add_argument("--strict", action="store_true", help="Treat warnings as failures.")
+
+    cmp = sub.add_parser(
+        "compare",
+        help="Compare two project revisions, or two scenarios of one project, side by side.",
+    )
+    cmp.add_argument("project", type=Path, help="First project folder (side A).")
+    cmp.add_argument(
+        "other", type=Path, nargs="?", help="Second project folder (side B; default: the first)."
+    )
+    cmp.add_argument("--scenario", help="Scenario id used on both sides.")
+    cmp.add_argument("--scenario-a", help="Scenario id of side A.")
+    cmp.add_argument("--scenario-b", help="Scenario id of side B.")
+    cmp.add_argument(
+        "--budget",
+        action="append",
+        choices=COMPARE_KINDS + ("all",),
+        help="Budget to compare; repeat for several (default: all that apply).",
+    )
+    cmp.add_argument(
+        "--report",
+        action="append",
+        choices=REPORTS + ("all",),
+        help="Output kind; repeat for several (default: all).",
+    )
+    cmp.add_argument("--out", type=Path, help="Output folder (default: <project>/results).")
+    cmp.add_argument(
+        "--max-rows",
+        type=int,
+        default=200,
+        metavar="N",
+        help="Differences listed per budget (default 200; the rest are counted).",
+    )
+    cmp.add_argument("--user", help="User name for the provenance block.")
+    cmp.add_argument("--date", type=_iso_datetime, help="Generation time, ISO 8601.")
 
     sub.add_parser(
         "self-test", help="Check that this installation can compute and render a budget."
@@ -396,6 +432,60 @@ def _power_timeline(args: argparse.Namespace) -> int:
     return 1 if findings or (args.strict and warnings) else 0
 
 
+def _compare(args: argparse.Namespace) -> int:
+    other = args.other or args.project
+    scenario_a = args.scenario_a or args.scenario
+    scenario_b = args.scenario_b or args.scenario
+    if args.other is None and (
+        scenario_a is None or scenario_b is None or scenario_a == scenario_b
+    ):
+        print(
+            "Give a second project folder, or two different scenarios "
+            "(--scenario-a and --scenario-b) of the same project."
+        )
+        return 2
+    sides: list[Side] = []
+    for path, scenario in ((args.project, scenario_a), (other, scenario_b)):
+        loaded = load_project(path)
+        errors = _count(loaded.problems, Severity.ERROR)
+        if loaded.project is None or errors:
+            for problem in loaded.problems:
+                print(problem.format())
+            print(f"{_plural(errors, 'error')}; nothing was written.")
+            return 1
+        sides.append(Side(loaded.project, scenario))
+    a, b = sides
+    wanted = args.budget or ["all"]
+    kinds = (
+        default_kinds(a, b, same_project=args.other is None)
+        if "all" in wanted
+        else tuple(k for k in ALL_KINDS if k in wanted)
+    )
+    try:
+        output, notes = compare_sides(
+            a, b, kinds, user=args.user, generated_at=args.date, max_rows=args.max_rows
+        )
+    except ScenarioRunError as exc:
+        print(exc.problem.format())
+        return 1
+    reports = set(args.report or ["all"])
+    if "all" in reports:
+        reports = set(REPORTS)
+    written = write_outputs([output], args.out or (args.project / "results"), reports)
+    for path in written:
+        print(f"Wrote {path}")
+    for note in notes:
+        print(f"Note: {note}")
+    for result in output.result:
+        print(
+            f"{result.name}: {len(result.differences) + result.truncated} value(s) differ "
+            f"out of {result.compared} compared."
+        )
+    if output.document.banner:
+        print(output.document.banner)
+    return 0
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
@@ -405,6 +495,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         return _scenario(args)
     if args.command == "link-passes":
         return _link_passes(args)
+    if args.command == "compare":
+        return _compare(args)
     if args.command == "power-timeline":
         return _power_timeline(args)
     if args.command == "self-test":
