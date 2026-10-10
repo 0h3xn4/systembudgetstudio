@@ -53,6 +53,7 @@ _SUFFIXES: dict[str, _Suffix] = {
     "dbi": _Suffix("dBi", "antenna gain", None),
     "dbw": _Suffix("dBW", "logarithmic power", None),
     "dbm": _Suffix("dBm", "logarithmic power", None),
+    "dbk": _Suffix("dB/K", "receiver figure of merit (G/T)", None),
 }
 
 # Logarithmic suffix -> accepted unit tokens (lower case) and their offset to the canonical unit.
@@ -61,8 +62,9 @@ _LOG_TOKENS: dict[str, dict[str, float]] = {
     "dbi": {"dbi": 0.0},
     "dbw": {"dbw": 0.0, "dbm": -30.0},
     "dbm": {"dbm": 0.0, "dbw": 30.0},
+    "dbk": {"dbk": 0.0, "db/k": 0.0},
 }
-_ALL_LOG_TOKENS = {"db", "dbi", "dbw", "dbm", "dbhz", "dbk", "dbc"}
+_ALL_LOG_TOKENS = {"db", "dbi", "dbw", "dbm", "dbhz", "dbk", "db/k", "dbc"}
 
 _NUMBER = re.compile(
     r"^\s*([+-]?(?:nan|inf(?:inity)?|\d+\.?\d*(?:[eE][+-]?\d+)?|\.\d+(?:[eE][+-]?\d+)?))\s*(.*?)\s*$",

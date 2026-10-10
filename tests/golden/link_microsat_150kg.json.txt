@@ -1,0 +1,401 @@
+{
+  "assumptions": [
+    {
+      "file": "links/sband_down.yaml",
+      "name": "Transmit power",
+      "path": "transmitter.power_w",
+      "placeholder": false,
+      "source": "Synthetic example value; not from a data sheet or a standard.",
+      "unit": "W",
+      "value": 5.0
+    },
+    {
+      "file": "links/sband_down.yaml",
+      "name": "Line loss",
+      "path": "transmitter.line_loss_db",
+      "placeholder": false,
+      "source": "Synthetic example value; not from a data sheet or a standard.",
+      "unit": "dB",
+      "value": 0.5
+    },
+    {
+      "file": "links/sband_down.yaml",
+      "name": "Antenna gain, transmitter",
+      "path": "transmitter.antenna.gain_dbi",
+      "placeholder": false,
+      "source": "Synthetic example value; not from a data sheet or a standard.",
+      "unit": "dBi",
+      "value": 3.0
+    },
+    {
+      "file": "links/sband_down.yaml",
+      "name": "G/T",
+      "path": "receiver.g_over_t_dbk",
+      "placeholder": false,
+      "source": "Synthetic example value; not from a data sheet or a standard.",
+      "unit": "dB/K",
+      "value": 10.0
+    },
+    {
+      "file": "links/sband_down.yaml",
+      "name": "Required margin",
+      "path": "required_margin_db",
+      "placeholder": false,
+      "source": "Synthetic example value; not from a data sheet or a standard.",
+      "unit": "dB",
+      "value": 3.0
+    },
+    {
+      "file": "links/sband_down.yaml",
+      "name": "Pointing loss",
+      "path": "pointing_loss_db",
+      "placeholder": false,
+      "source": "Synthetic example value; not from a data sheet or a standard.",
+      "unit": "dB",
+      "value": 1.0
+    },
+    {
+      "file": "links/sband_down.yaml",
+      "name": "Polarisation loss",
+      "path": "polarisation_loss_db",
+      "placeholder": false,
+      "source": "Synthetic example value; not from a data sheet or a standard.",
+      "unit": "dB",
+      "value": 0.5
+    },
+    {
+      "file": "links/sband_down.yaml",
+      "name": "Implementation loss",
+      "path": "implementation_loss_db",
+      "placeholder": false,
+      "source": "Synthetic example value; not from a data sheet or a standard.",
+      "unit": "dB",
+      "value": 1.0
+    },
+    {
+      "file": "config/ebn0_table.yaml",
+      "name": "Required Eb/N0, QPSK rate 1/2",
+      "path": "entries[0].required_ebn0_db",
+      "placeholder": false,
+      "source": "Synthetic example value; not from a data sheet or a standard.",
+      "unit": "dB",
+      "value": 4.0
+    },
+    {
+      "file": "config/attenuation_table.yaml",
+      "name": "Attenuation gas_s",
+      "path": "entries[0].loss_db",
+      "placeholder": false,
+      "source": "Synthetic example value; not from a data sheet or a standard.",
+      "unit": "dB",
+      "value": 0.2
+    },
+    {
+      "file": "links/xband_down.yaml",
+      "name": "Transmit power",
+      "path": "transmitter.power_w",
+      "placeholder": false,
+      "source": "Synthetic example value; not from a data sheet or a standard.",
+      "unit": "W",
+      "value": 10.0
+    },
+    {
+      "file": "links/xband_down.yaml",
+      "name": "Line loss",
+      "path": "transmitter.line_loss_db",
+      "placeholder": false,
+      "source": "Synthetic example value; not from a data sheet or a standard.",
+      "unit": "dB",
+      "value": 0.5
+    },
+    {
+      "file": "links/xband_down.yaml",
+      "name": "Antenna pattern, transmitter",
+      "path": "transmitter.antenna.pattern",
+      "placeholder": false,
+      "source": "Synthetic example value; not from a data sheet or a standard.",
+      "unit": "dBi",
+      "value": null
+    },
+    {
+      "file": "links/xband_down.yaml",
+      "name": "G/T",
+      "path": "receiver.g_over_t_dbk",
+      "placeholder": false,
+      "source": "Synthetic example value; not from a data sheet or a standard.",
+      "unit": "dB/K",
+      "value": 20.0
+    },
+    {
+      "file": "links/xband_down.yaml",
+      "name": "Required margin",
+      "path": "required_margin_db",
+      "placeholder": false,
+      "source": "Synthetic example value; not from a data sheet or a standard.",
+      "unit": "dB",
+      "value": 3.0
+    },
+    {
+      "file": "links/xband_down.yaml",
+      "name": "Pointing loss",
+      "path": "pointing_loss_db",
+      "placeholder": false,
+      "source": "Synthetic example value; not from a data sheet or a standard.",
+      "unit": "dB",
+      "value": 1.0
+    },
+    {
+      "file": "links/xband_down.yaml",
+      "name": "Polarisation loss",
+      "path": "polarisation_loss_db",
+      "placeholder": false,
+      "source": "Synthetic example value; not from a data sheet or a standard.",
+      "unit": "dB",
+      "value": 0.5
+    },
+    {
+      "file": "links/xband_down.yaml",
+      "name": "Implementation loss",
+      "path": "implementation_loss_db",
+      "placeholder": false,
+      "source": "Synthetic example value; not from a data sheet or a standard.",
+      "unit": "dB",
+      "value": 1.0
+    },
+    {
+      "file": "config/attenuation_table.yaml",
+      "name": "Attenuation rain_x at 5 deg",
+      "path": "entries[2].loss_db",
+      "placeholder": false,
+      "source": "Synthetic example value; not from a data sheet or a standard.",
+      "unit": "dB",
+      "value": 3.0
+    },
+    {
+      "file": "config/attenuation_table.yaml",
+      "name": "Attenuation rain_x at 20 deg",
+      "path": "entries[3].loss_db",
+      "placeholder": false,
+      "source": "Synthetic example value; not from a data sheet or a standard.",
+      "unit": "dB",
+      "value": 1.0
+    },
+    {
+      "file": "config/attenuation_table.yaml",
+      "name": "Attenuation rain_x at 90 deg",
+      "path": "entries[4].loss_db",
+      "placeholder": false,
+      "source": "Synthetic example value; not from a data sheet or a standard.",
+      "unit": "dB",
+      "value": 0.4
+    },
+    {
+      "file": "config/attenuation_table.yaml",
+      "name": "Attenuation gas_x",
+      "path": "entries[1].loss_db",
+      "placeholder": false,
+      "source": "Synthetic example value; not from a data sheet or a standard.",
+      "unit": "dB",
+      "value": 0.5
+    }
+  ],
+  "problems": [],
+  "provenance": {
+    "generated": "2026-01-02T03:04:05Z",
+    "libraries": [
+      [
+        "pinned",
+        "for-golden-tests"
+      ]
+    ],
+    "project_name": "Example 150 kg microsatellite",
+    "project_revision": "1",
+    "python_version": "3.x",
+    "scenario": "static (no scenario)",
+    "tool": "System Budget Studio",
+    "tool_version": "0.1.0",
+    "user": "Golden User"
+  },
+  "static": [
+    {
+      "atmospheric_loss_db": 0.2,
+      "cn0_dbhz": 79.24417676180624,
+      "direction": "downlink",
+      "eirp_dbw": 9.489700043360187,
+      "elevation_deg": 5.0,
+      "frequency_hz": 2200000000.0,
+      "g_over_t_dbk": 10.0,
+      "link_id": "sband_down",
+      "link_name": "S-band telemetry downlink",
+      "max_rate_bps": 8192000.0,
+      "max_rate_continuous_bps": 16765545.019791622,
+      "other_losses_db": 2.5,
+      "path_loss_db": 166.14469045477162,
+      "point": "5 deg elevation",
+      "range_m": 2200000.0,
+      "rates": [
+        {
+          "closes": true,
+          "data_rate_bps": 32000.0,
+          "ebn0_db": 34.19267697860718,
+          "margin_db": 30.19267697860718
+        },
+        {
+          "closes": true,
+          "data_rate_bps": 128000.0,
+          "ebn0_db": 28.172077065327557,
+          "margin_db": 24.172077065327557
+        },
+        {
+          "closes": true,
+          "data_rate_bps": 512000.0,
+          "ebn0_db": 22.15147715204794,
+          "margin_db": 18.15147715204794
+        },
+        {
+          "closes": true,
+          "data_rate_bps": 2048000.0,
+          "ebn0_db": 16.130877238768313,
+          "margin_db": 12.130877238768313
+        },
+        {
+          "closes": true,
+          "data_rate_bps": 8192000.0,
+          "ebn0_db": 10.110277325488696,
+          "margin_db": 6.1102773254886955
+        }
+      ],
+      "required_ebn0_db": 4.0,
+      "required_margin_db": 3.0
+    },
+    {
+      "atmospheric_loss_db": 0.2,
+      "cn0_dbhz": 91.2853765883655,
+      "direction": "downlink",
+      "eirp_dbw": 9.489700043360187,
+      "elevation_deg": 90.0,
+      "frequency_hz": 2200000000.0,
+      "g_over_t_dbk": 10.0,
+      "link_id": "sband_down",
+      "link_name": "S-band telemetry downlink",
+      "max_rate_bps": 8192000.0,
+      "max_rate_continuous_bps": 268248720.31666663,
+      "other_losses_db": 2.5,
+      "path_loss_db": 154.10349062821237,
+      "point": "zenith",
+      "range_m": 550000.0,
+      "rates": [
+        {
+          "closes": true,
+          "data_rate_bps": 32000.0,
+          "ebn0_db": 46.23387680516643,
+          "margin_db": 42.23387680516643
+        },
+        {
+          "closes": true,
+          "data_rate_bps": 128000.0,
+          "ebn0_db": 40.21327689188681,
+          "margin_db": 36.21327689188681
+        },
+        {
+          "closes": true,
+          "data_rate_bps": 512000.0,
+          "ebn0_db": 34.19267697860719,
+          "margin_db": 30.19267697860719
+        },
+        {
+          "closes": true,
+          "data_rate_bps": 2048000.0,
+          "ebn0_db": 28.172077065327564,
+          "margin_db": 24.172077065327564
+        },
+        {
+          "closes": true,
+          "data_rate_bps": 8192000.0,
+          "ebn0_db": 22.151477152047946,
+          "margin_db": 18.151477152047946
+        }
+      ],
+      "required_ebn0_db": 4.0,
+      "required_margin_db": 3.0
+    },
+    {
+      "atmospheric_loss_db": 2.8333333333333335,
+      "cn0_dbhz": 77.9593739172081,
+      "direction": "downlink",
+      "eirp_dbw": 9.5,
+      "elevation_deg": 10.0,
+      "frequency_hz": 8200000000.0,
+      "g_over_t_dbk": 20.0,
+      "link_id": "xband_down",
+      "link_name": "X-band payload downlink",
+      "max_rate_bps": 10000000.0,
+      "max_rate_continuous_bps": 12472037.032860726,
+      "other_losses_db": 2.5,
+      "path_loss_db": 174.80645992267623,
+      "point": "10 deg elevation",
+      "range_m": 1600000.0,
+      "rates": [
+        {
+          "closes": true,
+          "data_rate_bps": 1000000.0,
+          "ebn0_db": 17.959373917208097,
+          "margin_db": 13.959373917208097
+        },
+        {
+          "closes": true,
+          "data_rate_bps": 10000000.0,
+          "ebn0_db": 7.959373917208097,
+          "margin_db": 3.9593739172080973
+        },
+        {
+          "closes": false,
+          "data_rate_bps": 50000000.0,
+          "ebn0_db": 0.9696738738479098,
+          "margin_db": -3.03032612615209
+        }
+      ],
+      "required_ebn0_db": 4.0,
+      "required_margin_db": 3.0
+    },
+    {
+      "atmospheric_loss_db": 0.9,
+      "cn0_dbhz": 99.16785311377507,
+      "direction": "downlink",
+      "eirp_dbw": 19.5,
+      "elevation_deg": 90.0,
+      "frequency_hz": 8200000000.0,
+      "g_over_t_dbk": 20.0,
+      "link_id": "xband_down",
+      "link_name": "X-band payload downlink",
+      "max_rate_bps": 50000000.0,
+      "max_rate_continuous_bps": 1647347842.2190251,
+      "other_losses_db": 2.5,
+      "path_loss_db": 165.5313140594426,
+      "point": "zenith",
+      "range_m": 550000.0,
+      "rates": [
+        {
+          "closes": true,
+          "data_rate_bps": 1000000.0,
+          "ebn0_db": 39.16785311377507,
+          "margin_db": 35.16785311377507
+        },
+        {
+          "closes": true,
+          "data_rate_bps": 10000000.0,
+          "ebn0_db": 29.167853113775067,
+          "margin_db": 25.167853113775067
+        },
+        {
+          "closes": true,
+          "data_rate_bps": 50000000.0,
+          "ebn0_db": 22.17815307041488,
+          "margin_db": 18.17815307041488
+        }
+      ],
+      "required_ebn0_db": 4.0,
+      "required_margin_db": 3.0
+    }
+  ]
+}

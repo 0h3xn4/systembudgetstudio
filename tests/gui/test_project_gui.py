@@ -116,6 +116,8 @@ def test_export_runs_in_a_worker_and_writes_files(
         window.export_to(tmp_path / "out", {"xlsx", "json"})
     names = sorted(Path(p).name for p in blocker.args[0])
     assert names == [
+        "link_static.json",
+        "link_static.xlsx",
         "mass_static.json",
         "mass_static.xlsx",
         "power_static.json",

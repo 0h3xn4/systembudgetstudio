@@ -21,6 +21,7 @@ from budget_core.model import (
     Ebn0Table,
     Expendable,
     GroundStation,
+    Link,
     MarginPolicy,
     MassLimits,
     Orbit,
@@ -111,6 +112,7 @@ def write_project(project: Project, root: FsPath) -> None:
         ("ground_stations", project.ground_stations),
         ("targets", project.targets),
         ("scenarios", project.scenarios),
+        ("links", project.links),
     ):
         for item_id, model in items.items():
             _write(root / folder / f"{item_id}.yaml", model)
@@ -252,6 +254,7 @@ def load_project(root: FsPath, registry: MigrationRegistry = DEFAULT_REGISTRY) -
     stations = load_dir("ground_stations", GroundStation, "ground_station")
     targets = load_dir("targets", Target, "target")
     scenarios = load_dir("scenarios", Scenario, "scenario")
+    links = load_dir("links", Link, "link")
 
     configs: dict[str, Any] = {}
     for kind, cls in CONFIG_FILES.items():
@@ -286,6 +289,7 @@ def load_project(root: FsPath, registry: MigrationRegistry = DEFAULT_REGISTRY) -
             stations,
             targets,
             scenarios,
+            links,
         )
         problems = problems + validate_references(project, loader.lines)
     problems = sort_problems(problems)

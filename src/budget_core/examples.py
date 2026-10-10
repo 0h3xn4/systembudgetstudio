@@ -13,18 +13,23 @@ from pathlib import Path
 
 from budget_core.io.project_loader import write_project
 from budget_core.model import (
+    Antenna,
+    AntennaPattern,
     ArrayFace,
+    AttenuationEntry,
     AttenuationTable,
     Attitude,
     Battery,
     Bus,
     Conductance,
+    Ebn0Entry,
     Ebn0Table,
     Elements,
     Expendable,
     Exposure,
     GroundStation,
     Inertia,
+    Link,
     MarginPolicy,
     MassLimit,
     MassLimits,
@@ -38,6 +43,7 @@ from budget_core.model import (
     Project,
     ProjectConfig,
     ProjectMeta,
+    Receiver,
     Scenario,
     ScenarioRule,
     ScenarioSegment,
@@ -45,6 +51,7 @@ from budget_core.model import (
     Sourced,
     Spacecraft,
     SpacecraftMode,
+    StaticPoint,
     Surface,
     Target,
     TemperatureLimits,
@@ -52,6 +59,7 @@ from budget_core.model import (
     ThermalEnvironment,
     ThermalModel,
     ThermalNode,
+    Transmitter,
     Unit,
 )
 from budget_core.model.power_system import Pointing
@@ -127,6 +135,7 @@ def _config(
     power_system: PowerSystem | None = None,
     filled_power: bool = False,
     thermal: tuple[ThermalModel, ThermalEnvironment] | None = None,
+    link_tables: tuple[Ebn0Table, AttenuationTable] | None = None,
 ) -> ProjectConfig:
     """Margin policy and power configuration: placeholders, or (for the complete power example)
     invented round values. Mass numbers and tables stay placeholders in every example."""
@@ -151,8 +160,8 @@ def _config(
             distribution_loss_ratio=p(0.03),
             converter_efficiency_ratio={b: p(0.90) for b in buses},
         ),
-        ebn0_table=Ebn0Table(),
-        attenuation_table=AttenuationTable(),
+        ebn0_table=link_tables[0] if link_tables else Ebn0Table(),
+        attenuation_table=link_tables[1] if link_tables else AttenuationTable(),
         mass_limits=MassLimits(
             limits=[MassLimit(name="Launch mass", phase="launch", limit_kg=_tbd())]
         ),
@@ -660,7 +669,9 @@ def _cubesat() -> Project:
             ["main"],
             _power_system(False, ["launch", "eol"], CUBESAT_POINTING),
             thermal=_thermal(units, "imaging", "safe", 0.02, False),
+            link_tables=_cubesat_link_tables(False),
         ),
+        links=_cubesat_links(False),
         orbits={"leo": EXAMPLE_ORBIT},
         ground_stations=EXAMPLE_STATIONS,
         targets=EXAMPLE_TARGETS,
@@ -741,6 +752,166 @@ def _thermal(
     return model, environment
 
 
+def _link(
+    name: str,
+    direction: str,
+    peer: str,
+    frequency_hz: float,
+    rates: list[float],
+    modulation: str,
+    coding: str,
+    points: list[StaticPoint],
+    filled: bool,
+    *,
+    tx_w: float,
+    tx_gain_dbi: float | AntennaPattern,
+    g_over_t_dbk: float,
+    attenuation: list[str] | None = None,
+    active_modes: list[str] | None = None,
+) -> Link:
+    """A downlink (or uplink) of the examples. The design (band, rates, modulation, antenna type,
+    static points) is always given; the numbers are placeholders unless `filled`."""
+
+    def n(value: float) -> Sourced:
+        return _val(value) if filled else _tbd()
+
+    if isinstance(tx_gain_dbi, AntennaPattern):
+        antenna = Antenna(
+            pattern=tx_gain_dbi if filled else tx_gain_dbi.model_copy(update={"source": "TBD"})
+        )
+    else:
+        antenna = Antenna(gain_dbi=n(tx_gain_dbi))
+    return Link(
+        name=name,
+        direction=direction,  # type: ignore[arg-type]
+        peer=peer,
+        frequency_hz=frequency_hz,
+        transmitter=Transmitter(
+            power_w=n(tx_w), line_loss_db=n(0.5), antenna=antenna, polarisation="RHCP"
+        ),
+        receiver=Receiver(g_over_t_dbk=n(g_over_t_dbk), polarisation="RHCP"),
+        modulation=modulation,
+        coding=coding,
+        data_rates_bps=rates,
+        required_margin_db=n(3.0),
+        pointing_loss_db=n(1.0),
+        polarisation_loss_db=n(0.5),
+        implementation_loss_db=n(1.0),
+        attenuation=attenuation or [],
+        active_modes=active_modes or [],
+        static_points=points,
+    )
+
+
+UHF_POINTS = [
+    StaticPoint(name="5 deg elevation", elevation_deg=5.0, range_m=2.2e6),
+    StaticPoint(name="zenith", elevation_deg=90.0, range_m=5.5e5),
+]
+
+
+def _cubesat_links(filled: bool) -> dict[str, Link]:
+    return {
+        "uhf_down": _link(
+            "UHF telemetry downlink",
+            "downlink",
+            "gs_north",
+            4.35e8,
+            [1200.0, 9600.0, 19200.0, 76800.0],
+            "BPSK",
+            "none",
+            UHF_POINTS,
+            filled,
+            tx_w=1.0,
+            tx_gain_dbi=0.0,
+            g_over_t_dbk=-15.0,
+            active_modes=["downlink"],
+        )
+    }
+
+
+def _cubesat_link_tables(filled: bool) -> tuple[Ebn0Table, AttenuationTable]:
+    value = _val(10.0) if filled else _tbd()
+    return (
+        Ebn0Table(entries=[Ebn0Entry(modulation="BPSK", coding="none", required_ebn0_db=value)]),
+        AttenuationTable(),
+    )
+
+
+def _microsat_links() -> dict[str, Link]:
+    xband_pattern = AntennaPattern(
+        source=SYNTH_VALUE, angles_deg=[0.0, 30.0, 60.0], gains_dbi=[10.0, 7.0, 0.0]
+    )
+    return {
+        "sband_down": _link(
+            "S-band telemetry downlink",
+            "downlink",
+            "gs_north",
+            2.2e9,
+            [32e3, 128e3, 512e3, 2.048e6, 8.192e6],
+            "QPSK",
+            "rate 1/2",
+            [
+                StaticPoint(name="5 deg elevation", elevation_deg=5.0, range_m=2.2e6),
+                StaticPoint(name="zenith", elevation_deg=90.0, range_m=5.5e5),
+            ],
+            True,
+            tx_w=5.0,
+            tx_gain_dbi=3.0,
+            g_over_t_dbk=10.0,
+            attenuation=["gas_s"],
+            active_modes=["downlink"],
+        ),
+        "xband_down": _link(
+            "X-band payload downlink",
+            "downlink",
+            "gs_south",
+            8.2e9,
+            [1e6, 10e6, 50e6],
+            "QPSK",
+            "rate 1/2",
+            [
+                StaticPoint(name="10 deg elevation", elevation_deg=10.0, range_m=1.6e6),
+                StaticPoint(name="zenith", elevation_deg=90.0, range_m=5.5e5),
+            ],
+            True,
+            tx_w=10.0,
+            tx_gain_dbi=xband_pattern,
+            g_over_t_dbk=20.0,
+            attenuation=["rain_x", "gas_x"],
+            active_modes=["downlink"],
+        ),
+    }
+
+
+def _microsat_link_tables() -> tuple[Ebn0Table, AttenuationTable]:
+    ebn0 = Ebn0Table(
+        entries=[
+            Ebn0Entry(modulation="QPSK", coding="rate 1/2", required_ebn0_db=_val(4.0)),
+            Ebn0Entry(modulation="QPSK", coding="none", required_ebn0_db=_val(10.0)),
+        ]
+    )
+
+    def entry(name: str, kind: str, freq: float, el: float | None, loss: float) -> AttenuationEntry:
+        return AttenuationEntry(
+            name=name,
+            attenuation_kind=kind,  # type: ignore[arg-type]
+            freq_hz=freq,
+            elevation_deg=el,
+            loss_db=_val(loss),
+        )
+
+    attenuation = AttenuationTable(
+        entries=[
+            entry("gas_s", "gas", 2.2e9, None, 0.2),
+            entry("gas_x", "gas", 8.2e9, None, 0.5),
+            entry("rain_x", "rain", 8.2e9, 5.0, 3.0),
+            entry("rain_x", "rain", 8.2e9, 20.0, 1.0),
+            entry("rain_x", "rain", 8.2e9, 90.0, 0.4),
+        ]
+    )
+    return ebn0, attenuation
+
+
 CUBESAT_POINTING: dict[str, Pointing] = {
     "downlink": "nadir",
     "imaging": "nadir",
@@ -777,7 +948,9 @@ def _cubesat_eps() -> Project:
             _power_system(True, ["launch", "eol"], CUBESAT_POINTING),
             filled_power=True,
             thermal=_thermal(units, "imaging", "safe", 0.02, True),
+            link_tables=_cubesat_link_tables(True),
         ),
+        links=_cubesat_links(True),
         orbits=base.orbits,
         ground_stations=base.ground_stations,
         targets=base.targets,
@@ -815,7 +988,9 @@ def _microsat() -> Project:
             ["main_28v", "payload_12v"],
             _power_system(False, PHASES),
             thermal=_thermal(units, "imaging", "survival", 0.3, False),
+            link_tables=_microsat_link_tables(),
         ),
+        links=_microsat_links(),
         expendables={"propellant": propellant},
         orbits={"leo": EXAMPLE_ORBIT},
         ground_stations=EXAMPLE_STATIONS,

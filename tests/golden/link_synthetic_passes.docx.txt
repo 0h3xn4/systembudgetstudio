@@ -1,0 +1,71 @@
+pictures=1
+Link budget over passes: Time-domain test
+Summary
+Link budget at the static points
+## table
+Link | Direction | Point | Elevation (deg) | Range (km) | EIRP (dBW) | G/T (dB/K) | Path loss (dB) | Atmospheric (dB) | Other losses (dB) | C/N0 (dBHz) | Required Eb/N0 (dB) | Highest closing rate (kbit/s) | Rate at required margin (kbit/s)
+dl | downlink | slant | 10.0 | 1000.0 | 8.01 | -7.49 | 158.47 | 0.00 | 2.00 | 68.65 | 10.00 | 100.000 | 367.399
+Other losses = pointing, polarisation and implementation. A link closes at a rate when its margin is at least the required margin of the link. n/a: an input is a placeholder or missing. Highest closing rate empty (n/a with a result): no listed rate closes.
+Margin by data rate
+## table
+Link | Point | Data rate (kbit/s) | Eb/N0 (dB) | Margin (dB) | Required margin (dB) | Closes
+dl | slant | 10.000 | 28.65 | 18.65 | 3.00 | yes
+dl | slant | 100.000 | 18.65 | 8.65 | 3.00 | yes
+dl | slant | 1000.000 | 8.65 | -1.35 | 3.00 | no
+Passes
+Scenario synthetic: Synthetic. Step 10 s, duration 1000 s.
+Data volume per link
+## table
+Link | Station | Passes | Scenario total (Mbit) | Per day (Mbit) | Per day (MByte)
+dl | gs | 1 | 29.00 | 2505.60 | 313.20
+From the highest listed rate that closes at each sample while the link is active (its modes, below its tracking limit). Per day = scenario total scaled to 86 400 s.
+Passes of link dl over gs
+## table
+Pass | AOS (T+) | AOS (UTC) | Duration (s) | Max elevation (deg) | Usable (s) | Lowest margin (dB) | Volume (Mbit)
+1 | T+00:01:45 | 2026-01-01T00:01:45Z | 290.0 | 30.0 | 290.0 | 18.65 | 29.00
+Lowest margin is at the lowest listed rate over the active samples.
+Plot, dl
+Link dl over gs
+Margin at each listed rate with the required margin, the selected data rate and the elevation, inside the passes.
+Assumptions
+Configuration numbers used
+## table
+Name | Value | Unit | Source | Status
+Transmit power | 2.0000 | W | test fixture | sourced
+Line loss | 1.0000 | dB | test fixture | sourced
+Antenna gain, transmitter | 6.0000 | dBi | test fixture | sourced
+G/T | -7.4897 | dB/K | test fixture | sourced
+Required margin | 3.0000 | dB | test fixture | sourced
+Pointing loss | 1.0000 | dB | test fixture | sourced
+Polarisation loss | 0.5000 | dB | test fixture | sourced
+Implementation loss | 0.5000 | dB | test fixture | sourced
+Required Eb/N0, TEST NONE | 10.0000 | dB | test fixture | sourced
+Equations
+## table
+ID | Name | Formula | Source
+LNK-EIRP | Effective isotropic radiated power | EIRP = P_tx - L_line + G_tx  (dBW) | SOURCE_MISSING
+LNK-FSPL | Free-space path loss | L_fs = 20 log10(4 pi d f / c)  (dB) | SOURCE_MISSING
+LNK-GT | Receiver figure of merit | G/T = G_rx - L_feed - 10 log10(T_sys)  (dB/K), or given directly | SOURCE_MISSING
+LNK-CN0 | Carrier to noise density | C/N0 = EIRP - L_fs - L_atm - L_point - L_pol - L_impl + G/T - 10 log10(k)  (dBHz) | SOURCE_MISSING
+LNK-EBN0 | Energy per bit to noise density | Eb/N0 = C/N0 - 10 log10(R_b)  (dB) | SOURCE_MISSING
+LNK-MARGIN | Link margin | margin = Eb/N0 - Eb/N0_required  (dB); the link closes when margin >= required margin | SOURCE_MISSING
+LNK-ATT | Atmospheric attenuation | L_atm = sum of the named table entries, linear interpolation by elevation | SOURCE_MISSING
+LNK-NADIR | Angle from nadir at the spacecraft | sin(eta) = R cos(el) / r,  r^2 = R^2 + d^2 + 2 R d sin(el) | SOURCE_MISSING
+LNK-VOLUME | Data volume | V = sum over samples of R_selected * (time of the step inside the pass); R_selected is the highest listed rate with margin >= required margin while the link is active | SOURCE_MISSING
+SOURCE_MISSING: the formula is a project convention or textbook definition whose reference text is not available to the tool yet (see docs/DECISIONS.md).
+Problems
+Problems and open items
+## table
+Severity | Code | Location | Message
+Provenance
+Provenance
+## table
+Item | Value
+Tool | System Budget Studio 0.1.0
+Python | 3.x
+Libraries | pinned for-golden-tests
+Project | Time-domain test
+Project revision | r1
+Scenario | static (no scenario)
+Generated (UTC) | 2026-01-02T03:04:05Z
+User | Golden User

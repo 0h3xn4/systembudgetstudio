@@ -1,0 +1,54 @@
+schema_version: 1
+kind: link
+name: S-band telemetry downlink
+direction: downlink
+peer: gs_north
+frequency_hz: 2200000000.0
+transmitter:
+  power_w:
+    value: 5.0
+    source: Synthetic example value; not from a data sheet or a standard.
+  line_loss_db:
+    value: 0.5
+    source: Synthetic example value; not from a data sheet or a standard.
+  antenna:
+    gain_dbi:
+      value: 3.0
+      source: Synthetic example value; not from a data sheet or a standard.
+  polarisation: RHCP
+receiver:
+  g_over_t_dbk:
+    value: 10.0
+    source: Synthetic example value; not from a data sheet or a standard.
+  polarisation: RHCP
+modulation: QPSK
+coding: rate 1/2
+data_rates_bps:
+  - 32000.0
+  - 128000.0
+  - 512000.0
+  - 2048000.0
+  - 8192000.0
+required_margin_db:
+  value: 3.0
+  source: Synthetic example value; not from a data sheet or a standard.
+pointing_loss_db:
+  value: 1.0
+  source: Synthetic example value; not from a data sheet or a standard.
+polarisation_loss_db:
+  value: 0.5
+  source: Synthetic example value; not from a data sheet or a standard.
+implementation_loss_db:
+  value: 1.0
+  source: Synthetic example value; not from a data sheet or a standard.
+attenuation:
+  - gas_s
+active_modes:
+  - downlink
+static_points:
+  - name: 5 deg elevation
+    elevation_deg: 5.0
+    range_m: 2200000.0
+  - name: zenith
+    elevation_deg: 90.0
+    range_m: 550000.0

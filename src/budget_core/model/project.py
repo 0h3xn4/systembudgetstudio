@@ -12,6 +12,7 @@ from budget_core.model.base import BudgetModel
 from budget_core.model.config import AttenuationTable, Ebn0Table, MarginPolicy, PowerConfig
 from budget_core.model.environment import GroundStation, Orbit, Scenario, Target
 from budget_core.model.equipment import Spacecraft, SpacecraftMode, Unit
+from budget_core.model.link import Link
 from budget_core.model.mass import Expendable, MassLimits
 from budget_core.model.power_system import PowerSystem
 from budget_core.model.thermal import ThermalEnvironment, ThermalModel
@@ -51,6 +52,7 @@ class Project:
     ground_stations: dict[str, GroundStation] = field(default_factory=dict)
     targets: dict[str, Target] = field(default_factory=dict)
     scenarios: dict[str, Scenario] = field(default_factory=dict)
+    links: dict[str, Link] = field(default_factory=dict)
 
     @property
     def phases(self) -> tuple[str, ...]:

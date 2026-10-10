@@ -1,3 +1,13 @@
 schema_version: 1
 kind: ebn0_table
-entries: []
+entries:
+  - modulation: QPSK
+    coding: rate 1/2
+    required_ebn0_db:
+      value: 4.0
+      source: Synthetic example value; not from a data sheet or a standard.
+  - modulation: QPSK
+    coding: none
+    required_ebn0_db:
+      value: 10.0
+      source: Synthetic example value; not from a data sheet or a standard.

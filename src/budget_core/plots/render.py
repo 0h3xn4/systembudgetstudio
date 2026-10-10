@@ -151,12 +151,15 @@ def _panel(
     buckets = max(int(right_px - left_px) // SCALE, 50)
     legend_x = left_px + draw.textlength(panel.y_label, font=bold) + 36 * SCALE
     legend_y = top_px - 11 * SCALE
+    shown: set[str] = set()
     for series in panel.series:
         px, py = plot_points(series, spec.x_min_s, spec.x_max_s, spec.x_max_s, buckets)
         points = [(sx(float(a)), sy(float(b) * panel.y_scale)) for a, b in zip(px, py, strict=True)]
         if len(points) >= 2:
             draw.line(points, fill=series.color, width=int(1.6 * SCALE), joint="curve")
-        legend_x = _legend_entry(draw, legend_x, legend_y, series.label, series.color, regular)
+        if series.label not in shown:
+            shown.add(series.label)
+            legend_x = _legend_entry(draw, legend_x, legend_y, series.label, series.color, regular)
     for hline in panel.hlines:
         _hline(draw, hline, panel, sy, left_px, right_px)
         legend_x = _legend_entry(draw, legend_x, legend_y, hline.label, hline.color, regular)
@@ -179,8 +182,10 @@ def _hline(draw: Draw, hline: HLine, panel: Panel, sy: Any, left: float, right: 
 
 
 def _fmt(value: float) -> str:
-    if abs(value) >= 1000 or (value != 0 and abs(value) < 0.01):
+    if abs(value) >= 1e6 or (value != 0 and abs(value) < 0.01):
         return f"{value:.3g}"
+    if abs(value) >= 1000:
+        return f"{value:.0f}"
     text = f"{value:.2f}".rstrip("0").rstrip(".")
     return text or "0"
 

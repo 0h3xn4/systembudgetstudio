@@ -1,3 +1,9 @@
 schema_version: 1
 kind: ebn0_table
-entries: []
+entries:
+  - modulation: BPSK
+    coding: none
+    required_ebn0_db:
+      value: null
+      source: TBD
+      note: "Placeholder: supply the project's value."

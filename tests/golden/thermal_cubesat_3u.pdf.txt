@@ -962,9 +962,10 @@ CONFIG_EMPTY_TABLE
 config/attenuation_table.yaml:3
 The table has no entries.
 warning
-CONFIG_EMPTY_TABLE
-config/ebn0_table.yaml:3
-The table has no entries.
+CONFIG_PLACEHOLDER
+config/ebn0_table.yaml:7
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
 ## page 8
 System Budget Studio 0.1.0 | Example 3U CubeSat rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
 Page 8
@@ -1529,6 +1530,53 @@ config/thermal_model.yaml:187
 This number is a placeholder (no value or source 'TBD'); results that use it are not
 trustworthy.
 warning
+CONFIG_PLACEHOLDER
+links/uhf_down.yaml:9
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+links/uhf_down.yaml:13
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+links/uhf_down.yaml:18
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+## page 13
+System Budget Studio 0.1.0 | Example 3U CubeSat rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
+Page 13
+Severity
+Code
+Location
+Message
+warning
+CONFIG_PLACEHOLDER
+links/uhf_down.yaml:24
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+links/uhf_down.yaml:36
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+links/uhf_down.yaml:40
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+links/uhf_down.yaml:44
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
+CONFIG_PLACEHOLDER
+links/uhf_down.yaml:48
+This number is a placeholder (no value or source 'TBD'); results that use it are not
+trustworthy.
+warning
 THERMAL_NO_LIMITS
 units/adcs.yaml
 Unit 'adcs' has no operating temperature limits; it is not checked.
@@ -1548,13 +1596,6 @@ warning
 THERMAL_NO_LIMITS
 units/obc.yaml
 Unit 'obc' has no operating temperature limits; it is not checked.
-## page 13
-System Budget Studio 0.1.0 | Example 3U CubeSat rev 1 | static (no scenario) | 2026-01-02T03:04:05Z | Golden User
-Page 13
-Severity
-Code
-Location
-Message
 warning
 THERMAL_NO_LIMITS
 units/radio.yaml

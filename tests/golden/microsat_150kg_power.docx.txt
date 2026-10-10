@@ -260,8 +260,6 @@ Problems
 Problems and open items
 ## table
 Severity | Code | Location | Message
-warning | CONFIG_EMPTY_TABLE | config/attenuation_table.yaml:3 | The table has no entries.
-warning | CONFIG_EMPTY_TABLE | config/ebn0_table.yaml:3 | The table has no entries.
 warning | RESULT_INCOMPLETE | config/margin_policy.yaml | The margin of maturity class 'class_a' is a placeholder.
 warning | RESULT_INCOMPLETE | config/margin_policy.yaml | The margin of maturity class 'class_b' is a placeholder.
 warning | RESULT_INCOMPLETE | config/margin_policy.yaml | The margin of maturity class 'class_c' is a placeholder.

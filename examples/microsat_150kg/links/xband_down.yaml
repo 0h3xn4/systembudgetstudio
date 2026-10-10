@@ -1,0 +1,60 @@
+schema_version: 1
+kind: link
+name: X-band payload downlink
+direction: downlink
+peer: gs_south
+frequency_hz: 8200000000.0
+transmitter:
+  power_w:
+    value: 10.0
+    source: Synthetic example value; not from a data sheet or a standard.
+  line_loss_db:
+    value: 0.5
+    source: Synthetic example value; not from a data sheet or a standard.
+  antenna:
+    pattern:
+      source: Synthetic example value; not from a data sheet or a standard.
+      angles_deg:
+        - 0.0
+        - 30.0
+        - 60.0
+      gains_dbi:
+        - 10.0
+        - 7.0
+        - 0.0
+  polarisation: RHCP
+receiver:
+  g_over_t_dbk:
+    value: 20.0
+    source: Synthetic example value; not from a data sheet or a standard.
+  polarisation: RHCP
+modulation: QPSK
+coding: rate 1/2
+data_rates_bps:
+  - 1000000.0
+  - 10000000.0
+  - 50000000.0
+required_margin_db:
+  value: 3.0
+  source: Synthetic example value; not from a data sheet or a standard.
+pointing_loss_db:
+  value: 1.0
+  source: Synthetic example value; not from a data sheet or a standard.
+polarisation_loss_db:
+  value: 0.5
+  source: Synthetic example value; not from a data sheet or a standard.
+implementation_loss_db:
+  value: 1.0
+  source: Synthetic example value; not from a data sheet or a standard.
+attenuation:
+  - rain_x
+  - gas_x
+active_modes:
+  - downlink
+static_points:
+  - name: 10 deg elevation
+    elevation_deg: 10.0
+    range_m: 1600000.0
+  - name: zenith
+    elevation_deg: 90.0
+    range_m: 550000.0

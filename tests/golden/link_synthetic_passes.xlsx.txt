@@ -1,0 +1,62 @@
+## sheet Summary rows=12 cols=14
+1: 'Link budget over passes: Time-domain test' |  |  |  |  |  |  |  |  |  |  |  |  | 
+3: 'Link budget at the static points' |  |  |  |  |  |  |  |  |  |  |  |  | 
+4: 'Link' | 'Direction' | 'Point' | 'Elevation (deg)' | 'Range (km)' | 'EIRP (dBW)' | 'G/T (dB/K)' | 'Path loss (dB)' | 'Atmospheric (dB)' | 'Other losses (dB)' | 'C/N0 (dBHz)' | 'Required Eb/N0 (dB)' | 'Highest closing rate (kbit/s)' | 'Rate at required margin (kbit/s)'
+5: 'dl' | 'downlink' | 'slant' | 10 | 1000 | 8.010299956639813 | -7.4897 | 158.468383135163 | 0 | 2 | 68.6513839946945 | 10 | 100 | 367.3993634080172
+6: 'Other losses = pointing, polarisation and implementation. A link closes at a rate when its margin is at least the required margin of the link. n/a: an input is a placeholder or missing. Highest closing rate empty (n/a with a result): no listed rate closes.' |  |  |  |  |  |  |  |  |  |  |  |  | 
+8: 'Margin by data rate' |  |  |  |  |  |  |  |  |  |  |  |  | 
+9: 'Link' | 'Point' | 'Data rate (kbit/s)' | 'Eb/N0 (dB)' | 'Margin (dB)' | 'Required margin (dB)' | 'Closes' |  |  |  |  |  |  | 
+10: 'dl' | 'slant' | 10 | 28.6513839946945 | 18.6513839946945 | 3 | 'yes' |  |  |  |  |  |  | 
+11: 'dl' | 'slant' | 100 | 18.6513839946945 | 8.651383994694498 | 3 | 'yes' |  |  |  |  |  |  | 
+12: 'dl' | 'slant' | 1000 | 8.651383994694498 | -1.348616005305502 | 3 | 'no' |  |  |  |  |  |  | 
+## sheet Passes rows=10 cols=8
+1: 'Scenario synthetic: Synthetic. Step 10 s, duration 1000 s.' |  |  |  |  |  |  | 
+2: 'Data volume per link' |  |  |  |  |  |  | 
+3: 'Link' | 'Station' | 'Passes' | 'Scenario total (Mbit)' | 'Per day (Mbit)' | 'Per day (MByte)' |  | 
+4: 'dl' | 'gs' | 1 | 29 | 2505.6 | 313.2 |  | 
+5: 'From the highest listed rate that closes at each sample while the link is active (its modes, below its tracking limit). Per day = scenario total scaled to 86 400 s.' |  |  |  |  |  |  | 
+7: 'Passes of link dl over gs' |  |  |  |  |  |  | 
+8: 'Pass' | 'AOS (T+)' | 'AOS (UTC)' | 'Duration (s)' | 'Max elevation (deg)' | 'Usable (s)' | 'Lowest margin (dB)' | 'Volume (Mbit)'
+9: '1' | 'T+00:01:45' | '2026-01-01T00:01:45Z' | 290 | 30 | 290 | 18.6513839946945 | 29
+10: 'Lowest margin is at the lowest listed rate over the active samples.' |  |  |  |  |  |  | 
+## sheet Plot dl rows=42 cols=1
+1: 'Link dl over gs'
+42: 'Margin at each listed rate with the required margin, the selected data rate and the elevation, inside the passes.'
+## sheet Assumptions rows=24 cols=5
+1: 'Configuration numbers used' |  |  |  | 
+2: 'Name' | 'Value' | 'Unit' | 'Source' | 'Status'
+3: 'Transmit power' | 2 | 'W' | 'test fixture' | 'sourced'
+4: 'Line loss' | 1 | 'dB' | 'test fixture' | 'sourced'
+5: 'Antenna gain, transmitter' | 6 | 'dBi' | 'test fixture' | 'sourced'
+6: 'G/T' | -7.4897 | 'dB/K' | 'test fixture' | 'sourced'
+7: 'Required margin' | 3 | 'dB' | 'test fixture' | 'sourced'
+8: 'Pointing loss' | 1 | 'dB' | 'test fixture' | 'sourced'
+9: 'Polarisation loss' | 0.5 | 'dB' | 'test fixture' | 'sourced'
+10: 'Implementation loss' | 0.5 | 'dB' | 'test fixture' | 'sourced'
+11: 'Required Eb/N0, TEST NONE' | 10 | 'dB' | 'test fixture' | 'sourced'
+13: 'Equations' |  |  |  | 
+14: 'ID' | 'Name' | 'Formula' | 'Source' | 
+15: 'LNK-EIRP' | 'Effective isotropic radiated power' | 'EIRP = P_tx - L_line + G_tx  (dBW)' | 'SOURCE_MISSING' | 
+16: 'LNK-FSPL' | 'Free-space path loss' | 'L_fs = 20 log10(4 pi d f / c)  (dB)' | 'SOURCE_MISSING' | 
+17: 'LNK-GT' | 'Receiver figure of merit' | 'G/T = G_rx - L_feed - 10 log10(T_sys)  (dB/K), or given directly' | 'SOURCE_MISSING' | 
+18: 'LNK-CN0' | 'Carrier to noise density' | 'C/N0 = EIRP - L_fs - L_atm - L_point - L_pol - L_impl + G/T - 10 log10(k)  (dBHz)' | 'SOURCE_MISSING' | 
+19: 'LNK-EBN0' | 'Energy per bit to noise density' | 'Eb/N0 = C/N0 - 10 log10(R_b)  (dB)' | 'SOURCE_MISSING' | 
+20: 'LNK-MARGIN' | 'Link margin' | 'margin = Eb/N0 - Eb/N0_required  (dB); the link closes when margin >= required margin' | 'SOURCE_MISSING' | 
+21: 'LNK-ATT' | 'Atmospheric attenuation' | 'L_atm = sum of the named table entries, linear interpolation by elevation' | 'SOURCE_MISSING' | 
+22: 'LNK-NADIR' | 'Angle from nadir at the spacecraft' | 'sin(eta) = R cos(el) / r,  r^2 = R^2 + d^2 + 2 R d sin(el)' | 'SOURCE_MISSING' | 
+23: 'LNK-VOLUME' | 'Data volume' | 'V = sum over samples of R_selected * (time of the step inside the pass); R_selected is the highest listed rate with margin >= required margin while the link is active' | 'SOURCE_MISSING' | 
+24: 'SOURCE_MISSING: the formula is a project convention or textbook definition whose reference text is not available to the tool yet (see docs/DECISIONS.md).' |  |  |  | 
+## sheet Problems rows=2 cols=4
+1: 'Problems and open items' |  |  | 
+2: 'Severity' | 'Code' | 'Location' | 'Message'
+## sheet Provenance rows=10 cols=2
+1: 'Provenance' | 
+2: 'Item' | 'Value'
+3: 'Tool' | 'System Budget Studio 0.1.0'
+4: 'Python' | '3.x'
+5: 'Libraries' | 'pinned for-golden-tests'
+6: 'Project' | 'Time-domain test'
+7: 'Project revision' | 'r1'
+8: 'Scenario' | 'static (no scenario)'
+9: 'Generated (UTC)' | '2026-01-02T03:04:05Z'
+10: 'User' | 'Golden User'

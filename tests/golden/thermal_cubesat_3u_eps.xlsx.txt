@@ -214,17 +214,16 @@
 51: 'TH-SB' | 'Stefan-Boltzmann constant' | 'sigma = 5.670374419e-8 W m^-2 K^-4' | 'CODATA 2018 / SI 2019 (exact from h, k, c)' | 
 52: 'TH-LIMIT' | 'Unit temperature limit check' | 'exceeded when T < T_min or T > T_max; margin check when T - T_min or T_max - T < temperature_margin_k' | 'SOURCE_MISSING' | 
 53: 'SOURCE_MISSING: the formula is a project convention or textbook definition whose reference text is not available to the tool yet (see docs/DECISIONS.md).' |  |  |  | 
-## sheet Problems rows=10 cols=4
+## sheet Problems rows=9 cols=4
 1: 'Problems and open items' |  |  | 
 2: 'Severity' | 'Code' | 'Location' | 'Message'
 3: 'warning' | 'CONFIG_EMPTY_TABLE' | 'config/attenuation_table.yaml:3' | 'The table has no entries.'
-4: 'warning' | 'CONFIG_EMPTY_TABLE' | 'config/ebn0_table.yaml:3' | 'The table has no entries.'
-5: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:9' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
-6: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:17' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
-7: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:25' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
-8: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:32' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
-9: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/mass_limits.yaml:7' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
-10: 'error' | 'THERMAL_MARGIN_INSUFFICIENT' | 'units/radio.yaml' | "Unit 'radio' is within its operating limits but closer than the required temperature margin."
+4: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:9' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+5: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:17' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+6: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:25' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+7: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/margin_policy.yaml:32' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+8: 'warning' | 'CONFIG_PLACEHOLDER' | 'config/mass_limits.yaml:7' | "This number is a placeholder (no value or source 'TBD'); results that use it are not trustworthy."
+9: 'error' | 'THERMAL_MARGIN_INSUFFICIENT' | 'units/radio.yaml' | "Unit 'radio' is within its operating limits but closer than the required temperature margin."
 ## sheet Provenance rows=10 cols=2
 1: 'Provenance' | 
 2: 'Item' | 'Value'

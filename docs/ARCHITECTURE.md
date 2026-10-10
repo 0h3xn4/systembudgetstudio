@@ -31,7 +31,8 @@ src/budget_core/      no GUI, no network imports (enforced by import-linter test
   mass/               static_mass.py (roll-up, margins, limits), mass_properties.py (CG, inertia, phases)
   thermal/            static_thermal.py (dissipation roll-up, cases, limit checks),
                       steady_state.py (nodal heat balance, pure function)
-  link/               link_budget.py, propagation.py, passes.py, data_volume.py (pure functions)
+  link/               budget.py (equations, pure functions), evaluate.py (static table, pass series,
+                      data volume), constants.py (c, k with sources)
   scenario/           timeline model, rule-based generation (downlink-on-pass, ...)
   problems/           Problem(severity, code, message, location) — shared by validate/solvers
   reports/            xlsx, docx, pdf, csv, json; provenance block; figures
@@ -87,7 +88,7 @@ class Environment(Protocol):
 
 ## 6. Solvers (summary)
 
-**Power static**: per-mode sum over units of `avg_power_w * (1+margin(maturity))` → converter-efficiency-adjusted bus load → totals, peak. **Power time domain** (M4, implemented; D-061 to D-066): scenario timeline and environment, steps from the environment grid, demand per step by exact overlap of the mode segments with the step, sunlit share by exact overlap of the eclipses; array output `P = E * sum_faces(N_cells * max(0, cos theta)) * A_cell * eta_ref * k_T * (1 - l_pack) * (1 - l_harness) * k_age * f_lit` (constants from `config/power_system.yaml`, sourced); energy-based battery with charge and discharge efficiency, full and empty saturation, depth of discharge per phase; BOL and EOL cases; violations as intervals with time stamps. Pure NumPy over steps plus one scalar loop for the battery; a 604,800-step week runs in about 1 s on top of the environment. **Link**: `Eb/N0 = EIRP − L_path − L_other + G/T − 10log10(k) − 10log10(R_b)` (Friis; ECSS-E-ST-50-05C usage flagged), margin vs table value (from config), per-time-step over passes, data volume from margin-constrained rate selection. All formulae named in the registry with sources or `SOURCE_MISSING`.
+**Power static**: per-mode sum over units of `avg_power_w * (1+margin(maturity))` → converter-efficiency-adjusted bus load → totals, peak. **Power time domain** (M4, implemented; D-061 to D-066): scenario timeline and environment, steps from the environment grid, demand per step by exact overlap of the mode segments with the step, sunlit share by exact overlap of the eclipses; array output `P = E * sum_faces(N_cells * max(0, cos theta)) * A_cell * eta_ref * k_T * (1 - l_pack) * (1 - l_harness) * k_age * f_lit` (constants from `config/power_system.yaml`, sourced); energy-based battery with charge and discharge efficiency, full and empty saturation, depth of discharge per phase; BOL and EOL cases; violations as intervals with time stamps. Pure NumPy over steps plus one scalar loop for the battery; a 604,800-step week runs in about 1 s on top of the environment. **Link** (M5, implemented; D-077 to D-083): `Eb/N0 = EIRP − L_path − L_other + G/T − 10log10(k) − 10log10(R_b)` (Friis; ECSS-E-ST-50-05C usage flagged), margin vs table value (from config), per-time-step over passes, data volume from margin-constrained rate selection. All formulae named in the registry with sources or `SOURCE_MISSING`.
 
 ## 6a. Mass budget (added by D-033)
 

@@ -170,6 +170,85 @@ def _thermal_equations() -> tuple[Equation, ...]:
     )
 
 
+_LNK_NOTE = (
+    "Standard link budget relation (Friis); project convention, decision D-077. The reference "
+    "text is not available to the tool, owner to confirm (for example ECSS-E-ST-50-05C for RF "
+    "and modulation, ITU-R P.618 for rain, ITU-R P.676 for gas)."
+)
+
+
+def _link_equations() -> tuple[Equation, ...]:
+    return (
+        Equation(
+            "LNK-EIRP",
+            "Effective isotropic radiated power",
+            "EIRP = P_tx - L_line + G_tx  (dBW)",
+            None,
+            _LNK_NOTE,
+        ),
+        Equation(
+            "LNK-FSPL",
+            "Free-space path loss",
+            "L_fs = 20 log10(4 pi d f / c)  (dB)",
+            None,
+            _LNK_NOTE + " c = 299 792 458 m/s (SI, exact; decision D-078).",
+        ),
+        Equation(
+            "LNK-GT",
+            "Receiver figure of merit",
+            "G/T = G_rx - L_feed - 10 log10(T_sys)  (dB/K), or given directly",
+            None,
+            _LNK_NOTE,
+        ),
+        Equation(
+            "LNK-CN0",
+            "Carrier to noise density",
+            "C/N0 = EIRP - L_fs - L_atm - L_point - L_pol - L_impl + G/T - 10 log10(k)  (dBHz)",
+            None,
+            _LNK_NOTE + " k = 1.380649e-23 J/K (SI, exact; decision D-078).",
+        ),
+        Equation(
+            "LNK-EBN0",
+            "Energy per bit to noise density",
+            "Eb/N0 = C/N0 - 10 log10(R_b)  (dB)",
+            None,
+            _LNK_NOTE,
+        ),
+        Equation(
+            "LNK-MARGIN",
+            "Link margin",
+            "margin = Eb/N0 - Eb/N0_required  (dB); the link closes when margin >= required margin",
+            None,
+            "Required Eb/N0 from config/ebn0_table.yaml and the required margin from the link "
+            "file, both with sources.",
+        ),
+        Equation(
+            "LNK-ATT",
+            "Atmospheric attenuation",
+            "L_atm = sum of the named table entries, linear interpolation by elevation",
+            None,
+            "Values come only from config/attenuation_table.yaml; the tool has no built-in "
+            "propagation model (DEVIATIONS DV-P3, DV-L1).",
+        ),
+        Equation(
+            "LNK-NADIR",
+            "Angle from nadir at the spacecraft",
+            "sin(eta) = R cos(el) / r,  r^2 = R^2 + d^2 + 2 R d sin(el)",
+            None,
+            "Spherical Earth geometry; a spacecraft antenna boresight is assumed at nadir "
+            "(DEVIATIONS DV-L2).",
+        ),
+        Equation(
+            "LNK-VOLUME",
+            "Data volume",
+            "V = sum over samples of R_selected * (time of the step inside the pass); R_selected "
+            "is the highest listed rate with margin >= required margin while the link is active",
+            None,
+            "Per pass and per day (scenario total scaled to 86 400 s).",
+        ),
+    )
+
+
 _CONVENTION = (
     "Project convention (decision D-040). ECSS-E-ST-20C margin philosophy is the intended "
     "reference but its text is not available to the tool; owner to confirm."
@@ -292,5 +371,6 @@ EQUATIONS: dict[str, Equation] = {
         ),
         *_time_domain_equations(),
         *_thermal_equations(),
+        *_link_equations(),
     )
 }

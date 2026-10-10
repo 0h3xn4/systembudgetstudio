@@ -1,0 +1,52 @@
+schema_version: 1
+kind: link
+name: UHF telemetry downlink
+direction: downlink
+peer: gs_north
+frequency_hz: 435000000.0
+transmitter:
+  power_w:
+    value: 1.0
+    source: Synthetic example value; not from a data sheet or a standard.
+  line_loss_db:
+    value: 0.5
+    source: Synthetic example value; not from a data sheet or a standard.
+  antenna:
+    gain_dbi:
+      value: 0.0
+      source: Synthetic example value; not from a data sheet or a standard.
+  polarisation: RHCP
+receiver:
+  g_over_t_dbk:
+    value: -15.0
+    source: Synthetic example value; not from a data sheet or a standard.
+  polarisation: RHCP
+modulation: BPSK
+coding: none
+data_rates_bps:
+  - 1200.0
+  - 9600.0
+  - 19200.0
+  - 76800.0
+required_margin_db:
+  value: 3.0
+  source: Synthetic example value; not from a data sheet or a standard.
+pointing_loss_db:
+  value: 1.0
+  source: Synthetic example value; not from a data sheet or a standard.
+polarisation_loss_db:
+  value: 0.5
+  source: Synthetic example value; not from a data sheet or a standard.
+implementation_loss_db:
+  value: 1.0
+  source: Synthetic example value; not from a data sheet or a standard.
+attenuation: []
+active_modes:
+  - downlink
+static_points:
+  - name: 5 deg elevation
+    elevation_deg: 5.0
+    range_m: 2200000.0
+  - name: zenith
+    elevation_deg: 90.0
+    range_m: 550000.0

@@ -40,7 +40,7 @@ Scope: after M4 because it reuses the power modes, spacecraft modes and (for hot
 Acceptance: at least 10 hand-calculated cases (single node radiating to space, two nodes in series, radiator sizing, one node with constant dissipation, ...) with stated tolerances; properties (more dissipation never lowers a node temperature, more radiator area never raises it, energy balance residual below a tolerance); golden reports; solve time for the 200-unit stress case with realistic node counts well under a second.
 Needs from you: environment flux values, optical properties and hot/cold case definitions with sources; the node-network convention (how units map to nodes) when M4b starts.
 
-## M5 Link budget (L)
+## M5 Link budget (L, done)
 Scope: link models (uplink/downlink, multiple links), static table at chosen elevation/range, pass time series, margin-constrained data rate and data volume per pass/day, attenuation tables from config (empty until supplied), link reports.
 Acceptance: textbook S-band 2 GHz/1000 km case within tolerance, ≥10 cases; margin monotonic in range; golden reports for micro-sat with two links.
 
